@@ -1,0 +1,2 @@
+Stock
+- Se agrega validacion para etiqueta de producto en Stock
