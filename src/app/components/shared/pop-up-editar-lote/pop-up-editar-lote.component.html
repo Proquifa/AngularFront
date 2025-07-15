@@ -1,0 +1,297 @@
+<!-- <a type="submit" class="btnLOTE"
+      onclick="document.getElementById('pop-up-lote').style.display='block'">
+      INCIENCIA </a> -->
+
+<div class="content">
+  <div id="pop-up-facturacion" class="modal" #pop>
+    <div class="modal-content">
+      <header class="header" >
+        PROQUIFA NET
+      </header>
+
+      <!-- botonera -->
+
+
+      <div class="contenido" *ngIf="!publicacion ">
+        <!-- botonera -->
+        <div class="botonera" *ngIf="!publicacion && !vistaPieza">
+
+          <div  class="botones" (click)="lotes()" style="border-right: 1px solid white; " [style.background]="vistaLote?'#008895':'#ECEEF0'"
+                [style.color] = "vistaLote?'#FFFFFF':'#424242'" >
+            EDITAR LOTE
+          </div>
+
+          <div  class="botones" (click)="piezas()" [style.background]="!vistaLote?'#008895':'#ECEEF0'" [style.color]="!vistaLote?'#FFFFFF':'#424242'">
+            PIEZA NO DESPACHABLE
+          </div>
+
+        </div>
+        <div class="botonera" style="background:#008895" *ngIf="publicacion || vistaPieza">
+
+          <div style=" width:100%" [style.cursor] = "vistaPieza ?'default': 'default' ">
+            PIEZA NO DESPACHABLE
+          </div>
+
+        </div>
+
+        <!-- botonera -->
+        <div *ngIf="vistaLote && !vistaPieza" class="divLote">
+          <div style="width:100%; border-bottom: 1px solid #424242; height: 25px;">
+            <label class="titulo"> Información de Lote </label>
+          </div>
+
+          <div class="arriba">
+            <div class="" style=" flex-direction:column; width: 35%; display:flex;">
+              <label style="padding-bottom: 5px;" class="tituloDato">Lote: </label>
+              <input type="text" #textLote (blur)="cambioLote(textLote.value)" class="inf"   style="left:0px; " [(ngModel)]="pza.lote"  autofocus   />
+
+            </div>
+            <div class="" style=" flex-direction:column; width: 65%;">
+              <label class="tituloDato" style="left: 34.6%;">Caducidad: </label>
+              <div class="months" style=" flex-direction: row; width:100%; display: flex; padding-top: 5px;">
+                <pn-combo-flecha-verde style="width:50%; padding-right:10px;" [itemSelect]="selectedMes" id="cmbMeses" (valueDropList)="infoCombo($event,'mes')" [items]="meses" [heightLi]="'35px'"></pn-combo-flecha-verde>
+
+                <pn-combo-flecha-verde style="width:50%;  padding-left:10px;" [itemSelect]="selectedAnio" id="cmbAnios" (valueDropList)="infoCombo($event,'anio')" [items]="anio" [heightLi]="'35px'"></pn-combo-flecha-verde>
+              </div>
+            </div>
+          </div>
+          <div class="" style="height:60%; width:100%; display:flex; flex-direction: column; padding-top: 65px;"
+               [style.opacity]= " copiaPartidaPrioridad.lote != pza.lote && checkedCat ? '1' : '0.5'"
+               [style.pointerEvents]= "copiaPartidaPrioridad.lote  != pza.lote   && checkedCat ? 'auto':'none'" >
+
+            <div style="width:100%; heigth: 30px; display:flex; flex-direction: row; border-bottom: 1px solid #424242; " class="checkbox" >
+              <pq-check-gris-palomita-verde (event)="cambiaCheck($event, 'noAplica')" [check]="checkDocto"></pq-check-gris-palomita-verde>
+              <span class="titulo" style="padding: 2px 8px;"> No aplica documentación </span>
+            </div>
+
+
+            <div class="abajo" *ngIf="checkDocto2">
+              <div class="certificado">
+                <label class="tituloDato">Certificado: </label>
+                <br>
+                <div class="docto" style="left:0px; width:430px;">
+                  <pq-file-upload [doc]="'Certificado'"  [docR]="archCertificado" (enviarDocumento)="enviarDocumentacion($event,'Certificado')"></pq-file-upload>
+                </div>
+              </div>
+              <!-- <div class="Seguridad">
+                <label #label class="tituloDato">Hoja de Seguridad: </label>
+                <br>
+                <div class="docto" style="width:100%">
+                  <pq-file-upload [doc]="'Hoja_seguridad'"  [docR]="archSeguridad" (enviarDocumento)="enviarDocumentacion($event,'HojaSeguridad')"></pq-file-upload>
+                </div>
+              </div> -->
+            </div>
+          </div>
+          <div class="footer">
+            <div class="btnCancelar" (click)="cerrar()"><label>CANCELAR </label></div>
+            <div class="btnAceptar" (click)="aceptar()" [style.pointerEvents]= "aux == true && btnAceptar || copiaPartidaPrioridad.lote != pza.lote && aux == true  ? 'auto':'none'" [style.background]= "aux == true && btnAceptar || copiaPartidaPrioridad.lote != pza.lote && aux == true ? '#008895':'#D5DBDB'">
+              <label  [style.pointerEvents]= "aux == true && btnAceptar || copiaPartidaPrioridad.lote != pza.lote && aux == true ? 'auto':'none'" >ACEPTAR </label></div>
+          </div>
+
+        </div>
+        <!-- fin vistalote -->
+        <div *ngIf="!vistaLote || vistaPieza" class="divLote" style="left:-19px;">
+          <div class="checks" style=" height:93%; flex-direction:row; display:flex;">
+            <div style="width:50%; height:95%;  border-right:1px solid #D8D9DD;">
+              <div class="" style="width:100%; height:52.3%; padding-bottom: 25px;">
+                <div style="display:flex;  height: 14.5%; flex-direction: row; align-items: center;">
+                  <pq-check-gris-palomita-verde style="padding-right: 10px;" (event)="cambiaCheck($event, 'catalogo')" [check]="checkedCat" id="checkbox1"> </pq-check-gris-palomita-verde>
+                  <label [style.color]="label1" class="labelCheck">Catálogo: <span [style.color]= "label1"  class="info">{{catalogo}}</span></label>
+                </div>
+                <div style="display:flex;  height: 14.5%;   flex-direction: row;     align-items: center;">
+                  <pq-check-gris-palomita-verde (event)="cambiaCheck($event, 'lote')" [check]="checkLote" id="checkbox5" style="padding-right: 10px;" ></pq-check-gris-palomita-verde>
+                  <label [style.color]="label5" class="labelCheck">Lote: <span [style.color]= "label5" class="info">{{noLote}}</span></label>
+                </div>
+
+                <div style="display:flex;     flex-direction: row;     align-items: center;">
+                  <pq-check-gris-palomita-verde style="padding-right: 10px;" (event)="cambiaCheck($event, 'descripcion')" [check]="checkDesc" id="checkbox2"> </pq-check-gris-palomita-verde>
+                  <label [style.color]="label2" class="labelCheck" style="line-height: 20px;">Descripción: <span [style.color]= "label2" style="font-size:calc((1vh + 1vw) / 2 );" class="info">{{desc}}</span></label>
+                </div>
+                <div style="display:flex;  height: 14.5%;   flex-direction: row;     align-items: center;">
+                  <pq-check-gris-palomita-verde (event)="cambiaCheck($event, 'caducidad')" [check]="checkCad" id="checkbox6" style="padding-right: 10px;" ></pq-check-gris-palomita-verde>
+                  <label [style.color]="label6" class="labelCheck">Caducidad: <span [style.color]= "label6" class="info">{{caducidad}}</span></label>
+                </div>
+
+
+                <div style="display:flex; height: 14.5%;    flex-direction: row;     align-items: center;">
+                  <pq-check-gris-palomita-verde (event)="cambiaCheck($event, 'presentacion')" [check]="checkPre" id="checkbox3" style="padding-right: 10px;" ></pq-check-gris-palomita-verde>
+                  <label [style.color]="label3" class="labelCheck">Presentación: <span [style.color]= "label3" class="info">{{presentacion}}</span></label>
+                </div>
+
+                <div style="display:flex; height: 14.5%;    flex-direction: row;     align-items: center;">
+                  <pq-check-gris-palomita-verde (event)="cambiaCheck($event, 'fisicamente')" [check]="checkFis" id="checkbox7" style="padding-right: 10px;" ></pq-check-gris-palomita-verde>
+                  <label [style.color]="label7" class="labelCheck">Físicamente conforme: <span [style.color]= "label7"  class="info">{{fisico}}</span></label>
+                </div>
+
+
+                <div *ngIf="checkDocto2" style="display:flex; height: 14.5%;   flex-direction: row;  align-items: center;">
+                  <pq-check-gris-palomita-verde (event)="cambiaCheck($event, 'documentacion')" [check]="checkDocumentacion" style="padding-right: 10px;" ></pq-check-gris-palomita-verde>
+                  <label [style.color]="label4" class="labelCheck">Documentación: <span  [style.color]= "label4" class="info">{{documentacion}}</span></label>
+                </div>
+                <div *ngIf="!checkDocto2" style="display:flex; height: 14.5%;  flex-direction: row; align-items: center;">
+                  <pq-check-gris-palomita-verde [disabled]="!checkDocto2" [check]="checkDocto2" style="padding-right: 10px;"></pq-check-gris-palomita-verde>
+                  <label [style.color]="label4" class="labelCheck">Documentación: <span  [style.color]= "label4" class="info">{{documentacion}}</span></label>
+                </div>
+
+              </div>
+              <div  [style.opacity] ="activarText ? '1' : '0.5' " style="width:100%; padding-right: 20px; display: flex; flex-direction: column; box-sizing: border-box;">
+                <label style="width: 100%; height:30px; display: flex;border-bottom: 1px solid #424242; box-sizing: border-box; " class="titulo">Reporte de rechazo</label>
+                <div style="top: 20px; position: relative; width: 100%; border: 1px solid #D8D9DD; height: 136px; padding: 10px 15px; display: flex; box-sizing: border-box;" >
+                  <textarea type="text" class="textArea"  #textArea (blur)="rechazoTxt(textArea.value)" [(ngModel)]="reporteTxt" [disabled]="!activarText" [style.display]= "activarText ? 'block' :'none'"> {{reporteTxt}}</textarea>
+                </div>
+              </div>
+            </div>
+
+
+            <div style="right:0px; width:50%; height:95%; ">
+
+              <div [style.opacity] ="prueba ? '1' : '0.5' "style="width:100%; height:100%; padding-left: 20px; display:flex; flex-direction: column; box-sizing: border-box;">
+                <label style="width: 100%;display: flex; border-bottom: 1px solid #424242; box-sizing: border-box; padding: 10px 0px 10px 0px;" class="titulo">
+                  Cargar fotos <span style="color:#B40404; font-weight:300; padding-left: 5px;"> (Obligatoria)</span></label>
+
+                <div class="enfocarProducto" >
+                  <img src="./assets/Images/Images/Sup_Izq.svg" alt="" class="imgEnfoque"  style="top: 8px; left:0px; position: absolute;">
+                  <img src="./assets/Images/Images/Sup_Der.svg" alt="" class="imgEnfoque" style="top: 8px; right:0px; position: absolute;" >
+                  <label > ENFOCA EL PRODUCTO</label>
+                  <video  id="player" #player [style.display]= "prueba? 'block': 'none'"></video>
+
+                  <img src="./assets/Images/Images/Inf_Izq.svg" alt="" class="imgEnfoque" style="bottom:0px; left: 0px; position: absolute;">
+                  <img src="./assets/Images/Images/Inf_Der.svg" alt=""   class="imgEnfoque" style="bottom:0px; right:0px; position: absolute;">
+                </div>
+
+                <div class="tiposEnfoque" >
+                  <div style="padding-right:30px;">
+                    <label>Frente</label>
+                    <div >
+                      <img id="output" style="display:none"/>
+                      <p > Coloca la pieza en la orientación correcta, para tomar la foto.</p>
+                      <canvas id="canvasFrente" [style.display]='displayImg'  ></canvas>
+                      <!-- <canvas id="canvasFrente" [style.display]='displayImg' src = "data:image/png;base64,imageDataURL" [style.display] = "imageDataURL != undefined ? 'flex' : 'none' "></canvas> -->
+                    </div>
+                    <img src="./assets/Images/Images/boton_camara.svg" alt="" (click)= "takeSnapshot('Frente')"
+                         [style.pointerEvents]= "prueba? 'auto': 'none'" >
+
+                  </div>
+                  <div style="padding: 0px 30px 0px 30px;">
+                    <label>Arriba</label>
+                    <div >
+                      <p > Coloca la pieza en la orientación correcta, para tomar la foto.</p>
+                      <img id="output2" style="display:none"  />
+                      <canvas id="canvasArriba" [style.display]='displayImg' ></canvas>
+                    </div>
+                    <img src="./assets/Images/Images/boton_camara.svg" alt="" (click)= "takeSnapshot('Arriba')"    [style.pointerEvents]= "prueba? 'auto': 'none'">
+                  </div>
+                  <div style="padding-left: 30px;">
+                    <label>Abajo</label>
+                    <div >
+                      <p > Coloca la pieza en la orientación correcta, para tomar la foto.</p>
+                      <img id="output3" style="display:none" />
+                      <canvas id="canvasAbajo" [style.display]='displayImg' ></canvas>
+                    </div>
+                    <img src="./assets/Images/Images/boton_camara.svg" alt="" (click)= "takeSnapshot('Abajo')"    [style.pointerEvents]= "prueba? 'auto': 'none'">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="footer">
+            <div class="btnCancelar" style="left:0px;" (click)="cerrar()"><label>CANCELAR</label></div>
+            <div  *ngIf= "!copiaPartidaPrioridad.pasosImprimirEtiqueta" class="btnAceptar" style="right:0px;" (click)="aceptar()" [style.pointerEvents]= "btnEtiquetar && reporteTxt !== '' && prueba  ? 'auto':'none'" [style.background-color]= "btnEtiquetar && reporteTxt !== '' && prueba  ? '#008895':'#D5DBDB'" >
+              <label  [style.pointerEvents]= "btnEtiquetar && reporteTxt !== '' && prueba  ? 'auto':'none'">ACEPTAR</label>
+            </div>
+            <div  *ngIf= "!documentActivo" class="btnAceptar" style="right:0px;" (click)="aceptar()" [style.pointerEvents]= "btnEtiquetar && reporteTxt !== '' && prueba  ? 'auto':'none'" [style.background-color]= "btnEtiquetar && reporteTxt !== '' && prueba  ? '#008895':'#D5DBDB'" >
+              <label  [style.pointerEvents]= "btnEtiquetar && reporteTxt !== '' && prueba  ? 'auto':'none'">ETIQUETAR</label>
+            </div>
+            <div  *ngIf= "documentActivo" class="btnAceptar" style="right:0px;" (click)="aceptar()" [style.pointerEvents]= "btnEtiquetar && reporteTxt !== '' && documentActivo  ? 'auto':'none'" [style.background-color]= "btnEtiquetar && reporteTxt !== '' && documentActivo  ? '#008895':'#D5DBDB'" >
+              <label  [style.pointerEvents]= "btnEtiquetar && reporteTxt !== '' && documentActivo  ? 'auto':'none'">ETIQUETAR</label>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+      <!-- fin contenido -->
+      <div class="contenido" *ngIf="publicacion">
+        <div class="divLote" style="left:-19px;">
+          <div class="checks" style=" height:40%; border-bottom:1px solid #D8D9DD; flex-direction:row; display:flex;">
+            <div style="left:0px; width:50%; height:100%">
+
+              <div style="display:flex;  height: 33%; flex-direction: row;">
+                <pq-check-gris-palomita-verde  [check]="checkedCat" id="checkbox1"  style="padding-right: 10px;" (event)="cambiaCheckPublicacion($event,'catalogo')" > </pq-check-gris-palomita-verde>
+                <label [style.color]="label1" class="labelCheck">Catálogo: <span [style.color]= "label1"  class="info">{{catalogo}}</span></label>
+              </div>
+
+              <div style="display:flex;   height: 33%;  flex-direction: row;">
+                <pq-check-gris-palomita-verde  [check]="checkDesc" id="checkbox2"  style="padding-right: 10px;" (event)="cambiaCheckPublicacion($event,'descripcion')" > </pq-check-gris-palomita-verde>
+                <label [style.color]="label2" class="labelCheck">Descripción: <span [style.color]= "label2" class="info">{{desc}}</span></label>
+              </div>
+
+              <div style="display:flex; height: 33%;    flex-direction: row;">
+                <pq-check-gris-palomita-verde [check]="checkEdic" id="checkbox3" style="padding-right: 10px;" (event)="cambiaCheckPublicacion($event,'edicion')"></pq-check-gris-palomita-verde>
+                <label [style.color]="label3" class="labelCheck">Edición: <span [style.color]= "label3" class="info">{{edicion}}</span></label>
+              </div>
+
+            </div>
+            <div style="right:0px; width:50%; height:100%">
+              <div style="display:flex;  height: 33%;   flex-direction: row;">
+                <pq-check-gris-palomita-verde [check]="checkIdi" id="checkbox5" style="padding-right: 10px;" (event)="cambiaCheckPublicacion($event,'idioma')"></pq-check-gris-palomita-verde>
+                <label [style.color]="label5" class="labelCheck">Idioma: <span [style.color]= "label5" class="info">{{idioma}}</span></label>
+              </div>
+
+              <div style="display:flex; height: 33%;    flex-direction: row;">
+                <pq-check-gris-palomita-verde  [check]="checkFis" id="checkbox7" style="padding-right: 10px;" (event)="cambiaCheckPublicacion($event,'fisicamente')"></pq-check-gris-palomita-verde>
+                <label [style.color]="label7" class="labelCheck">Físicamente conforme: <span [style.color]= "label7"  class="info">{{fisico}}</span></label>
+              </div>
+
+            </div>
+
+
+          </div>
+          <div class="documentacion" style=" height:52.7%;">
+            <div style="width:100%; height:100%; flex-direction:row; display:flex;" #opacidad>
+              <div style="left:0px; width:50%; height:100%;">
+                <label style="width: 95%;display: flex;border-bottom: 1px solid #424242; box-sizing: border-box; padding: 10px 0px 10px 0px;" class="titulo">Reporte de rechazo</label>
+                <!--<textarea type="text" class="textArea" [disabled]="publicacion"> </textarea>-->
+                <div style="top: 20px; position: relative; width: 95%; height: 136px; display: flex; box-sizing: border-box;" >
+                  <textarea type="text" class="textAreaPub"  #textAreaPub (blur)="rechazoTxtPub(textAreaPub.value)" [(ngModel)]="reporteTxtPub" [disabled]="!publicacion" [style.display]= "publicacion ? 'block' :'none'" style="width: 100%;height: 100%"> {{reporteTxtPub}}</textarea>
+                </div>
+              </div>
+              <div style="left:0px; width:50%; height:95%;">
+                <label style="width: 100%;display: flex;border-bottom: 1px solid #424242; box-sizing: border-box; padding: 10px 0px 10px 0px;" class="titulo">
+                  Cargar fotos <span style="color:#B40404; font-weight:300; padding-left: 5px;"> (Obligatoria)</span></label>
+                <div style=" width:100%; box-sizing:border-box; padding-top:19px;">
+                  <pq-file-upload [disabled]="publicacion" [formato]="'.png'" [doc]="'Arriba'" (enviarDocumento)="recibeImg($event, 'Arriba')"  class="fileInput"></pq-file-upload>
+                </div>
+                <div style=" width:100%; box-sizing:border-box; padding-top:32px;" class="fileInput">
+                  <pq-file-upload [disabled]="publicacion" [formato]="'.png'" [doc]="'Frente'" (enviarDocumento)="recibeImg($event, 'Frente')"></pq-file-upload>
+                </div>
+                <div style=" width:100%; box-sizing:border-box; padding-top:35px" class="fileInput">
+                  <pq-file-upload [disabled]="publicacion" [formato]="'.png'" [doc]="'Abajo'" (enviarDocumento)="recibeImg($event, 'Abajo')"></pq-file-upload>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="footer">
+            <div class="btnCancelar" style="left:0px;" (click)="cerrar()"><label>CANCELAR</label></div>
+            <div class="btnAceptar" style="right:0px;" (click)="aceptarPublicacion()" #etiquetar *ngIf ="publicacion"
+                 [style.pointerEvents]= "btnEtiquetar && reporteTxtPub !== '' ? 'auto':'none'" [style.background-color]= "btnEtiquetar && reporteTxtPub !== ''? '#008895':'#D5DBDB'">
+              <label>ETIQUETAR</label></div>
+            <div class="btnAceptar" style="right:0px;" (click)="aceptar()" #etiquetar  *ngIf ="!copiaPartidaPrioridad.pasosImprimirEtiqueta"><label>ACEPTAR</label></div>
+
+          </div>
+        </div>
+
+
+      </div>
+      <pq-alerta *ngIf="mostrarAlerta" [alertaTxt]="textoAlerta" (confirmacion)="cerrarAlerta($event)"></pq-alerta>
+    </div>
+    <!-- fin modal-content -->
+  </div>
+  <!-- fin modal -->
+</div>
+<div class="pop-inf" #popInf   *ngIf ="cambioI" style= "z-index:5; position:absolute">
+  <!-- <pq-pop-informativo (cambioIndex)="cerrarPopInf($event)" > </pq-pop-informativo> -->
+  <pq-pop-escanear-qr (cambioIndex)="cerrarPopInf($event)" [bolsa]= "tipoBolsa" > </pq-pop-escanear-qr>
+
+</div>

@@ -1,0 +1,29 @@
+<div class="padre">
+    <div style="display: flex;  flex-direction: column">
+        <div class="texto">
+            <label class="menu"> INSPECTOR </label>
+        </div>
+        <div class="barraEntreMenus" ></div>
+        <a class="fondoSubmenu" *ngIf="!vistaInicialActiva" >
+            <label class="subMenu"  >
+               Inspeccionar Productos
+            </label>
+            <div class="contenedor">
+                <div class="rectangulo"></div>
+                <div class="centrado">{{pendiente}}
+                </div>
+            </div>
+        </a>
+        <a class="fondoSubmenu" *ngIf="vistaInicialActiva" (click)=recargaGraficas() style="cursor:pointer">  <!--(click)=recargaGraficas()-->
+            <label class="subMenu" style="cursor:pointer"> <!--style="cursor:pointer"-->
+               Inspeccionar Productos
+            </label>
+            <div class="contenedor" style="cursor:pointer"> <!-- style="cursor:pointer"-->
+              <div class="rectangulo"></div>
+                    <div class="centrado">{{pendiente}}
+                </div>
+            </div>
+
+        </a>
+    </div>
+</div>

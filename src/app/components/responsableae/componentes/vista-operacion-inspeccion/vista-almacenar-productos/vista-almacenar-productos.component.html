@@ -1,0 +1,113 @@
+<div>
+    <form>
+
+        <div class="direccionRow">
+
+            <div style="width: 20%">
+
+            </div>
+
+            <div style="width:406px; display: flex; flex-direction: column; padding-right: 211px">
+                <label class="subtitulo"> ALMACENAJE</label>
+                <label class="etiquetasFont21">Etiqueta</label>
+                <label style="height: 33px; padding-top: 12px; padding-bottom: 96px;font-size: 25px; color: #242424">{{etiqueta}}</label>
+
+
+
+                <label class="etiquetasFont21" *ngIf= "!diferenteDeAmbiente"> Ubicación</label>
+                <div style="display: flex; flex-direction: row; padding-top: 10px; padding-bottom: 96px;" *ngIf= "!diferenteDeAmbiente" >
+                    <div style="width: 50%; display: flex; flex-direction: row;"  >
+                        <div style="width: 25px;" (click)="seleccionUbicacionAmbienteAux('anaquel')">
+                            <!--<pn-radio-button-sin-label [width]="'25px'" [select]="selectedAnaquel" [select]="seleccionaAnaquel" (click)="seleccionUbicacionAmbiente('anaquel')" (emitItem)="onRadioChange($event)"></pn-radio-button-sin-label>-->
+                          <div *ngIf="seleccionaAnaquel">
+                            <img src="./assets/Images/radio_unselected.svg" style="width: 25px">
+                          </div>
+                          <div *ngIf="!seleccionaAnaquel">
+                            <img src="./assets/Images/radio_selected.svg" style="width: 25px">
+                          </div>
+                        </div>
+                        <label class="labelRadios" [style.color]="colorETanaquel">Anaquel</label>
+                    </div>
+
+                    <div style="width: 50%; display: flex; flex-direction: row;" >
+                        <div style="width: 25px; " (click)="seleccionUbicacionAmbienteAux('tarima')">
+                           <!-- <pn-radio-button-sin-label [width]="'25px'" [select]="selectedTarima" [select]="seleccionaTarima" (emitItem)="onRadioChange($event)"></pn-radio-button-sin-label>-->
+                          <div *ngIf="seleccionaTarima">
+                            <img src="./assets/Images/radio_unselected.svg" style="width: 25px">
+                          </div>
+                          <div *ngIf="!seleccionaTarima">
+                            <img src="./assets/Images/radio_selected.svg" style="width: 25px">
+                          </div>
+                        </div>
+                        <label class="labelRadios" [style.color]="colorETtarima">Tarima</label>
+                    </div>
+
+                </div>
+
+                <label class="etiquetasFont21"> Manejo</label>
+                <div style="display: flex; flex-direction: row; align-items: center; padding-top: 17px">
+                    <img [src]="imagenTipoManejo" width="25px" height="25px" />
+                    <label class="etiquetaTipoManejo">{{tipoManejo}}</label>
+                </div>
+
+            </div>
+
+
+            <div style="width: 406px; display: flex; flex-direction: column; padding-top: 46px">
+                <label *ngIf= "mostrarSeccionDespachable" class="etiquetasFont21SinColor" style="color: #39B54A ">Despachables</label>
+                <label *ngIf= "mostrarSeccionDespachable" style="height: 24px; padding-top: 17px; font-size: 18px; font-family: 'Roboto'; color: #242424">Total de Piezas</label>
+                <label *ngIf= "mostrarSeccionDespachable" style="height: 33px; padding-top: 17px; font-size: 25px; font-family: 'Roboto'; color: #242424">{{cantidadDespachable}}</label>
+                <label *ngIf= "mostrarSeccionDespachable" style="height: 24px; padding-top: 36px; font-size: 18px; font-family: 'Roboto'; color: #242424">{{textoUbicacion}}</label>
+                <div style="width: 100%; display: flex; flex-direction: row; padding-bottom: 48px" *ngIf= "mostrarSeccionDespachable" >
+
+                    <!-- <div [ngStyle]="{'display':'flex', 'flex-direction':'column', 'width':'50%'}" *ngIf="comboNumero">
+
+                        <div style="width: 90%">
+                            <pn-combo-flecha-verde [items]="numeros" [title]="'Seleccionar'" (valueDropList)="recibeValosCombo($event,'numero')"></pn-combo-flecha-verde>
+                        </div>
+                    </div>
+
+                    <div [ngStyle]="{'display':'flex', 'flex-direction':'column', 'width':'50%'}">
+                        <label></label>
+                        <div style="width: 90%">
+                            <pn-combo-flecha-verde [items]="letras" [title]="'Seleccionar'" (valueDropList)="recibeValosCombo($event,'letra')" *ngIf="comboLetra"></pn-combo-flecha-verde>
+                        </div>
+                    </div> -->
+                    <div [ngStyle]="{'display':'flex', 'flex-direction':'column', 'width':'50%'}">
+                        <label *ngIf = '!tarima' style="height: 33px; padding-top: 7px; font-size: 25px; font-family: 'Roboto'; color: #242424">{{ubicacionAux}}</label>
+                        <label  *ngIf = 'tarima' style="height: 33px; padding-top: 7px; font-size: 25px; font-family: 'Roboto'; color: #242424">{{ubicacionTarima}}</label>
+
+                    </div>
+
+
+                </div>
+
+
+                <label *ngIf= "mostrarSeccionNoDespachable" class="etiquetasFont21SinColor" style="color: #C1272D  ">No Despachables</label>
+
+                <div style="width: 100%; display: flex; flex-direction: row;" *ngIf= "mostrarSeccionNoDespachable">
+
+                    <div [ngStyle]="{'display':'flex', 'flex-direction':'column', 'width':'50%'}">
+                        <label style="height: 24px; padding-top: 17px; font-size: 18px; font-family: 'Roboto'; color: #242424">Total de Piezas</label>
+                        <label style="height: 33px; padding-top: 7px; font-size: 25px; font-family: 'Roboto'; color: #242424">{{cantidadNoDespachable}}</label>
+
+                    </div>
+
+                    <div [ngStyle]="{'display':'flex', 'flex-direction':'column', 'width':'50%'}">
+                        <label style="height: 24px; padding-top: 17px; font-size: 18px; font-family: 'Roboto'; color: #242424">Ubicación</label>
+                        <label style="height: 33px; padding-top: 7px; font-size: 25px; font-family: 'Roboto'; color: #242424">{{ubicacionNoDes}}</label><!-- {{ubicacionIncidencia}}-->
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+
+    </form>
+
+
+</div>

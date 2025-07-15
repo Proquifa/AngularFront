@@ -1,0 +1,33 @@
+@import "../../../../mixins";
+@import "../../../../colors";
+
+:host {
+  @include flexRow;
+  width: 100%;
+
+  div {
+    @include flexRow;
+    @include absoluteCenter;
+    background: #eceef0;
+    font-family: Roboto-Bold;
+    font-size: calc(((9) * 1px) + ((14) - (9)) * ((100vw - 1368px) / (2300 - 1368)));
+    text-align: center;
+    padding: 12px 5px;
+    border: 1px solid #C2C3C9;
+    min-width: 76px;
+    height: 40px;
+    box-sizing: border-box;
+    cursor: pointer;
+  }
+
+  .itemSelected {
+    background: #198893;
+    color: #FFF;
+  }
+
+  .indice {
+    position: relative;
+    top: -7px;
+    margin-left: 3px;
+  }
+}

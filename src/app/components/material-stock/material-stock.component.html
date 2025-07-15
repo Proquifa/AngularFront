@@ -1,0 +1,184 @@
+<div class="padre">
+  <!--Seccion de menu-->
+  <div style="position: relative; display: flex; background: #E6E6E6;" class="aux">
+    <aside [ngClass]="classAsideMenu">
+      <div class="articulo" *ngIf="!ocultarAcor">
+        <pn-menu-seccion-roles [items]="itemsMenu"   [titulo]="'RESPONSABLE DE SURTIDO'" style="width: 100%;" *ngIf="activar"></pn-menu-seccion-roles>
+      </div>
+    </aside>
+    <div style="position: absolute; position: absolute; padding-top: 352px;right: 0">
+      <img class="img" src='./assets/Images/flecha_cuadro.svg' *ngIf="!ocultarAcor" (click)="mostarOcultarAcordeon()" />
+      <img class="img" src='./assets/Images/flecha_mostrar.svg' *ngIf="ocultarAcor" (click)="mostarOcultarAcordeon()" />
+    </div>
+  </div>
+  <!--Empieza el area de trabajo-->
+  <div class="area">
+    <!--Empieza la cabezera-->
+    <div class="cabezera">
+      <div>
+        <label class="etiqueta">MATERIAL EN STOCK</label>
+      </div>
+    </div>
+    <!--Empiezan los componentes-->
+    <div [ngStyle]="{'overflow':'scroll', 'width':'100%', 'height':'calc(100% - 122px)'}">
+      <div class="areaPrincipal" *ngIf="partHabilidatas">
+        <div class="vistaGeneral">
+          <div class="botonera">
+            <pn-botonera [lista]="listaTipos" *ngIf="activeBotonera" style="width: 100%;height: 100%" (event)="seleccionarLista($event)" [selectedPos]="selectItem"></pn-botonera>
+          </div>
+        </div>
+        <div class="informacionLista">
+          <div class="filtros">
+            <div class="filtering">
+              <div>
+                <label>Marcas</label>
+                <pn-drop-list-search [title]="'Seleccionar'" [valImg]="'flechaRellena'" [items]="marcas" *ngIf="activeMarca" [subtitleActive]="false" (valueDropList)="filtrar($event, 'Marca')" style="display: flex;align-items: center"></pn-drop-list-search>
+              </div>
+              <div>
+                <label>Control</label>
+                <pn-combo-flecha-rellena [title]="'Seleccionar'" [valImg]="'flechaRellena'" [items]="control" [subtitleActive]="false" (valueDropList)="filtrar($event, 'Control')"></pn-combo-flecha-rellena>
+              </div>
+              <div>
+                <label>Manejo</label>
+                <pn-combo-flecha-rellena [title]="'Seleccionar'" [valImg]="'flechaRellena'" [items]="tipoManejo" [subtitleActive]="false"  (valueDropList)="filtrar($event, 'Manejo')"></pn-combo-flecha-rellena>
+              </div>
+            </div>
+            <div class="barraBusqueda">
+              <div class="buscar">
+                <div>
+                  <div class="lupa">
+                    <img src="assets/Images/lupa.svg" width="22px" height="22px" alt="buscar">
+                  </div>
+                  <input type="text" [ngModel]="searchTerm" (ngModelChange)="buscar($event)" class="buscar-input" placeholder="Descripción, Catálogo" />
+                  <div class="lupa" (click)="buscar('')" style="cursor: pointer;">
+                    <img src="assets/Images/cerrar.svg"  height="12px" alt="buscar">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="vistaLista">
+            <header>
+              <div class="imagenesDiv" style="min-width: 29px;max-width: 29px"></div>
+              <div  class="imagenesDiv" style="max-width: 27px">
+                <label>#</label>
+              </div>
+              <div style="width: 9%">
+                <label>Marca</label>
+              </div>
+              <div style="width: 8%">
+                <label>Catálogo</label>
+              </div>
+              <div style="width: 15%">
+                <label>Descripción</label>
+              </div>
+              <div>
+                <label>Control</label>
+              </div>
+              <div style="width: 8%">
+                <label>Tipo</label>
+              </div>
+              <div style="width: 8%">
+                <label>Etiqueta</label>
+              </div>
+              <div style="width: 8%">
+                <label style="text-align: center;">Lote</label>
+              </div>
+              <div>
+                <label style="text-align: center;">Tipo de Lote</label>
+              </div>
+              <div>
+                <label style="text-align: center;">Vigencia</label>
+              </div>
+              <div style="width: 7%">
+                <label style="text-align: center;">P.U</label>
+              </div>
+              <div class="imagenesDiv"></div>
+            </header>
+            <div style="height: 95%;width: 100%;overflow: auto;">
+              <div class= "lista" style="display: unset;flex-direction: column">
+                <div  *ngFor="let item of lista; let i = index" style="display: flex;flex-direction:column;width: 100%;position: relative;">
+                  <div [ngClass]="item.activePart? 'divActive': 'div'">
+                    <div class="dfSelect"></div>
+                    <div class="datosLst">
+                      <div class="imagenesDiv" style="max-width: 29px;min-width: 29px">
+                        <img class="imgEstado" src="./assets/Images/congelacion.svg" *ngIf="item.manejoTransporte.toLowerCase() === 'congelación'">
+                        <img class="imgEstado" src="./assets/Images/refrigeracion.svg" *ngIf="item.manejoTransporte.toLowerCase() === 'refrigeración'">
+                        <img clas="imgEstado" src="./assets/Images/ambiente.svg" *ngIf="item.manejoTransporte.toLowerCase() === 'ambiente'">
+                      </div>
+                      <div class="imagenesDiv" style="max-width: 27px">
+                        <span>{{i + 1}}</span>
+                      </div>
+                      <div style="width: 11%">
+                        <label>{{item.fabrica}}</label>
+                      </div>
+                      <div  style="width: 8%">
+                        <span>{{item.codigo}}</span>
+                      </div>
+                      <div style="width: 15%">
+                        <label>{{item.descripcion}}</label>
+                      </div>
+                      <div>
+                        <span>{{item.control}}</span>
+                      </div>
+                      <div style="width: 8%">
+                        <label>{{item.cpedido}}</label>
+                      </div>
+                      <div style="width: 8%">
+                        <span>{{item.tipo}}</span>
+                      </div>
+                      <div style="width: 8%">
+                        <label>{{item.cliente}}</label>
+                      </div>
+                      <div>
+                        <span>{{item.etiqueta}}</span>
+                      </div>
+                      <div>
+                        <label style="text-transform: capitalize">{{item.fee}}</label>
+                      </div>
+                      <div style="width: 7%">
+                        <span *ngIf="item.ruta === 'Dolares'">{{item.monto | currency: 'USD'}} USD</span>
+                        <span *ngIf="item.ruta === 'Pesos'">{{item.monto | acFormatMoney}} MXN</span>
+                        <span *ngIf="item.ruta === 'Libras'">{{item.monto | acFormatMoney}} lbs</span>
+                        <span *ngIf="item.ruta === 'Euros'">{{item.monto | currency: '€'}} EUR</span>
+                        <span *ngIf="item.ruta === 'DlCan'">{{item.monto | acFormatMoney}} CAD</span>
+                      </div>
+                      <div class="imagenesDiv">
+                        <div class="tooltip">
+                          <img src="./assets/Images/destruir.svg" (click)="eliminarStock(item)">
+                          <span class="tooltiptext">Destruir</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!--Termina Lista partidas-->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="sinDatos" *ngIf="!partHabilidatas">
+        <label>SIN PARTIDAS DISPONIBLES</label>
+      </div>
+    </div>
+    <!--Terminan los componentes-->
+    <footer class="footer">
+      <div class="datosFooter">
+        <div class="Prioridad1">
+          <img class="img" src='./assets/Images/ambiente.svg' /> Ambiente
+        </div>
+        <div class="Prioridad1">
+          <img class="img" src='./assets/Images/congelacion.svg' /> Congelación
+        </div>
+        <div class="Prioridad1">
+          <img class="img" src='./assets/Images/refrigeracion.svg' /> Refrigeración
+        </div>
+        <div class="Prioridad1">
+          <img class="img" src='./assets/Images/destruir.svg' /> Destruir Producto
+        </div>
+      </div>
+    </footer>
+  </div>
+</div>
+<pn-pop-up-notificado-desvincular *ngIf="notificado" (event)="cerrarPop($event)" [itemStock]="itemStock"></pn-pop-up-notificado-desvincular>

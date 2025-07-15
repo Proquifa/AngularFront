@@ -1,0 +1,44 @@
+<pn-header-bc [opciones]="opcion" [homePath]="homePath"></pn-header-bc>
+
+<div class="trabContainer">
+    <div class="trabContainerHeader">
+        <div class="trabContainerHeaderTitle">TRABAJADORES</div>
+        <div class="trabContainerHeaderSearch">
+            <app-pn-search [searchPlaceholder]="searchPlaceholder" (searchEmitter)="fnGetEmitSearch($event)" ></app-pn-search>
+        </div>
+        <div class="trabContainerHeaderActions">
+            <div class="trabContainerHeaderActionsFilter">
+                <pq-drop-list style="width:307px;margin-right: 25px;height: 30px;" [items]="itemsParent[0]" [isSearch]="isSearchParent[0]" [isCategory]="isCategoryParent[0]" [size]="sizeParent[0]" [align]="alignParent[0]" [itemSelect]="itemSelectParent[0]" [widthContent]="widthContentParent[0]" [marginLeftContent]="marginLeftContentParent[0]" [tooltip]="tooltipParent[0]" [tipoDrop]="tipoDropParent[0]" [campoLabel]="campoLabelParent[0]" [heightDrop]="heightDropParent[0]" [colorBorderDrop]="colorBorderDropParent[0]" (valueDropList)="fnGetValueDropList($event)"></pq-drop-list>
+            </div>
+            <div class="trabContainerHeaderActionsBtn" (click)="fnCrearTrabajador()" >AGREGAR TRABAJADOR</div>
+        </div>
+    </div>
+    <div class="lstTrabajadores">
+        <div class="lstTrabajadoresHeader">
+            <div class="lstTrabajadoresHeaderCol" style="min-width: 20px;max-width: 20px;justify-content: center;">#</div>
+            <div class="lstTrabajadoresHeaderCol" style="min-width: 115px;max-width: 340px;" >Nombre</div>
+            <div class="lstTrabajadoresHeaderCol" style="min-width: 100px;max-width: 190px;" >Departamento</div>
+            <div class="lstTrabajadoresHeaderCol" style="min-width: 90px;max-width: 190px;" >Puesto</div>
+            <div class="lstTrabajadoresHeaderCol" style="min-width: 95px;max-width: 130px;" >RFC</div>
+            <div class="lstTrabajadoresHeaderCol" style="min-width: 100px;max-width: 150px;" >Teléfono</div>
+            <div class="lstTrabajadoresHeaderCol" style="min-width: 130px;max-width: 240px;" >Correo Electrónico</div>
+            <div class="lstTrabajadoresHeaderCol" style="min-width: 120px;max-width: 200px;" >Fecha de Ingreso</div>
+            <div class="lstTrabajadoresHeaderCol" style="min-width: 115px;max-width: 160px;" >Tipo de Contrato</div>
+            <div class="lstTrabajadoresHeaderCol" style="min-width: 80px;max-width: 150px;">Estado</div>
+            <div class="lstTrabajadoresHeaderCol" style="min-width: 15px;max-width: 15px;">&nbsp;</div>
+        </div>
+        <div class="lstTrabajadoresItem" *ngFor="let item of lstTrabajadores; let i = index">
+            <div class="lstTrabajadoresItemCol" style="min-width: 20px;max-width: 20px;justify-content: center;">{{i + 1}}</div>
+            <div class="lstTrabajadoresItemCol" style="min-width: 115px;max-width: 340px;" >{{ item.nombre + ' ' + item.apellidoPaterno + ' ' + item.apellidoMaterno }}</div>
+            <div class="lstTrabajadoresItemCol" style="min-width: 100px;max-width: 190px;font-weight: 400;font-size: 16px;color: #008894;">{{ item.departamento }}</div>
+            <div class="lstTrabajadoresItemCol" style="min-width: 90px;max-width: 190px;" >{{ item.puesto }}</div>
+            <div class="lstTrabajadoresItemCol" style="min-width: 95px;max-width: 130px;" >{{ item.datoFiscal.rfc }}</div>
+            <div class="lstTrabajadoresItemCol" style="min-width: 100px;max-width: 150px;" >{{ item.telefonoFijo }}</div>
+            <div class="lstTrabajadoresItemCol" style="min-width: 130px;max-width: 240px;" >{{ item.email }}</div>
+            <div class="lstTrabajadoresItemCol" style="min-width: 120px;max-width: 200px;" >{{ item.fechaInicioRelLaboral }}</div>
+            <div class="lstTrabajadoresItemCol" style="min-width: 115px;max-width: 160px;" >{{ item.contrato.descripcion }}</div>
+            <div class="lstTrabajadoresItemCol" style="min-width: 80px;max-width: 150px;" [ngStyle]="{'color': (item.activo) ? '#4DA72C' : '#C1272D' }">{{ (item.activo) ? 'Activo' : 'Finiquitado' }}</div>
+            <div class="lstTrabajadoresItemCol" style="min-width: 15px;max-width: 15px;" (click)="fnVerTrabajador(item.idTrabajador)"><img class="lstTrabajadoresItemColImg" src="./assets/Images/ir.svg" alt="Ir"></div>
+        </div>
+    </div>
+</div>

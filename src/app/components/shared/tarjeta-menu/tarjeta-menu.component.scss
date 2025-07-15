@@ -1,0 +1,88 @@
+@import "../../../../mixins.scss";
+@import "../../../../colors.scss";
+
+.container{
+  @include flexColumn;
+  width: 113px;
+  height: 113px;
+  background-color: $pqFondoTarjeta;
+  justify-content: center;
+  align-items: center;
+  color: $pqBlanco;
+  margin-right: 7px;
+  font-size: 11px;
+  box-sizing: border-box;
+  > div:nth-of-type(1){
+    height: 30px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 10px;
+    position: relative;
+    & > img{
+      position: absolute;
+      height: 30px;
+      max-width: 45px;
+
+      left: 0;
+      right: 0;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+  > div:nth-of-type(2){
+    @include flexRow;
+    margin-top: 15px;
+    justify-content: center;
+    align-items: flex-start;
+    text-align: center;
+    height: 28px;
+  }
+}
+
+.imgNormal{
+  & > img:nth-of-type(2){
+    //  display: none;
+    opacity:0;
+  }
+}
+
+.imgHover{
+  & > img:nth-of-type(1){
+    animation-name: ocultar;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+  }
+  & > img:nth-of-type(2){
+    animation-name: entrar;
+    animation-duration: 0.5s;
+  }
+}
+
+.imgLeave{
+  & > img:nth-of-type(1){
+    animation-name: salir;
+    animation-duration: 0.5s;
+  }
+  & > img:nth-of-type(2){
+    animation-name: ocultar;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+  }
+}
+
+@keyframes entrar {
+  from {margin-left:10px;}
+  to {margin-left:42.3px;}
+}
+
+@keyframes salir {
+  from {margin-left:80px;}
+  to {margin-left:42.3px;}
+}
+
+@keyframes ocultar {
+  0% {opacity: 1;}
+  50% {opacity:0;}
+  100% {opacity:0;}
+
+}

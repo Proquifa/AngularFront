@@ -1,0 +1,10 @@
+<canvas [attr.id]="idGrafica+'Chart'" height="100%" width="100%"></canvas>
+<div class="title">
+  <div style="text-transform: uppercase">{{data.titulo}}</div>
+  <div>
+    <div *ngFor="let item of textosGrafica; let i = index">
+      <div>{{item}}: {{valores[i]}}</div>
+    </div>
+  </div>
+</div>
+

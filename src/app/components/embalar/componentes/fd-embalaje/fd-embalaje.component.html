@@ -1,0 +1,61 @@
+<div class="fdEmbalaje">
+
+  <div class="encabezado">
+    <p style="font-weight: bold;">{{FD}}</p>
+    <p style="font-weight: normal;">{{valorRecibidoEmbalajeFD}}</p>
+  </div>
+
+  <div class="contenidoFd">
+    <div class="agregarDescripcionFd">
+      <div class="txtDescripcionFD">
+        <label style="font-family: Novecento;">Escanea las Bolsas de Inspección y colocalas dentro del empaque contenedor correspondiente. </label>
+      </div>
+      <div class="imgDEscripcionFD" (click)="agregarPaquete()" [style.pointer-events] = "botonA?'auto':'none'" *ngIf="botonA">
+        <img class="img" src='./assets/Images/Agregar.svg' style="height:28px;width:28px;"/>
+      </div>
+      <div class="imgDEscripcionFD" (click)="agregarPaquete()" [style.pointer-events] = "botonA?'auto':'none'" *ngIf="!botonA">
+        <img class="img" src='./assets/Images/mas_inactivo.svg' style="height:28px;width:28px;"/>
+      </div>
+    </div>
+
+    <div class="EscanearQrFd">
+      <div class="Escanear">
+        <div class="txtEscanear">
+        <p class="p1">1.- ESCANEAR </p>
+        <p class="p2">Código QR, de </p>
+        <p class="p2">bolsa de Inspección</p>
+        </div>
+        <div class="imgEscanear">
+          <p>
+            <img class="img" src='./assets/Images/escanea.svg' style="height:102px;width:276px;" *ngIf="true" />
+            <img class="img" src='./assets/Images/escanea_gris.svg' style="height:102px;width:276px;" *ngIf="false" />
+          </p>
+          <p class="p3" style="font-family: Novecentol">{{FD}}</p>
+        </div>
+      </div>
+
+      <div class="Flecha">
+        <img class="img" src='./assets/Images/seguimiento.svg' style="height:22px;width:276px;" />
+      </div>
+
+      <div class="Guardar">
+        <div class="txtGuardar">
+        <p class="p1">2.- GUARDAR</p>
+        <p class="p2">Bolsa de Inspección,</p>
+        <p class="p2">en {{textoTipo}}</p>
+        </div>
+        <div class="imgGuardar">
+          <p>
+            <img class="img" src='./assets/Images/hielera_etiqueta.svg' style="height:177px;width:161px;" *ngIf="tipoImgenHielera" />
+            <img class="img" src='./assets/Images/bolsa_transito.svg' style="height:198px;width:163px;" *ngIf="tipoImgenBolsa" />
+          </p>
+          <p class="p3" style="font-family: Novecento">{{folio}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="comentarios" *ngIf="comentarios !== ''">
+    <label>Comentarios: </label>
+    <textarea disabled="true" *ngIf="comentarios !== ''">{{comentarios}}</textarea>
+  </div>
+</div>

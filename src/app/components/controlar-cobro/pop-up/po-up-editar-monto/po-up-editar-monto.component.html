@@ -1,0 +1,69 @@
+<div class="content">
+  <div id="pop-up-facturacion" class="modal" #pop>
+    <div class="modal-content">
+      <header class="header" >
+        EDITAR MONTO PAGADO
+      </header>
+      <div class="contenido">
+        <div class="titulos">
+          <div>
+            <label>AXIS CLINICAL LATINA</label>
+            <label style="font-size: 20px;font-family: Roboto">$2,000.00 USD</label>
+          </div>
+          <div>
+            <label style="font-size: 17px">Proquifa · <span>Factura</span></label>
+            <span style="font-weight: 300; font-size: 16px">Por cobrar</span>
+          </div>
+        </div>
+        <div class="tipoPago">
+          <label>Realizar Pago en: </label>
+          <pn-combo-flecha-verde [title]="'Seleccionar'" [itemSelect]="tipoMonto" [items]="tiposMontos" (valueDropList)="recibeValosCombo($event,'monto')"  id="cmbLote" class="inputs"></pn-combo-flecha-verde>
+        </div>
+        <div class="cantidades">
+          <div *ngIf="usd">
+            <label>$2123</label>
+            <h3>Saldo Anterior</h3>
+          </div>
+          <div *ngIf="!usd" style="width: 33%">
+            <label>$2123</label>
+            <h3>Saldo Anterior</h3>
+          </div>
+          <div *ngIf="usd">
+            <label><input type="text" class="input"><br> MXN</label>
+            <h3 style="padding-right: 21px;">Tipo de Cambio</h3>
+          </div>
+          <div *ngIf="!usd" style="width: 97%">
+            <div style="display: flex;height: 50%; flex-direction: row;justify-content: center;align-items: center;width: 100%;">
+              <input type="text" class="input">
+              <label style="padding-left: 5px">MXN</label>
+            </div>
+            <h3 style="padding-right: 21px;justify-content: center">Tipo de Cambio</h3>
+          </div>
+          <div *ngIf="usd">
+            <label><input type="text" class="input" style="color:#008894"><br> USD</label>
+            <h3>Monto Pagado</h3>
+          </div>
+          <div *ngIf="usd">
+            <label>$2123</label>
+            <h3>Saldo Insoluto</h3>
+          </div>
+          <div *ngIf="!usd"   style="width: 33%">
+            <label>$2123</label>
+            <h3>Saldo Insoluto</h3>
+          </div>
+        </div>
+        <div class="porcentaje">
+          <label *ngIf="porcentaje"> Porcentaje Pagado: <span> 10% = $1000 MXN</span></label>
+        </div>
+        <div class="btn">
+          <div>
+            <label>CANCELAR</label>
+          </div>
+          <div>
+            <label>ACEPTAR</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

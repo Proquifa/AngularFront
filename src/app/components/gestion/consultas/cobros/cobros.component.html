@@ -1,0 +1,737 @@
+<div>
+  <div (click)="backMenu()">
+    <img height="22px" src="assets/Images/gestion/consultas/facturacion/recurso_190.svg" alt="">
+  </div>
+  |
+  <div *ngIf="!detalle">CONSULTA DE COBROS</div>
+  <div *ngIf="detalle" (click)="regresarConsulta()" class="regresar">CONSULTA DE COBROS</div>
+  <div *ngIf="detalle">|</div>
+  <div *ngIf="detalle">DETALLES</div>
+</div>
+<div *ngIf="!detalle" class="consultaResultados">
+  <div [ngClass]="classPanel">
+    <div class="filtroHeader">
+      <div class="abrir" (click)="openPanel()">
+        <img *ngIf="hiddenClose" width="15px" src="assets/Images/hamburguesa.svg" alt="">
+        <img *ngIf="!hiddenClose" width="15px" src="assets/Images/hamburguesa_verde.svg" alt="">
+      </div>
+      <div *ngIf="hiddenClose">
+        CERRAR
+        <div class="cerrar" (click)="closePanel()">
+          <img height="20px" width="20px" src="assets/Images/gestion/consultas/facturacion/recurso_189.svg" alt="">
+        </div>
+      </div>
+    </div>
+    <div class="filtros">
+      <div>
+        <pq-radio-button [widthTotal]="'120px'" [lstItems]="lstItems" [disble]="true" [direction]="'row'" [imgSize]="'12px'" (emitItem)="radioFechaFacturacion($event)"
+          [width]="'15px'"></pq-radio-button>
+      </div>
+      <div>
+        <div (click)="filtroAvanzada()" [style.background]="avanzada?'#008895':'#C2C3C9'">AVANZADA</div>
+        <div (click)="filtroRapida()" [style.background]="!avanzada?'#008895':'#C2C3C9'">RÁPIDA</div>
+      </div>
+      <div *ngIf="avanzada" class="divAvanzada">
+        <!--  Si  ya hay datos dentro del compenente se manda el < Gestion-filter/> con los datos
+            Y la propiedad IsLoader como verdadera
+          -->
+        <div *ngIf="isThereData;else loader">
+          <gestion-filter [ElementsDropList]="Elements" (valueFilter)="mostrarDatos($event)" [IsImage]="IsImage" [IsDate]="IsDate"
+            [IsLoader]="isThereData" [Clear]="Clear" style="width: 100%"></gestion-filter>
+        </div>
+        <!--  Si  no hay datos dentro del compenente se manda el < Gestion-filter/> con solo
+            una propiedad
+            IsLoader como Falsa-->
+        <ng-template #loader>
+          <gestion-filter [IsLoader]="isThereData" [Clear]="Clear"></gestion-filter>
+        </ng-template>
+      </div>
+      <div *ngIf="!avanzada" class="divRapida">
+        <div>
+          <pq-radio-button [widthTotal]="'60px'" [lstItems]="lstRadiosRapida" [disble]="true" [direction]="'row'" [imgSize]="'12px'"
+            (emitItem)="radioRapida($event)" [width]="'15px'"></pq-radio-button>
+        </div>
+        <div [formGroup]="filtroForm">
+          <span>{{filtroConsultaRapida}}</span>
+          <input type="text" formControlName="filtroDato" name="filtroDato">
+        </div>
+        <div (click)="filtroRapido()">
+          <img height="20px" src="assets/Images/visualizar.svg" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--w3-animate-left-->
+  <div class="resultados" *ngIf="isTableShow;else ShowGraphic" [style.width]="hiddenClose ? 'calc(100% - 321px)': 'calc(100% - 50px)'">
+    <div>
+      <div>
+        RESULTADOS
+      </div>
+      <div>
+        <img [style.margin-right]="'15px'" height="20px" width="20px" src="assets/Images/gestion/consultas/cobros/graficaminigris.svg"
+          alt="" (click)="showGraphic()">
+        <img height="20px" width="20px" src="assets/Images/exportar.svg" alt="" (click)="download()">
+      </div>
+    </div>
+    <div class="fechafactura" *ngIf="fechaFacturacion && !fechacobros">
+      <div>
+        <div [style.min-width]="'50px'">#</div>
+        <div [style.min-width]="'160px'">Cliente</div>
+        <div [style.min-width]="'140px'">Cobrador</div>
+        <div [style.min-width]="'140px'">P. Interno</div>
+        <div [style.min-width]="'140px'">Referencia</div>
+        <div [style.min-width]="'140px'">Factura</div>
+        <div [style.min-width]="'292px'">UUID</div>
+        <div [style.min-width]="'140px'">Vendió</div>
+        <div [style.min-width]="'140px'">MEC</div>
+        <div [style.min-width]="'140px'">C. Pago</div>
+        <div [style.min-width]="'140px'">F. Facturación</div>
+        <div [style.min-width]="'140px'">FEP</div>
+        <div [style.min-width]="'140px'">DRC</div>
+        <div [style.min-width]="'15px'"></div>
+        <div [style.min-width]="'140px'">Estado</div>
+        <div [style.min-width]="'30px'"></div>
+      </div>
+      <div>
+        <div *ngFor="let item of lstCobros; let i = index">
+          <div [style.min-width]="'50px'">{{i + 1}}</div>
+          <div [style.min-width]="'160px'">{{item.nombreCliente}}</div>
+          <div [style.min-width]="'140px'">{{item.cobrador}}</div>
+          <div [style.min-width]="'140px'">{{item.cpedido}}</div>
+          <div [style.min-width]="'140px'">{{item.referencia}}</div>
+          <div [style.min-width]="'140px'">{{item.factura}}</div>
+          <div [style.min-width]="'292px'">{{item.uuid}}</div>
+          <div [style.min-width]="'140px'">{{item.fpor}}</div>
+          <div [style.min-width]="'140px'">$ {{item.subTotalDlls}} USD</div>
+          <div [style.min-width]="'140px'">{{item.cpago}}</div>
+          <div [style.min-width]="'140px'">{{item.fechaFacturacion | dateFormatSlash}}</div>
+          <div [style.min-width]="'140px'">
+            <span [style.color]="'#417505'" *ngIf="(((item.fechaEsperadaPago!=null && item.fechaPago!=null)&&(item.fechaEsperadaPago > item.fechaPago)))">{{item.fechaEsperadaPago| dateFormatSlash}} </span>
+            <span [style.color]="'#F5A623'" *ngIf="item.fechaPago > item.fechaEsperadaPago">{{item.fechaEsperadaPago| dateFormatSlash}} </span>
+            <span *ngIf="item.fechaPago===null">{{item.fechaEsperadaPago| dateFormatSlash}} </span>
+          </div>
+          <div [style.min-width]="'140px'">
+            <span *ngIf="item.diasRestantesCobro===0">Pendiente </span>
+            <span *ngIf="item.diasRestantesCobro > 0">Cobrado</span>
+            <span *ngIf="item.diasRestantesCobro < 0">Cobrado</span>
+          </div>
+          <div [style.min-width]="'15px'" [ngClass]="item.diasRestantesCobro >0 ?'circleGreen':item.diasRestantesCobro ===0?'circleRed':'circleYellow'"></div>
+          <div [style.min-width]="'140px'">
+            <span *ngIf="item.estado==='Por Cobrar'">Abierto</span>
+            <span *ngIf="item.estado==='Cobrada'">Cerrado</span>
+          </div>
+          <div [style.min-width]="'30px'" (click)="verDetalle(item)">
+            <img class="detalle" width="14px" src="assets/Images/ir_detalle.svg" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="fechacobro" *ngIf="!fechaFacturacion && !fechacobros">
+      <div>
+        <div [style.min-width]="'50px'">#</div>
+        <div [style.min-width]="'160px'">Cliente</div>
+        <div [style.min-width]="'160px'">Cobrador</div>
+        <div [style.min-width]="'160px'">P. Interno</div>
+        <div [style.min-width]="'160px'">Referencia</div>
+        <div [style.min-width]="'160px'">Factura</div>
+        <div [style.min-width]="'292px'">UUID</div>
+        <div [style.min-width]="'160px'">Vendió</div>
+        <div [style.min-width]="'160px'">MEC</div>
+        <div [style.min-width]="'160px'">Banco</div>
+        <div [style.min-width]="'160px'">Cuenta</div>
+        <div [style.min-width]="'160px'">Fecha Real</div>
+        <div [style.min-width]="'160px'">C. Pago</div>
+        <div [style.min-width]="'160px'">F. Facturación</div>
+        <div [style.min-width]="'160px'">FEP</div>
+        <div [style.min-width]="'160px'">DRC</div>
+        <div [style.min-width]="'15px'"></div>
+        <div [style.min-width]="'160px'">Estado</div>
+        <div [style.min-width]="'30px'"></div>
+      </div>
+      <div>
+        <div *ngFor="let item of lstCobros; let i = index">
+          <div [style.min-width]="'50px'">{{i + 1}}</div>
+          <div [style.min-width]="'160px'">{{item.nombreCliente}}</div>
+          <div [style.min-width]="'160px'">{{item.cobrador}}</div>
+          <div [style.min-width]="'160px'">{{item.cpedido}}</div>
+          <div [style.min-width]="'160px'">{{item.referencia}}</div>
+          <div [style.min-width]="'160px'">{{item.factura}}</div>
+          <div [style.min-width]="'292px'">{{item.uuid}}</div>
+          <div [style.min-width]="'160px'">{{item.fpor}}</div>
+          <div [style.min-width]="'160px'">$ {{item.subTotalDlls}} USD</div>
+          <div [style.min-width]="'160px'">{{item.banco}}</div>
+          <div [style.min-width]="'160px'">{{item.noCuenta}}</div>
+          <div [style.min-width]="'160px'">{{item.fechaPago }}</div>
+          <div [style.min-width]="'160px'">{{item.cpago}}</div>
+          <div [style.min-width]="'160px'">{{item.fechaFacturacion | dateFormatSlash}}</div>
+          <div [style.min-width]="'160px'">
+            <span [style.color]="'#417505'" *ngIf="(((item.fechaEsperadaPago!=null && item.fechaPago!=null)&&(item.fechaEsperadaPago > item.fechaPago)))">{{item.fechaEsperadaPago| dateFormatSlash}} </span>
+            <span [style.color]="'#F5A623'" *ngIf="item.fechaPago > item.fechaEsperadaPago">{{item.fechaEsperadaPago| dateFormatSlash}} </span>
+            <span *ngIf="item.fechaPago===null">{{item.fechaEsperadaPago| dateFormatSlash}} </span>
+          </div>
+          <div [style.min-width]="'140px'">
+            <span *ngIf="item.diasRestantesCobro===0">Pendiente </span>
+            <span *ngIf="item.diasRestantesCobro > 0">Cobrado</span>
+            <span *ngIf="item.diasRestantesCobro < 0">Cobrado</span>
+          </div>
+          <div [style.min-width]="'15px'" [ngClass]="item.diasRestantesCobro >0 ?'circleGreen':item.diasRestantesCobro ===0?'circleRed':'circleYellow'"></div>
+          <div [style.min-width]="'160px'">
+            <span *ngIf="item.estado==='Por Cobrar'">Abierto</span>
+            <span *ngIf="item.estado==='Cobrada'">Cerrado</span>
+          </div>
+          <div [style.min-width]="'30px'" (click)="verDetalle(item)">
+            <img class="detalle" width="14px" src="assets/Images/ir_detalle.svg" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="fechacobroRapida" *ngIf="fechacobros">
+      <div>
+        <div [style.min-width]="'50px'">#</div>
+        <div [style.min-width]="'160px'">Cliente</div>
+        <div [style.min-width]="'160px'">Cobrador</div>
+        <div [style.min-width]="'160px'">P. Interno</div>
+        <div [style.min-width]="'160px'">Referencia</div>
+        <div [style.min-width]="'160px'">Factura</div>
+        <div [style.min-width]="'292px'">UUID</div>
+        <div [style.min-width]="'160px'">Vendió</div>
+        <div [style.min-width]="'160px'">MEC</div>
+        <div [style.min-width]="'160px'">Banco</div>
+        <div [style.min-width]="'160px'">Cuenta</div>
+        <div [style.min-width]="'160px'">Fecha Real</div>
+        <div [style.min-width]="'160px'">C. Pago</div>
+        <div [style.min-width]="'160px'">F. Facturación</div>
+        <div [style.min-width]="'160px'">FEP</div>
+        <div [style.min-width]="'15px'"></div>
+        <div [style.min-width]="'160px'">DRC</div>
+        <div [style.min-width]="'160px'">Estado</div>
+      </div>
+      <div>
+        <div *ngFor="let item of lstCobros; let i = index">
+          <div [style.min-width]="'50px'">{{i + 1}}</div>
+          <div [style.min-width]="'160px'">{{item.nombreCliente}}</div>
+          <div [style.min-width]="'160px'">{{item.cobrador}}</div>
+          <div [style.min-width]="'180px'">{{item.interno}}</div>
+          <div [style.min-width]="'160px'">{{item.referencia}}</div>
+          <div [style.min-width]="'100px'">{{item.factura}}</div>
+          <div [style.min-width]="'292px'">{{item.uuid}}</div>
+          <div [style.min-width]="'120px'">{{item.vendio}}</div>
+          <div [style.min-width]="'120px'">{{item.mec}}</div>
+          <div [style.min-width]="'120px'">{{item.banco}}</div>
+          <div [style.min-width]="'120px'">{{item.cuenta}}</div>
+          <div [style.min-width]="'120px'">{{item.freal}}</div>
+          <div [style.min-width]="'160px'">{{item.cpago}}</div>
+          <div [style.min-width]="'120px'">{{item.fechaFacturacion | dateFormatSlash}}</div>
+          <div [style.min-width]="'160px'">
+            <span [style.color]="'#417505'" *ngIf="(((item.fechaEsperadaPago!=null && item.fechaPago!=null)&&(item.fechaEsperadaPago > item.fechaPago)))">{{item.fechaEsperadaPago| dateFormatSlash}} </span>
+            <span [style.color]="'#F5A623'" *ngIf="item.fechaPago > item.fechaEsperadaPago">{{item.fechaEsperadaPago| dateFormatSlash}} </span>
+            <span *ngIf="item.fechaPago===null">{{item.fechaEsperadaPago| dateFormatSlash}} </span>
+          </div>
+          <div [style.min-width]="'140px'">
+            <span *ngIf="item.diasRestantesCobro===0">Pendiente </span>
+            <span *ngIf="item.diasRestantesCobro > 0">Cobrado</span>
+            <span *ngIf="item.diasRestantesCobro < 0">Cobrado</span>
+          </div>
+          <div [style.min-width]="'15px'" [ngClass]="item.diasRestantesCobro >0 ?'circleGreen':item.diasRestantesCobro ===0?'circleRed':'circleYellow'"></div>
+          <div [style.min-width]="'100px'">
+            <span *ngIf="item.estado==='Por Cobrar'">Abierto</span>
+            <span *ngIf="item.estado==='Cobrada'">Cerrado</span>
+          </div>
+          <div [style.min-width]="'30px'" (click)="verDetalle(item)">
+            <img class="detalle" width="14px" src="assets/Images/ir_detalle.svg" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="total" *ngIf="lstCobros!= null">
+      <p>Total:
+        <span>{{lstCobros.length}}</span>
+        <span>Cobro
+          <span *ngIf="lstCobros.length != 1">s</span>
+        </span>
+      </p>
+    </div>
+  </div>
+</div>
+<!--Elemento Que muestra la vista Grafica-->
+<ng-template #ShowGraphic>
+  <div class="w3-animate-right GlobalContainer-graphic-Component" style="overflow: hidden;">
+    <!--Elemento Que muestra los gráficos style="overflow: scroll"-->
+    <div class="GraphicsContainer-graphic-Component" style="overflow: scroll">
+      <pq-graficas-cobros [valores1]="nivel" [valores2]="cpago" [valores3]="estado" [valores4]="programado" [valores7]="dias" [valores8]="medio"
+        [valores9]="tiempo"></pq-graficas-cobros>
+    </div>
+    <div class="Filter-Container-graphic-Component">
+      <div class="Tabgraphic-Component" (click)="showTable()">
+        <img height="16.2px" width="20.4px" src="assets/Images/gestion/images/tablaminibca.svg" alt="">
+      </div>
+      <!--contenedor principal para los filtros de los graficos-->
+      <div class="Main-Container-filter-graphic-Component">
+        <!--Encabezado Totales-->
+        <div class="totals-filter-graphic-Component">
+          TOTALES
+          <br>
+        </div>
+        <div [ngStyle]="{'margin-top': '30px', 'color': '#fff', 'font-size': '14px', 'margin-top': '10px'}">
+
+          <div [ngStyle]="{'height': '82px','flex-wrap': 'wrap','display': 'flex'}">
+            <div [ngStyle]="{'margin-right': '11px'}">
+              <img class="detalle" width="21.14px" height="14px" src="assets/Images/rojoflecha.png" alt="">
+            </div>
+            <div>
+              Monto USD:
+              <div>$ {{totalMontoDolares1 }}</div>
+              <div [ngStyle]="{'color': '#439DC1'}">$ {{totalMontoDolares }}</div>
+              <div [ngStyle]="{'color': '#AA65E7 '}">$ {{totalMontoDolares2 }}</div>
+            </div>
+          </div>
+          <div [ngStyle]="{'height': '82px','flex-wrap': 'wrap','display': 'flex'}">
+            <div [ngStyle]="{'margin-right': '11px'}">
+              <img class="detalle" width="21.14px" height="14px" src="assets/Images/rojoflecha.png" alt="">
+            </div>
+            <div>
+              No. Cobros:
+              <div>{{totalCobros1}}</div>
+              <div [ngStyle]="{'color': '#439DC1'}">{{totalCobros}}</div>
+              <div [ngStyle]="{'color': '#AA65E7 '}">{{totalCobros2}}</div>
+            </div>
+          </div>
+          <div [ngStyle]="{'height': '82px','flex-wrap': 'wrap','display': 'flex'}">
+            <div [ngStyle]="{'margin-right': '11px'}">
+              <img class="detalle" width="21.14px" height="14px" src="assets/Images/rojoflecha.png" alt="">
+            </div>
+            <div>
+              Total piezas:
+              <div>{{totalPiezas1}}</div>
+              <div [ngStyle]="{'color': '#439DC1'}">{{totalPiezas}}</div>
+              <div [ngStyle]="{'color': '#AA65E7 '}">{{totalPiezas2}}</div>
+            </div>
+          </div>
+        </div>
+        <!--Resultados de los filtros-->
+        <div class="Results-filter-graphic-Component">
+          <div [ngStyle]="{'display': 'flex', 'margin-right': '40px'}">
+            <div>
+              <div class="circleDateGreen"></div>
+              <div class="circleDatePurple">
+              </div>
+            </div>
+            <div [ngStyle]="{'margin-top': '20px', 'color': '#fff', 'margin-right': '20px'}">
+              <div [ngStyle]="{}">Del
+                <pq-date-picker [style.width]="'125px'" [(date)]="date1" dateFormat="YYYYMMDD" (fecha)="getFechaImpl($event)">
+                </pq-date-picker>
+              </div>
+              <div [ngStyle]="{'margin-top': '20px'}">Del
+                <pq-date-picker [style.width]="'125px'" [(date)]="date22" dateFormat="YYYYMMDD" (fecha)="getFechaImpl($event)">
+                </pq-date-picker>
+              </div>
+            </div>
+            <div [ngStyle]="{'margin-top': '20px', 'color': '#fff'}">
+              <div [ngStyle]="{}">Al
+                <pq-date-picker [style.width]="'125px'" [(date)]="date3" dateFormat="YYYYMMDD" (fecha)="getFechaImpl2($event)">
+                </pq-date-picker>
+              </div>
+              <div [ngStyle]="{'margin-top': '20px'}">Al
+                <pq-date-picker [style.width]="'125px'" [(date)]="date4" dateFormat="YYYYMMDD" (fecha)="getFechaImpl2($event)">
+                </pq-date-picker>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div [ngStyle]="{'margin-top': '20px', 'background-color':'red','justify-content': 'center','align-items': 'center', 'display': 'flex', 'margin-right': '33px','cursor': 'pointer'}"
+          (click)="filtroTotalBlanco()" (click)="filtroTotalMorado()" (click)="filtroTotalAzul()">
+          <img height="31px" src="assets/Images/reload.svg" alt="">
+        </div>
+        <!--Dobles filtros
+        <div class="filters-graphic-Component">
+          Dobles filtros
+          <br>
+        </div>-->
+      </div>
+    </div>
+  </div>
+</ng-template>
+<div *ngIf="detalle" class="consultaDetalles">
+  <div [ngClass]="classPanel">
+    <div class="filtroHeader">
+      <div class="abrir" (click)="openPanel()">
+        <img *ngIf="hiddenClose" width="15px" src="assets/Images/hamburguesa.svg" alt="">
+        <img *ngIf="!hiddenClose" width="15px" src="assets/Images/hamburguesa_verde.svg" alt="">
+      </div>
+      <div *ngIf="hiddenClose">
+        CERRAR
+        <div class="cerrar" (click)="closePanel()">
+          <img height="20px" width="20px" src="assets/Images/gestion/consultas/facturacion/recurso_189.svg" alt="">
+        </div>
+      </div>
+    </div>
+    <div class="filtros">
+      <div class="detalleCliente">{{cobroDetalle.nombreCliente}}</div>
+      <div class=""></div>
+      <div class="detalleTitulo">Nivel de ingresos:</div>
+      <div class="detalleTextoVerde">{{cobroDetalle.nivelIngreso}}</div>
+      <div class="detalleTitulo">Factura:</div>
+      <div class="detalleTextoVerde">{{cobroDetalle.factura}}</div>
+      <div class="detalleTitulo">Vendió:</div>
+      <div class="detalleTexto">{{cobroDetalle.fpor}}</div>
+      <div class="detalleTitulo">P. Interno:</div>
+      <div class="detalleTextoVerde">{{cobroDetalle.cpedido}}</div>
+      <div class="detalleTitulo">Monto estimado de cobro:</div>
+      <div class="detalleTextoVerde">$ {{cobroDetalle.montoEsperadoCobro}} Pesos</div>
+      <div class="detalleTitulo">Condiciones de pago:</div>
+      <div class="detalleTexto">{{cobroDetalle.cpago}}</div>
+      <div class="detalleTitulo">Medio de pago:</div>
+      <div class="detalleTexto">{{cobroDetalle.medioPago}}</div>
+      <div class="detalleTitulo">Fecha facturación:</div>
+      <div class="detalleTexto">{{cobroDetalle.fechaFacturacion | dateFormatSlash}}</div>
+      <div class="detalleTitulo">Fecha revisión:</div>
+      <div class="detalleTexto">{{cobroDetalle.fechaRevision | dateFormatSlash}}</div>
+      <div class="detalleTitulo">Contrarecibo:</div>
+      <div class="detalleTexto">{{cobroDetalle.contrarecibo}}</div>
+    </div>
+  </div>
+  <div class="contenidoFactura">
+    <div class="detalleFactura">
+      <div>DETALLE DE COBRO</div>
+      <div>
+        <div [ngClass]="i==0?'divActual':lstCobrosDetalleActive[i]" *ngFor="let item of lstCobrosDetalle; let i = index" (click)="resumenCobro(i)">
+          <div class="dfSelect"></div>
+          <div>
+            <div>
+              <div>
+                <div [style.color]="'#008895'">F- {{item.factura}} </div>
+                <div>MEC: $ {{item.montoEsperadoCobro}} Dolares</div>
+              </div>
+              <div>FEP:
+                <span *ngIf="item.fechaEsperadaPago != null">{{item.fechaEsperadaPago | dateFormatSlash}} </span>
+                <span *ngIf="item.fechaEsperadaPago == null">N/D</span>
+              </div>
+            </div>
+            <div>
+              <div>Total de Piezas: {{item.piezas}} </div>
+              <div [style.color]="item.estado != 'Cobrada'?'#C1272D':'#39B54A'"></div>
+              <div>CDR: Pendiente</div>
+            </div>
+            <div>
+              <div></div>
+              <div>
+                <span [style.color]="'#981E30'" *ngIf="item.estado==='Por Cobrar'">Abierto</span>
+                <span [style.color]="'#008895'" *ngIf="item.estado!='Por Cobrar'">Cerrado</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div> TOTAL: {{lstCobrosDetalle.length}} COBRO
+          <span *ngIf="lstCobrosDetalle.length != 1">S</span> · {{totalDetalle | acFormatMoney}} USD</div>
+      </div>
+    </div>
+    <div class="lineaTiempo">
+      <div>LÍNEA DE TIEMPO</div>
+      <div>
+        <div [ngClass]="lstLineaTiempoActive[i]" *ngFor="let item of lstLineaTiempo; let i = index" (click)="lineaTiempo(i)">
+          <div class="ltSelect"></div>
+          <div>
+            <div>
+              <div *ngIf="item.etapa !='COOBRADA'">{{item.etapa}}</div>
+              <div *ngIf="item.etapa == 'COOBRADA'">COBRADA</div>
+              <div *ngIf="item.responsable !=null">{{item.responsable}}</div>
+              <div *ngIf="item.responsable == null">PENDIENTE</div>
+              <div>FI {{item.fechaInicio | dateFormatSlash}}</div>
+              <div>FF {{item.fechaFin | dateFormatSlash}}</div>
+              <div>TT {{item.totalProceso}} día
+                <span *ngIf="item.totalProceso != 1">s</span>
+              </div>
+            </div>
+            <div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="detalleTiempo">
+      <div *ngIf="estadoItemLineaTiempo !='COOBRADA'">
+        {{estadoItemLineaTiempo}}
+      </div>
+      <div *ngIf="estadoItemLineaTiempo == 'COOBRADA'">
+        COBRADA
+      </div>
+      <div>
+        <!-- Credito -->
+        <div class="monitoreo_Cobro_SC" *ngIf="estadoItemLineaTiempo == 'FACTURACION'|| estadoItemLineaTiempo == 'INTERFACTURACION' && itemLineaTiempo != undefined">
+          <div>
+            <div class="titulo">Generales</div>
+            <div class="subTitulo">Fecha de facturación:</div>
+            <div class="normal">{{itemLineaTiempo.fechaInicio | dateFormatSlash }}</div>
+            <div class="subTitulo">Factura:</div>
+            <div class="normalVerde" style=" color: #008895;">
+              <span style=" color: #008895;" (click)="descargarPDF('http://201.161.12.60:51725/SAP/Facturas/'+cobroDetalle.fpor+'/'+cobroDetalle.factura+'.pdf')">{{itemLineaTiempo.referencia}}</span>
+            </div>
+            <div class="subTitulo">Facturó:</div>
+            <div class="normal">{{itemLineaTiempo.responsable}}</div>
+            <div class="subTitulo">Tipo:</div>
+            <div class="normal" *ngIf="itemLineaTiempo.tipo!= null">{{itemLineaTiempo.tipo}}</div>
+            <div class="normal" *ngIf="itemLineaTiempo.tipo== null">Pendiente</div>
+            <div class="subTitulo">Medio:</div>
+            <div class="normal">{{itemLineaTiempo.medio}}</div>
+          </div>
+        </div>
+        <div class="monitoreo_Cobro_SC" *ngIf="estadoItemLineaTiempo == 'COOBRADA' && itemLineaTiempo != undefined">
+          <div>
+            <div class="titulo">Generales</div>
+            <div class="subTitulo">Fecha de pago:</div>
+            <div class="normal">{{itemLineaTiempo.fechaInicio | dateFormatSlash}}</div>
+            <div class="subTitulo">Condiciones de pago:</div>
+            <div class="normal">{{itemLineaTiempo.tipo}}</div>
+            <div class="subTitulo">Fecha estimada de pago:</div>
+            <div class="normal">{{itemLineaTiempo.fechaProgramacion | dateFormatSlash}}</div>
+            <div class="subTitulo">Fecha pago:</div>
+            <div class="normal">{{itemLineaTiempo.fechaCobro | dateFormatSlash}}</div>
+            <div class="subTitulo">Fecha registro de pago:</div>
+            <div class="normal">{{itemLineaTiempo.fechaDispobible | dateFormatSlash}}</div>
+            <div class="subTitulo">Factura:</div>
+            <div class="normalVerde">
+              <span (click)="descargarPDF('http://201.161.12.60:51725/SAP/Facturas/Golocaer/'+itemLineaTiempo.referencia+'.pdf')">{{itemLineaTiempo.referencia}}</span>
+            </div>
+            <div class="subTitulo">Monto:</div>
+            <div class="normal" *ngIf="itemLineaTiempo.monto !=0 ">{{itemLineaTiempo.monto | acFormatMoney}}</div>
+            <div class="normal" *ngIf="itemLineaTiempo.monto ==0 ">ND</div>
+            <div class="subTitulo">Comprobante de pago:</div>
+            <div class="normalVerde">
+              <span *ngIf="itemLineaTiempo.comentarios != null" (click)="descargarPDF('http://201.161.12.60:51725/SAP/Pagos%20cliente/'+itemLineaTiempo.documento+'.pdf')">{{itemLineaTiempo.documento}}</span>
+            </div>
+            <div class="normal" *ngIf="itemLineaTiempo.comentarios == null ">ND</div>
+            <div class="subTitulo">Pago:</div>
+            <div class="normal" [style.color]="'#C1272D'" *ngIf="itemLineaTiempo.comentarios == 'FT' ">{{itemLineaTiempo.comentarios}}</div>
+            <div class="normal" [style.color]="'#39B54A'" *ngIf="itemLineaTiempo.comentarios == 'ET' ">{{itemLineaTiempo.comentarios}}</div>
+          </div>
+
+        </div>
+
+        <div class="monitoreo_Cobro_SC" *ngIf="estadoItemLineaTiempo == 'ENVIO'">
+          <div>
+            <div class="titulo">Generales</div>
+            <div class="subTitulo">Fecha tramitación:</div>
+            <div class="normal">{{itemLineaTiempo.fechaInicio | dateFormatSlash}}</div>
+            <div class="subTitulo">Fecha entrega:</div>
+            <div class="normal">{{itemLineaTiempo.fechaFin | dateFormatSlash}}</div>
+          </div>
+        </div>
+        <div class="monitoreo_Cobro_SC" *ngIf="estadoItemLineaTiempo == 'ENTREGA'">
+          <div>
+            <div class="titulo">Generales</div>
+            <div class="subTitulo">Fecha tramitación:</div>
+            <div class="normal">{{itemLineaTiempo.fechaInicio | dateFormatSlash}}</div>
+            <div class="subTitulo">Fecha entrega:</div>
+            <div class="normal">{{itemLineaTiempo.fechaFin | dateFormatSlash}}</div>
+            <div class="subTitulo">Conforme:</div>
+            <div class="normal" [style.color]="'#39B54A'"  *ngIf="itemLineaTiempo.conforme == 'SI' " >{{itemLineaTiempo.conforme}}</div>
+            <div class="normal"   *ngIf="itemLineaTiempo.conforme == 'NO' " >{{itemLineaTiempo.conforme}}</div>
+          
+          </div>
+        </div>
+        <div *ngFor="let itemEtapas of lstEtapas; let i = index">
+          <div class="monitoreo_Cobro_SC" *ngIf="itemEtapas.etapa == 'TRAMITAR RUTA' && estadoItemLineaTiempo != 'FACTURACION' ">
+            <div>
+              <div class="titulo">Tramitar ruta</div>
+              <div class="normal">FI {{itemEtapas.fechaInicio | dateFormatSlash }} : FF {{itemEtapas.fechaInicio | dateFormatSlash }} </div>
+              <div class="subTitulo">Tramitó:</div>
+              <div class="normal">{{itemEtapas.responsable }}</div>
+              <div class="subTitulo">Comentarios gestor ruta:</div>
+              <div class="normal" *ngIf="itemEtapas.comentarios == '' ">ND</div>
+              <div class="normal" *ngIf="itemEtapas.comentarios != '' ">{{itemEtapas.comentarios }}</div>
+            </div>
+          </div>
+          <div class="monitoreo_Cobro_SC" *ngIf="itemEtapas.etapa == 'SURTIR RUTA' && estadoItemLineaTiempo != 'FACTURACION' ">
+            <div>
+              <div class="titulo">Surtir ruta</div>
+              <div class="normal">FI {{itemEtapas.fechaInicio | dateFormatSlash }} : FF {{itemEtapas.fechaInicio | dateFormatSlash }} </div>
+              <div class="subTitulo">Surtió:</div>
+              <div class="normal">{{itemEtapas.responsable }}</div>
+              <div class="subTitulo">Surtido:</div>
+              <div class="normal" *ngIf="itemEtapas.referencia ==''  ">Pendiente</div>
+              <div class="normalVerde" *ngIf="itemEtapas.referencia !=''  ">
+                <span (click)="descargarPDF('http://201.161.12.60:51725/SAP/Etiquetas/'+itemEtapas.referencia+'.pdf')">{{itemEtapas.referencia}}</span>
+                <!--     <a href="http://201.161.12.60:51725/SAP/Etiquetas/{{itemEtapas.referencia}}.pdf" download>{{itemEtapas.referencia}}</a>-->
+              </div>
+              <div class="subTitulo">Caja colectora:</div>
+              <div class="normal" *ngIf="itemEtapas.documento==null">Pendiente</div>
+              <div class="normalVerde" *ngIf="itemEtapas.documento!=null">
+                <span (click)="descargarPDF('http://201.161.12.60:51725/SAP/Etiquetas/'+itemEtapas.documento+'.pdf')">{{itemEtapas.documento}}</span>
+                <!--   <a href="http://201.161.12.60:51725/SAP/Etiquetas/{{itemEtapas.documento }}.pdf" download> {{itemEtapas.documento }}</a>-->
+              </div>
+            </div>
+          </div>
+          <div class="monitoreo_Cobro_SC" *ngIf="itemEtapas.etapa == 'ASIGNAR MENSAJERO' && estadoItemLineaTiempo != 'FACTURACION' ">
+            <div>
+              <div class="titulo">Asignar mensajero</div>
+              <div class="normal">FI {{itemEtapas.fechaInicio | dateFormatSlash }} : FF {{itemEtapas.fechaFin | dateFormatSlash }} </div>
+              <div class="subTitulo">Asignó:</div>
+              <div class="normal">{{itemEtapas.contacto }}</div>
+              <div class="subTitulo">Mensajero asignado:</div>
+              <div class="normal">{{itemEtapas.responsable }}</div>
+              <div class="subTitulo">Ruta:</div>
+              <div class="normal">{{itemEtapas.medio }} {{itemEtapas.referencia }}</div>
+            </div>
+          </div>
+          <div class="monitoreo_Cobro_SC" *ngIf="itemEtapas.etapa == 'EJECUTAR RUTA' && estadoItemLineaTiempo != 'FACTURACION' ">
+            <div>
+              <div class="titulo">Ejecutar ruta</div>
+              <div class="normal">FI {{itemEtapas.fechaInicio | dateFormatSlash }} : FF {{itemEtapas.fechaFin | dateFormatSlash }} </div>
+              <div class="subTitulo">Entrega:</div>
+              <div class="normal">{{itemEtapas.referencia }}</div>
+            </div>
+          </div>
+          <div class="monitoreo_Cobro_SC" *ngIf="itemEtapas.etapa == 'CERRAR RUTA' && estadoItemLineaTiempo != 'FACTURACION' ">
+            <div>
+              <div class="titulo">Cerrar ruta</div>
+              <div class="normal">FI {{itemEtapas.fechaInicio | dateFormatSlash }} : FF {{itemEtapas.fechaInicio | dateFormatSlash }} </div>
+              <div class="subTitulo">Cerró:</div>
+              <div class="normal">{{itemEtapas.responsable }}</div>
+              <div class="subTitulo">Documentos resultantes:</div>
+              <div class="normalVerde">
+                <span>
+                  <span (click)="descargarPDF('http://201.161.12.60:51725/SAP/Doctos%20Cierre/RT/'+itemEtapas.pedimento+'.pdf')">{{itemEtapas.pedimento}}</span>
+                </span>&nbsp;&nbsp;&nbsp;&nbsp;
+                <span>
+                  <span (click)="descargarPDF('http://201.161.12.60:51725/SAP/Etiquetas/'+itemEtapas.referencia+'.pdf')">{{itemEtapas.referencia}}</span>
+                </span>
+
+                <!-- <a href="http://201.161.12.60:51725/SAP/Etiquetas/ {{itemEtapas.pedimento }} .pdf" download> {{itemEtapas.pedimento }} </a>
+                <a href="http://201.161.12.60:51725/SAP/Etiquetas/  {{itemEtapas.referencia}} .pdf" download> {{itemEtapas.referencia}} </a>-->
+              </div>
+              <div class="subTitulo">¿Entrega y revisión?</div>
+              <div class="normal" *ngIf="itemEtapas.revision!=null">{{itemEtapas.revision }}</div>
+              <div class="normal" *ngIf="itemEtapas.revision==null">SI</div>
+              <div class="normal">{{itemEtapas.revision }}</div>
+              <div class="subTitulo">Refacturación:</div>
+              <div class="normal" *ngIf="itemEtapas.refacturacion!=null">{{itemEtapas.refacturacion }}</div>
+              <div class="normal" *ngIf="itemEtapas.refacturacion==null">NO</div>
+            </div>
+          </div>
+          <div class="monitoreo_Cobro_SC" *ngIf="estadoItemLineaTiempo == 'COBRO' && itemLineaTiempo != undefined">
+            <div class="monitoreo_Cobro_SC" *ngIf="itemEtapas.etapa == 'GENERALES' ">
+              <div>
+                <div class="titulo">Generales</div>
+
+                <div class="subTitulo">Fecha registro:</div>
+                <div class="normal">{{itemEtapas.fechaProgramacion | dateFormatSlash}}</div>
+                <div class="subTitulo">Fecha facturación:</div>
+                <div class="normal">{{itemEtapas.fechaRevision | dateFormatSlash}}</div>
+                <div class="subTitulo">Fecha cobro:</div>
+                <div class="normal">{{itemEtapas.fechaCobro | dateFormatSlash }}</div>
+              </div>
+            </div>
+            <div class="monitoreo_Cobro_SC" *ngIf="itemEtapas.etapa == 'GESTION_PSC' && estadoItemLineaTiempo != 'FACTURACION' && estadoItemLineaTiempo != 'INTERFACTURACION'">
+              <div>
+                <div class="titulo">Gestión PSC</div>
+                <div class="normal">FI {{itemEtapas.fechaProgramacion | dateFormatSlash }} : FF {{itemEtapas.fechaRevision | dateFormatSlash
+                  }} </div>
+                <div class="subTitulo">MEC:</div>
+                <div class="normal"> {{itemEtapas.monto | acFormatMoney }} {{itemEtapas.docsCierre }}</div>
+                <div class="subTitulo">TC:</div>
+                <div class="normal"> {{itemEtapas.cobro | acFormatMoney}} {{itemEtapas.docsCierre }}</div>
+                <div class="subTitulo">Medio:</div>
+                <div class="normal">{{itemEtapas.doscResult1 }}</div>
+                <div class="subTitulo">FEP:</div>
+                <div class="normal">{{itemEtapas.fechaEntrega | dateFormatSlash}}</div>
+              </div>
+            </div>
+            <div class="monitoreo_Cobro_SC" *ngIf="itemEtapas.etapa == 'MONITOREO_CO_SC' && estadoItemLineaTiempo != 'FACTURACION' && estadoItemLineaTiempo != 'INTERFACTURACION' ">
+              <div>
+                <div class="titulo">Monitoreo cobro SC</div>
+                <div class="normal">FI {{itemEtapas.fechaRevision | dateFormatSlash }} : FF {{itemEtapas.fechaProgramacion | dateFormatSlash}}
+                </div>
+                <div class="subTitulo">Pago asociado:</div>
+                <div class="normalVerde">
+                  <span (click)="descargarPDF('http://201.161.12.60:51725/SAP/Doctos/'+itemEtapas.revision+'.pdf')">{{itemEtapas.revision}}</span>
+                  <!-- <a href="http://201.161.12.60:51725/SAP/Doctos/{{itemEtapas.revision }}.pdf" download>{{itemEtapas.revision }}</a>-->
+                </div>
+                <div class="subTitulo">Comprobante de pago:</div>
+                <div class="normalVerde">
+                  <span *ngIf="itemEtapas.docsCierre!=null" (click)="descargarPDF('http://201.161.12.60:51725/SAP/Pagos%20cliente/'+itemEtapas.docsCierre+'.pdf')">{{itemEtapas.docsCierre}}</span>
+                  <!--<a href="http://201.161.12.60:51725/SAP/Pagos%20cliente/{{itemEtapas.docsCierre}}.pdf" download>{{itemEtapas.docsCierre}}</a>-->
+                </div>
+                <div class="normal" *ngIf="itemEtapas.docsCierre==null">ND</div>
+                <div class="subTitulo">Monto cobrado:</div>
+                <div class="normal" *ngIf="itemEtapas.monto!=0"> {{itemEtapas.monto | acFormatMoney}} {{itemEtapas.doscResult1}}</div>
+                <div class="normal" *ngIf=" itemEtapas.monto==0">ND</div>
+                <div class="subTitulo">TC:</div>
+                <div class="normal" *ngIf="itemEtapas.cobro!=null"> {{itemEtapas.cobro | acFormatMoney}} {{itemEtapas.doscResult1}}</div>
+                <div class="normal" *ngIf="itemEtapas.cobro==mull">ND</div>
+                <div class="subTitulo">FEP:</div>
+                <div class="normal">{{itemEtapas.fechaEntrega | dateFormatSlash}}</div>
+                <div class="subTitulo">Fecha de pago:</div>
+                <div class="normal">{{itemEtapas.fechaCobro | dateFormatSlash}}</div>
+                <div class="subTitulo">Moroso:</div>
+                <div class="normal" [style.color]="'#39B54A'" *ngIf="itemEtapas.doscResult2 == 'NO' ">{{itemEtapas.doscResult2}}</div>
+                <div class="normal" [style.color]="'#C1272D'" *ngIf="itemEtapas.doscResult2 == 'SI' ">{{itemEtapas.doscResult2}}</div>
+                <!--<div class="normal" *ngIf="itemEtapas.moroso == false ">NO</div>
+                <div class="normal" *ngIf="itemEtapas.moroso != false ">SI</div>-->
+              </div>
+            </div>
+          </div>
+
+         <!-- <div class="monitoreo_Cobro_SC" *ngIf="estadoItemLineaTiempo == 'COBRO' && itemEtapas.etapaPadre==0 && itemLineaTiempo != undefined">
+            <div class="monitoreo_Cobro_SC" *ngIf="itemEtapas.etapaPadre==0">-->
+              <div class="monitoreo_Cobro_SC" *ngIf="itemEtapas.etapa == 'COBRO_GRAL' && estadoItemLineaTiempo != 'FACTURACION' && estadoItemLineaTiempo != 'INTERFACTURACION' ">
+                <div>
+                  <div class="titulo">Generales</div>
+                  <div class="subTitulo">Fecha revisión:</div>
+                  <div class="normal"> {{itemEtapas.fechaRevision | dateFormatSlash }} </div>
+                  <div class="subTitulo">Fecha programación:</div>
+                  <div class="normal"> {{itemEtapas.fechaProgramacion | dateFormatSlash }} </div>
+                  <div class="subTitulo">Fecha cobro:</div>
+                  <div class="normal"> {{itemEtapas.fechaCobro | dateFormatSlash }} </div>
+                </div>
+              </div>
+              <div class="monitoreo_Cobro_SC" *ngIf="itemEtapas.etapa == 'COBRO_PROGR' && estadoItemLineaTiempo != 'FACTURACION' && estadoItemLineaTiempo != 'INTERFACTURACION' ">
+                <div>
+                  <div class="titulo">Programación</div>
+                  <div class="normal">FI {{itemEtapas.fechaRevision | dateFormatSlash }} : FF {{itemEtapas.fechaProgramacion | dateFormatSlash}}
+                    </div>
+                  <div class="subTitulo">MEC:</div>
+                  <div class="normal"> {{itemEtapas.monto | acFormatMoney }} {{itemEtapas.cobro }}</div>
+                  
+                  <div class="subTitulo">Medio:</div>
+                  <div class="normal">{{itemEtapas.docsCierre }}</div>
+                  <div class="subTitulo">FEP:</div>
+                  <div class="normal">{{itemEtapas.fechaEntrega | dateFormatSlash}}</div>
+                </div>
+              </div>
+              <div class="monitoreo_Cobro_SC" *ngIf="itemEtapas.etapa == 'COBRO_MONITOREO' && estadoItemLineaTiempo != 'FACTURACION' && estadoItemLineaTiempo != 'INTERFACTURACION' ">
+                <div>
+                  <div class="titulo">Monitoreo</div>
+                  <div class="normal" *ngIf="itemEtapas.fechaRevision!=null && itemEtapas.fechaProgramacion!=null">FI {{itemEtapas.fechaRevision | dateFormatSlash }} : FF {{itemEtapas.fechaProgramacion | dateFormatSlash}}
+                    </div>
+                  <div class="normal" *ngIf="itemEtapas.fechaRevision==null">FI Pendiente : FF {{itemEtapas.fechaProgramacion | dateFormatSlash}} </div>
+                  <div class="normal" *ngIf="itemEtapas.fechaProgramacion==null">FI {{itemEtapas.fechaRevision | dateFormatSlash }} : FF Pendiente </div>
+                  <div class="subTitulo">Comprobante pago:</div>
+                
+                  <div class="normalVerde">
+                      <span *ngIf="itemEtapas.docsCierre!=null" (click)="descargarPDF('http://201.161.12.60:51725/SAP/Pagos%20cliente/'+itemEtapas.docsCierre+'.pdf')">{{itemEtapas.docsCierre}}</span>
+                      <div class="normal">
+                          <span *ngIf="itemEtapas.docsCierre==null" >Pendiente</span>
+                        </div>
+                    </div>
+                   
+                  <div class="subTitulo">Monto cobrado:</div>
+                  <div class="normal" *ngIf="itemEtapas.cobro != null "> {{itemEtapas.cobro | acFormatMoney}} {{itemEtapas.docsCierre }}</div>
+                  <div class="normal" *ngIf="itemEtapas.cobro == null ">Pendiente</div>
+                  <div class="subTitulo">Moroso:</div>
+                  <div class="normal" [style.color]="'#39B54A'" *ngIf="itemEtapas.doscResult2 == 'NO' ">{{itemEtapas.doscResult2}}</div>
+                  <div class="normal" [style.color]="'#C1272D'" *ngIf="itemEtapas.doscResult2 == 'SI' ">{{itemEtapas.doscResult2}}</div>
+                  <div class="normal"  *ngIf="itemEtapas.doscResult2 == null ">Pendiente</div>
+                </div>
+              </div>
+          <!--  </div>
+
+
+
+
+          </div>-->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

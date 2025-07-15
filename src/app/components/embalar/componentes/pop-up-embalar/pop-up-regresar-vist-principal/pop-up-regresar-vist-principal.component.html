@@ -1,0 +1,27 @@
+<div id="popUp" class="popUp" *ngIf="popUpComprobante">
+  <div class="fondo"></div>
+  <div class="popContenido">
+    <div class="popHeader">
+      <span>PROQUIFA NET</span>
+    </div>
+    <div class="popContenido">
+      <!--  <title>Bolsa de Tránsito</title>-->
+      <div class="alerta">
+        <img src="assets/Images/flecha_blanca_encirculoverde.svg" alt="" class="alert" />
+      </div>
+      <label>
+        ¡Se han embalado todas las piezas
+      </label>
+      <label style="color:#008894">
+        exitosamente!
+      </label>
+    </div>
+    <div class="dvBotones">
+      <div class="dvBoton" (click)="cerrar()">
+        Aceptar
+      </div>
+    </div>
+  </div>
+</div>
+
+

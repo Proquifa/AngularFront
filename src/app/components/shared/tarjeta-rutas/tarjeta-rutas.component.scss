@@ -1,0 +1,104 @@
+.tarjetaRutas {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-content:center;
+    align-items: baseline;
+    padding: 5px;
+    }
+
+.tipoEvento {
+  order: 0;
+  flex: 1 1 auto;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  font-size: 10px;
+  font-family: 'Roboto', sans-serif;
+  text-align: center;
+  vertical-align: center;
+  height: 13%;
+  width: 100%;
+  align-items: center;
+  padding-top: 14px;
+  cursor: pointer;
+}
+
+.accion{
+  order: 0;
+  flex: 1 1 auto;
+  align-self: center;
+  margin-top: 3px;
+}
+
+.tipoEvento:hover {
+  background-color: #DFF0F1;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+}
+
+.listaEventos:hover #eliminar{
+ visibility: visible;
+ padding-left: 3px;
+ //cursor: pointer;
+}
+
+.listaEventos:hover #agregar{
+ visibility: visible;
+ padding-left: 3px;
+}
+
+.listaEventos{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  font-size: 10px;
+  width: 20%;
+  cursor: pointer;
+}
+  //Imagenes
+
+  img{
+    //  padding-bottom: 9px;
+  }
+
+    #entrega, #entregaGris{
+      height: 27px;
+      width: 32px;
+    }
+
+    #cobro, #cobroGris{
+      height: 27px;
+      width: 31px;
+    }
+
+    #revision, #revisionGris{
+      height: 29px;
+      width: 23px;
+    }
+
+    #eEspecial, #eEspecialGris{
+      height: 27px;
+      width: 29px;
+    }
+
+    #rMaterial, #rMaterialGris{
+      height: 27px;
+      width: 31px;
+    }
+
+    #eliminar{
+      height: 13px;
+      width: 13px;
+      visibility: hidden;
+    }
+     #agregar{
+      height: 13px;
+      width: 13px;
+      visibility: hidden;
+      }

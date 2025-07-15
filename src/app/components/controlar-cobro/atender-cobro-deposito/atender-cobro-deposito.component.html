@@ -1,0 +1,242 @@
+<div class="areaPrincipal">
+  <div class="botonera">
+    <pn-botonera [lista]="listaEmpresas" *ngIf="activarBotonera" class="componmentBtn"></pn-botonera>
+  </div>
+  <div class="seccion">
+    <div class="primerSeccion">
+      <div class="titulosLista">
+        <div  class="tituloCliente">
+          <label class="tituloLista">DEPÓSITOS</label>
+        </div>
+        <div style="height: 33%;width: 100%;padding-bottom: 5px">
+          <pn-combo-flecha-verde  [title]="'Seleccionar'"  [itemSelect]="selectedTipoCuenta" (valueDropList)="recibeValosCombo($event,'tipoCuenta')"  id="cmbUnidad" [items]="listaTipoCuenta" [heightLi]="'35px'" ></pn-combo-flecha-verde>
+        </div>
+        <div class="organizarLista">
+          <div style="width: 10%; height: 100%;    display: flex;align-items: center;">
+            <div class="menu" (click)="abreCombo()">
+              <div>
+              </div>
+              <div>
+              </div>
+              <div>
+              </div>
+              <section id="section">
+                <ul class="listaHamburguesa">
+                  <li (click)="ordenamientoCliente()">Alfabético (A-Z)</li>
+                  <li (click)="ordenamientoFechaTramNue()">Trámites Más Nuevos</li>
+                  <li (click)="ordenamientoFechaTramAnt()">Trámites Más Antiguos</li>
+                </ul>
+              </section>
+            </div>
+          </div>
+          <div style="width: 38%; height: 100%;    display: flex;align-items: center;">
+            <h3 class="subtitulo">{{tipoOrden}}</h3>
+          </div>
+          <div class="barraBusqueda" style="height: 100%">
+            <div class="buscar" style="padding-left: 236px;">
+              <div>
+                <div class="lupa">
+                  <img src="assets/Images/lupa.svg" width="22px" height="22px" alt="buscar">
+                </div>
+                <input type="text" [ngModel]="searchTerm" (ngModelChange)="buscar($event)" class="buscar-input" placeholder="Banco, rdf, método de pago" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--Lista total-->
+      <div class="segundaSeccionList" style="height: 79.5%">
+        <div style="width: 97%;display: flex;overflow: auto;position: relative;height: 100%;">
+          <div class= "lista" style="display: unset;flex-direction: column">
+            <div [ngClass]="listaFD[i]" *ngFor="let item of lista; let i = index"   style="display: flex;flex-direction:row;width: 100%;position: relative; border-bottom: 1px solid #ECEEF0">
+              <div class="dfSelect"></div>
+              <div class="datosLst" style="padding-top: 5px;padding-left: 15px;display: flex; width: 100%;box-sizing: border-box;padding-bottom: 10px;" (click)="seleccionarItem(item, i)">
+                <div class="informacionList">
+                  <label> #{{i +1}} · {{item.cliente}} · <span class="tipoBanco">{{item.ft}}</span></label>
+                  <span class="rfc">Monto Depositado {{item.monto}} <span class="tipoBanco" style="font-weight: 300;font-size: 18px"> M.Pago: </span></span>
+                  <h3>{{item.piezas}} Facturas · Monto Por Cobrar: {{item.monto}}</h3>
+                </div>
+                <div class="numeroIndex" style="width: 10%">
+                  <label class="index" style="font-family: Roboto-Regular">{{item.depositado}}</label>
+                  <label style="color: #848387">M.Depositado</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="totales">
+        <label># {{total}}</label>
+        <label>{{totPiezas}} Cheques</label>
+        <label>{{montoTot}} Transferencias</label>
+      </div>
+    </div>
+    <!--linea degradada-->
+    <div class="borderLine"></div>
+    <div class="segundaSeccion">
+      <div class="tituloBanco">
+        <div class="tituloBlanSeccion">
+          <label class="cabeceraRb">{{rb}} <p class="cabeceraRb" style="color: #008894;"> {{banco}}</p></label>
+        </div>
+        <div class="tituloBlanSeccion">
+          <label class="tipoBanco" style="font-weight: 300;font-size: 17px;display: flex;padding-left: 5px;"> M.Pago: <span class="espacio"> F.Deposito <h3 class="espacio" style="color:#424242"> M.Depositado</h3></span></label>
+        </div>
+      </div>
+      <div class="facturas">
+        <div class="secciones" style="justify-content: space-between;align-items: center;">
+          <label class="cabeceraRb" style="font-size: 20px">FACTURAS</label>
+          <label class="monto">Monto Por Cobrar: <label class="cant">$1234567</label></label>
+        </div>
+        <div class="secciones">
+          <div class="barraBusqueda" style="height: 100%;width: 100%;">
+            <div class="buscar" style="justify-content: center;">
+              <div style="    width: 500px;justify-content: center;justify-items: center;">
+                <div class="lupa">
+                  <img src="assets/Images/lupa.svg" width="22px" height="22px" alt="buscar">
+                </div>
+                <input type="text" [ngModel]="searchTerm" (ngModelChange)="buscar($event)" class="buscar-input" placeholder="Banco, rdf, método de pago" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="height: 72%; width: 100%;">
+        <div class="segundaSeccionList" style="width: 100%;border-top:0px">
+          <div style="width: 97%;display: flex;overflow: auto;position: relative;height: 100%;">
+            <div class= "lista" style="display: unset;flex-direction: column">
+              <div  *ngFor="let item of lista; let i = index"   style="display: flex;flex-direction:row;width: 100%;position: relative; border-bottom: 1px solid #ECEEF0">
+                <div class="dfSelect"></div>
+                <div class="datosLst" style="padding-top: 5px;padding-left: 15px;display: flex; width: 100%;box-sizing: border-box;padding-bottom: 10px;" (click)="seleccionarItemFac(item, i)">
+                  <div class="numeroIndex" (click)="item.itemSelect = !item.itemSelect">
+                    <img class="img" src="./assets/Images/check1.svg" *ngIf="!item.itemSelect">
+                    <img class="img" src="./assets/Images/check2.svg" *ngIf="item.itemSelect">
+                  </div>
+                  <div class="informacionList">
+                    <h1 class="facList"> #{{i +1}} · {{item.cliente}} · P.Interno · C.Pago></h1>
+                    <span class="facFechas">F.F: {{item.monto}} · F.Revisión · C.Recibo</span>
+                    <h3 style="font-size: 15px">FPC: {{item.piezas}} · M.Pago: {{item.monto}} · DRC</h3>
+                    <div class="totalesFacturas">
+                     <div>
+                       <label>1234567</label>
+                       <label>Saldo Anterior</label>
+                     </div>
+                     <div>
+                       <label>$123456</label>
+                       <label>Monto Pagado</label>
+                     </div>
+                      <div>
+                        <label>23456789</label>
+                        <label>S.Insoluto</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="totales">
+          <label>8 Facturas</label>
+        </div>
+      </div>
+    </div>
+    <!--linea degradada-->
+    <div class="borderLine"></div>
+    <!--ULTIMA SECCIÓN-->
+    <div class="segundaSeccion">
+      <div class="tituloBanco">
+        <div class="tituloBlanSeccion">
+          <label class="cabeceraRb">NOTAS DE CRÉDITO</label>
+        </div>
+        <div class="tituloBlanSeccion">
+          <label class="tipoBanco" style="font-family:Novecento;font-size: 18px;font-weight: 300;padding-left: 5px"> Total:</label>
+        </div>
+      </div>
+      <div style="height: 25%">
+        <div class="segundaSeccionList" style="width: 100%;border-top:0px">
+          <div style="width: 97%;display: flex;overflow: auto;position: relative;height: 100%;">
+            <div class= "lista" style="display: unset;flex-direction: column">
+              <div  *ngFor="let item of lista; let i = index"   style="display: flex;flex-direction:row;width: 100%;position: relative; border-bottom: 1px solid #ECEEF0">
+                <div class="dfSelect"></div>
+                <div class="datosLst" style="padding-top: 5px;padding-left: 15px;display: flex; width: 100%;box-sizing: border-box;padding-bottom: 10px;" (click)="seleccionarItemFac(item, i)">
+                  <div class="numeroIndex">
+                    <img class="img" src="./assets/Images/check1.svg" *ngIf="!item.itemSelect">
+                    <img class="img" src="./assets/Images/check2.svg" *ngIf="item.itemSelect">
+                  </div>
+                  <div class="informacionList">
+                    <label> #{{i +1}} · {{item.cliente}} · <span class="tipoBanco">{{item.precio}}</span></label>
+                    <span class="rfc">Monto Depositado {{item.monto}} </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="totales">
+          <label>7 Notas de Crédito</label>
+        </div>
+      </div>
+      <div class="tituloBanco">
+        <div class="tituloBlanSeccion">
+          <label class="cabeceraRb">EXCEDENTES</label>
+        </div>
+        <div class="tituloBlanSeccion">
+          <label class="tipoBanco" style="font-family:Novecento;font-size: 18px;font-weight: 300;padding-left: 5px"> Total: </label>
+        </div>
+      </div>
+      <div style="height: 23%;width: 100%">
+        <div class="segundaSeccionList">
+          <div style="width: 97%;display: flex;overflow: auto;position: relative;height: 100%;">
+            <div class= "lista" style="display: unset;flex-direction: column">
+              <div  *ngFor="let item of lista; let i = index"   style="display: flex;flex-direction:row;width: 100%;position: relative; border-bottom: 1px solid #ECEEF0">
+                <div class="dfSelect"></div>
+                <div class="datosLst" style="padding-top: 5px;padding-left: 15px;display: flex; width: 100%;box-sizing: border-box;padding-bottom: 10px;" (click)="seleccionarItemFac(item, i)">
+                  <div class="numeroIndex">
+                    <img class="img" src="./assets/Images/check1.svg" *ngIf="!item.itemSelect">
+                    <img class="img" src="./assets/Images/check2.svg" *ngIf="item.itemSelect">
+                  </div>
+                  <div class="informacionList">
+                    <label> #{{i +1}} · {{item.cliente}} · <span class="tipoBanco">{{item.precio}}</span></label>
+                    <span class="rfc">Monto Depositado {{item.monto}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="totales">
+          <label>3 Excedentes</label>
+        </div>
+      </div>
+      <div class="totalesFinales">
+        <div>
+          <label>TOTALES</label>
+        </div>
+        <div>
+          <label>NC</label>
+          <label>$123456</label>
+        </div>
+        <div>
+          <label>Excedente</label>
+          <label>$1000</label>
+        </div>
+        <div>
+          <label>Pago</label>
+          <label style="color: #008894">$2000</label>
+        </div>
+        <div>
+           <label>Conciliado</label>
+          <label style="color: #4BA92B">$$2100.00</label>
+        </div>
+      </div>
+      <div class="btn">
+        <div>
+          <label>CANCELAR</label>
+        </div>
+        <div style="background: #4BA92B">
+          <label>ACEPTAR</label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

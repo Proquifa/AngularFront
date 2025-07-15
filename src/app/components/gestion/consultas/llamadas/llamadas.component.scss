@@ -1,0 +1,338 @@
+@import "../../../../../mixins.scss";
+@import "../../../../../colors.scss";
+:host {
+  @include flexColumn;
+  background: $pqPanelContenido;
+  &>div:nth-of-type(1) {
+    @include flexRow;
+    background: $pqPanelTitulo;
+    height: 41px;
+    color: $pqBlanco;
+    align-items: center;
+    font-size: 12px;
+    padding: 0px 20px;
+    box-sizing: border-box;
+    &>div:nth-of-type(1) {
+      @include flexRow;
+      align-items: center;
+      margin-right: 20px;
+      cursor: pointer;
+    }
+    &>div:nth-of-type(2) {
+      margin-left: 20px;
+    }
+  }
+  &>div:nth-of-type(2) {
+    @include flexRow;
+    justify-content: flex-start;
+    position: relative;
+    height: calc(100vh - 170px);
+    width: 100%;
+    overflow-x: hidden;
+    >.panelNormal {
+      background: $pqBlanco;
+      height: 100%;
+      padding: 15px 20px;
+      box-sizing: border-box;
+      width: 321px;
+      min-width: 321px;
+      overflow-y: scroll;
+    }
+    >.panelOcultar {
+      background: $pqBlanco;
+      animation-name: ocultarPanel;
+      animation-duration: 1s;
+      transition: 1s ease-in-out;
+      animation-fill-mode: forwards;
+      box-sizing: border-box;
+      padding: 15px 15px;
+      .filtros {
+        display: none;
+      }
+    }
+    >.panelMostrar {
+      background: $pqBlanco;
+      animation-name: mostar;
+      animation-duration: 0.5s;
+      animation-fill-mode: forwards;
+      padding: 15px 20px;
+      box-sizing: border-box;
+      overflow-y: scroll;
+    }
+    .filtroHeader {
+      @include flexRow;
+      justify-content: space-between;
+      align-items: center;
+      color: $pqNegro;
+      font-size: 10px;
+      margin-bottom: 20px;
+      >.abrir {
+        cursor: pointer;
+      }
+      &>div:nth-of-type(2) {
+        @include flexRow;
+        align-items: center;
+        >.cerrar {
+          margin-left: 9px;
+          cursor: pointer;
+        }
+      }
+    }
+    .filtros {
+      @include flexColumn;
+      border-top: 1px solid #424242;
+      padding-bottom: 50px;
+      >.divAvanzada {
+        @include flexColumn;
+        margin-top: 15px;
+        &>div:nth-of-type(1) {
+          @include flexRow;
+          justify-content: space-between;
+          >div {
+            @include flexColumn;
+            width: 130px;
+            font-size: 16px;
+            color: $pqNegro;
+            >div {
+              margin-top: 6px;
+            }
+          }
+        }
+        &>div:nth-of-type(2) {
+          border-bottom: 1px solid #424242;
+          padding-bottom: 18px;
+          box-sizing: border-box;
+          &>div {
+            @include flexColumn;
+            justify-content: space-between;
+            margin-top: 15px;
+          }
+        }
+        &>div:nth-of-type(3) {
+          @include flexRow;
+          justify-content: center;
+          align-items: center;
+          margin-top: 18px;
+          background: $pqNegro;
+          width: 100%;
+          height: 35px;
+          cursor: pointer;
+        }
+      }
+      >.divRapida {
+        &>div:nth-of-type(1) {
+          @include flexRow;
+          align-items: center;
+          box-sizing: border-box;
+          height: 53px;
+          padding-top: 10px;
+          border-bottom: 1px solid #ECEEF0;
+        }
+        &>div:nth-of-type(2) {
+          @include flexColumn;
+          justify-content: space-between;
+          margin-top: 15px;
+          padding-bottom: 18px;
+          border-bottom: 1px solid #424242;
+          &>input {
+            height: 25px;
+            border: 1px solid #ECEEF0;
+            box-sizing: border-box;
+            margin-top: 5px;
+          }
+        }
+        &>div:nth-of-type(3) {
+          @include flexRow;
+          justify-content: center;
+          align-items: center;
+          margin-top: 18px;
+          background: $pqNegro;
+          width: 100%;
+          height: 35px;
+          cursor: pointer;
+        }
+      }
+    }
+    &>div:nth-of-type(2) {
+      height: 100%;
+      width: 100%;
+      background: $pqPanelContenido;
+    }
+    &>.resultados {
+      z-index: 0;
+      // top: 0;
+      // left: 322px;
+      @include flexColumn;
+      padding: 20px;
+      box-sizing: border-box;
+      transition: 1s ease-in-out;
+      &>div:nth-of-type(1) {
+        border-bottom: 3px solid #424242;
+        @include flexRow;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 10px;
+        box-sizing: border-box;
+        &>div:nth-of-type(1) {
+          font-size: 22px;
+        }
+        &>div:nth-of-type(2) {
+          @include flexRow;
+          flex-direction: row;
+          align-items: center;
+          &>img {
+            cursor: pointer;
+            height: 30px;
+            width: 30px;
+          }
+        }
+      }
+      &>div:nth-of-type(2) {
+        @include flexColumn;
+        min-width: 782px;
+        width: 100%;
+        height: 100%;
+        overflow-x: scroll;
+        &>div:nth-of-type(1) {
+          @include flexRow;
+          border-bottom: 1px solid #424242;
+          justify-content: space-between;
+          min-width: 1030px;
+          min-height: 57px;
+          &>div {
+            @include flexRow;
+            min-height: 57px;
+            max-width: 160px;
+            align-items: center;
+            box-sizing: border-box;
+            text-align: center;
+            justify-content: center;
+          }
+        }
+        &>div:nth-of-type(2) {
+          @include flexColumn;
+          overflow: scroll;
+          justify-content: space-between;
+          min-width: 1030px;
+          >div {
+            @include flexRow;
+            justify-content: space-between;
+            min-height: 70px;
+            border-bottom: 1px solid #C2C3C9;
+            >div {
+              @include flexRow;
+              max-width: 160px;
+              align-items: center;
+              font-size: 12px;
+              justify-content: center;
+              text-align: center;
+              >div {
+                @include flexColumn;
+                align-items: center;
+                >span {
+                  margin-top: 10px;
+                }
+                >.circleGreen {
+                  @include pqCircle(18px, #91BE5F);
+                }
+                >.circleYellow {
+                  @include pqCircle(18px, #DC931C);
+                }
+                >.circleRed {
+                  @include pqCircle(18px, #952936);
+                }
+              }
+            }
+          }
+        }
+      }
+      &>.total {
+        @include flexRow;
+        @include absoluteCenter;
+        min-height: 30px;
+        align-items: flex-end;
+      }
+    }
+    & .graphics-panel-container {
+      overflow: scroll;
+      position: absolute;
+      /* top: -110%;
+      left: 322px; */
+      width: 100%;
+      transition: top 600ms;
+      height: 100%;
+      opacity: 1;
+      z-index: 30;
+      background-color: #f4fcfd;
+      &.visible {
+        //top: 0;
+      }
+      @include flexColumn;
+      padding: 20px;
+      box-sizing: border-box;
+      .graphics-panel-option {
+        width: 100%;
+        text-align: right;
+        img {
+          min-width: 30px;
+          min-height: 30px;
+          &:hover {
+            cursor: pointer;
+          }
+        }
+      }
+      .graphics-container {
+        display: flex;
+        width: 100%;
+        height: 97%;
+        flex-wrap: wrap;
+        justify-content: center;
+        .donut-container {
+          min-width: 235px;
+          min-height: 263px;
+          width: 30%;
+          height: 50%;
+          margin: 0 10px;
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-start;
+          align-items: center;
+          .donut-title {
+            text-align: center;
+          }
+          .canvas-container {
+            @include flexColumn;
+            @include absoluteCenter;
+            width: 100%;
+            min-height: 80%;
+            max-height: 400px;
+            position: relative;
+            padding: 20px;
+            height: 100%;
+          }
+        }
+      } 
+    }
+  }
+  @keyframes ocultarPanel {
+    from {
+      min-width: 321px;
+    }
+    to {
+      min-width: 50px;
+    }
+  }
+  @keyframes mostar {
+    from {
+      width: 50px;
+    }
+    to {
+      width: 321px;
+    }
+  }
+
+  #chart {
+    width: 100%;
+    height: 100%;
+  }
+}

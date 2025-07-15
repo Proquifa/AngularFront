@@ -1,0 +1,38 @@
+
+<div class="w3-container">
+
+  <div id="pop-confirmacion" class="modal" #pop>
+    <div class="modal-content">
+      <header class="header" style="flex-direction:row">
+        PROQUIFA NET
+
+      </header>
+
+      <div class="contenido">
+        <div class="datos">
+          <img class="img" src='./assets/Images/flecha_blanca_encirculoverde.svg' style="padding-top: 35px" />
+          <label class="mensaje">Has terminado el proceso de inspección</label>
+          <div style="display:flex; justify-content:center;; ">
+            <p class="etiquetas" style="color: #39B54A ">
+              <label class="mensajeEtiqueta" [style.color]="tipoColor? '#39B54A':'#AF3634'">{{mensajeEtiqueta}} :</label>
+              <label class="datoEtiqueta" [style.color]="tipoColor? '#39B54A':'#AF3634'"> {{pzasE}}</label>
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="footer">
+        <div type="submit" class="btnAceptar" (click)="btnImprimir()">
+          <label>REIMPRIMIR</label>
+        </div>
+
+        <div type="submit" class="btnAceptar" (click)="btnFinalizar()">
+          <label>FINALIZAR</label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

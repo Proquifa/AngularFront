@@ -1,0 +1,136 @@
+<div style="width: 100%; height:100%">
+  <div style="height: 95%; width: 100%; display: -webkit-box;">
+    <!--ORDENES DE COOMPRA BUSQUEDA-->
+    <div style="width: 20%;height: 100%;border-right: 1px solid #BCBCBC">
+      <div class="ordenCompra">
+        <div style="width: 100%;height: 5%; padding-top: 15px">
+          <label class="titulo"> ORDENES DE COMPRA </label>
+        </div>
+        <!--Empieza elemento de barra de búsqueda y lista de ordenes-->
+        <div style="width: 100%;height: 90%">
+          <div class="barraBusqueda">
+            <div class="buscar">
+              <div>
+                <div class="lupa">
+                  <img src="assets/Images/lupa.svg" width="22px" height="22px" alt="buscar">
+                </div>
+                <input type="text" [ngModel]="searchTerm" (ngModelChange)="buscarOrden($event)" class="buscar-input" placeholder="Orden de compra" />
+              </div>
+            </div>
+          </div>
+          <!--Lista total-->
+          <div style="height: 90%; display: flex;">
+            <div style="border-bottom: 1px solid; width: 95%;border-top: 1px solid #ECEEF0;overflow: scroll">
+              <div class= "lista" style="display: unset;flex-direction: column" *ngIf="validarLista">
+                <div [ngClass]="listaFD[i]" *ngFor="let item of lista; let i = index" (click)="seleccionarOrden(i)" style="display: flex;flex-direction:row;width: 100%; height: 95px;position: relative; border-bottom: 1px solid #ECEEF0">
+                  <div class="dfSelect"></div>
+                  <div class="datosLst" style="padding-top: 15px;padding-left: 15px">
+                    <label class="index" style="font-family: Roboto-Bold">#{{i +1}} · OC-</label>
+                    <label style="color: #008894">{{item.folio}}</label>
+                    <p>$ {{item.precio}}</p>
+                    <h3 class="textoPiezas">{{item.piezas}} piezas · {{item.productos}} Productos</h3>
+                  </div>
+                </div>
+              </div>
+              <!--Lista de busqueda-->
+              <div class= "lista" style="display: unset;flex-direction: column" *ngIf="!validarLista">
+                <div  [ngClass]="listaFD[i]" *ngFor="let item of clientesSearched; let i = index" (click)="seleccionarOrden(i)" style="display: flex;flex-direction:row;width: 100%; height: 95px;position: relative; border-bottom: 1px solid #ECEEF0">
+                  <div class="dfSelect"></div>
+                  <div class="datosLst" style="padding-top: 15px;padding-left: 15px">
+                    <label class="index" style="font-family: Roboto-Bold">#{{i +1}} · OC-</label>
+                    <label style="color: #008894">{{item.folio}}</label>
+                    <p>$ {{item.precio}}</p>
+                    <h3 class="textoPiezas">{{item.piezas}} piezas · {{item.productos}} Productos</h3>
+                  </div>
+                </div>
+              </div>
+              <!---->
+            </div>
+          </div>
+        </div>
+         <!--Termina elemento de barra de búsqueda y lista de ordenes-->
+        <div style="width: 100%;height: 5%">
+          <label>Totales</label>
+        </div>
+      </div>
+    </div>
+    <!--TERMINA ORDENES DE COOMPRA BUSQUEDA-->
+    <!--TABLA DE ORDENES-->
+    <div style="width: 60%;height: 100%;">
+      <label>PQF > </label>
+      <label>PHS</label>
+    </div>
+    <!--MONTO FACTURADO-->
+    <div style="width: 20%;height: 100%; background:#ECEEF0;">
+      <div style="display: flex;justify-content: center;padding-top: 15px">
+        <label class="titulo"> MONTO FACTURADO </label>
+      </div>
+      <div style="display: flex;justify-content: center;display: flex;flex-direction: column;padding: 10px 80px">
+        <div>
+          <div class="subtituloMonto">
+          <label>Folio a Facturar:</label>
+          </div>
+          <div>
+          <input type="text" />
+          </div>
+        </div>
+        <div>
+          <div class="subtituloMonto">
+          <label>Fecha de Facturación:</label>
+          </div>
+          <div>
+          <input type="text" />
+          </div>
+        </div>
+        <div>
+          <div class="subtituloMonto">
+          <label>Monto Flete:</label>
+          </div>
+          <div>
+          <input type="text" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <footer class="footer">
+      <div class="datosFooter">
+        <div class="Prioridad1">
+          <label class="p1">PHS</label> Pharma Scientific, inc
+        </div>
+
+        <div class="Prioridad2">
+          <label class="p2">GOL</label> Golocaer
+        </div>
+
+        <div class="Prioridad3">
+          <label class="p3">PQF</label> Proquifa S.A de C.V
+        </div>
+
+        <div class="Prioridad3">
+          <label class="p3">MUN</label> Mungen
+        </div>
+
+        <div class="Prioridad3">
+          <label class="p3">RMT</label> RM Trading Inc.
+        </div>
+
+        <div class="Prioridad3">
+          <label class="p3">OC</label> RM Orden de compra
+        </div>
+        <div class="Ambiente">
+          <img class="img" src='./assets/Images/regular.svg' /> Regular
+        </div>
+
+        <div class="Congelación">
+          <img class="img" src='./assets/Images/programada.svg' /> Programada
+        </div>
+
+        <div class="Refrigeración">
+          <img class="img" src='./assets/Images/warning.svg' /> Información Incompleta
+        </div>
+      </div>
+    </footer>
+  </div>
+</div>

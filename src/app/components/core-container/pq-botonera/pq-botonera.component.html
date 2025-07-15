@@ -1,0 +1,105 @@
+<div class="botonera1">
+  <a  class="listaMenus Usr" style="height:60px;"> <!--(click)="redirect('home')"-->
+    <div class="ImgCat" >
+      <img alt="UsrBlanco" id="UsrBlanco" [src]="url_usrPlantilla" />
+    </div>
+    <div class="txtCat">
+      <Label>{{username}}</Label>
+    </div>
+    <div class="flechaCat">
+      <img class="flechaCatGris" [src]="url_ImagenFlechaCatGris"/>
+      <img class="flechaCatBlanca" [src]="url_ImagenFlechaCatBlanca" />
+    </div>
+  </a>
+
+  <a  [ngClass]="listaMenus[0]" (click)="metodoDeDias('pendientes', 0)"> <!--(click)="redirect('pendientes')"-->
+    <div class="ImgCat">
+      <img alt="pendientes" id="pendientes" [src]="url_pendientesPlantilla" />
+    </div>
+    <div class="txtCat">
+      <Label>PENDIENTES</Label>
+    </div>
+    <div class="flechaCat">
+      <img class="flechaCatGris" [src]="url_ImagenFlechaCatGris"/>
+      <img class="flechaCatBlanca" [src]="url_ImagenFlechaCatBlanca" />
+    </div>
+  </a>
+
+  <a   class="listaMenus" [ngClass]="listaMenus[1]" (click)="metodoDeDias('mejoras', 1)"> <!--(click)="redirect('home')"-->
+    <div class="ImgCat">
+      <img alt="mejoras" id="mejoras" [src]="url_mejorasPlantilla" />
+    </div>
+    <div class="txtCat">
+      <Label>MEJORAS</Label>
+    </div>
+    <div class="flechaCat">
+      <img class="flechaCatGris" [src]="url_ImagenFlechaCatGris"/>
+      <img class="flechaCatBlanca" [src]="url_ImagenFlechaCatBlanca" />
+    </div>
+  </a>
+
+  <a   class="listaMenus" [ngClass]="listaMenus[2]" (click)="metodoDeDias('incidente', 2)"> <!--(click)="redirect('home')"-->
+    <div class="ImgCat">
+      <img alt="incidente" id="incidente" [src]="url_incidentePlantilla" />
+    </div>
+    <div class="txtCat">
+      <Label>INCIDENTE</Label>
+    </div>
+    <div class="flechaCat">
+      <img class="flechaCatGris" [src]="url_ImagenFlechaCatGris"/>
+      <img class="flechaCatBlanca" [src]="url_ImagenFlechaCatBlanca" />
+    </div>
+  </a>
+
+  <a  class="listaMenus" [ngClass]="listaMenus[3]" (click)="metodoDeDias('solicitud', 3)"> <!--(click)="redirect('home')"-->
+    <div class="ImgCat">
+      <img alt="solicitud" id="solicitud" [src]="url_solicitudPlantilla" />
+    </div>
+    <div class="txtCat">
+      <Label>SOLICITUD</Label>
+    </div>
+    <div class="flechaCat">
+      <img class="flechaCatGris" [src]="url_ImagenFlechaCatGris"/>
+      <img class="flechaCatBlanca" [src]="url_ImagenFlechaCatBlanca" />
+    </div>
+  </a>
+
+  <a  class="listaMenus" [ngClass]="listaMenus[4]" (click)="metodoDeDias('gestion', 4)"> <!--(click)="redirect('gestion')"-->
+    <div class="ImgCat">
+      <img alt="grafica" id="grafica" [src]="url_gestionPlantilla" />
+    </div>
+    <div class="txtCat">
+      <Label>GESTIÓN</Label>
+    </div>
+    <div class="flechaCat">
+      <img class="flechaCatGris" [src]="url_ImagenFlechaCatGris"/>
+      <img class="flechaCatBlanca" [src]="url_ImagenFlechaCatBlanca" />
+    </div>
+  </a>
+
+  <a   class="listaMenus" [ngClass]="listaMenus[5]" (click)="metodoDeDias('catalogos', 5)"> <!--(click)="redirect('catalogo')"-->
+    <div class="ImgCat">
+      <img alt="catalogos" id="catalogos" [src]="url_catalogosPlantilla" />
+    </div>
+    <div class="txtCat">
+      <Label>CATÁLOGOS</Label>
+    </div>
+    <div class="flechaCat">
+      <img class="flechaCatGris" [src]="url_ImagenFlechaCatGris"/>
+      <img class="flechaCatBlanca" [src]="url_ImagenFlechaCatBlanca" />
+    </div>
+  </a>
+
+  <a   class="listaMenus" [ngClass]="listaMenus[6]" (click)="metodoDeDias('configuracion', 6)"> <!--(click)="redirect('home')"-->
+    <div class="ImgCat" >
+      <img alt="configuracion" id="configuracion" [src]="url_configuracionPlantilla" />
+    </div>
+    <div class="txtCat">
+      <Label>CONFIGURACIÓN</Label>
+    </div>
+    <div class="flechaCat">
+      <img class="flechaCatGris" [src]="url_ImagenFlechaCatGris"/>
+      <img class="flechaCatBlanca" [src]="url_ImagenFlechaCatBlanca" />
+    </div>
+  </a>
+</div>

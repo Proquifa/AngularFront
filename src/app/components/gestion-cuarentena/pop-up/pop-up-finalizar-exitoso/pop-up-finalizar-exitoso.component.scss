@@ -1,0 +1,133 @@
+#popUp {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  & > div {
+    &.fondo {
+      position: fixed;
+      height: 100%;
+      width: 100%;
+      left: 0;
+      top: 0;
+      overflow-y: hidden;
+      background: rgba(204, 209, 209, .6);
+      z-index: 3;
+    }
+    &.popContenido {
+      max-width: 630px;
+      width: 630px;
+      height: 385px;
+      max-height: 385px;
+      position: relative;
+      z-index: 9;
+      background: #FFFFFF;
+      border-radius: 20px;
+      border: 1px solid #008894;
+      & > .popHeader {
+        background-color: #008894;
+        border: 1px solid #008894;
+        border-radius: 19px 19px 0 0;
+        color: white;
+        font-family: Roboto;
+        /// font-weight: bold;
+        font-size: 25px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0 15px;
+        height: 55px;
+      }
+
+      & > .popContenido {
+        display: flex;
+        flex-direction: column;
+        margin-top: 10px;
+        justify-content: center;
+        align-items: center;
+        font-size:30px;
+        padding-top: 30px;
+        & > i {
+          padding: 35px;
+          font-size: 60px;
+          color: #008A98;
+        }
+        & > div{
+          line-height: 1.2;
+          display: flex;
+          justify-content: flex-end;
+          align-items: center;
+          flex-direction: column;
+          box-sizing: border-box;
+          padding-right: 20px;
+          padding-left: 20px;
+          & > span {
+            font-family: Roboto;
+            font-weight: bold;
+            font-size: 29px;
+            color: #008894;
+            text-align: center;
+          }
+          & > label {
+            font-family: Roboto;
+            font-weight: 400;
+            font-size: 29px;
+            color: #424242;
+            text-align: center;
+          }
+        }
+      }
+
+      & > .dvBotones {
+        position: absolute;
+        bottom: 25px;
+        left: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        & > .dvBoton {
+          width: 170px;
+          height: 30px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: #008894;
+          color: #FFFFFF;
+          font-weight: bold;
+          & > label{
+            font-family: 'Novecento';
+            font-size: 21px;
+            font-weight: bold;
+            color: white;
+            cursor: pointer;
+            margin-top: -2px;
+          }
+          &:HOVER {
+            opacity: 0.9;
+            cursor: pointer;
+          }
+          &:ACTIVE {
+            background: #005f67;
+          }
+        }
+      }
+    }
+  }
+}
+.alerta{
+  display: flex;
+  order: 0;
+  flex: 0 1 auto;
+  align-self: auto;
+  padding-top: 20px;
+  img.alert{
+    width: 100%;
+    height: 100%;
+  }
+}
+

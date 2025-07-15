@@ -1,0 +1,50 @@
+<div class="w3-container">
+  <div id="id01" class="modal" #pop>
+    <div class="modal-content">
+      <header class="header">
+        <h1> PROQUIFA NET  </h1>
+      </header>
+      <div class="contenido">
+        <div class="info">
+          <span>INFORMACIÓN DE LA O.ENTREGA</span>
+          <label class="subTitle">{{client[0].cliente}}</label>
+          <label>{{contacto}}</label>
+        </div>
+        <div class="datos">
+          <span>Datos del Paquete: </span>
+          <div>
+            <div>
+              <div>
+                <label>Peso: </label>
+                <input type="number" [(ngModel)]="peso" (input)="saveMeter($event.target.value, 'peso')"  min="1">
+                <label style="padding-left: 4px">kg</label>
+              </div>
+              <div>
+                <label>Longitud:</label>
+                <input [(ngModel)]="longitud" (input)="saveMeter($event.target.value, 'long')"  type="number"  min="1">
+                <label style="padding-left: 4px">cm</label>
+              </div>
+            </div>
+            <div style="padding-top: 61px">
+              <div>
+                <label>Altura:</label>
+                <input type="number" [(ngModel)]="altura" (input)="saveMeter($event.target.value, 'alt')"  min="1">
+                <label style="padding-left: 4px">cm</label>
+              </div>
+              <div>
+                <label  style="padding-left: 20px;">Ancho:</label>
+                <input [(ngModel)]="ancho" (input)="saveMeter($event.target.value, 'ancho')" type="number"  min="1">
+                <label style="padding-left: 4px;">cm</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer class="footer2">
+        <a type="submit" class="btnOk" (click)="btn(true)" [style.background]="activeBtn? '#008894':'#C2C3C9' " [style.pointerEvents]="activeBtn?'auto':'none'" >
+          <label> ACEPTAR </label>
+        </a>
+      </footer>
+    </div>
+  </div>
+</div>

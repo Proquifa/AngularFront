@@ -1,0 +1,159 @@
+.flipContainer{
+    display:flex;
+    width: 100%;
+    height: 100%;
+    background: white;
+    background: radial-gradient(ellipse at center, rgba(0,0,0,1) 0%,rgba(255,255,255,1) 90%);
+    & > .flipContainerFront{
+        display:none;
+        flex-direction: column;
+        width: calc(100% - 32px);
+        height: calc(100% - 32px);
+        background-color: white;
+        padding: 15px;
+        filter: grayscale(100%);
+        transition: all 0.2s ease-in-out;
+        cursor: pointer;
+        & > .flipContainerFrontBody{
+            display:flex;
+            width: 100%;
+            & > img.flipContainerFrontBodyImg{
+                display:flex;
+                width: 100%;
+                height: 105px;
+                margin-bottom: 17px;
+                margin-top: 49px;
+            }
+        }
+        & > .flipContainerFrontFooter{
+            display:flex;
+            width: 100%;
+            font-size: 18px;
+            color: #008894;
+            font-weight: 400;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+    & > .flipContainerFront:hover{
+        filter: grayscale(0);
+    }
+    & > .flipContainerBack{
+        display:none;
+        width: 100%;
+        flex-direction: column;
+        background: #ECEEF0;
+        padding: 15px;
+        transition: all 0.2s ease-in-out;
+        & > .flipContainerBackHeader{
+            display:flex;
+            flex-direction: column;
+            width: 100%;
+            & > .flipContainerBackHeaderClose{
+                display: flex;
+                justify-content: flex-end;
+                & > .flipContainerFrontHeaderCloseImg{
+                    display: flex;
+                    width: 20px;
+                    cursor: pointer;
+                }
+            }
+            & > .flipContainerBackHeaderClose:hover{
+                opacity: 0.5;
+            }
+            & > .flipContainerBackHeaderClose:active{
+                opacity: 0.75;
+            }
+            & > .flipContainerBackHeaderTitle{
+                display: flex;
+                font-size: 20px;
+                color: #008894;
+                font-weight: 700;
+                width: 100%;
+                justify-content: center;
+            }
+            & > .flipContainerBackHeaderSubtitle{
+                display: flex;
+                font-size: 16px;
+                color: #424242;
+                font-weight: 400;
+                width: 100%;
+                justify-content: center;
+                padding: 3px 0px;
+            }
+        }
+        & > .flipContainerBackBody{
+            display:flex;
+            width: 100%;
+            padding: 30px 0px;
+            height: 66px;
+        }
+        & > .flipContainerBackFooter{
+            display:flex;
+            width: 100%;
+            font-family: Novecento;
+            font-size: 21px;
+            font-weight: 700;
+            color: #424242;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            & > .flipContainerBackFooterSpan{
+                display: flex;
+            }
+            & > .flipContainerBackFooterImg{
+                display: flex;
+            }
+        }
+        & > .flipContainerBackFooter:hover{
+            opacity: 0.5;
+        }
+        & > .flipContainerBackFooter:active{
+            opacity: 0.75;
+        }
+    }
+    & > .isFront{
+        display: flex;
+    }
+    & > .isBack{
+        display: none;
+    }
+    & > .isFlippingBack{
+        animation-delay: 0s;
+        animation-direction: normal;
+        animation-duration: 500ms;
+        animation-name: rotateBackCard;
+        animation-timing-function: ease-in-out;
+    }
+    & > .isFlippingFront{
+        animation-delay: 0s;
+        animation-direction: normal;
+        animation-duration: 500ms;
+        animation-name: rotateFrontCard;
+        animation-timing-function: ease-in-out;
+    }
+}
+.flipContainerBGW{
+    background: white;
+}
+
+@keyframes rotateBackCard {
+    from {
+        transform:rotateY(0deg);
+    }
+    to {
+        transform:rotateY(90deg);
+        display: none;
+    }
+}
+@keyframes rotateFrontCard {
+    from {
+        display: flex;
+        opacity: 0.0;
+        transform:rotateY(90deg);
+    }
+    to {
+        opacity: 1.0;
+        transform:rotateY(0deg);
+    }
+}

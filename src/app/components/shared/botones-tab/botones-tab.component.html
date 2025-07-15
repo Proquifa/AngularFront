@@ -1,0 +1,4 @@
+<div *ngFor="let item of listItmes; let i = index" [ngStyle]="{'width':'calc(100% /' + listItmes.length +')'} "
+  [ngClass]="listSelected[i]" (click)="itemSelect(i)">
+  {{item.label}}<span  *ngIf="item.subIndice!= null && item.subIndice !=''" class="indice">{{item.subIndice}}</span>
+</div>

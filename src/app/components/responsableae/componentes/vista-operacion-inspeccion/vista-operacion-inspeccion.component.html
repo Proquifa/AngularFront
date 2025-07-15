@@ -1,0 +1,126 @@
+<div class="VistaOperacion">
+
+  <div class="scroll">
+    <div class="datosC" style="display: flex; flex-direction: column; height: 75px; box-sizing: border-box; padding: 15px 15px;">
+      <div class="subPadre">
+        <div style="width:202px;  height:40px; display: flex; flex-direction: column">
+          <label style="height: 50%; padding-left: 0px; width: 100%" class="estiloDatos"> TU OBJETIVO </label>
+          <label style="height: 50%; padding-left: 0px; width: 100%" class="estiloDatos"> DE INSPECCIÓN DE HOY </label>
+        </div>
+
+        <div style="max-width: 85px; min-width: 30px; height:50px">
+          <label class="estiloNumero"> {{inspeccionDeceada}}</label>
+        </div>
+
+        <img class="img" src='./assets/Images/objetivo.svg' style="width:22px; padding-bottom: 3px" />
+        <div style="padding-left: 19px">
+          <hr style=" width:1px; height:38px; margin:0px; border-width:0" color='#979797' />
+        </div>
+        <div style="width:165px; height:40px; display: flex; flex-direction: column">
+          <label style="height: 50%; width: 100%" class="estiloDatos"> PIEZAS HOY </label>
+          <label style="height: 50%; width: 100%" class="estiloDatos"> INSPECCIONADAS </label>
+        </div>
+
+        <div style="max-width:85px; height:50px">
+          <label class="estiloNumero"> {{piezasInspeccionadas}}</label>
+        </div>
+
+        <div style="padding-left: 19px">
+          <hr style=" width:1px; height:38px; margin:0px; border-width:0" color='#979797' />
+        </div>
+
+        <div style="padding-left: 1px; width:112px; height:40px; display: flex; flex-direction: column">
+          <label style="height: 50%; width: 100%" class="estiloDatos"> INSPECCIÓN</label>
+          <label style="height: 50%; width: 100%" class="estiloDatos"> DESEADA </label>
+        </div>
+
+        <div style="flex-direction: row; width:91px; height:50px; position: relative">
+          <label class="estiloNumero"> {{objetivoDeinspeccionAux}}</label>
+          <label [style.color]="colorIndiceInspeccionDeceada" style="font-size:16px; color:#D0021B; font-weight: bold; position: absolute; top: -1px"> {{inspeccionDeceadaHastaElMomento}}</label>
+        </div>
+
+        <div style="padding-left: 19px">
+          <hr style=" width:1px; height:38px; margin:0px; border-width:0" color='#979797' />
+        </div>
+
+        <div style="width:110px; height: 40px; display: flex; flex-direction: column">
+          <label style="height: 50%; width: 100%" class="estiloDatos"> MÍNIMO DE</label>
+          <label style="height: 50%; width: 100%" class="estiloDatos"> INSPECCIÓN </label>
+        </div>
+
+        <div style="flex-direction: row; width:91px; height:50px; position: relative">
+          <label class="estiloNumero"> {{minimoDeInspeccion}}</label>
+          <label [style.color]="colorMinimoInspeccion" style="font-size:16px; font-weight: bold; position: absolute; top: -1px"> {{minimaInspeccionHastaElMomento}}</label>
+        </div>
+
+        <div style="padding-left: 18px">
+          <pq-pop-up-estadisticas [totalesPorInspector]= "totales_estadisticas" [donaChart] = "donaPEstadisticas" [tipoGrafica] ="tipoGraficaEstadisticas" ></pq-pop-up-estadisticas>
+          <!-- <pq-pop-up-estadisticas [totalesPorInspector]= "totales_estadisticas" [donita] = "donaPEstadisticas"  ></pq-pop-up-estadisticas> -->
+        </div>
+        <!-- <pq-pop-up-editar-lote  style="position: absolute; z-index: 1;" >
+                               </pq-pop-up-editar-lote> -->
+      </div>
+
+      <div style="width: 100%; padding-top: 3px;" *ngIf="!vistaInicialActiva">
+      </div>
+
+    </div>
+
+    <div class="Informacion">
+      <div class="info">
+        <pq-informacion-partida [partidaPrioridad]="partidaPrioridad" class="InformacionPartida"></pq-informacion-partida>
+        <pq-barra-progreso   class="BarraProgreso" [partidaPrioridad]="partidaPrioridad" (pedimentoVistaEscanear)="recibirPedimento($event)"></pq-barra-progreso>
+        <!-- <pq-inspeccion-por-prioridad [partidaPrioridad]="partidaPrioridad" class="TipoInspeccion"></pq-inspeccion-por-prioridad> -->
+      </div>
+    </div>
+
+    <div class="AreaTrabajo" *ngIf="vistaIniciaInspeccion ">
+      <!-- <pn-vista-secciones-inspeccion style="min-width: 1608px; width: 100%; padding-right: 20px; height:100%" (reiniciarVista)="reinicioDeVista($event)" [partidaPrioridad]="partidaPrioridad" style="width: 100%;">
+      </pn-vista-secciones-inspeccion> -->
+      <pq-iniciar-inspeccion  style=" width: 100%;  height:100%" (reiniciarVista)="reinicioDeVista($event)" [partidaPrioridad]="partidaPrioridad" (actualizarValores)="actualizarD($event)"></pq-iniciar-inspeccion>
+    </div>
+
+    <div class="AreaTrabajo" *ngIf="!vistaIniciaInspeccion ">
+      <pn-vista-escanear-pedimento style="min-width: 1608px; width: 100%; padding-right: 20px; height:100%" (event)="cambioDeVista($event)" [pedimento]="pedimentoVistaEscanear"></pn-vista-escanear-pedimento>
+    </div>
+
+  </div>
+
+
+  <footer class="footer">
+
+    <div class="datosFooter">
+
+      <div class="Prioridad1">
+        <label class="p1">P1</label> Prioridad 1
+      </div>
+
+      <div class="Prioridad2">
+        <label class="p2">P2</label> Prioridad 2
+      </div>
+
+      <div class="Prioridad3">
+        <label class="p3">P3</label> Prioridad 3
+      </div>
+
+      <div class="Ambiente">
+        <img class="img" src='./assets/Images/ambiente.svg' /> Ambiente
+      </div>
+
+      <div class="Congelación">
+        <img class="img" src='./assets/Images/congelacion.svg' /> Congelación
+      </div>
+
+      <div class="Refrigeración">
+        <img class="img" src='./assets/Images/refrigeracion.svg' /> Refrigeración
+      </div>
+
+      <div class="Pedimento">
+        <img class="img" src='./assets/Images/pedimento.svg' /> Pedimento
+      </div>
+
+    </div>
+  </footer>
+
+
+</div>

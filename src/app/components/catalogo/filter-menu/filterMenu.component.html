@@ -1,0 +1,30 @@
+
+<div class="menu">
+  <div class="filter-item " *ngFor="let filtro of listaFiltros" >
+     <div *ngIf="filtro.hasOptions;else nOptions" (click)="ShowDrop(filtro.label,$event,filtro)" style="width: 100%;height: 100%; cursor: pointer;" class="ctn-menu-filter">
+<div style="width: 100%;">
+    <img    id="{{'img'+filtro.label}}"   class="dropbtn" src="{{filtro.imgUrl}}" alt="">
+    
+</div>
+{{filtro.label}}
+     </div>
+       <ng-template #nOptions>
+
+          <div  (click)="sendEvent(filtro.label,2 ,filtro.label)" id="{{'id'+filtro.label}}" style="width: 100%;height: 100%;cursor: pointer;" class="ctn-menu-filter">
+              <div style="width: 100%;">
+                  <img    id="{{'img'+filtro.label}}"   class="dropbtn" src="{{filtro.imgUrl}}" alt="">
+              </div>
+              {{filtro.label}}
+                </div>
+               </ng-template>
+    <div  *ngIf="filtro.hasOptions"  id="{{'myDropdown'+filtro.label}}" class="dropdown-content aniamtionTop" >
+          <a  *ngFor="let option of filtro.options" (click)="sendEvent(option.name,1,filtro.label)" class="aniamtionTopitems">{{option.name}}</a>
+
+  
+    </div>
+
+
+  </div>
+
+
+</div>

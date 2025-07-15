@@ -1,0 +1,382 @@
+@import "../../../../../mixins.scss";
+
+.card-container{
+  width: 98%;
+  font-family: 'Roboto', sans-serif;
+  height: 99%;
+  /* entire container, keeps perspective */
+  .flip-container {
+    perspective: 1000px;
+    background: white;
+  }
+
+  .front:hover{
+  	background: #F3F9FA;
+
+  }
+  .centerPagination{
+  	width:100%;
+  	height: 58%;
+  	display: flex;
+  	justify-content: center;
+    align-items: center;
+    align-content: center;
+  }
+  .paginationContent{
+  	width: 100%;
+  	height: 100%;
+  }
+  .footContent{
+  	margin-top: 5px;
+  	width:100%;
+  	height: 11%;
+  	display: flex;
+  	justify-content: center;
+  	align-items: center;
+  	align-content: center;
+  }
+  .footContentBack{
+  	width:100%;
+  	height: 12%;
+  	display: flex;
+  	justify-content: center;
+  	align-items: center;
+  	align-content: center;
+  	border: 0 none #ccc;
+    border-bottom: 1px solid #424242;
+    border-radius: 0;
+  }
+  .iconsContent{
+  	display: flex;
+  	flex-wrap: wrap;
+  	width: 100%;
+  	height: 100%;
+  	display: flex;
+  	justify-content: center;
+  	align-items: center;
+  	align-content: center;
+  	font-size: 10px;
+    border-top: 1px solid #ECEEF0;
+  }
+
+  .iconoCarteraFront{
+    margin-top: 10px;
+  	height: 100%;
+  	width:16%;
+    opacity: .4;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+
+    img {
+      width: 20px;
+      height: 20px;
+    }
+    p {
+      width: 58px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-align: center !important;
+      font-family: Helvetica;
+    }
+  }
+
+  .iconoCartera{
+  	height: 70%;
+  	width: 20%;
+    background-image: url("../../../../../assets/Images/catalogo/ruta.svg");
+    background-repeat: no-repeat;
+    background-size: 30%;
+    background-position:  top;
+    opacity: .8;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end  ;
+    align-content: flex-end;
+    font-family: Helvetica;
+  }
+  .iconoCartera2{
+  	height: 70%;
+  	width:20%;
+    background-image: url("../../../../../assets/Images/catalogo/industria.svg");
+    background-repeat: no-repeat;
+    background-size: 30%;
+    background-position:  top;
+    opacity: .8;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    align-content: flex-end;
+    font-family: Helvetica;
+  }
+  .iconoCartera3{
+  	height: 70%;
+  	width:20%;
+    background-image: url("../../../../../assets/Images/catalogo/importancia.png");
+    background-repeat: no-repeat;
+    background-size: 30%;
+    background-position:  top;
+    opacity: .8;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    align-content: flex-end;
+    font-family: Helvetica;
+  }
+  .iconoCartera4{
+  	height: 70%;
+  	width:20%;
+    background-image: url("../../../../../assets/Images/catalogo/dificultad.png");
+    background-repeat: no-repeat;
+    background-size: 30%;
+    background-position:  top;
+    opacity: .8;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    align-content: flex-end;
+    font-family: Helvetica;
+  }
+  .iconoCartera5{
+  	height: 70%;
+  	width:20%;
+    background-image: url("../../../../../assets/Images/catalogo/todos.svg");
+    background-repeat: no-repeat;background-size: 30%;
+    background-position:  top;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    align-content: flex-end;
+    opacity: .8;
+    font-family: Helvetica;
+  }
+
+  .buttonCardContent{
+  	width: 100%;
+  	height: 12%;
+  	display: flex;
+  	justify-content: center;
+    align-items: center;
+  	align-content: center;
+    border: 0 none #ccc;
+    border-bottom: 0px solid #ccc;
+    border-radius: 0;
+  }
+  .buttonCardBtn{
+  	background:#1E8893;
+    font-size: 12px;
+  	color:white;
+  	width: 35%;
+  	height: 50%;
+    height: 20px;
+  	display: flex;
+  	justify-content: center;
+    align-items: center;
+    align-content: center;
+
+    h4 {
+      font-family: 'Novecento-Demibold';
+    }
+  }
+
+  .buttonCardBtn:hover{
+  	cursor: pointer;
+  	background:rgb(38, 161, 175);
+  	color:white;
+  }
+  /* flip the pane when hovered */
+  .flip-container:focus .flipper, .flip-container.hover .flipper {
+  	transform: rotateY(180deg);
+  }
+
+  .flip-container{
+    width: 100%;
+    height: 100%;
+  }
+
+  .front, .back {
+  	width: 100%;
+  	height: 100%;
+  }
+
+  /* flip speed goes here */
+  .flipper {
+  	transition: 0.6s;
+  	transform-style: preserve-3d;
+  	position: relative;
+    height: 100%;
+  }
+
+  .front p{
+    line-height: 16px;
+    padding-top: 4px;
+    text-align: left;
+  }
+
+  .folioCartera{
+    width: 80%;
+    font-family: 'Roboto-regular';
+    color: #424242;
+    display: flex;
+  	align-items: flex-end;
+  	align-content: flex-end;
+  }
+  .userIconCatera{
+    width:20%;
+    color:#739ba5;
+    p {
+      display: inline-block;
+      padding: 0;
+    }
+  }
+  .headerContentFront{
+    width: calc(100% - 15px);
+    height: 5%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 0 0 0 3%;
+  }
+  /* hide back of pane during swap */
+  .front, .back {
+    border-style:solid ;
+    border-color: rgba(110, 110, 110, 0.288);
+    border-width: 0px;
+  	backface-visibility: hidden;
+  	position: absolute;
+  	top: 0;
+  	left: 0;
+  }
+
+  /* front pane, placed above back */
+  .front {
+  	z-index: 2;
+  	/* for firefox 31 */
+  	transform: rotateY(0deg);
+  	font-family: 'Roboto', sans-serif;
+    hr{
+      background-color: #424242;
+      margin-bottom: 0;
+      height: 1px;
+      border: none;
+    }
+    .cart_nombre {
+      padding: 10px 0 0 3%;
+      font-family: 'Roboto-bold';
+      color: #424242;
+    }
+  }
+
+  /* back, initially hidden pane */
+  .back {
+  	font-family: 'Roboto', sans-serif;
+  	transform: rotateY(180deg);
+    background-color: #E7F4F5;
+  }
+
+  .backContent{
+  	width:100%;
+  	height: 74%;
+    position: relative;
+    .tache {
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      right: 8px;
+      top: 8px;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+  .headerBackCartera{
+    width: 100%;
+    height: 13%;
+    font-weight: 900;
+    display: flex;
+  	justify-content: center;
+  	align-items: center;
+  	align-content: center;
+    font-size: 18px;
+    font-family: 'Roboto-bold';
+  }
+  .subheaderBackCartera{
+  	width: 100%;
+    height: 5%;
+    display: flex;
+  	justify-content: center;
+  	align-items: center;
+  	align-content: center;
+    font-size: 18px;
+    font-family: 'Roboto-regular';
+  }
+  .backCenterContent{
+  	width:100%;
+  	height: 80%;
+  	display: flex;
+  	flex-wrap: wrap;
+  	justify-content: center;
+  	align-items: center;
+  	align-content: center;
+  }
+  .FactCarteraContent{
+    width:48%;
+    height: 100%;
+  }
+  .headerFactcarteraContent{
+  	font-weight: 900;
+  	height: 30%;
+  	display: flex;
+  	align-items: center;
+  	align-content: center;
+    font-family: 'Roboto-regular';
+
+    .CVerde{
+      color: #1E8893;
+      font-family: 'Roboto-bold';
+    }
+  }
+  .headerFantcarteraContent{
+  	font-weight: 900;
+  	height: 30%;
+  	display: flex;
+  	align-items: center;
+  	align-content: center;
+  	justify-content:flex-end;
+
+    font-family: 'Roboto-regular';
+
+    .CVerde{
+      color: #1E8893;
+      font-family: 'Roboto-bold';
+    }
+  }
+  .FantCarteraContent{
+  	width:48%;
+  	height: 100%;
+  }
+  .infoFactcarteraContent{
+  	height: 65%;
+  	text-align: left;
+  }
+  .infoFantcarteraContent{
+  	height: 65%;
+  	text-align: right
+  }
+  .rowCarteraContent{
+    width: 100%;
+    height: 33%;
+    font-family: 'Roboto-light';
+
+    .CVerde{
+      color: #1E8893;
+      font-family: 'Roboto-light';
+    }
+  }
+  .CVerde{
+    color: #1E8893;
+    font-family: 'Roboto-bold';
+  }
+}

@@ -1,0 +1,137 @@
+.vistaColectarElementos {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-content: stretch;
+  align-items: stretch;
+  height: 95%;
+  width: 100%;
+  font-family: 'Roboto', sans-serif;
+  // min-height: 750px;
+}
+
+.vistaColectar {
+  order: 0;
+  flex: 1 1 auto;
+  align-self: auto;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+}
+
+// .botonesDireccion {
+//   order: 0;
+//   flex: 0 1 auto;
+//   align-self: auto;
+//   height: 100%;
+//   width: 100%;
+//   min-height: 70px;
+//   max-height: 70px;
+//   display: flex;
+//   justify-content: flex-end;
+//   align-items: center;
+//   padding-right: 20px;
+//   box-sizing: border-box;
+// }
+
+.pAmbiente {
+  order: 0;
+  flex: 0 1 auto;
+  align-self: auto;
+  height: 100%;
+  width: 14%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+}
+
+.flecha1 {
+  order: 0;
+  flex: 0 1 auto;
+  align-self: auto;
+  height: 100%;
+  width: 12%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pRefrigeracion {
+  order: 0;
+  flex: 0 1 auto;
+  align-self: auto;
+  height: 100%;
+  width: 14%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+}
+
+.flecha2 {
+  order: 0;
+  flex: 0 1 auto;
+  align-self: auto;
+  height: 100%;
+  width: 12%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pCongelacion {
+  order: 0;
+  flex: 0 1 auto;
+  align-self: auto;
+  height: 100%;
+  width: 14%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+}
+
+.dato {
+  font-size: 40px;
+  color: #404040;
+  text-align: center;
+  margin-top: 10%;
+}
+
+.tipo {
+  font-size: 35px;
+  color: #338A9C;
+  text-align: center;
+  margin-top: 10%;
+  font-weight: bold;
+}
+
+.botonIngresar {
+  width: 190px;
+  height: 30px;
+  background: #008894;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 21px;
+  cursor: pointer;
+  border: none;
+  color: #FFFFFF;
+  font-weight: bold;
+  order: 0;
+  flex: 0 1 auto;
+  align-self: auto;
+}

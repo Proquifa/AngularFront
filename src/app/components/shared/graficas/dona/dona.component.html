@@ -1,0 +1,12 @@
+
+<div (click)="clickGrav()">
+    <canvas *ngIf="doughnutChartData !== undefined && tipoGrafica !== undefined" width="100%" height="100%" baseChart
+                [data]="doughnutChartData"
+                [labels]="doughnutChartLabels"
+                [chartType]="doughnutChartType"
+                [legend]="false"
+                [colors]="listaColores"
+                [options]="options"
+                (chartHover)="chartHovered($event)"
+                (chartClick)="chartClicked($event)"></canvas>
+  </div>

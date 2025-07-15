@@ -1,0 +1,33 @@
+<div [ngClass]="classFlipContainer">
+  <div [ngClass]="classContainerFront" (click)="fnToggleCard(0)">
+    <div class="flipContainerFrontBody">
+      <img [src]="inpLogo" alt="LOGO" class="flipContainerFrontBodyImg">
+    </div>
+    <div class="flipContainerFrontFooter">
+      <div class="flipContainerFrontFooterItem">{{ inpFrontValue }}</div>
+    </div>
+  </div>
+  <div [ngClass]="classContainerBack">
+    <div class="flipContainerBackHeader">
+      <div class="flipContainerBackHeaderClose" (click)="fnToggleCard(1)">
+        <img src="./assets/Images/cerrar_tarjeta.svg" alt="" class="flipContainerFrontHeaderCloseImg">
+      </div>
+      <div class="flipContainerBackHeaderTitle">{{ inpBackTitle }}</div>
+      <div class="flipContainerBackHeaderSubtitle">{{ inpBackSubtitle }}</div>
+    </div>
+    <div class="flipContainerBackBody">
+      <div class="flipContainerBackBody" [ngStyle]="{
+        'color': item.fontColor,
+        'font-family': item.fontFamily,
+        'font-size': item.fontSize,
+        'text-align': item.fontAlign,
+        'font-weight': item.fontWeight}" *ngFor="let item of inpLstItemsBackBody">
+        <span [ngStyle]="{'font-weight': item.labelWeight}">{{ item.label }}</span>&nbsp;<span>{{ item.value }}</span>
+      </div>
+    </div>
+    <div class="flipContainerBackFooter">
+      <span class="flipContainerBackFooterSpan" (click)="fnGoTo()" >Entrar</span>
+      <img src="./assets/Images/ir.svg" alt=">" class="flipContainerBackFooterImg">
+    </div>
+  </div>
+</div>

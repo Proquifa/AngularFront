@@ -1,0 +1,174 @@
+<div class="container">
+    <div class="containerHeader">NUEVA PÓLIZA</div>
+    <div class="containerBody">
+        <div class="containerBodyTitle">DATOS DE PÓLIZA</div>
+        <div class="containerBodyForm">
+            <div class="containerBodyFormCol" style="flex-basis: 10%;">
+                <div class="containerBodyFormColLabel">Tipo de Póliza</div>
+                <div class="containerBodyFormColSelect">
+                    <app-pf-selector [inputHeight]="'30px'" [defaultItem]="defaultItem[0]" [lstItems]="lstItems[0]" (outPutItem)="fnOutPutItem($event, 0)"></app-pf-selector>
+                </div>
+            </div>
+            <div class="containerBodyFormCol" style="flex-basis: 10%;">
+                <div class="containerBodyFormColLabel">Referencia</div>
+                <div class="containerBodyFormColInputs">
+                    <input [(ngModel)]="poliza.referencia" class="containerBodyFormColInput" placeholder="Escribe Aquí" (keypress)="fnValidPoliza()">
+                </div>
+            </div>
+            <div class="containerBodyFormCol" style="flex-basis: 15%;">
+                <div class="containerBodyFormColLabel">Descripción</div>
+                <div class="containerBodyFormColInputs">
+                    <input [(ngModel)]="poliza.descripcion" class="containerBodyFormColInput" placeholder="Escribe Aquí" (keypress)="fnValidPoliza()">
+                </div>
+            </div>
+            <div class="containerBodyFormCol" style="flex-basis: 10%;max-width: 170px;">
+                <div class="containerBodyFormColLabel">Fecha</div>
+                <div class="containerBodyFormColDate">
+                    <pq-date-picker [borderInputColor]="'1px solid #D8D9DD'" [fontColor]="'#424242'" [backGroundColor]="white" [disabled]="'false'" [sizeInput]="'16px'" [heightInput]="'30px'" [(date)]="poliza.fecha" dateFormat="YYYYMMDD" (fecha)="fnGetFechaImpl($event)"></pq-date-picker>
+                </div>
+            </div>
+            <div class="containerBodyFormCol" style="flex-basis: 10%;max-width: 10%;">
+                <div class="containerBodyFormColLabel">Empresas del Grupo</div>
+                <div class="containerBodyFormColSelect">
+                    <app-pf-selector [colorSelectedSimple]="'#008894'" [inputHeight]="'30px'" [viewSearch]="true" [defaultItem]="defaultItem[1]" [lstItems]="lstItems[1]" (outPutItem)="fnOutPutItem($event, 1)"></app-pf-selector>
+                </div>
+            </div>
+            <div class="containerBodyFormCol" style="flex-basis: 10%;max-width: 10%;">
+                <div class="containerBodyFormColLabel">&nbsp;</div>
+                <div class="containerBodyFormColSelect">
+                    <app-pf-selector [inputHeight]="'30px'" [defaultItem]="defaultItem[7]" [lstItems]="lstItems[7]" (outPutItem)="fnOutPutItem($event, 7)"></app-pf-selector>
+                </div>
+            </div>
+            <div class="containerBodyFormCol" style="flex-basis: 15%;max-width: 15%;">
+                <div class="containerBodyFormColLabel">{{ labelSelect2 }}</div>
+                <div class="containerBodyFormColSelect">
+                    <app-pf-selector [isDisabled]="(lstItems[2] !== undefined && lstItems[2] !== null && lstItems[2].length > 0) ? false : true" [isOpaque]="(lstItems[2] !== undefined && lstItems[2] !== null && lstItems[2].length > 0) ? false : true"  [inputHeight]="'30px'" [viewSearch]="true" [defaultItem]="defaultItem[2]" [lstItems]="lstItems[2]" (outPutItem)="fnOutPutItem($event, 2)"></app-pf-selector>
+                </div>
+            </div>
+            <div class="containerBodyFormCol" style="flex-basis: 10%;">
+                <div class="containerBodyFormColLabel">Folio</div>
+                <div class="containerBodyFormColLabelValue">{{ poliza.folio }}</div>
+            </div>
+        </div>
+        <div class="containerBodySubtitle">AGREGAR CUENTA CONTABLE</div>
+        <div class="containerBodyFormColor">
+            <div class="containerBodyFormColorCol" style="flex-basis: 20%;max-width: 20%;">
+                <div class="containerBodyFormColorColLabel">Cuenta</div>
+                <div class="containerBodyFormColorColSelect">
+                    <app-pf-selector [inputHeight]="'30px'" [defaultItem]="defaultItem[3]" [isSimpleValue]="false" [placeholder]="'Folio, Cuenta'" [lstItems]="lstItems[3]" [viewSearch]="true" (outPutItem)="fnOutPutItem($event, 3)"></app-pf-selector>
+                </div>
+            </div>
+            <div class="containerBodyFormColorCol" style="flex-basis: 20%">
+                <div class="containerBodyFormColorColLabel">Descripción</div>
+                <div class="containerBodyFormColorColInputs">
+                    <input [(ngModel)]="itemDescripcion" class="containerBodyFormColorColInput" placeholder="Escribe Aquí" (keypress)="fnValidPPoliza()">
+                </div>
+            </div>
+            <div class="containerBodyFormColorCol" style="flex-basis: 10%">
+                <div class="containerBodyFormColorColLabel">Monto</div>
+                <div class="containerBodyFormColorColInputs">
+                    <input [(ngModel)]="itemMonto" class="containerBodyFormColorColInput" placeholder="Escribe Aquí" (keypress)="fnValidPPoliza()" (focus)="fnFocusMonto()" (blur)="fnBlurMonto()" [ngStyle]="{'text-align': 'right', 'color': '#008894'}">
+                </div>
+            </div>
+            <div class="containerBodyFormColorCol" style="flex-basis: 10%;max-width: 10%;">
+                <div class="containerBodyFormColorColLabel">IVA</div>
+                <div class="containerBodyFormColorColSelect">
+                    <app-pf-selector [inputHeight]="'30px'" [defaultItem]="defaultItem[4]" [lstItems]="lstItems[4]" (outPutItem)="fnOutPutItem($event, 4)"></app-pf-selector>
+                </div>
+            </div>
+            <div class="containerBodyFormColorCol" style="flex-basis: 10%;max-width: 10%;">
+                <div class="containerBodyFormColorColLabel">Tipo</div>
+                <div class="containerBodyFormColorColSelect">
+                    <app-pf-selector [inputHeight]="'30px'" [defaultItem]="defaultItem[5]" [lstItems]="lstItems[5]" (outPutItem)="fnOutPutItem($event, 5)"></app-pf-selector>
+                </div>
+            </div>
+            <div class="containerBodyFormColorCol" style="flex-basis: 15%;max-width: 15%;">
+                <div class="containerBodyFormColorColLabel">Centro de Costos</div>
+                <div class="containerBodyFormColorColSelect">
+                    <app-pf-selector [inputHeight]="'30px'" [defaultItem]="defaultItem[6]" [lstItems]="lstItems[6]" (outPutItem)="fnOutPutItem($event, 6)"></app-pf-selector>
+                </div>
+            </div>
+            <div class="containerBodyFormColorCol" style="flex-basis: 5%">
+                <div class="containerBodyFormColorColLabel">&nbsp;</div>
+                <div [ngClass]="classBtnAdd" (click)="fnAddPPoliza()">AGREGAR</div>
+            </div>
+        </div>
+        <div class="containerBodyTable">
+            <div class="containerBodyTableHeader">
+                <div class="containerBodyTableHeaderCol" style="flex-basis: 5%;">#</div>
+                <div class="containerBodyTableHeaderCol" style="flex-basis: 20%;text-align: left;">Cuenta</div>
+                <div class="containerBodyTableHeaderCol" style="flex-basis: 20%;text-align: left;">Descripción</div>
+                <div class="containerBodyTableHeaderCol" style="flex-basis: 5%;text-align: left;">Tipo</div>
+                <div class="containerBodyTableHeaderCol" style="flex-basis: 15%;text-align: left;">Centro de Costos</div>
+                <div class="containerBodyTableHeaderCol" style="flex-basis: 10%;text-align: right;">Monto MXN</div>
+                <div class="containerBodyTableHeaderCol" style="flex-basis: 10%;text-align: right;">IVA</div>
+                <div class="containerBodyTableHeaderCol" style="flex-basis: 10%;text-align: right;">Total</div>
+                <div class="containerBodyTableHeaderCol" style="flex-basis: 5%;">&nbsp;</div>
+            </div>
+            <div class="containerBodyTableBody">
+                <div class="containerBodyTableBodyEmpty" *ngIf="poliza.lstPPoliza.length === 0">NO HAS GENERADO CUENTAS CONTABLES</div>
+                <div class="containerBodyTableBodyLst" *ngIf="poliza.lstPPoliza.length > 0">
+                    <div class="containerBodyTableBodyLstRow" *ngFor="let item of poliza.lstPPoliza; let i = index">
+                        <div class="containerBodyTableBodyLstRowCol" style="flex-basis: 5%;">{{ i + 1 }}</div>
+                        <div class="containerBodyTableBodyLstRowCol" style="flex-basis: 20%;text-align: left;"><span class="containerBodyTableBodyLstRowColSpan">{{ item.cuentaContable.descripcionAux + ' ' + item.cuentaContable.descripcionAuxSep + ' '}}</span><span class="containerBodyTableBodyLstRowColSpan">{{ item.cuentaContable.descripcion }}</span></div>
+                        <div class="containerBodyTableBodyLstRowCol" style="flex-basis: 20%;text-align: left;">{{item.descripcion}}</div>
+                        <div class="containerBodyTableBodyLstRowCol" style="flex-basis: 5%;text-align: left;">{{(item.tipo) ? 'Abono' : 'Cargo'}}</div>
+                        <div class="containerBodyTableBodyLstRowCol" style="flex-basis: 15%;text-align: left;">{{ item.centroCosto.descripcion }}</div>
+                        <div class="containerBodyTableBodyLstRowCol" style="flex-basis: 10%;text-align: right;;font-size: 17px;color: #008894;font-weight: 400;">{{ item.monto | acFormatMoney }}</div>
+                        <div class="containerBodyTableBodyLstRowCol" style="flex-basis: 10%;text-align: right;;font-size: 17px;color: #008894;font-weight: 400;">{{ (item.tipoIVA) ? '16%' : '0%'}}</div>
+                        <div class="containerBodyTableBodyLstRowCol" style="flex-basis: 10%;text-align: right;;font-size: 17px;color: #008894;font-weight: 400;">{{ (item.monto + item.montoIVA) | acFormatMoney }}</div>
+                        <div class="containerBodyTableBodyLstRowCol" style="flex-basis: 5%;" (click)="fnDeleteItem(i)"><img src="./assets/Images/polizasEliminar.svg" alt="" class="containerBodyTableBodyLstRowColImg"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="containerBodyTableFooter">
+                {{ (poliza.lstPPoliza.length === 1) ? '#1 Cuenta Contable' : '#' + poliza.lstPPoliza.length + ' Cuentas Contables' }}
+            </div>
+        </div>
+        <div class="containerBodySummary">
+            <div class="containerBodySummaryTitle">
+                <span class="containerBodySummaryTitleSpan">Totales</span>
+            </div>
+            <div class="containerBodySummaryTitle">
+                <div class="containerBodySummarySubtitle">Subtotal</div>
+                <div class="containerBodySummaryAmount" style="font-size: 23px;color: #424242;font-weight: 400;">{{ poliza.monto | acFormatMoney }}</div>
+            </div>
+            <div class="containerBodySummaryTitle">
+                <div class="containerBodySummarySubtitle">IVA</div>
+                <div class="containerBodySummaryAmount" style="font-size: 23px;color: #008894;font-weight: 400;">{{ poliza.iva | acFormatMoney }}</div>
+            </div>
+            <div class="containerBodySummaryTitle">
+                <div class="containerBodySummarySubtitle">Total</div>
+                <div class="containerBodySummaryAmount" style="font-size: 27px;color: #4BA92B;font-weight: 700;">{{ poliza.total | acFormatMoney }}</div>
+            </div>
+        </div>
+    </div>
+    <div class="containerFooter">
+        <div class="containerFooterBtnAcepted" (click)="fnCancel()">Cancelar</div>
+        <div [ngClass]="classBtnAcept" (click)="fnSave()">Guardar</div>
+    </div>
+</div>
+
+<div [ngClass]="modalPromt">
+    <div class="modalPromtContainer">
+        <div class="modalPromtContainerHeader">PROQUIFA NET</div>
+        <div class="modalPromtContainerBody">
+            <img src="./assets/Images/polizasAlerta.svg" alt="Alerta!" class="modalPromtContainerBodyImg">
+            <span class="modalPromtContainerBodySpan">¿Estás seguro que deseas salir sin guardar los cambios?</span>
+        </div>
+        <div class="modalPromtContainerFooter">
+            <div class="modalPromtContainerFooterBtn" (click)="fnClosePrompt()">CANCELAR</div>
+            <div class="modalPromtContainerFooterBtn" (click)="fnViewReturn()">ACEPTAR</div>
+        </div>
+    </div>
+</div>
+
+<div [ngClass]="modalSuccess">
+    <div class="modalPromtContainer">
+        <div class="modalPromtContainerHeader">PROQUIFA NET</div>
+        <div class="modalPromtContainerBody">
+            <img src="./assets/Images/polizasExito.svg" alt="Alerta!" class="modalPromtContainerBodyImg">
+            <span class="modalPromtContainerBodySpan"><span style="font-weight: 700;font-size: 29px;color: #008894;" >¡Has guardado exitosamente </span><br /> una nueva póliza!</span>
+        </div>
+    </div>
+</div>

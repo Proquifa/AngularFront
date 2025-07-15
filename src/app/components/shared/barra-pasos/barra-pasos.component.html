@@ -1,0 +1,19 @@
+<div class="barraActividades">
+
+    <div class="flechaIzq">
+      <img id="FlechaIzqVerde" [src]="classflechaizq" (click)="desplazamientoIzq()" />
+    </div>
+  
+  
+    <div class="contenido">
+      <a href="javascript:;" class="elemento" (click)="select(i)" *ngFor="let item of lstItems; let i = index" >
+        <div [ngClass]="classText[i]">{{item}}</div>
+        <hr [ngClass]="classHr[i]" >
+      </a>
+    </div>
+  
+    <div class="flechaDer">
+      <img id="FlechaDerVerde" [src]="classflechader" (click)="desplazamientoDer()"/>
+    </div>
+  
+  </div>

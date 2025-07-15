@@ -1,0 +1,208 @@
+@import "./../../../../mixins";
+
+.modal{
+  z-index:11;
+  display:flex;
+  position:fixed;
+  left:0;
+  top:0;
+  width:100%;
+  height:100%;
+  overflow:auto;
+  background-color:rgba(238, 238, 238, 0.8);
+  font-family: 'Roboto', sans-serif;
+}
+.modal-content{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-content: center;
+  align-items: flex-start;
+  margin:auto;
+  text-align: center;
+  background-color:white;
+  position:relative;
+  padding:0;
+  outline:0;
+  height:673px;
+  width: 793px;
+  color:#424242;
+  border-radius: 25px;
+  font-family: 'Roboto';
+  font-size: 20px;
+  border: 1px solid #008A98;
+}
+.header{
+  -webkit-box-ordinal-group: 1;
+  order: 0;
+  flex: 0 1 auto;
+  align-self: stretch;
+  height: 52px;
+  background-color: #008894;
+  border-radius: 24px 24px 0px 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  h1{
+    top: 20px;
+    color: white;
+    font-size: 25px;
+    order: 0;
+    flex: 0 1 auto;
+    align-self: auto;
+    font-weight: bold;
+  }
+}
+.contenido {
+  order: 1;
+  flex: 1 1 auto;
+  align-self: stretch;
+  width: 100%;
+  height: 516px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-content: stretch;
+  align-items: stretch;
+  color: #424242;
+  box-sizing: border-box;
+
+  & >div{
+    height: 135px;
+    width: 100%;
+    display: flex;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
+    box-sizing: border-box;
+    flex-direction: column;
+    align-items: flex-start;
+
+    & >span{
+      font-family: Roboto;
+      font-weight: 400;
+      font-size: 18px;
+      color: #008894;
+      padding-bottom: 12px;
+    }
+
+    & >div{
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 100%;
+    }
+  }
+}
+
+
+.footer2 {
+  order: 1;
+  flex: 0 1 auto;
+  align-self: stretch;
+  height: 68px;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}
+.btnOk {
+ @include button(31px, 170px, #FFFFFF, #008A98);
+}
+.datos {
+  order: 1;
+  flex: 1 1 auto;
+  align-self: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  height: 40%;
+  padding-bottom: 10%;
+  box-sizing: border-box;
+}
+
+.datosCliente{
+  height: 90px !important;
+  width: 100%;
+  padding: 20px 20px 0 20px;
+  & >div{
+    padding-bottom: 8px;
+    box-sizing: border-box;
+    flex-direction: column !important;
+    align-items: flex-start;
+    justify-content: center;
+    line-height: 1.5;
+    border-bottom: 1px solid #424242;
+    & >label{
+      font-family: Novecento !important;
+      font-weight: bold !important;
+      font-size: 20px !important;
+      color: #008894 !important;
+    }
+    & > div{
+      display: flex;
+      justify-content: space-between;
+      flex-direction: row;
+      width: 100%;
+      & > label{
+        font-family: Roboto;
+        font-weight: 400;
+        font-size: 14px;
+        color: #008894;
+      }
+    }
+  }
+}
+textarea{
+  resize: none;
+  border: none;
+  height: 80px;
+  width: 100%;
+  font-family: Roboto;
+  font-weight: 400;
+  font-size: 18px;
+  color: #424242;
+}
+.datas{
+  box-sizing: border-box;
+  padding-bottom: 3px!important;
+  & > div{
+    width: 15%;
+    display: flex;
+    justify-content: flex-start;
+    box-sizing: border-box;
+    & >label{
+      font-family: Roboto;
+      font-weight: 400;
+      font-size: 18px;
+      color: #424242;
+    }
+
+    & >span{
+      font-family: Roboto;
+      font-weight: 400;
+      font-size: 15px;
+      color: #848387;
+    }
+  }
+}
+.infoWarning{
+  height: 70px !important;
+  padding-top: 10px !important;
+
+  & > div{
+    height: 100% !important;
+    border-bottom: 1px solid !important;
+  }
+}

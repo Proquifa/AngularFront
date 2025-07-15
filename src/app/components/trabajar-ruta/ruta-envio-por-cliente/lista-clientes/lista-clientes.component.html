@@ -1,0 +1,72 @@
+<div *ngIf="listaClientes" style="height: calc(100% - 60px);">
+  <div class="content-area">
+    <div class="area" style=" display: flex; border-bottom: 1px solid #D8D8D8;  min-width: 800px; border-top: 1px solid #D8D8D8;display: flex;position: relative">
+      <!--Inicio Div Daos C-->
+      <div id="bordeDatosC" class="datosC" style="display: flex; flex-direction:row; height: 80%; justify-content: space-between; width: 100%; ">
+        <label class="encabezadoCliente">CLIENTES</label>
+        <div style="padding-right: 10px; " ng-model="searchText" class="form-control">
+          <div class="buscar">
+            <div>
+              <div class="lupa">
+                <img src="assets/Images/lupa.svg" width="22px" height="22px" alt="buscar">
+              </div>
+              <input type="text" [ngModel]="searchTerm" (ngModelChange)="buscar($event)" class="buscar-input" placeholder="clientes" />
+            </div>
+          </div>
+        </div>
+        <!--Fin datos C-->
+      </div>
+    </div>
+  </div>
+  <div class="catalogoClientes">
+    <div class="container">
+      <div id="datosArreglo" class="tabla-clientes" *ngIf="listaUniverso.length > 0">
+        <div class="item" *ngFor="let datos of listaCli let i= index">
+          <div style="display: flex;">
+            <img style="height:106px; width: 106px; " src="./assets/Images/clientes/{{datos.idCliente}}.png" onerror="this.src='./assets/Images/clientes/default.png';">
+          </div>
+          <div id="datosCliente">
+            <label class="numCliente ">{{'#'}}{{i+1}} <span class= "nombreClienteEstilo " > {{datos.nombreCliente}} </span></label>
+            <label class="datosCllienteEstilo "> {{datos.cant}} {{'Piezas '}} · {{datos.numPL}}{{' Packing List'}}</label>
+            <div style="display: flex; flex-direction: row;">
+              <label class="p1 "> P1. {{datos.p1}} </label>
+              <label class="p2 "> P2  {{datos.p2}} </label>
+              <label class="p3 "> P3  {{datos.p3}} </label>
+            </div>
+          </div>
+          <div class="imagenMas" (click)="cambiarVistaPorCliente(datos)">
+            <img type=image src="./assets/Images/Images/entrar.svg" />
+          </div>
+        </div>
+      </div>
+      <div class="mensajeSinDatos" *ngIf="listaUniverso.length === 0">
+        <label>NO HAY ENVIOS PAGADOS POR CLIENTE</label>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="!listaClientes" style="width: 100%;height: 100%">
+<pn-finalizar-envio-cliente [idCliente]="idCliente" [totalesBarra]="totalesBarra" (regresarVistaP)="regresarVista($event)" (finalizarEnvio)="actualizarDatos($event)"></pn-finalizar-envio-cliente>
+</div>
+<footer class="footer " style="  border: none; border-top: solid;" *ngIf="listaClientes">
+  <div class="datosFooter " style="width: 100%;height: 100%; ">
+    <div class="Prioridad1 ">
+      <label class="p1 ">P1</label> Prioridad 1
+    </div>
+    <div class="Prioridad2 ">
+      <label class="p2 ">P2</label> Prioridad 2
+    </div>
+    <div class="Prioridad3 ">
+      <label class="p3 ">P3</label> Prioridad 3
+    </div>
+    <div class="Ambiente ">
+      <img class="img " src='./assets/Images/ambiente.svg' /> Ambiente
+    </div>
+    <div class="Congelación ">
+      <img class="img " src='./assets/Images/congelacion.svg' /> Congelación
+    </div>
+    <div class="Refrigeración ">
+      <img class="img " src='./assets/Images/refrigeracion.svg' /> Refrigeración
+    </div>
+  </div>
+</footer>

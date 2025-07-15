@@ -1,0 +1,72 @@
+.tituloGrafica{
+  padding-right: 1%;
+  padding-top: 3%;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  color: #008894;
+  font-weight: bold;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-content: center;
+  align-items: flex-start;
+
+}
+
+.contenido {
+    order: 0;
+    flex: 0 1 auto;
+    align-self: center;
+    }
+
+.combo {
+    order: 1;
+    flex: 0 1 auto;
+    align-self: center;
+    cursor: pointer;
+    width: 130px;
+    }
+
+#lineChart1{
+  display: block;
+  position: absolute;
+  width: 536px;
+  height: 185px;
+  max-height: 185px;
+  max-width: 536px;
+  box-sizing: border-box;
+}
+
+#lineChart1Div{
+  display: block;
+  position: absolute;
+  width: 525px;
+  height: 185px;
+  max-height: 185px;
+  max-width: 536px;
+  box-sizing: border-box;
+}
+
+.seleccion{
+  font-family: 'Roboto', sans-serif;
+  font-size: 13px;
+  color: #008894;
+  font-weight: bold;
+  border: none;
+  background-color: white;
+  border: 1px solid #ccc;
+  width: 101%;
+  overflow: hidden;
+  border: none;
+  padding-right: 25px;
+  -webkit-appearance: none;
+  outline-style: none;
+  cursor: pointer;
+}
+
+  // .seleccion:focus, .seleccion:hover{border:2px solid green;}
+
+.seleccion:focus{
+  outline: none;
+}

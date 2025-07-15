@@ -1,0 +1,139 @@
+.selectContainer{
+    width: 100%;
+    background: #FFFFFF;
+    border: 1px solid #D8D9DD;
+    cursor: pointer;
+    & > .selectContainerHeader{
+        height: 100%;
+        & > .selectContainerHeaderValues{
+            height: 100%;
+            width: calc(100% - 20px);
+            float: left;
+            & > input.selectContainerHeaderValuesInput{
+                width: calc(100% - 20px);
+                border: none;
+                outline: none;
+                font-size: 16px;
+                font-weight: 400;
+                height: 100%;
+                padding: 0px;
+                margin: 0px 10px;
+                cursor: pointer;
+            }
+            & > .selectContainerHeaderValuesItems{
+                height: 100%;
+                margin: 0px 10px;
+                & > input.selectContainerHeaderValuesItemInput{
+                    font-size: 16px;
+                    font-weight: 700;
+                    padding: 0px;
+                    float: left;
+                    border: none;
+                    cursor: pointer;
+                }
+                & > .selectContainerHeaderValuesItem{
+                    font-size: 16px;
+                    color: #424242;
+                    font-weight: 400;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    float: left;
+                    width: calc(100% - 15ch);
+                }
+            }
+        }
+        & > img.selectContainerHeaderImg{
+            width: 10px;
+            height: 100%;
+        }
+    }
+    & > .selectContainerDrop{
+        display: none;
+        height: 0;
+        transition: all 0.2s ease-in-out;
+        background: #FFFFFF;
+        border: 1px solid #ECEEF0;
+        position: relative;
+        z-index: 5;
+        box-shadow: 0 2px 10px 0 rgba(216,217,221,0.50);
+        & > .selectContainerDropSearch{
+            padding: 10px 20px;
+        }
+        & > .selectContainerDropListSimple{
+            overflow: scroll;
+            height: 100%;
+            padding: 20px 10px;
+            & > .selectContainerDropListSimpleItem{
+                width: 100%;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                overflow: hidden;
+                font-size: 13px;
+                color: #424242;
+                font-weight: 300;
+                vertical-align: middle;
+                border-bottom: 1px solid #ECEEF0;
+                transition: all 0.2s ease-in-out;
+            }
+            & > .selectContainerDropListSimpleItem:hover{
+                background: #ECEEF0;
+                font-weight: 400;
+            }
+            & > .selectContainerDropListSimpleItem:active{
+                opacity: 0.75;
+            }
+        }
+        & > .selectContainerDropListLevels{
+            overflow: scroll;
+            height: 100%;
+            padding: 20px 10px;
+            & > .selectContainerDropListLevelsItem{
+                width: 100%;
+                vertical-align: middle;
+                border-bottom: 1px solid #ECEEF0;
+                transition: all 0.2s ease-in-out;
+                & > .selectContainerDropListLevelsItemValue1{
+                    width: 100%;
+                    & > .selectContainerDropListLevelsItemValue1Span1{
+                        min-width: 35px;
+                        font-size: 13px;
+                        color: #008894;
+                        font-weight: 300;
+                        float: left;
+                    }
+                    & > .selectContainerDropListLevelsItemValue1Span2{
+                        width: calc(100% - 35px);
+                        font-size: 13px;
+                        color: #424242;
+                        font-weight: 300;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        float: left;
+                    }
+                }
+                & > .selectContainerDropListLevelsItemValue2{
+                    margin-left: 35px;
+                    width: calc(100% - 35px);
+                    font-size: 13px;
+                    color: #424242;
+                    font-weight: 300;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    overflow: hidden;
+                }
+            }
+            & > .selectContainerDropListLevelsItem:hover{
+                background: #ECEEF0;
+                font-weight: 400;
+            }
+            & > .selectContainerDropListLevelsItem:active{
+                opacity: 0.75;
+            }
+        }
+    }
+    & > .open{
+        display: block;
+    }
+}

@@ -1,0 +1,41 @@
+<div>
+  <div id="id01" class="modal" #pop>
+    <div class="modal-content">
+      <header class="header">
+        <h1> PROQUIFA NET  </h1>
+      </header>
+
+      <div class="contenido">
+        <div class="datos">
+          <div class="alertaTxt">
+            <p>¿ Estás seguro que deseas quitar la restricción a <label class="cliente">{{empresa}}</label> ?</p>
+          </div>
+          <div class="option">
+            <label style="padding-right: 30px">Realizar entrega con:</label>
+              <div>
+                <img src="./assets/Images/radio_1.svg" height="20px"  (click)="select('factura')" *ngIf="!facturaSelect">
+                <img src="./assets/Images/radio_selected.svg" height="20px"  (click)="select('factura')" *ngIf="facturaSelect">
+                <label>Factura</label>
+              </div>
+              <div>
+                <img src="./assets/Images/radio_1.svg" height="20px" (click)="select('remision')" *ngIf="!remisionSelect">
+                <img src="./assets/Images/radio_selected.svg" height="20px"  (click)="select('remision')" *ngIf="remisionSelect">
+                <label>Remisión</label>
+              </div>
+          </div>
+        </div>
+
+      </div>
+
+      <footer class="footer2" >
+        <a type="submit" class="btnOk" (click)="cerrar(false)" >
+          <label> CANCELAR </label>
+        </a>
+        <a type="submit" class="btnOk" (click)="cerrar(true)" [style.pointer-events]= "facturaSelect || remisionSelect? 'auto': 'none'" [style.background]="facturaSelect || remisionSelect? '#008894': '#C2C3CA'">
+          <label> ACEPTAR </label>
+        </a>
+      </footer>
+    </div>
+  </div>
+</div>
+

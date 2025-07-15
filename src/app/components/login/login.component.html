@@ -1,0 +1,77 @@
+<div class="fondoBlanco" id="fondoBlanco">
+  <div class="botonesControl">
+    <div class="botones">
+      <img class="btn" src="./assets/login/fullscreen_gris.svg" (click)="fullScreen()"/>
+      <img class="btn" src="./assets/login/minimize_gris.svg" (click)="minimize()"/>
+      <img class="btn" src="./assets/login/normal_gris.svg" (click)="maximizer()"/>
+      <img class="btn" src="./assets/login/close_gris.svg" onclick="window.close()"/>
+    </div>
+  </div>
+
+  <div class="content-inicio">
+    <img src="assets/login/ryndem.svg" class="inicio"/>
+  </div>
+
+  <div class="login" id="login">
+
+    <img src="assets/login/logo.svg" class="logo">
+
+    <div id="datos" class="loginForm">
+      <form id="formulario" [formGroup]="loginForm" (keydown.enter)="login()">
+        <input type="text" class="usuario" name="usuario" placeholder=" USUARIO" formControlName="usuario"
+               name="usuario" autofocus required/>
+        <br>
+        <br>
+        <input type="password" class="password" name="password" placeholder=" CONSTRASEÑA" formControlName="password"
+               required>
+      </form>
+      <div class="content">
+        <hr color="black" class="left"/>
+        <a class="btn-verde" type="submit" (click)="login()">
+          <img type="submit" src="assets/login/boton.png" class="botonVerde"/>
+          <img type="submit" class="flechas" id="flechas"/>
+
+        </a>
+        <hr color="black" class="right"/>
+      </div>
+    </div>
+    <footer>
+      <img src="assets/login/ryndem.svg" class="ryndem" alt="Ryndem Studio Logo"/>
+    </footer>
+  </div>
+</div>
+
+<!--     ALERTA           -->
+<div class="w3-container">
+  <div id="id01" class="modal">
+    <div class="modal-content">
+      <header class="header">
+        <h1> PROQUIFA NET </h1>
+      </header>
+
+      <div class="contenido">
+        <div class="datos">
+
+          <div class="alerta" style="padding-top: 7%;box-sizing: border-box;">
+            <img src="assets/Images/alerta.svg" alt="" class="alert"/>
+          </div>
+
+          <div class="alertaTxt">
+            <p class="dato">{{alertaTxt}} </p>
+            <p class="dato" *ngIf="alertaTxt2 != ''">{{alertaTxt2}} </p>
+          </div>
+        </div>
+
+      </div>
+
+      <footer class="footer2">
+        <a type="submit" class="btnOK" onclick="document.getElementById('id01').style.display='none'">
+          <h2> OK </h2>
+
+        </a>
+
+      </footer>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,53 @@
+<div style="width:100%;flex-direction: row;height: 30px; display:flex; min-width:250px" class="content" *ngIf="activarOjito">
+  <div class="boton_file">
+    <a *ngIf="fileName == ''">
+          <label class="doc" for="fileInput">{{doc}}</label>
+    </a>
+    <a *ngIf="fileName != ''">
+          <label [ngStyle]="{'width':'calc(100% - 5px )','height':'12px'}">{{fileName}} </label>
+    </a>
+    <!--Bloquear carga-->
+    <input [disabled]="!disabled" *ngIf="fileName == '' && bloqueo" #fileInput type="file" id="fileInput" (change)="fileChange2($event)" accept="{{formato}}" #cursorPointer class="uploadBlocking">
+    <input [disabled]="!disabled" *ngIf="fileName == '' && !bloqueo" #fileInput type="file" id="fileInput" (change)="fileChange2($event)" accept="{{formato}}" #cursorPointer class="upload">
+    <!---->
+    <input *ngIf="fileName != ''" #fileInput type="file" id="fileInput" (change)="fileChange2($event)" accept="{{formato}}"  class="uploadC">
+  </div>
+  <img *ngIf="fileName != '' && activeVis" for="file" src="./assets/Images/editar-pieza/ojito.svg" alt="" style="margin-left:2px; width:30px; height:30px; cursor:pointer;z-index: 3" (click)= "escogerVisualizaDor()">
+</div>
+<!---->
+<div style="width:100%;flex-direction: row;height: 30px; display:flex; min-width:250px" class="content" *ngIf="!activarOjito">
+  <div class="boton_file">
+    <a *ngIf="fileName == ''">
+      <label class="doc" for="fileInput">{{doc}}</label>
+    </a>
+    <a *ngIf="fileName != ''">
+      <label [ngStyle]="{'width':'calc(100% - 5px )','height':'12px'}">{{fileName}} </label>
+    </a>
+    <input [disabled]="!disabled" *ngIf="fileName == ''" #fileInput type="file" id="fileInput" (change)="fileChange2($event)" accept="{{formato}}" #cursorPointer class="upload">
+      <input *ngIf="fileName != ''" #fileInput type="file" id="fileInput" (change)="fileChange2($event)" accept="{{formato}}"  class="uploadCTra" [disabled]="true">
+  </div>
+  <div *ngIf="fileName != ''">
+    <img *ngIf="activarOjito" for="file" src="./assets/Images/editar-pieza/ojito.svg" alt="" style="margin-left:2px; width:30px; height:30px; cursor:pointer;z-index: 3" (click)= "mostrarArchivo()">
+    <img *ngIf="!activarOjito" for="file" src="./assets/Images/editar-pieza/ojito.svg" alt="" style="margin-left:2px; width:30px; height:30px; cursor:pointer; z-index: 3" (click)= "mostrarArchivoTrabajar()">
+  </div>
+</div>
+<img  id="imagen"  *ngIf="!popUpColectarElementos">
+<!--/*****************************************************************/-->
+<div id="popUp" class="popUp" *ngIf="popUpColectarElementos" >
+  <div class="fondo"></div>
+  <div class="popContenido">
+    <div class="popHeader">
+      <span>PROQUIFA NET</span>
+    </div>
+    <div class="popContenido">
+      <div class="contentRefuse" id="preview" [innerHtml] = "htmlToAdd" [style.height]="'100%'"
+           [style.overflow]="'auto'">
+      </div>
+    </div>
+    <div class="dvBotones">
+      <div class="dvBoton" (click)="closePopUp()">
+        Cancelar
+      </div>
+    </div>
+  </div>
+</div>

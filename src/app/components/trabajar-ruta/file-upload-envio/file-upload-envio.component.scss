@@ -1,0 +1,62 @@
+@import "../../../../mixins";
+.boton_file{
+  @include flexColumn;
+  width: 100%;
+  box-sizing: border-box;
+  margin:0px 0px;
+  border: 1px solid #D8D9DD;
+
+
+  & > a{
+    $textSize: ('base': convertPts(10, 'px'));
+    color: black;
+    @include flexRow;
+    //  @include absoluteCenter;
+
+    min-height: 28px;
+    background: #FFF;
+    box-sizing: border-box;
+    padding: 6px 5px;
+    z-index: 1;
+    font-family: 'Roboto';
+    font-weight: 200;
+    font-size: 11px !important;
+    color: #424242;
+    text-align: left;
+    width: calc(100% - 30px);
+    overflow-y: scroll;
+
+    & > .doc{
+      font-family: 'Roboto';
+      font-size: 16px;
+      color: #ABAAB0;
+      text-align: left;
+    }
+
+  }
+  & > .upload{
+    background: url('../../../../assets/Images/editar-pieza/cargarImg.svg') no-repeat right;
+    background-size: 30px ;
+    height: 30px;
+    box-sizing: border-box;
+    padding: 8px 0px;
+    outline:none;
+    width: 100%;
+    margin: -29px 0px;
+    min-width: 55px;
+    cursor: pointer;
+
+  }
+  & > .uploadC{
+    background: url('../../../../assets/Images/editar-pieza/cargar.svg') no-repeat right;
+    background-size: 30px ;
+    height: 30px;
+    box-sizing: border-box;
+    padding: 8px 40%;
+    outline:none;
+    cursor: pointer;
+    width: 100%;
+    margin: -29px 0px;
+    min-width: 255px;
+  }
+}

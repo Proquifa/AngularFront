@@ -1,0 +1,78 @@
+<div class="flip-container" >
+  <div [ngClass]="'flipper' + (flipOnEvent ? ' flip': '')">
+    <div class="front-face" (click)="flipCard(true)">
+      <img class="" [src]="cliente.imagen !== null ? 'assets/Images/clientes/' + cliente.id+'.png' : 'assets/Images/clientes/default.png'" />
+      <p *ngIf="!cliente.imagen" class="client-name">{{cliente.nombre}}</p>
+    </div>
+    <div class="back-face">
+      <div class="client-name-cont">
+        <p class="bold title">{{cliente.nombre}}</p>
+        <img class="tache" src="assets/Images/catalogo/tache_Carteras.png" (click)="flipCard(false)" />
+      </div>
+      <div class="info-cont">
+        <div class="info-block">
+          <div class="block-info left">
+            <div>
+              <div class="fac">
+                <p class="bold">FACT Actual</p>
+                <p class="money bold">${{cliente.facturaAct | acFormatNumber2decimal}}</p>
+              </div>
+              <div class="bloque">
+                <div class="label">
+                  <p class="light">Objetivo Fundamental</p>
+                </div>
+                <div>
+                  <div class="money bold right">${{cliente.objetivoFundamental | acFormatNumber2decimal}}</div>
+                  <div class="porcent">
+                    <img class="objetivo" src="assets/Images/catalogo/objetivo.svg" />
+                    <p>{{calcularCambioEnProcentaje(cliente.facturaAnt, cliente.objetivoFundamental) | acFormatNumber2decimal}}%</p>
+                  </div>
+                </div>
+              </div>
+              <div class="bloque">
+                <div class="label">
+                  <p class="light">Promedio facturado</p>
+                </div>
+                <div>
+                  <div class="money bold">${{cliente.promedioFacturado | acFormatNumber2decimal}}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="block-info right">
+            <div>
+              <div class="fac">
+                <p class="bold">FACT Anterior</p>
+                <p class="money bold">${{cliente.facturaAnt | acFormatNumber2decimal}}</p>
+              </div>
+              <div class="bloque">
+                <div class="label">
+                  <p class="light">Objetivo Deseado</p>
+                </div>
+                <div>
+                  <div class="money bold right">${{cliente.objetivoDeseado | acFormatNumber2decimal}}</div>
+                  <div class="porcent">
+                    <img class="objetivo" src="assets/Images/catalogo/objetivo.svg" />
+                    <p>{{calcularCambioEnProcentaje(cliente.facturaAnt, cliente.objetivoDeseado) | acFormatNumber2decimal}}%</p>
+                  </div>
+                </div>
+              </div>
+              <div class="bloque">
+                <div class="label">
+                  <p class="light">Proyección venta</p>
+                </div>
+                <div>
+                  <div class="money bold right">${{cliente.proyeccionVenta | acFormatNumber2decimal}}</div>
+                  <div class="porcent">
+                    <img class="objetivo" src="assets/Images/catalogo/objetivo.svg" />
+                    <p>{{calcularCambioEnProcentaje(cliente.facturaAnt, cliente.proyeccionVenta) | acFormatNumber2decimal}}%</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

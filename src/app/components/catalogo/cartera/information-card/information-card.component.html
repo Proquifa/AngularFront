@@ -1,0 +1,102 @@
+
+<div class="card-container">
+	<div [ngClass]="'flip-container' + (carteraSelected === cartera.idCartera || doFlip ? ' hover' : '')"  >
+		<div class="flipper">
+			<div class="front">
+	      <!-- front content -->
+	      <p class="cart_nombre">{{cartera.nombreCartera && cartera.nombreCartera !== '' ? cartera.nombreCartera : 'ND'}}</p>
+	      <div class="headerContentFront">
+	        <div class="folioCartera">{{cartera.folio}}</div>
+	        <div class="userIconCatera">
+            <img src="assets/Images/catalogo/todos.svg" width="22%" alt="todos">
+						<p>{{cartera.numeroClientes}}</p>
+	        </div>
+	      </div>
+	      <hr>
+	      <div class="centerPagination">
+	   			<div class="paginationContent">
+	    			<app-pagination [clientes]="cartera.clientes"></app-pagination>
+	   			</div>
+	   		</div>
+	  		<a>
+    			<div class="buttonCardContent">
+        		<div class="buttonCardBtn" (click)="flip(cartera.nombreCartera,cartera.folio, cartera.idCartera)">
+      				<h4 >VER MÁS</h4>
+        		</div>
+      		</div>
+    		</a>
+				<div class="footContent">
+      		<div class="iconsContent">
+        	<div class="iconoCarteraFront ev">
+						<img src="assets/Images/catalogo/EV.svg" />
+						<p>{{cartera.ev || 'ND'}}</p>
+					</div>
+        	<div class="iconoCarteraFront cobrador">
+						<img src="assets/Images/catalogo/Recurso_203.svg" />
+						<p>{{cartera.cobrador || 'ND'}}</p>
+					</div>
+        	<div class="iconoCarteraFront esac">
+						<img src="assets/Images/catalogo/esac.svg" />
+						<p>{{cartera.esac || 'ND'}}</p>
+					</div>
+        	<div class="iconoCarteraFront evt">
+						<img src="assets/Images/catalogo/esac.svg" />
+						<p>{{cartera.evt || 'ND'}}</p>
+					</div>
+        	<div class="iconoCarteraFront elaboro">
+						<img src="assets/Images/catalogo/creador.png" />
+						<p>{{cartera.elaboro || 'ND'}}</p>
+					</div>
+        	<div class="iconoCarteraFront todos">
+						<img src="assets/Images/catalogo/msjero.svg" />
+						<p>{{cartera.mensajero || 'ND'}}</p>
+					</div>
+      	</div>
+  		</div>
+		</div>
+		<div class="back" >
+      <!-- back content -->
+      <div class="backContent" onclick="this.classList.toggle('hover');">
+				<img class="tache" src="assets/Images/catalogo/tache_Carteras.png" (click)="flip(cartera.nombreCartera,cartera.folio, 0)" />
+      	<div class="headerBackCartera">{{cartera.nombreCartera}}</div>
+          <div class="subheaderBackCartera">{{cartera.folio}}</div>
+	        <hr>
+	        <div class="backCenterContent">
+	          <div class="FactCarteraContent">
+	          	<div class="headerFactcarteraContent"> &nbsp; FACT.  <span class="CVerde">&nbsp;${{cartera.facturacionActual | acFormatNumber2decimal }}</span></div>
+	            	<div class="infoFactcarteraContent">
+	              	<div class="rowCarteraContent">&nbsp;  OF. <span class="CVerde">${{cartera.objetivoFundamental | acFormatNumber2decimal }}</span></div>
+										<div class="rowCarteraContent">&nbsp;    PF. <span class="CVerde">${{cartera.promedioFacturacion | acFormatNumber2decimal }}</span></div>
+                    	<div class="rowCarteraContent">&nbsp; DEBE. <span class="CVerde">${{cartera.debe | acFormatNumber2decimal }}</span></div>
+                </div>
+        		</div>
+	          <div class="FantCarteraContent">
+							<div class="headerFantcarteraContent">FANT.&nbsp;${{cartera.facturacionAnterior | acFormatNumber2decimal }}</div>
+							<div class="infoFantcarteraContent">
+								<div class="rowCarteraContent">OF. ${{cartera.objetivoDeseado | acFormatNumber2decimal }}   &nbsp;</div>
+								<div class="rowCarteraContent">PV. ${{cartera.proyeccionVenta | acFormatNumber2decimal }}  &nbsp;</div>
+								<div class="rowCarteraContent">DEBEMOS. ${{cartera.debemos | acFormatNumber2decimal }}   &nbsp;</div>
+							</div>
+						</div>
+					</div>
+				</div>
+	      <div class="footContentBack">
+					<div class="iconsContent">
+						<div class="iconoCartera">{{cartera.ruta}}</div>
+						<div class="iconoCartera2">{{cartera.industria}}</div>
+						<div class="iconoCartera3">{{cartera.estrella ? cartera.estrella : 'ND'}}</div>
+						<div class="iconoCartera4">{{cartera.triangulo ? cartera.triangulo : 'ND'}}</div>
+						<div class="iconoCartera5">{{cartera.numeroClientes}}</div>
+					</div>
+				</div>
+				<a>
+					<div class="buttonCardContent">
+						<div class="buttonCardBtn" (click)="redirect(cartera.idCartera)">
+							<h4>Entrar</h4>
+						</div>
+					</div>
+				</a>
+	    </div>
+		</div>
+	</div>
+</div>

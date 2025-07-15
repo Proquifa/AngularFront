@@ -1,0 +1,131 @@
+<div style="display: flex; flex-direction: row;height: 100%;">
+  <div class="productosPorEmbalar" style="padding: 20px;box-sizing:  border-box;border-right: 2px solid #ECEEF0;">
+    <div class="encabezadoP">
+      <p>PRODUCTOS </p>
+      <P>POR EMBALAR</P>
+    </div>
+    <div>
+      <textarea id="elementoText" #elemento (keydown.enter)="recuperarTextAux()" type="text" name="firstname" class="texArea" [(ngModel)]="textoPedimento" style="position: inherit;opacity: 0"></textarea>
+    </div>
+    <div class="congelarPorColectar" *ngIf="mostrarCongelarPorColectar" (click)="MostrarlistaPorCongelacion()" [style.pointer-events]="validarClicCongelacion?'auto':'none'">
+      <div class="tipo">
+        <div class="imagenTipo">
+          <img class="img" src='./assets/Images/congelacion.svg' style="height:33px;width:33px;" *ngIf="imgConge1"/>
+          <img class="img" src='./assets/Images/congelacionOpaco.svg' style="height:33px;width:33px;" *ngIf="imgConge2"/>
+        </div>
+        <div class="datosTipo" *ngIf="congeNormal">
+          <p style="font-weight: 500;" [style.color]="txtColor1">Congelación</p>
+          <p [style.color]="txtColor2">{{estadoConge}}</p>
+        </div>
+        <div class="datosTipo" *ngIf="congeOpaco">
+          <p style="font-weight: 500;" [style.color]="txtColor3">Congelación</p>
+          <p [style.color]="txtColor3">{{estadoConge}}</p>
+        </div>
+      </div>
+
+      <div class="grafica">
+        <pq-barra-progreso-decremental [tipo]="tipoConge" [pzasTotales] = "pzasTotalesConge" [pzasAlMomento] = "pzasAlMomentoConge" [mensajePzas] = "mensajeGraficas" >
+        </pq-barra-progreso-decremental>
+      </div>
+    </div>
+
+    <div class="refriPorColectar" *ngIf="mostrarRefriPorColectar" (click)="MostrarlistaporRefrigeracion()" [style.pointer-events]="validarClicRefrigeracion?'auto':'none'">
+      <div class="tipo">
+        <div class="imagenTipo">
+          <img class="img" src='./assets/Images/refrigeracion.svg' style="height:33px;width:33px;" *ngIf="imgRefri1"/>
+          <img class="img" src='./assets/Images/refrigeracionOpaco.svg' style="height:33px;width:33px;" *ngIf="imgRefri2"/>
+        </div>
+        <div class="datosTipo" *ngIf="refriNormal">
+          <p style="font-weight: 500;" [style.color]="txtColor1">Refrigeración</p>
+          <p [style.color]="txtColor2">{{estadoRefri}}</p>
+        </div>
+        <div class="datosTipo" *ngIf="refriOpaco">
+          <p style="font-weight: 500;" [style.color]="txtColor3">Refrigeración</p>
+          <p [style.color]="txtColor3">{{estadoRefri}}</p>
+        </div>
+      </div>
+
+      <div class="grafica">
+        <pq-barra-progreso-decremental [tipo]="tipoRefri" [pzasTotales] = "pzasTotalesRefri" [pzasAlMomento] = "pzasAlMomentoRefri" [mensajePzas] = "mensajeGraficas" >
+        </pq-barra-progreso-decremental>
+      </div>
+
+    </div>
+
+    <div class="AmbientePorColectar" *ngIf="mostrarAmbientePorColectar" (click)=" MostrarlistaPorAmbiente()" [style.pointer-events]="validarClicAmbiente?'auto':'none'">
+      <div class="tipo">
+        <div class="imagenTipo">
+          <img class="img" src='./assets/Images/ambiente.svg' style="height:33px;width:33px;" *ngIf="imgAmbiente1"/>
+          <img class="img" src='./assets/Images/ambienteOpaco.svg' style="height:33px;width:33px;" *ngIf="imgAmbiente2" />
+        </div>
+        <div class="datosTipo" *ngIf="ambienteNormal">
+          <p style="font-weight: 500;" [style.color]="txtColor1">Ambiente</p>
+          <p [style.color]="txtColor2">{{estadoAmbiente}}</p>
+        </div>
+        <div class="datosTipo" *ngIf="ambienteOpaco">
+          <p style="font-weight: 500;" [style.color]="txtColor3">Ambiente</p>
+          <p [style.color]="txtColor3">{{estadoAmbiente}}</p>
+        </div>
+      </div>
+
+      <div class="grafica">
+        <pq-barra-progreso-decremental [tipo]="tipoAmbiente" [pzasTotales] = "pzasTotalesambiente" [pzasAlMomento] = "pzasAlMomentoAmbiente" [mensajePzas] = "mensajeGraficas"  >
+        </pq-barra-progreso-decremental>
+      </div>
+
+    </div>
+  </div>
+  <!--EMPIEZA LA LISTA-->
+  <div class="EscaneaCodigo" *ngIf="mostrarVistaLista">
+
+    <div class="encabezado" >
+      <div class="txtEncabezado">
+        <p style="font-weight: bold;">ESCANEA EL CÓDIGO</p>
+        <p style="font-weight: normal;">{{mensajeGraficas}} · {{tipoProductoEmbalar}}</p>
+      </div>
+      <div class="imgEncabezado">
+        <img class="img" src='./assets/Images/escanea_2.svg' style="height:42px;width:42px;" />
+
+      </div>
+    </div>
+
+    <div class="contenido">
+      <!--<textarea #elemento (keydown.enter)="recuperarTextAux()" type="text" name="firstname" class="texArea" [(ngModel)]="textoPedimento" style="position: inherit;opacity: 0"></textarea>-->
+      <div class= "lista" style="display: unset;flex-direction: column" *ngIf="cambioDeEtiqueta">
+        <div [ngClass]="listaFD[i]" *ngFor="let item of etiquetaPorRefrigeracion; let i = index"  (click)="seleccionarItemFD(i)" style="display: flex;flex-direction:row;width: 100%; height: 80px;">
+          <div class="dfSelect"></div>
+          <div class="datosLst" style="padding-top: 15px;padding-left: 15px">
+            <label class="index" style="font-family: Roboto-Bold">#{{i +1}} ·  </label>
+            <label>{{item.fd}}<p style="font-family: Roboto-Regular;text-align: center;">{{item.piezas}} Piezas</p></label>
+          </div>
+        </div>
+      </div>
+
+      <div class="lista" style="display: unset;flex-direction: column" *ngIf="!cambioDeEtiqueta">
+        <div [ngClass]="listaFD[i]" *ngFor="let item of listaAux; let i = index"   style="display: flex;flex-direction:row;width: 100%; height: 80px;position: relative">
+          <textarea (keydown.enter)="recuperarTextAux()" type="text" name="firstname" class="texArea" [(ngModel)]="textoPedimento" style="position: absolute;opacity: 0"></textarea>
+          <!--
+                      <textarea  type="text" name="firstname" (keydown.enter)="enter(i)" class="texArea" [(ngModel)]="textoPedimento">Hola 2</textarea>
+          -->
+          <div class="dfSelect"></div>
+          <div class="datosLst" style="padding-top: 15px;padding-left: 15px">
+            <label class="index" style="font-family: Roboto-Bold">#{{i +1}} ·  </label>
+            <label >{{item.folioEmpaque}} <p style="font-family: Roboto-Regular;text-align: center;font-size: 17px;">{{item.piezas}} Piezas · FEE: {{item.fee}}</p></label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <pq-alerta *ngIf="activarPopUp" [alertaTxt]="mensaje" (confirmacion)="cerrarAlerta($event)" [activarBoton]="false"></pq-alerta>
+  </div>
+  <div *ngIf="popError">
+    <pq-alerta [alertaTxt]="mensaje" (confirmacion)="cerrarAlert($event)" ></pq-alerta>
+  </div>
+  <div *ngIf="activarPopExitoso">
+    <pn-pop-up-exito [label]="'Escaneo Exitoso'" [imagen]="true" (desactivarPop)="cerrarPop($event)"></pn-pop-up-exito>
+  </div>
+  <div *ngIf="activarPopTimbre">
+    <pn-pop-up-timbrado (cerrarPopTimbrado)="reinterntatTimbrado($event)"></pn-pop-up-timbrado>
+  </div>
+</div>

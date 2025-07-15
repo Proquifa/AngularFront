@@ -1,0 +1,55 @@
+.direccionRow{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    // border: 2px solid red;
+}
+
+.subtitulo{
+    font-family: "Novecento";
+    font-size: 21px;
+    color: #008895;
+    font-weight: bold;
+    height: 25px;
+    padding-bottom: 21px;
+}
+
+.etiquetasFont21{
+    font-family: "Roboto";
+    font-weight: bold;
+    font-size: 21px;
+    color: #424242;
+    height: 36px;
+    width: 402px;
+    border-bottom: 1px solid #424242;
+
+}
+
+.labelRadios{
+    font-family: "Roboto";
+    font-size: 25px;
+    color: #008895 ;
+    height: 33px;
+    padding-left: 11px;
+}
+
+.etiquetasFont21SinColor{
+    font-family: "Roboto";
+    font-weight: bold;
+    font-size: 21px;
+    height: 36px;
+    width: 402px;
+    border-bottom: 1px solid #424242;
+
+}
+.etiquetaTipoManejo{
+  color: #008895;
+  font-size: 25px;
+  height: 27px;
+  padding-left: 15px
+}
+
+pn-combo-flecha-verde{
+  cursor: pointer;
+}

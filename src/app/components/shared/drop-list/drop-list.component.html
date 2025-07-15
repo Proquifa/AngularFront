@@ -1,0 +1,46 @@
+<div [ngClass]="dropListClass">
+  <div class="container-drop">
+    <div class="Title">
+      <div class="" *ngIf="isSearch">
+        <gn-search-bar style="border: 1px solid #ffffff;z-index: 1;position: absolute;width: 100%; " (click)="openDropList()"
+          [searchValue]="searchTerm" (searchTermChanged)="changeSearchTerm($event)" [placeholder]="placeholder" [reset]="resetSearch"></gn-search-bar>
+      </div>
+      <p [ngClass]="align" (click)="openDropList()" matTooltip="{{title}}">{{title}}</p>
+      <img src="./assets/Images/drop_list.svg" alt="" (click)="openDropList()">
+    </div>
+    <div [hidden]="!showDropList" class="content" [style.width]="widthContent" [style.margin-left]="marginLeftContent">
+      <div [ngClass]="'triangulo '+size">
+      </div>
+      <div [ngClass]="'triangulo2'">
+      </div>
+      <!-- <div class="search" *ngIf="isSearch">
+        <gn-search-bar [searchValue]="searchTerm" (searchTermChanged)="changeSearchTerm($event)" [placeholder]="placeholder" [reset]="resetSearch"></gn-search-bar>
+      </div>-->
+      <div *ngIf="tipoDrop == ''">
+        <div slimScroll height="100%" size="5px" color="#3369b1" railVisible="true" railColor="#ecf0f3" opacity=".7">
+          <ul class="lista" *ngIf="(arrayAux != undefined)">
+            <li *ngFor="let item of arrayAux" [style.align-items]="'left'" [ngClass]="(isCategory && item.tipo =='cat')?'category tooltip':'tooltip'"
+              (click)="selectItem(item)">{{item.nombre}} <span class="tooltiptext" *ngIf="tooltip">{{item.nombre}}</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div *ngIf="tipoDrop == 'multiple'">
+        <div slimScroll height="100%" size="5px" color="#3369b1" railVisible="true" railColor="#ecf0f3" opacity=".7">
+          <ul class="lista" *ngIf="(arrayAux != undefined)">
+            <li *ngFor="let item of arrayAux" style="padding: 5px 0px;" [style.align-items]="'left'" [ngClass]="(isCategory && item.tipo =='cat')?'category tooltip':'tooltip'">
+              <mat-checkbox (change)="changeCheck($event, item)" matTooltip="{{item[campoLabel]}}" [checked]="checkItem(item)">
+                {{item[campoLabel]}}
+              </mat-checkbox>
+            </li>
+          </ul>
+          <div (click)="closeDropList()" class="btnAceptar">
+            Aceptar
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <!-- <label [ngClass]="effectS">Label</label> -->
+</div>

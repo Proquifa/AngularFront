@@ -1,0 +1,313 @@
+<script src='http://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-resource.js'></script>
+<script src='../../../../../../app/services/session/consume-rest.js'></script>
+<div style="width: 100%;height: calc(100% - 59px);overflow: auto;">
+  <div class="content-area">
+    <div id="principal">
+      <div style=" width: 100%; height: 100%; justify-content: space-between; display: flex;">
+        <div id="encabezados" style=" height: 100%;">
+          <div class="infoPL" *ngIf="datosCliente.length > 0">
+            <label class="label_estilo_encabezado ">INFORMACIÓN PACKING LIST</label>
+            <label class="label_nombre_lugar ">{{datosCliente[0].cliente}}</label>
+            <label class="label_cliente "> {{contactoInfo}} </label>
+            <div style="" class="ubicacion">
+              <img id="ubicacion" src="./assets/Images/Configuracion/Rutas/ubicacion.svg" style="width: 14px"/>
+              <span class="label_ubicacion" style="padding-left: 10px;"> {{datosCliente[0].ruta}} · {{datosCliente[0].mensajeria}}</span>
+
+            </div>
+          </div>
+          <div class="progresoTrabajo">
+            <pn-barra-progreso-por-cliente *ngIf="activarBarraProgreso" [totPiezas]="recibePiezasTot"
+                                              [packingTotales]="totalesPacking"></pn-barra-progreso-por-cliente>
+          </div>
+          <div class="prioridadEmbalaje">
+            <pn-barra-prioridades-por-cliente *ngIf="activarBarraPrioridades"></pn-barra-prioridades-por-cliente>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="contenedorFormulario">
+      <div class="infoEnvio">
+        <div>
+          <div>
+            <div class=" subtituloPeque "
+                 style=" padding-top: 10px; display: flex;">Destino
+            </div>
+            <div class="rowFormulario">
+              <div class="datosForm">
+                <div class="estiloLabelData">País:</div>
+                <div class="estiloLabelsContacto">{{datosCliente[0].pais}}</div>
+              </div>
+              <div class="datosForm">
+                <div class="estiloLabelData">Estado:</div>
+                <div class="estiloLabelsContacto">{{datosCliente[0].estado}}</div>
+              </div>
+              <div class="datosForm">
+                <div class="estiloLabelData">Calle / Nº / Colonia:</div>
+                <div class="estiloLabelsContacto">{{datosCliente[0].calle}}</div>
+              </div>
+            </div>
+            <div class="rowFormulario">
+              <div class="datosForm">
+                <div class="estiloLabelData">Delegación / Municipio:</div>
+                <div class="estiloLabelsContacto">{{datosCliente[0].delegacion}}</div>
+              </div>
+              <div class="datosForm">
+                <div class="estiloLabelData">C.P:</div>
+                <div class="estiloLabelsContacto">{{datosCliente[0].cp}}</div>
+              </div>
+              <div class="datosForm">
+                <div class="estiloLabelData">Ruta:</div>
+                <div class="estiloLabelsContacto">{{datosCliente[0].ruta}}</div>
+              </div>
+              <div class="datosForm" style="z-index: 3;">
+                <div class="estiloLabelData">Mensajeria:</div>
+                <div class="estiloLabelsContacto" style="min-width: 136px" *ngIf="this.datosCliente[0].envio.tipo !== 'Guia'"><!--{{colectarElemtosAux[0].mensajeria}}-->
+                  <pn-combo-flecha-verde [title]="'Seleccionar'"  [itemSelect]="selectedEnvio" id="cmbEnvio"  (valueDropList)="recibeValosCombo($event,'envio')" [items]="tiposEnvios" [heightLi]="'35px'"></pn-combo-flecha-verde>
+                </div>
+                <div class="estiloLabelsContacto" *ngIf="this.datosCliente[0].envio.tipo === 'Guia'">
+                  {{this.mensajeria}}
+                </div>
+              </div>
+              <div class="datosForm" *ngIf="activeCuenta">
+                <div class="estiloLabelData"># Cuenta: </div>
+                <div class="estiloLabelsContacto">{{datosCliente[0].numero}}</div>
+              </div>
+            </div>
+          </div>
+          <div class="comentarioEnvio">
+            <div>
+              <label class="subtituloPeque" style=" padding-bottom: 10px; display: flex;">Comentario
+                de envío</label>
+              <div>
+                <div class="estiloLabelData" *ngIf="comentarios !== null">
+                  <textarea class="comentariosText" readonly>{{comentarios}}</textarea>
+                </div>
+              </div>
+              <div>
+                <div *ngIf="comentarios == null">
+                  <div class="contenedorComentario" *ngIf="!etiquetaComentarios">
+                    <label>SIN COMENTARIOS</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <label class=" subtituloPeque " style="display: flex;">Datos del paquete</label>
+              <div class="datosPaq">
+                <div style="padding-bottom: 5px;">
+                  <label class="estiloLabelData">Peso:</label>
+                  <input class="inputPaquete" name="peso" id="peso"
+                         (input)="recibeContacto($event.target.value,'peso')" [value]="valorInicial"
+                          style="z-index: 3" [(ngModel)]="peso" *ngIf="this.datosCliente[0].envio.tipo !== 'Guia'">
+                  <label class="estiloLabelData" *ngIf="this.datosCliente[0].envio.tipo !== 'Guia'">kg</label>
+                  <label class="estiloLabelData" *ngIf="this.datosCliente[0].envio.tipo === 'Guia'">{{dataMeter.peso}} kg</label>
+                </div>
+                <div style="padding-bottom: 5px;">
+                  <label class="estiloLabelData">Longitud:</label>
+                  <input class="inputPaquete" name="longitud" id="longitud"
+                         (input)="recibeContacto($event.target.value,'longitud')" value=" "
+                         style="z-index: 3" [(ngModel)]="longitud" *ngIf="this.datosCliente[0].envio.tipo !== 'Guia'">
+                  <label class="estiloLabelData" *ngIf="this.datosCliente[0].envio.tipo !== 'Guia'">cm</label>
+                  <label class="estiloLabelData" *ngIf="this.datosCliente[0].envio.tipo === 'Guia'">{{dataMeter.length}} cm</label>
+                </div>
+
+                <div style="padding-bottom: 5px;">
+                  <label class="estiloLabelData">Altura:</label>
+                  <input class="inputPaquete" name="altura" id="altura"
+                         (input)="recibeContacto($event.target.value,'altura')" value=" "
+                         style="z-index: 3" [(ngModel)]="altura" *ngIf="this.datosCliente[0].envio.tipo !== 'Guia'">
+                  <label class="estiloLabelData" *ngIf="this.datosCliente[0].envio.tipo !== 'Guia'">cm</label>
+                  <label class="estiloLabelData" *ngIf="this.datosCliente[0].envio.tipo === 'Guia'">{{dataMeter.height}}cm</label>
+                </div>
+
+                <div style="padding-bottom: 5px;position: relative;z-index: 1;">
+                  <label class="estiloLabelData">Ancho:</label>
+                  <input class="inputPaquete" name="ancho" id="ancho"
+                         (input)="recibeContacto($event.target.value, 'ancho')" value=" "
+                         style="z-index: 3" [(ngModel)]="ancho" *ngIf="this.datosCliente[0].envio.tipo !== 'Guia'">
+                  <label class="estiloLabelData" *ngIf="this.datosCliente[0].envio.tipo !== 'Guia'">cm</label>
+                  <label class="estiloLabelData" *ngIf="this.datosCliente[0].envio.tipo === 'Guia'">{{dataMeter.width}} cm</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="width: 50%;box-sizing: border-box;padding-left: 10px;display: flex">
+          <div class="contacto">
+            <div>
+              <label class=" subtituloPeque " style=" padding-top: 10px; display: flex;"> Contacto</label>
+              <div class="rowFormulario">
+                <div class="datosForm">
+                  <div class="estiloLabelData">Nombre:</div>
+                  <div class="estiloLabelsContacto">{{datosCliente[0].contacto}}</div>
+                </div>
+                <div class="datosForm">
+                  <div class="estiloLabelData">Puesto:</div>
+                  <div class="estiloLabelsContacto">{{datosCliente[0].puesto}}</div>
+                </div>
+              </div>
+              <div class="rowFormulario">
+                <div class="datosForm" style="position: relative;z-index: 1;">
+                  <div class="estiloLabelData">Departamento:</div>
+                  <div class="estiloLabelsContacto">{{datosCliente[0].departamento}}</div>
+                </div>
+                <div class="datosForm">
+                  <label class="estiloLabelData">Tel:</label>
+                  <div class="estiloLabelsContacto">{{datosCliente[0].tel}}</div>
+                </div>
+                <div class="datosForm" style="position: relative;z-index: 1;">
+                  <label class="estiloLabelData">Email:</label>
+                  <div class="estiloLabelsContacto">{{datosCliente[0].mail}}</div>
+                </div>
+              </div>
+            </div>
+            <div style="padding-top: 15px;">
+              <label class="subtituloPeque">Registro de envío</label>
+              <div id="archivo" class="archivo">
+                <div class="datosForm" style="align-items: center;">
+                  <label class="estiloLabelData" class="estiloLabelsContacto"> Guía de envío:</label>
+                  <div>
+                    <input id="ingresoNumTracking" class="estiloInputMensajero" name="mensajero " value=" " type="text "
+                           maxlength="10" [ngModel]="ingresoTracking" (ngModelChange)="incluirTrackingArreglo($event)"
+                           style="z-index: 3; position: relative" *ngIf="this.datosCliente[0].envio.tipo !== 'Guia'">
+                    <label style="z-index: 3; position: relative" *ngIf="this.datosCliente[0].envio.tipo === 'Guia'">{{datosCliente[0].numero}}</label>
+                  </div>
+                  <label id="localizacion"></label>
+                </div>
+                <div class="datosForm" style="align-items: center;">
+                  <label class="estiloLabelData"> Guía de envío escaneada:</label>
+                  <div id="EstiloCargarArchivo">
+
+                    <div>
+                      <pq-file-upload  [disabled]="true" [docR]="guiaDoc" style="min-width: 260px;display: flex;"
+                                      (enviarDocumento)="recibeDocumentacion($event)"
+                                      [activarOjito]="tipoEnvio"></pq-file-upload>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="secondSeccion">
+        <div class="listaNueva">
+          <label class="encabezadoLista">PACKING LIST</label>
+          <div id="estilo_borde_verde_lista" class="lista">
+            <div [ngClass]="lstResultadoCotizaciones[i]" *ngFor="let packing_list of encabezadosPasckinList; let i = index" class="listaItem" (click)="itemSelect(i)">
+              <div class="ltSelect"></div>
+              <div id="listaContent" style="display: flex; flex-direction: column; justify-content: space-between; ">
+                <label class="numPacking_list "> #{{i+1}}· <span
+                  style=" padding-bottom: 15px;"
+                  class="nombrePacking_list "> {{packing_list.folio}}  </span></label>
+                <label class="piezasPacking_llist "> {{packing_list.piezas}}&nbsp;{{'Piezas'}}</label>
+                <div style="display: flex; flex-direction: row ">
+                  <label class="p1"> P1 · {{packing_list.p1}} </label>
+                  <label class="p2"> P2 · {{packing_list.p2}} </label>
+                  <label class="p3"> P3 · {{packing_list.p3}} </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="overflow-y: scroll" class="segundaSeccion">
+          <div class="escanearCodigos">
+            <div class="tituloColectar">
+          <span class="tituloColectarElem">
+          COLECTAR ELEMENTO </span>
+              <span class="estiloNombreSeleccioncliente"> {{datoPL}}</span>
+            </div>
+            <!-- div de tipos de elementos -->
+            <div class="elementosItems">
+          <textarea type="text" name="firstname" autofocus="focus" (keydown.enter)="enterAux()" #textarea
+                    [(ngModel)]="codigosBarraElemento" class="textArea"
+                    style="width: 95%; position: absolute"></textarea>
+              <div class="seccionUno" [attr.id]="'div0'" *ngIf="colectarElemtosAux.length>0">
+                <div class="contenedorTarjeta">
+                  <div class="imagenTarjeta">
+                    <label class="estiloTipoElemento">DOCUMENTACIÓN</label>
+                    <img class="img" src="./assets/Images/bolsa_doc.svg" style=" width: 68px; height: 74px;"/>
+                    <div class="divColectarElementos"
+                         style="border:1px solid #D8D8D8; display: flex; flex-direction: column; ">
+                      <label class="labelcolectarElementos">{{datoPL}}</label>
+                      <label class="labelcolectarElementos">Sobre</label>
+                      <label class="labelcolectarElementos"></label>
+                    </div>
+                  </div>
+                  <div class="escanear" style="flex-direction: row; display: flex; position: relative; ">
+                    <div class="imgEscanear">
+                      <img src='./assets/Images/Images/codigo_gris.svg' *ngIf="!codigosValidos[indexPacking][0]"/>
+                      <img src='./assets/Images/Images/codigobarras_verde.svg' *ngIf="codigosValidos[indexPacking][0]"/>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div id="seccionUno" class="seccionUno" *ngFor="let elemento of colectarElemtosAux; let i = index "
+                   [attr.id]="'div'+i">
+                <div class="contenedorTarjeta">
+                  <div class="imagenTarjeta">
+                    <label class="estiloTipoElemento"> {{elemento.tipo}} </label>
+                    <img class="img" [src]="imgTipoValidacionArr[i]" style=" width: 68px; height: 74px;"/>
+                    <div class="divColectarElementos"
+                         style="border:1px solid #D8D8D8; display: flex; flex-direction: column; ">
+                      <label class="labelcolectarElementos">{{elemento.folio}}</label>
+                      <label class="labelcolectarElementos">{{tipoDeProducto[i]}}</label>
+                      <label class="labelcolectarElementos">{{elemento.cant}}&nbsp;{{'Piezas'}}</label>
+                    </div>
+                  </div>
+                  <div class="escanear" style="flex-direction: row; display: flex; position: relative; ">
+                    <div class="imgEscanear">
+                      <img src='./assets/Images/Images/codigo_gris.svg' *ngIf="!codigosValidos[indexPacking][i+1]"/>
+                      <img src='./assets/Images/Images/codigobarras_verde.svg' *ngIf="codigosValidos[indexPacking][i+1]"/>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- prueba-->
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="totalPacking">
+      <div>
+        <label class="totalPacking_llist " style="align-content:center; padding-left: 70px;">{{'Total :'}}
+          {{totalPacking}} {{'Packing list'}}</label>
+      </div>
+    </div>
+  </div>
+  <div class="totalFinalizar">
+    <div class="botonFinalizar" (click)="finalizar()" [style.pointerEvents]="btnAceptar ? 'auto':'none'"
+         [style.background]="btnAceptar ? '#008895':'#C2C3C9'"> FINALIZAR
+    </div>
+  </div>
+</div>
+<footer class="footer " style=" border: none; border-top: solid;">
+  <div class="datosFooter " style="width: 100%;height: 100%;">
+    <div class="Prioridad1 ">
+      <label class="p1 ">P1 <span>Prioridad 1</span></label>
+    </div>
+    <div class="Prioridad2 ">
+      <label class="p2 ">P2 <span>Prioridad 2</span></label>
+    </div>
+    <div class="Prioridad3 ">
+      <label class="p3 ">P3 <span>Prioridad 3</span></label>
+    </div>
+    <div class="Ambiente ">
+      <img class="img " src='./assets/Images/ambiente.svg'/> Ambiente
+    </div>
+    <div class="Congelación ">
+      <img class="img " src='./assets/Images/congelacion.svg'/> Congelación
+    </div>
+    <div class="Refrigeración ">
+      <img class="img " src='./assets/Images/refrigeracion.svg'/> Refrigeración
+    </div>
+  </div>
+</footer>
+<div *ngIf="activarAlerta">
+  <pq-alerta [alertaTxt]="mensaje" (confirmacion)="cerrarAlert($event)"></pq-alerta>
+</div>
+<div *ngIf="activarAlertExit">
+<pn-pop-up-finalizar (desactivarPop)="cerrarPop($event)" [label]="'Operación exitosa'"
+                     [imagen]="true"></pn-pop-up-finalizar>
+</div>

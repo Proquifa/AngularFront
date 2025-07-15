@@ -1,0 +1,224 @@
+:host{
+    & > .container{
+        display: flex;
+        & > .containerLateralBar{
+            padding: 15px 20px;
+            width: 281px;
+            background: #E6E6E6;
+            height: calc(100vh - 160px);
+            overflow: scroll;
+            transition: all 0.2s ease-in-out;
+            & > .containerLateralBarItems{
+                border-bottom: 1px solid #424242;
+                height: 49px;
+                display: flex;
+                justify-content: space-around;
+                margin: 10px 0px 15px 0px;
+                & > .containerLateralBarItemsImg{
+                    width: 20px;
+                    height: 30px;
+                }
+                & > .containerLateralBarItemsTitle{
+                    font-size: 27px;
+                    color: #424242;
+                    font-weight: 500;
+                    font-family: Bank Gothic;
+                    width: 100%;
+                    text-align: center;
+                }
+            }
+            & > .containerLateralBarDates{
+                display: flex;
+                & > .containerLateralBarDate{
+                    width: 100%;
+                    & > .containerLateralBarDateLabel{
+                        font-size: 15px;
+                        color: #424242;
+                        font-display: 700;
+                    }
+                }
+            }
+            & > .containerLateralBarSelects{
+                margin: 15px 0px;
+                & > .containerLateralBarSelectsLabel{
+                    font-size: 15px;
+                    color: #424242;
+                    font-weight: 700;
+                }
+            }
+            & > .containerLateralBarBtns{
+                border-bottom: 1px solid #424242;
+                padding: 15px 0px 35px 0px;
+                & > .containerLateralBarBtn{
+                    background: #0F0F0F;
+                    border-radius: 17px;
+                    width: 281px;
+                    height: 45px;
+                    cursor: pointer;
+                    transition: all 0.2s ease-in-out;
+                    & > .containerLateralBarBtnImg{
+                        height: 46px;
+                        width: 20px;
+                        margin: auto;
+                        display: block;
+                    }
+                }
+                & > .containerLateralBarBtn:hover{
+                    opacity: 0.5;
+                }
+                & > .containerLateralBarBtn:active{
+                    opacity: 0.75;
+                }
+            }
+        }
+        & > .closed{
+            width: 0px !important;
+            padding: 15px 0px;
+        }
+        & > .containerBtn{
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            & > .containerBtnImg{
+                width: 18px;
+                height: 32px;
+                cursor: pointer;
+                transition: all 0.2s ease-in-out;
+                margin-left: -17px;
+            }
+            & > .containerBtnImg:hover{
+                opacity: 0.5;
+            }
+            & > .containerBtnImg:active{
+                opacity: 0.75;
+            }
+            & > .rotated{
+                transform: rotate(180deg);
+            }
+        }
+        & > .containerBody{
+            padding: 0px 15px;
+            background: #FFFFFF;
+            height: calc(100vh - 130px);
+            overflow: scroll;
+            & > .containerBodyHeader{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                height: 58px;
+                border-bottom: 2px solid #424242;
+                & > .containerBodyHeaderTitle{
+                    font-family: Novecento;
+                    font-size: 25px;
+                    color: #424242;
+                    font-weight: 400;
+                }
+                & > .containerBodyHeaderBtn{
+                    height: 30px;
+                    width: 200px;
+                    background: #008894;
+                    line-height: 30px;
+                    font-size: 21px;
+                    color: #FFFFFF;
+                    font-family: Novecento;
+                    font-weight: 900;
+                    vertical-align: middle;
+                    text-align: center;
+                    cursor: pointer;
+                    transition: all 0.2s ease-in-out;
+                    padding-bottom: 3px;
+                }
+                & > .containerBodyHeaderBtn:hover{
+                    opacity: 0.5;
+                }
+                & > .containerBodyHeaderBtn:active{
+                    opacity: 0.75;
+                }
+            }
+            & > .containerBodyTable{
+                & > .containerBodyTableHeader{
+                    height: 54px;
+                    border-bottom: 1px solid #424242;
+                    display: flex;
+                    justify-content: space-between;
+                    margin-bottom: 5px;
+                    align-items: flex-end;
+                    & > .containerBodyTableHeaderCol{
+                        margin: 5px;
+                        font-size: 15px;
+                        color: #424242;
+                        font-weight: 700;
+                        display: flex;
+                        align-items: flex-end;
+                        justify-content: center;
+                        & > .containerBodyTableHeaderColImg{
+                            width: 30px;
+                            height: 30px;
+                            cursor: pointer;
+                            transition: all 0.2s ease-in-out;
+                        }
+                        & > .containerBodyTableHeaderColImg:hover{
+                            opacity: 0.5;
+                        }
+                        & > .containerBodyTableHeaderColImg:active{
+                            opacity: 0.75;
+                        }
+                    }
+                }
+                & > .containerBodyTableBody{
+                    height: calc(100vh - 300px);
+                    border-bottom: 1px solid #424242;
+                    overflow: scroll;
+                    & > .containerBodyTableBodyRow{
+                        height: 54px;
+                        border-bottom: 1px solid #ECEEF0;
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        transition: all 0.2s ease-in-out;
+                        & > .containerBodyTableBodyRowCol{
+                            margin: 5px;
+                            font-size: 16px;
+                            color: #424242;
+                            font-weight: 400;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            & > .containerBodyTableBodyRowColSpan:nth-of-type(2){
+                                font-size: 16px;
+                                color: #008894;
+                                font-weight: 700;
+                            }
+                            & > .containerBodyTableBodyRowColImg{
+                                width: 13px;
+                                cursor: pointer;
+                                transition: all 0.2s ease-in-out;
+                            }
+                            & > .containerBodyTableBodyRowColImg:hover{
+                                opacity: 0.5;
+                            }
+                            & > .containerBodyTableBodyRowColImg:active{
+                                opacity: 0.75;
+                            }
+                            & > .imgDisabled{
+                                pointer-events: none;
+                            }
+                        }
+                    }
+                    & > .containerBodyTableBodyRow:hover{
+                        background: #ECEEF0;
+                    }
+                }
+            }
+            & > .containerBodyFooter{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 49px;
+                font-size: 14px;
+                color: #424242;
+                font-weight: 400;
+            }
+        }
+    }
+}

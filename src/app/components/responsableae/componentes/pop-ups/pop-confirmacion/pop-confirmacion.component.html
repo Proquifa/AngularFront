@@ -1,0 +1,30 @@
+<!-- <button type="button" class="btnControlPrincipal" onclick="document.getElementById('id01').style.display='block'">btn</button> -->
+
+<!-- <img src="./assets/Images/editar-pieza/caja_vacia.svg" alt="" style="width:30px; height:30px; cursor:pointer;" onclick="document.getElementById('pop-confirmacion').style.display='block'" > -->
+<div class="w3-container">
+<!--DIV INICIAL-->
+<div id="pop-confirmacion" class="modal" #pop>
+<div class="modal-content">
+  <header class="header" style="flex-direction:row">
+  PROQUIFA NET
+  <!-- <img src="./assets/Images/Images/cerrar_blanco.svg" alt="cerrar" (click)="cerrar()"> -->
+  </header>
+
+  <div class="contenido">
+     <div class="datos">
+
+      <label>¿Estas seguro de que faltan {{pzasE - (pzasI -1)}} piezas? </label>
+      <p>Piezas Esperadas: {{pzasE}}</p>
+      <p style="color:#DF0101;">Piezas Inspeccionadas:{{pzasI -1}}</p>
+    </div>
+
+  </div>
+
+  <div class="footer">
+      <div type="submit" class="btnCancelar" (click)="cerrar()" > <label>CANCELAR</label> </div>
+      <div type="submit" class="btnAceptar" (click)="cambioIndex()" > <label>ACEPTAR</label> </div>
+  </div>
+</div>
+</div>
+<!--FIN DIV INICIO-->
+</div>

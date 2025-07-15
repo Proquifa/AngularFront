@@ -1,0 +1,137 @@
+<div [ngStyle]="{'overflow':'scroll', 'width':'100%', 'height':'calc(100% - 55px)'}">
+    <div style="height: 100%; width: 100%; display: -webkit-box" >
+      <div class="listaProd">
+        <div class="titulosLista">
+          <div  class="tituloCliente">
+            <label class="tituloLista">GUÍAS</label>
+          </div>
+          <div class="organizarLista">
+            <div style="width: 10%; height: 100%;    display: flex;align-items: center;">
+              <div class="menu" (click)="abreCombo()">
+                <div>
+                </div>
+                <div>
+                </div>
+                <div>
+                </div>
+                <section id="section">
+                  <ul class="listaHamburguesa">
+                    <li (click)="ordenamientoFechaTramNue(0)">Más Nuevos</li>
+                    <li (click)="ordenamientoFechaTramAnt(0)">Mas Antiguos</li>
+                  </ul>
+                </section>
+              </div>
+            </div>
+            <div style="width: 38%; height: 100%;    display: flex;align-items: center;">
+              <h3 class="subtitulo">{{tipoOrden}}</h3>
+            </div>
+            <div class="barraBusqueda" style="height: 100%">
+              <div class="buscar" style="padding-left: 236px;">
+                <div>
+                  <div class="lupa">
+                    <img src="assets/Images/lupa.svg" width="22px" height="22px" alt="buscar">
+                  </div>
+                  <input type="text" [ngModel]="searchTerm" (ngModelChange)="buscar($event)" class="buscar-input" placeholder="Buscar"/>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--Lista total-->
+        <div class="segundaSeccionList">
+          <div style="width: 97%;">
+            <div class= "lista" style="display: unset;flex-direction: column" *ngIf="validarLista">
+              <div  [ngClass]="listaFD[i]" *ngFor="let item of lista; let i = index"   style="display: flex;flex-direction:row;width: 100%;position: relative; border-bottom: 1px solid #ECEEF0">
+                <div class="dfSelect"></div>
+                <div class="datosLst" style="padding-top: 5px;padding-left: 15px;display: flex; width: 100%;box-sizing: border-box;padding-bottom: 10px;" (click)="seleccionarItem(i, item)">
+                  <div class="informacionList">
+                    <label class="numeroIndex"> #{{i +1}} · <span class="tipoMen"> {{item.mensajeria}}</span></label>
+                    <span class="guia">Guía: {{item.guia}}</span>
+                    <h3 class="fechaEnv"> Fecha de Envio : {{fechas[i].fecha}} · {{fechas[i].hora}} {{fechas[i].tipo}}</h3>
+                    <div style="display: flex;justify-content: space-between;">
+                      <h3 class="totalesList"> <img height="17px;" src="./assets/Images/catalogo/btnClientes_azul.png" style="padding-right: 5px;">{{item.totalClientes}} Clientes</h3>
+                      <h3 class="totalesList"><img height="17px;" src="./assets/Images/ventas/visitas/archivos.svg" style="padding-right: 5px;">{{item.totalFacturas}} Facturas</h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--Lista de busqueda-->
+            <div class= "lista" style="display: unset;flex-direction: column" *ngIf="!validarLista">
+              <div  [ngClass]="listaFD[i]" *ngFor="let item of  clientesSearched; let i = index"  (click)="seleccionarItem(i, item)" class="select">
+                <div class="dfSelect"></div>
+                <div class="datosLst" style="padding-top: 5px;padding-left: 15px;display: flex; width: 100%;box-sizing: border-box;padding-bottom: 10px;" (click)="seleccionarItem(i)">
+                  <div class="informacionList">
+                    <label class="numeroIndex"> #{{i +1}} · <span class="tipoMen">{{item.mensajeria}}</span></label>
+                    <span class="guia">Guía: {{item.guia}}</span>
+                    <h3 class="fechaEnv"> Fecha de Envio : {{fechas[i].fecha}} · {{fechas[i].hora}} {{fechas[i].tipo}}</h3>
+                    <div style="display: flex;justify-content: space-between;">
+                      <h3 class="totalesList"> <img height="17px;" src="./assets/Images/catalogo/btnClientes_azul.png" style="padding-right: 5px;">{{item.totalClientes}} Clientes</h3>
+                      <h3 class="totalesList"><img height="17px;" src="./assets/Images/ventas/visitas/archivos.svg" style="padding-right: 5px;">{{item.totalFacturas}} Facturas</h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!---->
+          </div>
+        </div>
+        <div class="totales">
+          <label># {{total}}</label>
+          <label>{{totCli}} Clientes</label>
+          <label>{{totFac}} Facturas</label>
+          <!--<label>{{totDir}} Direcciones</label>-->
+        </div>
+      </div>
+      <!--linea degradada-->
+      <div class="borderLine"></div>
+      <div class="contenidoEsaneo">
+        <div class="tituloEscaneo" style="min-height: 50px;">
+          <label>LECTURA CÓDIGO DE BARRAS</label>
+        </div>
+        <div class="escaneo">
+          <div class="vistaPedimento">
+
+              <textarea  id="pedimento" type="text" name="firstname" autofocus="focus"  (keydown.enter)="enter()"
+               #textarea  [(ngModel)]="textoPedimento" class="texArea">
+            </textarea>
+
+            <div class="contenedorImagen" >
+              <div style="height: 25%;%; display:flex"></div>
+              <div style="height:27%; display:flex; width:50%; ">
+                <img width="100%" height="100%" src='./assets/Images/Codigo_de_barras.svg' *ngIf="inicio">
+                <img width="100%" height="100%" src="./assets/Images/Codigo_de_barras_incorrecto.svg"  *ngIf="escaneoIncorrecto">
+                <img width="100%" height="100%" src="./assets/Images/Codigo_de_barras_correcto.svg"  *ngIf="escaneoCorrecto">
+              </div>
+              <div style="height:6%; display:flex"></div>
+              <div style="height:12%; display:flex; align-items:center; "  *ngIf="activarGuia">
+                <!-- <label class="textoPedimento">[3018 8000249]</label> -->
+                <label class="subtituloEscaneo">Escanea el código de barras</label>
+              </div>
+              <div style="height:19%; display:flex; flex-direction:column;" *ngIf="activarGuia">
+                <label class="subtituloEscaneo" [style.color]="escaneoCorrecto? '#008894':'#848387'">Guía: {{numGuiaEscanear}}</label>
+                <label class="subtituloEscaneo"></label>
+              </div>
+              <div style="height:19%; display:flex"> </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+<div style="width: 100%; height: 50px">
+  <div style="width: 100%;height: 100%">
+    <footer class="footer">
+      <div class="abreviaciones">
+        <div class="Prioridad1">
+          <label class="p1"><img height="17px;" src="./assets/Images/catalogo/btnClientes_azul.png" class="imgFooter"><span class="texto"> Clientes</span></label>
+        </div>
+        <div class="Prioridad2">
+          <label class="p2"><img height="17px;" src="./assets/Images/ventas/visitas/archivos.svg" class="imgFooter"><span class="texto"> Facturas</span></label>
+        </div>
+
+      </div>
+    </footer>
+  </div>
+</div>

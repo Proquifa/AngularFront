@@ -1,0 +1,125 @@
+<div>
+  <div (click)="backMenu()">
+    <img height="22px" src="assets/Images/gestion/consultas/facturacion/recurso_190.svg" alt="">
+  </div>
+  |
+  <div>CONSULTA DE DOCUMENTOS</div>
+</div>
+<div>
+  <div [ngClass]="classPanel">
+    <div class="filtroHeader">
+      <div class="abrir" (click)="openPanel()">
+        <img *ngIf="hiddenClose" width="15px" src="assets/Images/gestion/consultas/facturacion/recurso_193.svg" alt="">
+        <img *ngIf="!hiddenClose" width="15px" src="assets/Images/gestion/consultas/facturacion/recurso_188.svg" alt="">
+      </div>
+      <div *ngIf="hiddenClose">
+        CERRAR
+        <div class="cerrar" (click)="closePanel()">
+          <img height="20px" width="20px" src="assets/Images/gestion/consultas/facturacion/recurso_189.svg" alt="">
+        </div>
+      </div>
+    </div>
+
+    <div class="filtros">
+      <div>
+
+      </div>
+      <div>
+        <div (click)="filtroAvanzada()" [style.background]="avanzada?'#008895':'#C2C3C9'">AVANZADA</div>
+        <div (click)="filtroRapida()" [style.background]="!avanzada?'#008895':'#C2C3C9'">RÁPIDA</div>
+      </div>
+
+      <div *ngIf="avanzada" class="divAvanzada">
+        <!--  Si  ya hay datos dentro del compenente se manda el < Gestion-filter/> con los datos
+              Y la propiedad IsLoader como verdadera
+            -->
+
+        <div *ngIf="isThereData;else loader">
+          <gestion-filter [ElementsDropList]="Elements" (valueFilter)="mostrarDatos($event)" [IsImage]="IsImage" [IsDate]="IsDate"
+            [IsLoader]="isThereData" [Clear]="Clear" [istextbox]="istextbox" style="width: 100%"></gestion-filter>
+
+        </div>
+
+        <!--  Si  no hay datos dentro del compenente se manda el < Gestion-filter/> con solo
+              una propiedad
+              IsLoader como Falsa-->
+        <ng-template #loader>
+          <gestion-filter [IsLoader]="isThereData" [Clear]="Clear"></gestion-filter>
+        </ng-template>
+
+      </div>
+
+      <div *ngIf="!avanzada" class="divRapida">
+        <div>
+        </div>
+        <div [formGroup]="filtroForm">
+          <span>Folio Documento</span>
+          <input type="text" formControlName="filtroDato" name="filtroDato">
+        </div>
+        <div (click)="filtroRapido()">
+          <img height="20px" src="assets/Images/visualizar.svg" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="resultados" [style.width]="hiddenClose ? 'calc(100% - 321px)': 'calc(100% - 50px)'">
+    <div>
+      <div>
+        RESULTADOS
+      </div>
+    </div>
+    <div class="fechafactura">
+      <div>
+        <div [style.min-width]="'50px'">#</div>
+        <div [style.min-width]="'150px'">Folio</div>
+        <div [style.min-width]="'160px'">Adjuntos</div>
+        <div [style.min-width]="'180px'">Empresa</div>
+        <div [style.min-width]="'160px'">Remitente</div>
+        <div [style.min-width]="'160px'">Contacto</div>
+        <div [style.min-width]="'160px'">Tipo</div>
+        <div [style.min-width]="'130px'">Fecha Inicio</div>
+        <div [style.min-width]="'130px'">Fecha Fin</div>
+      </div>
+      <div>
+      <div *ngFor="let item of lstDocumentos; let i = index">
+          <div [style.min-width]="'50px'">{{i + 1}}</div>
+          <div [style.min-width]="'160px'" class="normalVerde" style=" color: #008895;"  *ngIf="item.tipo=='Cotizaciones por enviar'"> 
+            <span  (click)="descargarPDF('http://201.161.12.60:51725/SAP/Cotizaciones/'+item.folioDocumento+'.pdf')">{{item.folioDocumento}}</span>
+          </div>
+          <div  [style.min-width]="'160px'" class="normalVerde" style=" color: #008895;"  *ngIf="item.tipo=='Notificaciones por enviar'"> 
+            <span  (click)="descargarPDF('http://201.161.12.60:51725/SAP/Doctos/'+item.folioDocumento+'.pdf')">{{item.folioDocumento}}</span>
+          </div>
+          <div  [style.min-width]="'160px'" class="normalVerde" style=" color: #008895;"  *ngIf="item.tipo=='Factura-Proforma por enviar'"> 
+            <span (click)="descargarPDF('http://201.161.12.60:51725/SAP/Doctos/'+item.folioDocumento+'.pdf')">{{item.folioDocumento}}</span>
+          </div>
+          <div  [style.min-width]="'160px'" class="normalVerde" style=" color: #008895;"  *ngIf="item.tipo=='Pedidos por enviar'"> 
+            <span  (click)="descargarPDF('http://201.161.12.60:51725/SAP/Doctos/'+item.folioDocumento+'.pdf')">{{item.folioDocumento}}</span>
+          </div>
+          <div  [style.min-width]="'160px'" class="normalVerde" style=" color: #008895;"  *ngIf="item.proformaFpor=='Proquifa'"> 
+            <span (click)="descargarPDF('http://201.161.12.60:51725/SAP/Proforma/Proquifa/'+item.folioDocumento+'.pdf')">{{item.folioDocumento}}</span>
+          </div>       
+          <div  [style.min-width]="'160px'" class="normalVerde" style=" color: #008895;"  *ngIf="item.proformaFpor=='Golocaer'"> 
+            <span (click)="descargarPDF('http://201.161.12.60:51725/SAP/Proforma/Golocaer/'+item.folioDocumento+'.pdf')">{{item.folioDocumento}}</span>
+          </div>         
+          <div [style.min-width]="'150px'" *ngIf="item.adjuntosDocumento!=''">{{item.adjuntosDocumento}}</div>
+          <div [style.min-width]="'150px'" *ngIf="item.adjuntosDocumento==''">ND</div>
+          <div [style.min-width]="'180px'">{{item.estado}}</div>
+          <div [style.min-width]="'160px'">{{item.origen}}</div>
+          <div [style.min-width]="'160px'">{{item.contacto}}</div>
+          <div [style.min-width]="'160px'">{{item.tipo}}</div>
+          <div [style.min-width]="'130px'">{{item.finicio | dateFormatSlash}}</div>
+          <div [style.min-width]="'130px'">{{item.ffin | dateFormatSlash}}</div>
+        </div>
+      </div>
+    </div>
+    <div class="total" *ngIf="lstDocumentos!= null">
+      <p>Total:
+        <span>{{lstDocumentos.length}}</span>
+         <span>Documento<span *ngIf="lstDocumentos.length != 1">s</span>
+          <span>Enviado<span *ngIf="lstDocumentos.length != 1">s</span>
+          </span>
+        </span>
+      </p>
+    </div>
+  </div>
+</div>

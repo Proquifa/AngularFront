@@ -1,0 +1,127 @@
+<div class="padre">
+  <!--Seccion de menu-->
+  <div style="position: relative; display: flex; background: #E6E6E6;" class="aux">
+    <aside [ngClass]="classAsideMenu">
+      <div class="articulo" *ngIf="!ocultarAcor">
+        <pn-menu-seccion-roles [items]="itemsMenu"  style="width: 100%;" *ngIf="activeMenuReclamo"></pn-menu-seccion-roles>
+      </div>
+    </aside>
+    <div style="position: absolute; position: absolute; padding-top: 352px;right: 0">
+      <img class="img" src='./assets/Images/flecha_cuadro.svg' *ngIf="!ocultarAcor" (click)="mostarOcultarAcordeon()" />
+      <img class="img" src='./assets/Images/flecha_mostrar.svg' *ngIf="ocultarAcor" (click)="mostarOcultarAcordeon()" />
+    </div>
+  </div>
+  <div class="area">
+    <!--Empieza la cabezera-->
+    <div class="cabezera">
+      <div>
+        <div style="cursor: pointer;" *ngIf="!vistaP" (click)="regresarVistaP()">
+          <img class="img" src='./assets/Images/regresar.svg'/>
+        </div>
+        <label class="etiqueta">PRODUCTO A RECLAMO</label>
+      </div>
+      <div *ngIf="!vistaP">
+        <label class="title">{{cliente}}</label>
+      </div>
+    </div>
+    <!--Termina la cabezera-->
+    <!--Empiezan los componentes-->
+    <div [ngStyle]="{'overflow':'scroll', 'width':'100%', 'height':'calc(100% - 122px)'}">
+      <div class="content" *ngIf="vistaP">
+        <div class="primeraSec">
+          <div class="titulosLista">
+            <div  class="tituloCliente">
+              <label class="tituloLista">PROVEEDORES</label>
+            </div>
+            <div class="organizarLista">
+              <div style="height: 100%;    display: flex;align-items: center;">
+                <div class="menu" (click)="abreCombo()">
+                  <div>
+                  </div>
+                  <div>
+                  </div>
+                  <div>
+                  </div>
+                  <section id="section">
+                    <ul class="listaHamburguesa">
+                      <li (click)="ordenamientoFechaTramNue()">Más Recientes</li>
+                      <li (click)="ordenamientoFechaTramAnt()">Más Antiguos</li>
+                    </ul>
+                  </section>
+                </div>
+              </div>
+              <div style="height: 100%; display: flex;align-items: center;">
+                <h3 class="subtitulo">{{tipoOrden}}</h3>
+              </div>
+              <div class="barraBusqueda" style="height: 100%">
+                <div class="buscar">
+                  <div>
+                    <div class="lupa">
+                      <img src="assets/Images/lupa.svg" width="22px" height="22px" alt="buscar">
+                    </div>
+                    <input type="text" [ngModel]="searchTerm" (ngModelChange)="buscar($event)" class="buscar-input" placeholder="Proveedor" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--Lista total-->
+          <div class="listaSeccionUno">
+            <div>
+              <div class= "lista" style="display: unset;flex-direction: column" >
+                <div  *ngFor="let item of lista; let i = index"   style="display: flex;flex-direction:row;width: 100%;position: relative; border-bottom: 1px solid #ECEEF0">
+                  <div class="imagenFlecha">
+                    <img src="./assets/Images/regresarAzul.svg" class="flechaInicio" (click)="seleccionarItem(i, item)">
+                  </div>
+                  <div class="dfSelect"></div>
+                  <div class="datosLst">
+                    <div class="numeroIndex">
+                      <label class="index" style="font-family: Roboto-Regular">#{{i +1}}</label>
+                    </div>
+                    <div class="informacionList">
+                      <label style="color: #008894">{{item.proveedor}} </label>
+                      <p>{{item.totalOC}} OC · {{item.totalProducto}} Productos</p>
+                      <h3 class="textoPiezas">Fecha de Inspección: {{item.fechaFormato}} </h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="totales">
+              <label>#{{lista.length}}</label>
+              <label>{{lista.length}} Proveedores</label>
+              <label>{{totalOc}} OC</label>
+              <label>{{totalProductos}} Productos</label>
+            </div>
+          </div>
+        </div>
+        <div class="contenidoGrafica">
+          <div class="grafica">
+            <label style="padding-bottom: 10px">PROVEEDORES</label>
+            <pn-donut-chart  [idGrafica]="'proveedores'" [data]="dataProveedores" [tipoGrafica]="tipoGraficaProveedores" [height]="'auto'" style="height: 90%;" *ngIf="activarProveedores"></pn-donut-chart>
+          </div>
+          <div class="grafica">
+            <label>TIPOS DE PRODUCTOS</label>
+            <pn-grafica-barras  [data]="dataBarra" [idGrafica]="'barra'" style="width:50%;height: 90%;" *ngIf="activarBarra"></pn-grafica-barras>
+          </div>
+        </div>
+      </div>
+      <pn-gestion-producto-reclamo  *ngIf="!vistaP" [datosProveedor]="datosProveedor" (regreVista)="vistaInicial()"></pn-gestion-producto-reclamo>
+    </div>
+    <div class="foo">
+      <footer>
+        <div>
+          <div class="Prioridad1">
+            <label class="p1">OC: </label> Orden de Compra
+          </div>
+          <div class="Prioridad1" *ngIf="!vistaP">
+            <label class="p1">FEE: </label> Fecha Estimada de Entrega
+          </div>
+          <div class="Prioridad1" *ngIf="!vistaP">
+            <label class="p1">DRE: </label> Días Restantes de Entrega
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+</div>

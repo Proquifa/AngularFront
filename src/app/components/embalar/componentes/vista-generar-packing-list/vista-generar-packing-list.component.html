@@ -1,0 +1,7 @@
+<div class="vistaGenerarPackingList">
+
+  <!--<pq-escanear-codigo-packing-list *ngIf="escanearCodigo" (event)="cambioDeVista($event)"></pq-escanear-codigo-packing-list>-->
+  <pq-bolsa-contenedora-packing-list *ngIf="bolsaContenedora" [valoresCLiente]="valorCliente" (cambiarVista)="vistaColectarPartidas($event)" (cambiarVistaEnvio)="vistaEnvio($event)"></pq-bolsa-contenedora-packing-list>
+
+
+</div>

@@ -1,0 +1,91 @@
+@import "../../../mixins.scss";
+@import "../../../colors.scss";
+
+:host {
+  @include flexColumn;
+  height: calc(100vh - 231px);
+  margin: 20px 0;
+  width: 100%;
+
+  .header {
+    @include flexRow;
+    justify-content: space-between;
+    width: calc(100% - 90%);
+    margin: 0 25px 10px 25px;
+  
+  }
+
+  .header-menu {
+    @include flexRow;
+    width: 100%;
+    margin-bottom: 15px;
+
+    .exportar {
+      width: 32px;
+      height: 32px;
+      margin-right: 25px;
+    }
+  }
+
+  .container {
+    width: 100%;
+    border-top: 3px solid #000;
+    border-bottom: 3px solid #000;
+
+    .buscar {
+      @include flexRow;
+      justify-content: center;
+      width: 100%;
+
+      div {
+        width: 200px;
+        .buscar-input {
+          border-radius: 25px;
+          min-width: 200px;
+          height: 16px;
+          &::placeholder {
+            padding-left: 20px;
+          }
+        }
+      }
+    }
+
+    .tabla-clientes {
+      @include flexRow;
+      justify-content: center;
+      flex-wrap: wrap;
+      height: 66vh;
+      width: 100%;
+      overflow-y: auto;
+
+      .cliente {
+        text-align: center;
+        width: 14%;
+        filter: grayscale(100%);
+        border-right: 1px solid #ccc;
+        border-bottom: 1px solid #ccc;
+
+        img {
+          width: 60%;
+        }
+        &.final {
+          border-right: none;
+        }
+        &:hover{
+          filter: grayscale(0);
+        }
+      }
+    }
+
+    .total{
+      @include flexColumn;
+      align-items: center;
+    }
+  }
+
+  .footer {
+    @include flexRow;
+    justify-content: space-between;
+    margin: 0 25px;
+  }
+}

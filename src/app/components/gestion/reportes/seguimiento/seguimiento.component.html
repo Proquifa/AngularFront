@@ -1,0 +1,315 @@
+<div>
+  <div (click)="backMenu()">
+    <img height="22px" src="assets/Images/gestion/consultas/facturacion/recurso_190.svg" alt="">
+  </div>
+  REPORTE |
+  <div>SEGUIMIENTO</div>
+  <!-- <div *ngIf="detalle"  class="regresar">CONSULTA DE FACTURACIÓN</div>
+  <div *ngIf="detalle">|</div>
+  <div *ngIf="detalle">DETALLES</div>-->
+</div>
+<div class="consultaResultados" [ngClass]="'resultados' + (!showGraphic ? ' visible' : '')" >
+  <div [ngClass]="classPanel">
+    <div class="filtroHeader">
+      <div class="abrir" (click)="openPanel()">
+        <img *ngIf="hiddenClose" width="15px" src="assets/Images/hamburguesa.svg" alt="">
+        <img *ngIf="!hiddenClose" width="15px" src="assets/Images/hamburguesa_verde.svg" alt="">
+      </div>
+      <div *ngIf="hiddenClose">
+        CERRAR
+        <div class="cerrar" (click)="closePanel()">
+          <img height="20px" width="20px" src="assets/Images/gestion/consultas/facturacion/recurso_189.svg" alt="">
+        </div>
+      </div>
+    </div>
+    <div class="filtros">
+      <div></div>
+      <div>
+        <div (click)="filtroAvanzada()" [style.background]="avanzada?'#008895':'#C2C3C9'">AVANZADA</div>
+        <div (click)="filtroRapida()" [style.background]="!avanzada?'#008895':'#C2C3C9'">RÁPIDA</div>
+      </div>
+      <div *ngIf="avanzada" class="divAvanzada">
+        <!--  Si  ya hay datos dentro del compenente se manda el < Gestion-filter/> con los datos
+            Y la propiedad IsLoader como verdadera
+        -->
+        <div>
+          <div class="divSeguimiento" [style.background]="tipoCotizacion==1?'#008895':''" [style.color]="tipoCotizacion==1?'#ffff':''"
+            (click)="obtenerSeguimiento()">
+            <div style="display: flex;">
+              <div style="margin-left: 4px;" *ngIf="tipoCotizacion==1">
+                <img height="20px" width="20px" src="assets/Images/gestion/reportes/seguimiento/seguimiento_b.svg" alt="">
+              </div>
+              <div style="margin-left: 4px;" *ngIf="tipoCotizacion!=1">
+                <img height="20px" width="20px" src="assets/Images/gestion/reportes/seguimiento/seguimiento_n.svg" alt="">
+              </div>
+              <div style="display: flex; align-items: center; margin-left: 4px;">Seguimiento</div>
+            </div>
+          </div>
+          <div class="divConfirmacion" [style.background]="tipoCotizacion==2?'#008895':''" [style.color]="tipoCotizacion==2?'#ffff':''"
+            (click)="obtenerConfirmacion()">
+            <div style="display: flex;">
+              <div style="margin-left: 4px;" *ngIf="tipoCotizacion==2">
+                <img height="20px" width="20px" src="assets/Images/gestion/reportes/seguimiento/confirmacion_b.svg" alt="">
+              </div>
+              <div style="margin-left: 4px;" *ngIf="tipoCotizacion!=2">
+                <img height="20px" width="20px" src="assets/Images/gestion/reportes/seguimiento/confirmacion_n.svg" alt="">
+              </div>
+              <div style="display: flex; align-items: center; margin-left: 4px;">Confirmación</div>
+            </div>
+          </div>
+          <div class="divCancelar" [style.background]="tipoCotizacion==3?'#008895':''" [style.color]="tipoCotizacion==3?'#ffff':''"
+            (click)="obtenerCancelable()">
+            <div style="display: flex;">
+              <div style="margin-left: 4px;" *ngIf="tipoCotizacion==3">
+                <img height="20px" width="20px" src="assets/Images/gestion/reportes/seguimiento/seguimiento_b.svg" alt="">
+              </div>
+              <div style="margin-left: 4px;" *ngIf="tipoCotizacion!=3">
+                <img height="20px" width="20px" src="assets/Images/gestion/reportes/seguimiento/seguimiento_n.svg" alt="">
+              </div>
+              <div style="display: flex; align-items: center; margin-left: 4px;">Cancelable</div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="isThereData;else loader">
+
+
+          <gestion-filter [ElementsDropList]="Elements" (valueFilter)="mostrarDatos($event)" (diahoy)="filtroCuadros(4,1)" (todas)="filtroCuadros(5,1)"
+            (diaManana)="filtroCuadros(6,1)" (diaPasado)="filtroCuadros(7)" (diaPospasado)="filtroCuadros(8,1)" (diaFuturo)="filtroCuadros(9,1)" (diaAyer)="filtroCuadros(3,1)"
+            (diaAntier)="filtroCuadros(2,1)" (diaAnteAntier)="filtroCuadros(1,1)" (diaPa)="filtroCuadros(0,1)" [IsImage]="IsImage" [IsDate]="IsDate"
+            (grafica)="showGraphicPanel()" [IsLoader]="isThereData" [Clear]="Clear" style="width: 100%" [isSeguimiento]="isSeguimiento"
+            [activarHoy]="activaGraficaHoy" [activarTodo]="activaGraficaTodo" [activarManana]="activaGraficaManana" [activarPasadoMa]="activaGraficaPasadoMa" [activarPosPasado]="activaGraficaPosPasado" [activarFuturo]="activaGraficaFuturo" [activarAyer]="activaGraficaAyer"
+            [activarAntier]="activaGraficaAntier" [activarAnteAntier]="activaGraficaAnteAntier" [activarPasado]="activarPasado" [tasa]="tazaRealizacion"
+            ></gestion-filter>
+
+        </div>
+        <!--  Si  no hay datos dentro del compenente se manda el < Gestion-filter/> con solo
+            una propiedad
+            IsLoader como Falsa-->
+
+        <ng-template #loader>
+          <gestion-filter [IsLoader]="isThereData" [Clear]="Clear"></gestion-filter>
+        </ng-template>
+
+      </div>
+      <div *ngIf="!avanzada" class="divRapida">
+
+        <!--<div>
+          <pq-radio-button [widthTotal]="'60px'" [lstItems]="lstRadiosRapida" [disble]="true" [direction]="'row'" [imgSize]="'12px'"
+            (emitItem)="radioRapida($event)" [width]="'15px'"></pq-radio-button>
+        </div>-->
+        <gestion-filter [ElementsDropList]="Elements" (valueFilter)="mostrarDatos($event)" [IsImage]="IsImage" [IsLoader]="isThereData"
+          [Clear]="Clear" [istextboxSeguimiento]="istextboxSeguimiento" style="width: 100%" [isSeguimiento]="isSeguimiento"></gestion-filter>
+        <!--  <div [formGroup]="filtroForm">
+            <span>Búsqueda por Folio</span>
+          <input type="text" formControlName="filtroDato" name="filtroDato">
+          </div>-->
+        <!--<div (click)="filtroRapido()">
+          <img height="20px" src="assets/Images/visualizar.svg" alt="">
+        </div>-->
+      </div>
+    </div>
+
+  </div>
+  <!-- Fin Filtros -->
+  <!-- Seccion detalle -->
+  <div class="consultaDetalles" *ngIf="!showGraphic">
+    <div *ngIf="!detalle" class="contenidoFactura">
+      <div class="detalleFactura">
+        <div style=" display:flex">
+          <div class="rangoVerde" [style.background]="rango==1?'#008895':''" [style.color]="rango==1?'#ffff':''" (click)="todo()">Todo</div>
+          <div class="rangoBlanco" [style.background]="rango==2?'#008895':''" [style.color]="rango==2?'#ffff':''" (click)="diezmil()">>$10,000</div>
+          <div class="rangoBlanco" [style.background]="rango==3?'#008895':''" [style.color]="rango==3?'#ffff':''" (click)="dosmil()">$2,001-$10,000</div>
+          <div class="rangoBlanco" [style.background]="rango==4?'#008895':''" [style.color]="rango==4?'#ffff':''" (click)="cero()">$0,000-2,000</div>
+        </div>
+        <div>
+          <div style="margin-top: 19px; margin-bottom: 21px; display: flex;"> {{titulo}}/ {{today}}  {{numeroDia}} &nbsp;
+            <span *ngIf="tipoCotizacion===1">Seguimiento</span>
+            <span *ngIf="tipoCotizacion===2">Confirmación</span>
+            <span *ngIf="tipoCotizacion===3">Cancelable</span>
+          </div>
+        </div>
+        <div>
+          <div style="min-height: 115px;" [ngClass]="lstLineaTiempoActive[i]" *ngFor="let item of informacion; let i = index"   (click)="filtrarClientePanelDos(item.nombreCliente)" (click)="lineaTiempo(i)" >
+            <div class="dfSelect"></div>
+            <div>
+              <div>
+                <div style="display: flex;font-family: 'Roboto-Bold'"># {{i+1}} ·   
+                    <div *ngIf="item.numCotizaciones > 1"> {{item.numCotizaciones}} Cotizaciones </div>
+                    <div *ngIf="item.numCotizaciones<=1">{{item.numCotizaciones}} Cotización </div>
+                </div>
+              </div>
+              <div>
+                <div>
+                  <div> {{item.nombreCliente}} </div>
+                </div>
+              </div>
+              <div>
+                <div style="font-family: 'Roboto-Bold'"> {{item.monto | acFormatMoney}} USD</div>
+              </div>
+              <div>
+                <div style="display: flex">ESAC:&nbsp;
+                  <div style=" color: #008895;"> {{item.nombreEsac}} </div>
+                </div>
+                <div style="display: flex">EVT:&nbsp;
+                  <div style=" color: #008895;"> {{item.nombreEVT}} </div>
+                </div>
+                <div style="display: flex">EVC:&nbsp;
+                  <div style=" color: #008895;"> {{item.nombreEV}} </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div style="display: flex; justify-content: center; height: 50px; align-items: center">
+            Cliente<span *ngIf="lstAux1.length != 1">s</span>:
+            <span>{{informacion.length}}</span>
+            <span> TOTAL: {{montoTotal | acFormatMoney}} USD</span>
+          
+          </div>
+        </div>
+      </div>
+      <div class="lineaTiempo">
+        <div>
+          <div style="height: 62px;border-bottom: 1px solid #979797; align-items: center;display: flex;">{{nombreCliente}}</div>
+        </div>
+        <div>
+          <div [ngClass]="lstResultadoCotizaciones[i]" *ngFor="let item of tempCotizaciones; let i = index" (click)="obtenerPartidasPorCotizacionEnSeguimiento(i)"  (click)="cotizaciones(i)"   >
+
+            <div class="ltSelect"></div>
+            <div>
+              <div>
+                <div>
+                  <span class="link" style=" color: #008895;" (click)="descargarPDF('http://201.161.12.60:51725/SAP/Cotizaciones/'+item.facturadoPor+'/'+item.numeroFactura+'.pdf')">{{item.folioCotizacion}}</span>
+                  ·
+                  <span class="link" style=" color: #008895;    margin-right: 80px;" (click)="descargarPDF('http://201.161.12.60:51725/SAP/Doctos/'+item.cpedido+'.pdf')">{{item.folio}}</span>
+                </div>
+                <div style="display: flex;">
+                  <div style="color:#9CC100" *ngIf="item.enTiempo=='ET'"> {{item.enTiempo}} ·&nbsp; </div>
+                  <div style="color:#AD0404 " *ngIf="item.enTiempo=='FT'"> {{item.enTiempo}} ·&nbsp; </div>
+                  <div *ngIf="item.enTiempo==null"> Pendiente ·&nbsp; </div>
+                  <div *ngIf="item.diasAtraso<0 || item.diasAtraso===0">0 días</div>
+                  <div *ngIf="item.diasAtraso>0">{{item.diasAtraso}} días</div>
+                </div>
+                <div style="display: flex">
+                  <div style="width: 320px;">{{item.monto | acFormatMoney}} USD · {{item.piezas}} pzas
+                  </div>
+                  <div style=" color: #008895;">{{item.estadoSeguimiento}} </div>
+                </div>
+              </div>
+              <div></div>
+            </div>
+          </div>
+        </div>
+        <div style="text-align: center;">
+          <div>
+            <span>{{tempCotizaciones.length}}</span> Cotizacio
+            <span *ngIf="tempCotizaciones.length>1">nes</span> ·{{tercerSuma | acFormatMoney}} USD
+            <div>Total piezas: {{piezasSuma}}</div>
+            <div>TOTAL</div>
+          </div>
+        </div>
+      </div>
+      <div class="detalleFactura">
+        <div></div>
+        <div style="display: flex">
+          <div style="margin-top: 20px;">{{folio}}</div> <div *ngIf="radarActivo==false" (click)="radar(false)" style="margin-top: 20px;margin-left: 335px;"><img height="20px" width="20px" src="assets/Images/gestion/reportes/seguimiento/localizacion_1.svg" alt=""></div>
+          <div  *ngIf="radarActivo==true" (click)="radar(true)" style="margin-top: 20px;margin-left: 335px;"><img height="20px" width="20px" src="assets/Images/gestion/reportes/seguimiento/localizacion_2.svg" alt=""></div>
+        </div>
+        <div>
+          <div style="min-height: 150px;" [ngClass]="lstResultadoPartidas[i]" *ngFor="let item of lstInfo; let i = index" (click)="cuartoSegmento(i)" (click)="partidas(i)">
+            <div class="dfSelect"></div>
+            <div>
+              <div>
+                <div style="display: flex">
+                  <div style="color: #424242;font-family: Roboto-Bold;width: 315px;">#{{i+1}} · {{item.cantidad}} pz · $ {{item.monto}} {{item.monedaCotiza}} </div> Siguiente:&nbsp;
+                  <div *ngIf="item.fechaSiguiente!=null"> {{item.fechaSiguiente | date :'dd-MM-yy'}}</div>
+                  <div *ngIf="item.fechaSiguiente===null"> Pendiente</div>
+                </div>
+              </div>
+              <div>
+                <div style="font-size: 14px; ">{{item.concepto}} </div>
+              </div>
+              <div>
+                <div style="font-size: 14px;color: #989A99;">{{item.tipo}} · {{item.control}}</div>
+              </div>
+              <div>
+                <div style="display: flex">
+                  <div style="font-size: 14px;color: #989A99;width: 380px; display: flex;">PU: $ {{item.precio}} Dólares </div>
+                  <div style=" color: #008895;"> {{item.estado}} </div>
+                
+                </div>
+                <!--<div style="display: flex"> </div>-->
+              </div>
+              <div><img height="15px" width="15px" src="assets/Images/gestion/reportes/seguimiento/localizacion_1.svg" alt=""></div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div>
+          </div>
+        </div>
+        <div style="text-align: center;">
+          <div>
+            <span>{{sumaPartidas}}</span> Partidas · {{suma  | acFormatMoney}} USD
+            <div>Total piezas: {{sumaPiezas}}</div>
+            <div>TOTAL</div>
+          </div>
+        </div>
+      </div>
+      <div class="historial">
+        <div>
+          <div style="height:62px;align-items:center;display: flex;border-bottom: 1px solid #979797; ">Historial</div>
+        </div>
+        <div>
+          <div *ngFor="let item of lstElementos; let i = index" style="border-bottom: 1px solid black;" >
+            <div *ngIf="lstElementos.length!=0">
+                <div class="ltSelect"></div>
+                <div *ngIf="item!=null && item!= undefined">
+                  <div>
+                    <div># {{i+1}} · {{item.estadoFinal}} <div  [ngClass]="item.estado=='Confirmacion' || item.estado=='En S3'?'circleGreen':'circleRed'"></div> </div>
+                    <div style=" color: #008895;">{{item.vendedor}}</div>
+                    <div>
+                      <div>Origen:</div>
+                      <div>{{item.estado}}</div>
+                      <div>Contacto:</div>
+                      <div>{{item.contacto}}</div>
+                      <div>FER:</div>
+                      <div>{{item.fer |  date :'dd-MM-yy'}}</div>
+                      <div>FR:</div>
+                      <div *ngIf="item.fr===null">Pendiente</div>
+                      <div *ngIf="item.fr!=null">{{item.fr |date :'dd-MM-yy'}}</div>
+                      <div>Comentarios:</div>
+                      <div>{{item.comentarios}}</div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            
+          </div>
+          <div *ngIf="lstElementos.length===0">
+              Sin información
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Fin detalle -->
+  <!-- Seccion Graficas -->
+  <div style="position: relative;" [style.width]="hiddenClose ? 'calc(100% - 321px)': 'calc(100% - 50px)'" *ngIf="showGraphic">
+    <div [ngClass]="'graphics-panel-container' + (showGraphic ? ' visible' : '')" [style.top]="topGraphics" style="    height: calc(100vh - 171px);">
+      <div class="graphics-panel-option">
+        <img src="assets/Images/gestion/images/tablaminigris.svg" (click)="showTablePanel()">
+      </div>
+      <div class="graphics-container" *ngIf="refrescar" >
+        <div class="donut-container" *ngFor="let item of graficas; let i = index">
+          <p class="donut-title">{{item}}</p>
+          <div id="asistencia-canvas" class="canvas-container" >
+            <pn-donut-chart [idGrafica]="i+'asis'" [data]="graficasValores[i]" [tipoGrafica]="'General'"></pn-donut-chart>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

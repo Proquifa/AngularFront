@@ -1,0 +1,160 @@
+<div class="padre">
+  <!--Seccion de menu-->
+  <div class="aux">
+    <aside [ngClass]="classAsideMenu">
+      <div class="articulo" *ngIf="!ocultarAcor">
+        <pn-menu-seccion-roles [items]="itemsMenu" [titulo]="'Direccion Operaciones'"  style="width: 100%;" *ngIf="activeMenu"></pn-menu-seccion-roles>
+      </div>
+    </aside>
+    <div style="position: absolute; position: absolute; padding-top: 352px;right: 0">
+      <img class="img" src='./assets/Images/flecha_cuadro.svg' *ngIf="!ocultarAcor" (click)="mostarOcultarAcordeon()" />
+      <img class="img" src='./assets/Images/flecha_mostrar.svg' *ngIf="ocultarAcor" (click)="mostarOcultarAcordeon()" />
+    </div>
+  </div>
+  <!--Empieza el area de trabajo-->
+  <div class="area">
+    <!--Empieza la cabezera-->
+    <div class="cabezera">
+      <div>
+        <div style="cursor: pointer;" *ngIf="!vistaP" (click)="regresarVistaP(true)">
+          <img class="img" src='./assets/Images/regresar.svg'/>
+        </div>
+        <label class="etiqueta">NOTAS DE CRÉDITO</label>
+      </div>
+    </div>
+    <!--Empiezan los componentes-->
+    <div [ngStyle]="{'overflow':'scroll', 'width':'100%', 'height':'calc(100% - 122px)'}" *ngIf="vistaP">
+      <div class="areaPrincipal" *ngIf="vistaP">
+        <div class="vistaGeneral">
+          <div class="areaInformativa">
+            <label>EMPRESAS</label>
+          </div>
+          <div class="botonera">
+            <pn-botonera [lista]="listaEmpresas" *ngIf="activeBotonera" style="width: 100%;height: 100%" (event)="seleccionarLista($event)" [selectedPos]="selectItem"></pn-botonera>
+          </div>
+        </div>
+        <div class="informacionLista">
+          <div class="filtros">
+            <div>
+              <div class="menu" id="menuOrden" (click)="abreCombo()">
+                <div id="menuOrden1">
+                </div>
+                <div id="menuOrden2">
+                </div>
+                <div id="menuOrden3">
+                </div>
+                <section id="section">
+                  <ul class="listaHamburguesa">
+                    <li (click)="ordenamientoFechaTramNue()">Más Nuevas</li>
+                    <li (click)="ordenamientoFechaTramAnt()">Más Antiguas</li>
+                  </ul>
+                </section>
+              </div>
+              <label id="menuOrdenLabel">{{tipoOrden}}</label>
+            </div>
+            <div class="select">
+              <label>Proveedor</label>
+              <pn-combo-flecha-rellena [title]="'Seleccionar'"  valImg="flechaRellena" style="display: flex;align-items: center;max-width: 233px;" [items]="proveedores" *ngIf="activeCombos" [subtitleActive]="false" (valueDropList)="filtrarEmpresa($event)" [colorPrincipal]="'#424242'"></pn-combo-flecha-rellena>
+            </div>
+            <div class="barraBusqueda">
+              <div class="buscar">
+                <div>
+                  <div class="lupa">
+                    <img src="assets/Images/lupa.svg" width="22px" height="22px" alt="buscar">
+                  </div>
+                  <input type="text" [ngModel]="searchTerm" (ngModelChange)="buscar($event)" class="buscar-input" placeholder="Folio, serie" />
+                  <div class="lupa" (click)="buscar('')" style="cursor: pointer;">
+                    <img src="assets/Images/cerrar.svg"  height="12px" alt="buscar">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="vistaLista">
+            <header>
+              <div  class="imagenesDiv" style="max-width: 27px">
+                <label>#</label>
+              </div>
+              <div>
+                <label>Empresa</label>
+              </div>
+              <div style="width: 20%">
+                <label>Proveedor</label>
+              </div>
+              <div>
+                <label>Fecha</label>
+              </div>
+              <div>
+                <label>Folio Documento</label>
+              </div>
+              <div>
+                <label>Serie CFDI</label>
+              </div>
+              <div style="width: 13%">
+                <label>Monto</label>
+              </div>
+              <div class="imagenesDiv"></div>
+            </header>
+            <div style="height: 95%;width: 100%;overflow: auto;">
+              <div class= "lista" style="display: unset;flex-direction: column">
+                <div  *ngFor="let item of lista; let i = index" style="display: flex;flex-direction:column;width: 100%;position: relative;">
+                  <div [ngClass]="item.activePart? 'divActive': 'div'">
+                    <div class="dfSelect"></div>
+                    <div class="datosLst">
+                      <div class="imagenesDiv" style="max-width: 27px">
+                        <label>{{i + 1}}</label>
+                      </div>
+                      <div>
+                        <span>{{item.empresa.alias}}</span>
+                      </div>
+                      <div style="width: 20%">
+                        <label>{{item.proveedor.nombre}}</label>
+                      </div>
+                      <div>
+                        <span style="text-transform: capitalize">{{item.ffechaDocto}}</span>
+                      </div>
+                      <div>
+                        <label (click)="openBrowser(item)" class="linkPdf">{{item.folio}}</label>
+                      </div>
+                      <div>
+                        <span *ngIf="item.serie !== null && item.serie !== ''">{{item.serie}}</span>
+                        <span *ngIf="item.serie === null || item.serie === ''">No Aplica</span>
+                      </div>
+                      <div>
+                        <label *ngIf="item.moneda === 'Dolares'">{{item.monto | currency: 'USD'}} USD</label>
+                        <label *ngIf="item.moneda === 'Pesos'">{{item.monto | acFormatMoney}} MXN</label>
+                        <label *ngIf="item.moneda === 'Libras'">{{item.monto | acFormatMoney}} lbs</label>
+                        <label *ngIf="item.moneda === 'Euros'">{{item.monto | currency: '€'}} </label>
+                        <label *ngIf="item.moneda === 'DlCan'">{{item.monto | acFormatMoney}} CAD</label>
+                      </div>
+                      <div class="imagenesDiv" (click)="eliminarSaldo(item)">
+                        <div class="tooltip">
+                          <img src="./assets/Images/eliminar.svg">
+                          <span class="tooltiptext">Eliminar</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!--Empieza Lista partidas-->
+                  <!--Termina Lista partidas-->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div [ngStyle]="{'overflow':'scroll', 'width':'100%', 'height':'calc(100% - 65px)'}" *ngIf="!vistaP">
+      <pn-generar-saldo *ngIf="!vistaP" class="generar" [tipoSaldo]="false" (regresarVista)="regresarVistaP($event)"></pn-generar-saldo>
+    </div>
+    <!--Terminan los componentes-->
+    <footer class="footer" *ngIf="vistaP">
+      <div class="datosFooter">
+        <div class="dvBoton" (click)="abrirNuevo()">
+          <label>Agregar</label>
+        </div>
+      </div>
+    </footer>
+  </div>
+</div>
+<pn-pop-up-saldos *ngIf="eliminar" [alertaTxt]="mensaje" [folio]="folio" [activarBoton]="true" (emit)="recibirValor($event)"></pn-pop-up-saldos>

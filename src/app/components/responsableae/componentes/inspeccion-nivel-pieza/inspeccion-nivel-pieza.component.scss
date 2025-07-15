@@ -1,0 +1,115 @@
+
+.inspeccionPartida{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.direccionRow{
+    display: flex;
+    flex-direction: row;
+}
+.direccionColum{
+  display: flex;
+  flex-direction: column;
+}
+.titulo{
+    font-family: "Novecento";
+    font-size: 21px;
+    color: #008895;
+    font-weight: bold;
+    padding-bottom: 21px;
+
+}
+
+.subtitulo{
+    font-family: "Roboto";
+    color: #424242 ;
+    font-size: 21px;
+    font-weight: bold;
+    width: 93.5%;
+    height: 30px;
+    border-bottom: 1px solid #424242;
+
+
+}
+.subtituloCentro{
+  font-family: "Roboto";
+  color: #424242 ;
+  font-size: 21px;
+  font-weight: bold;
+  width: 100%;
+  height: 30px;
+  border-bottom: 1px solid #424242;
+
+
+}
+
+.etiqueta{
+    font-family: "Roboto";
+    color: #242424 ;
+    font-size: 18px;
+    height: 24px;
+    padding-top: 14px;
+
+}
+
+.etiquetasGris{
+  font-family: "Roboto";
+  color: #9B9B9B ;
+  font-size: 18px;
+  height: 24px;
+  padding-top: 14px;
+
+}
+
+  .infoDato{
+font-family: 'Roboto';
+font-weight: 200;
+font-size: 18px;
+color: #242424;
+text-align: left;
+}
+
+.etiqueta{
+font-family: 'Roboto';
+font-size: 18px;
+color: #242424;
+text-align: left;
+}
+
+.doctos{
+  flex-direction: row;
+  display: flex;
+  box-sizing: border-box;
+  width: 50%;
+}
+.docto-img{
+  width: 21px;
+  height: 27px;
+  margin-top:5px;
+
+}
+.incidencia{
+  margin:25px;
+}
+
+
+.textArea{
+  width: 105%;
+  height: 100%;
+  border: 1px solid red;
+  z-index: 1;
+  opacity: 0;
+  position: absolute;
+}
+
+
+   body.modal-open
+   {
+     overflow:hidden;
+     position:fixed;
+     width:100%
+     }

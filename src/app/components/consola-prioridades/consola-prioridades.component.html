@@ -1,0 +1,294 @@
+<div class="padre">
+  <!--Seccion de menu-->
+  <div style="position: relative; display: flex; background: #E6E6E6;" class="aux">
+    <aside [ngClass]="classAsideMenu">
+      <div class="articulo" *ngIf="!ocultarAcor">
+        <pn-menu-seccion-roles [items]="itemsMenu"   [titulo]="'RESPONSABLE DE SURTIDO'" style="width: 100%;" *ngIf="activar"></pn-menu-seccion-roles>
+      </div>
+    </aside>
+    <div style="position: absolute; position: absolute; padding-top: 352px;right: 0">
+      <img class="img" src='./assets/Images/flecha_cuadro.svg' *ngIf="!ocultarAcor" (click)="mostarOcultarAcordeon()" />
+      <img class="img" src='./assets/Images/flecha_mostrar.svg' *ngIf="ocultarAcor" (click)="mostarOcultarAcordeon()" />
+    </div>
+  </div>
+  <!--Empieza el area de trabajo-->
+  <div class="area">
+    <!--Empieza la cabezera-->
+    <div class="cabezera">
+      <div>
+        <label class="etiqueta">CONSOLA DE PRIORIDADES</label>
+      </div>
+    </div>
+    <!--Empiezan los componentes-->
+    <div [ngStyle]="{'overflow':'scroll', 'width':'100%', 'height':'calc(100% - 122px)'}">
+      <div class="areaPrincipal" *ngIf="partHabilidatas">
+        <div class="vistaGeneral">
+          <div class="areaInformativa">
+              <label>ZONAS</label>
+          </div>
+          <div class="botonera">
+            <pn-botonera [lista]="listaZonas" *ngIf="activeBotonera" style="width: 100%;height: 100%" (event)="seleccionarLista($event, recargar)" [selectedPos]="selectItem"></pn-botonera>
+          </div>
+        </div>
+        <div class="informacionLista">
+          <div class="filtros">
+            <div>
+              <div class="menu" id="menuOrden" (click)="abreCombo()">
+                <div id="menuOrden1">
+                </div>
+                <div id="menuOrden2">
+                </div>
+                <div id="menuOrden3">
+                </div>
+                <section id="section">
+                  <ul class="listaHamburguesa">
+                    <li (click)="ordenamiento('Urgencia')">Urgencia</li>
+                    <li (click)="ordenamiento('Por Sistema')">Por Sistema</li>
+                  </ul>
+                </section>
+              </div>
+              <label id="menuOrdenLabel">{{tipoOrden}}</label>
+            </div>
+            <div class="barraBusqueda">
+              <div class="buscar">
+                <div>
+                  <div class="lupa">
+                    <img src="assets/Images/lupa.svg" width="22px" height="22px" alt="buscar">
+                  </div>
+                  <input type="text" [ngModel]="searchTerm" (ngModelChange)="buscar($event)" class="buscar-input" placeholder="Cliente, Contacto, P.Interno, Código, Concepto" />
+                  <div class="lupa" (click)="buscar('')" style="cursor: pointer;">
+                    <img src="assets/Images/cerrar.svg"  height="12px" alt="buscar">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="filtros">
+              <div class="menu" (click)="abreComboFiltrado()" id="menuFiltro">
+                <div id="menuFiltro1">
+                </div>
+                <div id="menuFiltro2">
+                </div>
+                <div id="menuFiltro3">
+                </div>
+                <section id="sectionFiltrado">
+                  <ul class="listaHamburguesa">
+                    <li (click)="filtrado('Todos')">Todos</li>
+                    <li (click)="filtrado('Embalaje')">Embalaje</li>
+                    <li (click)="filtrado('Inspección')">Inspección</li>
+                  </ul>
+                </section>
+              </div>
+              <label id="menuFiltrolabel">{{tipoOrdenFiltrado}}</label>
+            </div>
+          </div>
+          <div class="vistaLista">
+            <header>
+              <div  class="imagenesDiv" style="max-width: 27px">
+                <label>#</label>
+              </div>
+              <div class="imagenesDiv" style="min-width: 29px;max-width: 29px"></div>
+              <div class="imagenesDiv"></div>
+              <div class="imagenesDiv" style="min-width: 68px; max-height: 68px"></div>
+              <div style="width: 5%">
+                <label>#Prioridad</label>
+              </div>
+              <div>
+                <label>Cliente</label>
+              </div>
+              <div style="width: 20%">
+                <label>Zona</label>
+              </div>
+              <div>
+                <label>Contacto</label>
+              </div>
+              <div>
+                <label>Monto</label>
+              </div>
+              <div style="width: 13%">
+                <label>FEE</label>
+              </div>
+              <div>
+                <label style="text-align: center;">Días Restantes</label>
+              </div>
+              <div></div>
+              <div></div>
+              <div class="imagenesDiv"></div>
+            </header>
+            <div style="height: 95%;width: 100%;overflow: auto;">
+              <div class= "lista" style="display: unset;flex-direction: column">
+                <div  *ngFor="let item of lista; let i = index" style="display: flex;flex-direction:column;width: 100%;position: relative;">
+                  <div [ngClass]="item.activePart? 'divActive': 'div'">
+                    <div class="dfSelect"></div>
+                    <div class="datosLst">
+                      <div class="imagenesDiv" style="max-width: 27px">
+                        <label>{{i + 1}}</label>
+                      </div>
+                      <div class="imagenesDiv" style="max-width: 29px;min-width: 29px">
+                        <div class="tooltip">
+                          <img src="./assets/Images/candado_morado.svg"  (click)="quitarRestriccion(true, item)" *ngIf="item.restriccion === 1">
+                          <span class="tooltiptext" *ngIf="item.restriccion === 1"> Con Restricción por Fin de Mes</span>
+                          <img src="./assets/Images/candado_verde_R.svg"  (click)="quitarRestriccion(false, item)" *ngIf="item.facturaRemision === 1 && item.remision ===1">
+                          <span class="tooltiptext" *ngIf="item.facturaRemision === 1 && item.remision ===1" > Revertir Entrega con Restricción R </span>
+                          <img src="./assets/Images/candado_verde_F.svg"  (click)="quitarRestriccion(false, item)" *ngIf="item.facturaRemision === 1 && item.remision ===0">
+                          <span class="tooltiptext" *ngIf="item.facturaRemision === 1 && item.remision ===0" > Revertir Entrega con Restricción F </span>
+                        </div>
+                      </div>
+                      <div class="imagenesDiv" *ngIf="item.pausado === 0 && item.metodo === 0">
+                        <div class="tooltip" *ngIf="item.urgencia === 0">
+                          <img src="./assets/Images/dar_prioridad.svg" *ngIf="item.urgencia === 0" (click)="cambiarStatus(item, 1)">
+                          <span class="tooltiptext" *ngIf="item.urgencia === 0"> Dar Prioridad</span>
+                        </div>
+                        <div class="tooltip"  *ngIf="item.urgencia !== 0">
+                          <img src="./assets/Images/revertir_prioridad.svg" *ngIf="item.urgencia !== 0" (click)="cambiarStatus(item, 0)">
+                          <span class="tooltiptext" *ngIf="item.urgencia"> Revertir Prioridad</span>
+                        </div>
+                      </div>
+                      <div class="imagenesDiv" *ngIf="item.pausado !== 0 && item.metodo === 0" style="pointer-events: none;">
+                        <div  *ngIf="item.urgencia === 0">
+                          <img src="./assets/Images/flecha_prioridad_inactivo.svg" *ngIf="item.urgencia === 0">
+                        </div>
+                        <div   *ngIf="item.urgencia !== 0">
+                          <img src="./assets/Images/flecha_revert_inactivo.svg" *ngIf="item.urgencia !== 0" >
+                        </div>
+                      </div>
+                      <div class="imagenesDiv" *ngIf="item.metodo === 1">
+                        <div class="tooltipAbove">
+                          <img (click)="popInformativo(item)" src="./assets/Images/icono_warning.svg">
+                          <span class="tooltiptext">No Facturable</span>
+                        </div>
+                      </div>
+                      <div class="imagenesDiv" style="min-width: 68px; max-height: 68px">
+                        <div class="tooltip" *ngIf="item.pausado === 0 && item.metodo === 0">
+                          <img src="./assets/Images/pausar.svg" *ngIf="item.pausado === 0" (click)="pausar(item, 1)" height="15px">
+                          <span class="tooltiptext" *ngIf="item.pausado === 0"> Pausar Envío</span>
+                        </div>
+                        <div class="tooltip"  *ngIf="item.pausado !== 0 && item.metodo === 0">
+                          <img src="./assets/Images/reanudar.svg" *ngIf="item.pausado !== 0" (click)="pausar(item, 0)" height="15px">
+                          <span class="tooltiptext" *ngIf="item.pausado !== 0" style=""> Reanudar Envío</span>
+                        </div>
+                      </div>
+                      <div style="width: 5%">
+                        <label>{{item.indicePrioridad}}</label>
+                      </div>
+                      <div>
+                        <label (click)="popInformativo(item)" [ngClass]="item.metodo == 1? 'activeClient': ''"> {{item.cliente}}</label>
+                      </div>
+                      <div style="width: 20%">
+                        <span>{{item.zona}}</span>
+                        <label class="textLimite">{{item.calle}} C.P {{item.cp}}</label>
+                      </div>
+                      <div>
+                        <span>{{item.contacto}}</span>
+                        <label class="textLimite">{{item.puesto}}</label>
+                      </div>
+                      <div>
+                        <label>{{item.monto | currency: 'USD'}} USD</label>
+                      </div>
+                      <div class="alertProgramados">
+                        <img src="./assets/Images/relojAlarma.svg" *ngIf="item.programado === 1" class="imgAlert" height="17px">
+                        <label style=" text-transform: capitalize;" [style.color]="item.programado === 1? '#D08F29':'#424242'">{{item.fee}}</label>
+                      </div>
+                      <div>
+                        <label>{{item.dias}}</label>
+                      </div>
+                      <div>
+                        <span>{{item.totalPartidas}} Partidas · {{item.totalPiezas}} Pzas</span>
+                        <label class="textLimite"><span *ngIf="item.totalInspeccion > 0">{{item.totalInspeccion}} Inspeccion</span><span *ngIf="item.totalInspeccion > 0 && item.totalEmbalar > 0"> · </span> <span *ngIf="item.totalEmbalar > 0">{{item.totalEmbalar}} Embalaje</span></label>
+                      </div>
+                      <div style="width: 8%">
+                        <label *ngIf="item.urgencia !== 0" [style.color]="'#D0021B'">Urgencia</label>
+                        <label *ngIf="item.urgencia === 0" [style.color]="'#242424'">Por Sistema</label>
+                      </div>
+                      <div class="imagenesDiv">
+                        <img src="./assets/Images/flecha_abajo.svg" *ngIf="item.activePart" (click)="item.activePart = !item.activePart">
+                        <img src="./assets/Images/flecha_arriba.svg" *ngIf="!item.activePart" (click)="item.activePart = !item.activePart">
+                      </div>
+                    </div>
+                  </div>
+                  <!--Empieza Lista partidas-->
+                  <div *ngIf="item.activePart" class="partidas">
+                    <header class="headerPart">
+                      <div>
+                        <label>#<span style="padding-left: 20px">Partidas</span></label>
+                      </div>
+                    </header>
+                    <div class="listaPart" *ngIf="item.partidas.length > 0">
+                      <div class="listaPartidas" *ngFor="let part of item.partidas; let i = index">
+                        <div class="datosLst">
+                          <div style="width: 80%">
+                            <span>
+                            <img src="./assets/Images/relojAlarma.svg" *ngIf="part.programado === 1" class="imgAlert" height="14px">
+                            <label class="labelData">{{i +1}} ·
+                            <img class="imgEstado" src="./assets/Images/congelacion.svg" *ngIf="part.tipo === 'congelacion'">
+                            <img class="imgEstado" src="./assets/Images/refrigeracion.svg" *ngIf="part.tipo === 'refrigeracion'">
+                            <img clas="imgEstado" src="./assets/Images/ambiente.svg" *ngIf="part.tipo === 'ambiente'">
+                            </label>
+                            <span class="spanData">{{part.codigo}} ·</span>
+                            <span class="spanData" [style.color]="part.programado === 1? '#D08F29':'#424242'">{{part.fechaPartida}}</span>
+                            <label class="labelData"> P.Interno {{part.cpedido}}</label>
+                            <label class="labelData" style="font-weight: bold"> · {{part.fabrica}} · </label>
+                            <label class="labelData" >{{part.descripcion}}</label>
+                            </span>
+                          </div>
+                          <div style="justify-content: center">
+                            <label style="color: #008894">{{part.piezas}} <span *ngIf="part.piezas === 1" class="spanData">Pza</span> <span class="spanData" *ngIf="part.piezas > 1">Pzas</span></label>
+                          </div>
+                          <div style="justify-content: center">
+                            <span class="spanData">{{part.tipo}}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!--Termina Lista partidas-->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="sinDatos" *ngIf="!partHabilidatas">
+        <label>SIN PARTIDAS DISPONIBLES</label>
+      </div>
+    </div>
+    <!--Terminan los componentes-->
+      <footer class="footer">
+        <div class="datosFooter">
+          <div class="Prioridad1">
+            <img style="height: 20px;" class="img" src='./assets/Images/revertir_prioridad.svg' />
+            <span>Revertir Prioridad</span>
+          </div>
+          <div class="Prioridad1">
+            <img style="height: 20px;" class="img" src='./assets/Images/dar_prioridad.svg' />
+            <span>Dar Prioridad</span>
+          </div>
+          <div class="Prioridad1">
+            <img class="img" src='./assets/Images/congelacion.svg' />
+            <span>Congelación</span>
+          </div>
+          <div class="Prioridad1">
+            <img class="img" src='./assets/Images/refrigeracion.svg' />
+            <span>Refrigeración</span>
+          </div>
+          <div class="Prioridad1">
+            <img class="img" src='./assets/Images/ambiente.svg' />
+            <span>Ambiente</span>
+          </div>
+          <div class="Prioridad1">
+            <img class="img" src='./assets/Images/relojAlarma.svg' />
+            <span>Productos Programados</span>
+          </div>
+          <div class="Prioridad1">
+            <label class="p1">FEE: </label> Fecha Estimada de Entrega
+          </div>
+          <div class="Prioridad1">
+            <img style="height: 20px;" class="img" src='./assets/Images/icono_warning.svg' />
+            <span>No Facturable</span>
+          </div>
+        </div>
+      </footer>
+  </div>
+</div>
+<pn-pop-up-restriccion *ngIf="deleteRestriction" (cerrarPop)="validarFactura($event)" [empresa]="cliente.toLowerCase()"></pn-pop-up-restriccion>
+<pn-pop-up-restriccion-entrega *ngIf="activeRestriction" (cerrarPop)="activarResctriccion($event)" [cliente]="cliente.toLowerCase()"></pn-pop-up-restriccion-entrega>
+<pn-pop-up-tipo-pago *ngIf="activePop" [datos]="inforCliente" (cerrarPop)="cerrarPopDatos($event)"></pn-pop-up-tipo-pago>

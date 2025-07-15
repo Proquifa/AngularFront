@@ -1,0 +1,182 @@
+<div>
+  <div (click)="backMenu()">
+    <img height="22px" src="assets/Images/gestion/consultas/facturacion/recurso_190.svg" alt="">
+  </div>
+  |
+  <div>NOTA DE CREDITO</div>
+</div>
+<div>
+  <div [ngClass]="classPanel">
+    <div class="filtroHeader">
+      <div class="abrir" (click)="openPanel()">
+        <img *ngIf="hiddenClose" width="15px" src="assets/Images/gestion/consultas/facturacion/recurso_193.svg" alt="">
+        <img *ngIf="!hiddenClose" width="15px" src="assets/Images/gestion/consultas/facturacion/recurso_188.svg" alt="">
+      </div>
+      <div *ngIf="hiddenClose">
+        CERRAR
+        <div class="cerrar" (click)="closePanel()">
+          <img height="20px" width="20px" src="assets/Images/gestion/consultas/facturacion/recurso_189.svg" alt="">
+        </div>
+      </div>
+    </div>
+
+    <div class="filtros">
+<div></div>
+      <div>
+        <div (click)="filtroAvanzada()" [style.background]="avanzada?'#008895':'#C2C3C9'">AVANZADA</div>
+        <div (click)="filtroRapida()" [style.background]="!avanzada?'#008895':'#C2C3C9'">RÁPIDA</div>
+      </div>
+
+      <div *ngIf="avanzada" class="divAvanzada">
+        <!--  Si  ya hay datos dentro del compenente se manda el < Gestion-filter/> con los datos
+            Y la propiedad IsLoader como verdadera
+          -->
+        <div *ngIf="isThereData;else loader">
+          <gestion-filter [ElementsDropList]="Elements" (valueFilter)="mostrarDatos($event)" [IsImage]="IsImage" [IsDate]="IsDate"
+            [IsLoader]="isThereData" [Clear]="Clear" style="width: 100%"></gestion-filter>
+        </div>
+
+        <!--  Si  no hay datos dentro del compenente se manda el < Gestion-filter/> con solo
+            una propiedad
+            IsLoader como Falsa-->
+        <ng-template #loader>
+          <gestion-filter [IsLoader]="isThereData" [Clear]="Clear"></gestion-filter>
+        </ng-template>
+      </div>
+
+      <div *ngIf="!avanzada" class="divRapida">
+        <div>
+          <pq-radio-button [widthTotal]="'120px'" [lstItems]="lstRadiosRapida" [disble]="true" [direction]="'row'" [imgSize]="'12px'"
+            (emitItem)="radioRapida($event)" [width]="'15px'"></pq-radio-button>
+        </div>
+
+        <div [formGroup]="filtroForm">
+          <span>{{filtroConsultaRapida}}</span>
+          <input type="text" formControlName="filtroDato" name="filtroDato">
+        </div>
+
+        <div (click)="filtroRapido()">
+          <img height="20px" src="assets/Images/visualizar.svg" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div [ngClass]="'resultados' + (!showGraphic ? ' visible' : '')" [style.width]="hiddenClose ? 'calc(100% - 321px)': 'calc(100% - 50px)'"
+    *ngIf="!showGraphic">
+    <div>
+      <div>
+        RESULTADOS
+      </div>
+      <div>
+        <img [style.margin-right]="'15px'" height="20px" width="20px" src="assets/Images/gestion/consultas/cobros/graficaminigris.svg"
+          alt="" (click)="showGraphicPanel()">
+        <img height="20px" width="20px" src="assets/Images/exportar.svg" alt="" (click)="download()">
+      </div>
+    </div>
+    <div>
+      <div>
+        <div [style.min-width]="'30px'">#</div>
+        <div [style.min-width]="'80px'">Fecha</div>
+        <div [style.min-width]="'150px'">Cliente</div>
+        <div [style.min-width]="'80px'">Cobrador</div>
+        <div [style.min-width]="'80px'">Nota de crédito</div>
+        <div [style.min-width]="'40px'">XML</div>
+        <div [style.min-width]="'80px'">Facturó</div>
+        <div [style.min-width]="'80px'">Monto</div>
+        <div [style.min-width]="'80px'">Factura</div>
+        <div [style.min-width]="'80px'">Pedido interno</div>
+        <div [style.min-width]="'80px'">Estado</div>
+        <div [style.min-width]="'80px'">Factura destino</div>
+        <div [style.min-width]="'10px'"></div>
+      </div>
+      <div>
+        <div *ngFor="let item of lstNotasCredito; let i = index">
+          <div [style.min-width]="'30px'">{{i + 1}}</div>
+          <div [style.min-width]="'80px'">{{item.fecha | dateFormatSlash}}</div>
+          <div [style.min-width]="'150px'">{{item.nombreCliente}}</div>
+          <div [style.min-width]="'80px'">
+            <!-- <span *ngIf="item.hora != null">{{item.hora}}</span>
+            <span *ngIf="item.hora == null">NA</span> -->
+            {{item.cobrador}}
+          </div>
+          <div [style.min-width]="'80px'" class="normalVerde" style=" color: #008895;">
+            <!-- <span *ngIf="item.tipoChecada != null">{{item.tipoChecada}}</span>
+            <span *ngIf="item.tipoChecada == null">NA</span> -->
+            <span (click)="descargarPDF('http://201.161.12.60:51725/SAP/NotaCredito/'+item.fpor+'/'+item.akFolio+'.pdf')">{{item.akFolio}}</span>
+          </div>
+          <div [style.min-width]="'40px'" class="normalVerde" style=" color: #008895;">
+            <span><a style=" color: #008895;" href="http://201.161.12.60:51725/SAP/Facturas/{{item.fpor}}/{{item.akFolio}}.xml"
+                download>VER</a></span>
+            <!-- <span *ngIf="item.localidad == 'DISTRITO FEDERAL'">PROQUIFA</span>
+            <span *ngIf="item.localidad == 'CUERNAVACA'">RYNDEM</span>
+            <span *ngIf="item.localidad == 'GUADALAJARA'">GUADALAJARA</span> -->
+          </div>
+          <div [style.min-width]="'80px'">
+            {{item.fpor}}
+            <!-- {{item.area}} -->
+            <!-- <div>
+              <img *ngIf="item.area == 'OPERACIONES'" height="30px" src="assets/Images/gestion/consultas/asistencias/asis_flechas.svg"
+                matTooltip="{{item.area}}" />
+              <img *ngIf="item.area == 'SERVICIOS'" height="30px" src="assets/Images/gestion/consultas/asistencias/asis_mas.svg" matTooltip="{{item.area}}"
+              />
+              <img *ngIf="item.area == 'COMERCIALIZACION'" height="30px" src="assets/Images/gestion/consultas/asistencias/asis_box.svg"
+                matTooltip="{{item.area}}" />
+              <img *ngIf="item.area == 'FINANZAS'" height="30px" src="assets/Images/gestion/consultas/asistencias/asis_cal.svg" matTooltip="{{item.area}}"
+              />
+            </div> -->
+          </div>
+          <div [style.min-width]="'80px'">{{item.importe | acFormatMoney}}</div>
+          <div [style.min-width]="'80px'" class="normalVerde" style=" color: #008895;">
+            <span (click)="descargarPDF('http://201.161.12.60:51725/SAP/Facturas/'+item.fpor+'/'+item.factura+'.pdf')" *ngIf="item.factura !== 0">{{item.factura}}</span>
+            <span *ngIf="item.factura === 0" style="color: black;">NA</span>
+          </div>
+          <div [style.min-width]="'80px'" class="normalVerde" style=" color: #008895;">
+            <span (click)="descargarPDF('http://201.161.12.60:51725/SAP/Pedidos/'+item.cpedido+'.pdf')" *ngIf="item.cpedido !== null">{{item.cpedido}}</span>
+            <span *ngIf="item.cpedido === null" style="color: black;">NA</span>
+            <!-- <div>
+              <div [ngClass]="item.incidencia == 'NINGUNA'?'circleGreen':item.incidencia == 'RETARDO' || item.incidencia == 'FUERA DE TIEMPO'?'circleYellow':'circleRed'"></div>
+              <span *ngIf="item.incidencia != 'NINGUNA' && item.incidencia != 'FALTA'">{{item.incidencia}}</span>
+              <span *ngIf="item.incidencia == 'FALTA'">FALTÓ</span>
+              <span *ngIf="item.incidencia == 'NINGUNA'">ASISTIÓ</span>
+            </div> -->
+          </div>
+          <div [style.min-width]="'80px'">{{ item.estado }}</div>
+          <div [style.min-width]="'80px'" class="normalVerde" style=" color: #008895;">
+            <span *ngIf="item.facturaDestino === 0" style=" color: black;">NA</span>
+            <span *ngIf="item.facturaDestino !== 0" (click)="descargarPDF('http://201.161.12.60:51725/SAP/Facturas/'+item.fpor+'/'+item.facturaDestino+'.pdf')" >{{ item.facturaDestino }}</span>
+          </div>
+          <div [style.min-width]="'10px'"></div>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="total">
+      <p>Total:
+        <span>{{lstAsistencias.length}}</span>
+        <span>Registros</span>
+      </p>
+    </div> -->
+    <div class="total">
+      <p>Total:
+        <span>{{lstNotasCredito.length}}</span>
+        <span>Nota<span *ngIf="lstNotasCredito.length != 1">s</span>
+          de crédito</span>
+      </p>
+    </div>
+  </div>
+  <div style="position: relative;" [style.width]="hiddenClose ? 'calc(100% - 321px)': 'calc(100% - 50px)'" *ngIf="showGraphic">
+    <div [ngClass]="'graphics-panel-container' + (showGraphic ? ' visible' : '')" [style.top]="topGraphics">
+      <div class="graphics-panel-option">
+        <img src="assets/Images/gestion/images/tablaminigris.svg" (click)="showTablePanel()">
+      </div>
+      <div class="graphics-container" *ngIf="refrescar">
+        <div class="donut-container" *ngFor="let item of graficas; let i = index">
+          <p clasfgh jºº=b s="donut-title">{{item}}</p>
+          <div id="asistencia-canvas" class="canvas-container">
+            <pn-donut-chart [idGrafica]="i+'asis'" [data]="graficasValores[i]" [tipoGrafica]="'General'"></pn-donut-chart>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

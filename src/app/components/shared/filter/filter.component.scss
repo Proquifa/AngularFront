@@ -1,0 +1,192 @@
+@import "../../../../mixins.scss";
+
+.loader {
+    margin-left: 35%;
+    border: 8px solid #f3f3f3; /* Light grey */
+    border-top: 8px solid #008895; /* Blue */
+    border-radius: 50%;
+    width: 60px;
+
+    
+    height: 60px;
+    animation: spin .9s linear infinite;
+   
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+.refresh{
+    @include flexRow;
+    @include absoluteCenter;
+    background: #292929;
+    height: 35px;
+    
+
+}
+.refresh:hover{
+cursor: pointer;
+background: black;
+}
+.refresh::after{
+    cursor: pointer;
+    background: #454444;
+    }
+.img-filter{
+opacity: .9;
+
+    -webkit-animation: fadein .5s; /* Safari, Chrome and Opera > 12.1 */
+    -moz-animation: fadein .5s; /* Firefox < 16 */
+     -ms-animation: fadein .5s; /* Internet Explorer */
+      -o-animation: fadein .5s; /* Opera < 12.1 */
+         animation: fadein .5s;
+}
+
+.img-filter2{
+
+    opacity: .9;
+
+        -webkit-animation: fadein .5s; /* Safari, Chrome and Opera > 12.1 */
+        -moz-animation: fadein .5s; /* Firefox < 16 */
+         -ms-animation: fadein .5s; /* Internet Explorer */
+          -o-animation: fadein .5s; /* Opera < 12.1 */
+             animation: fadein .5s;
+    }
+
+
+
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: .9; }
+}
+
+/* Firefox < 16 */
+@-moz-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: .9; }
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: .9; }
+}
+
+/* Internet Explorer */
+@-ms-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: .9; }
+}
+
+/* Opera < 12.1 */
+@-o-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 9; }
+}
+.button-cnt{
+    border-radius: 93px 93px 93px 93px;
+-moz-border-radius: 93px 93px 93px 93px;
+-webkit-border-radius: 93px 93px 93px 93px;
+border: 0px solid #000000;
+}
+
+.ayer{
+    cursor: pointer;
+    background: #AD0404 ; height: 84px; width: 91px; margin-bottom: 3px;text-align: center;
+    color: #f3f3f3;
+    font-family: "Roboto-Regular";
+    font-size: 12px;
+}
+.atier{
+    background: #960000 ; height: 84px; width: 91px; margin-bottom: 3px;
+    color: #f3f3f3;
+    font-family: "Roboto-Regular";
+    font-size: 12px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+.anteAntier{
+    cursor: pointer;
+    background: #820000 ; height: 62px; width: 91px; margin-bottom: 3px;
+    color: #f3f3f3;
+    font-family: "Roboto-Regular";
+    font-size: 12px;
+    justify-content: center;
+    align-items: center;
+    display: inline-grid;
+}
+.pasado{
+    cursor: pointer;
+    background: #680000 ; height: 42px; width: 91px; margin-bottom: 3px;
+    color: #f3f3f3;
+    font-family: "Roboto-Regular";
+    font-size: 12px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    
+}
+.hoy{
+    cursor: pointer;
+    background: #424242 ; height: 172px; width: 91px; margin-bottom: 3px;
+    color: #f3f3f3;
+    font-family: "Roboto-Regular";
+    font-size: 12px;
+    justify-content: center;
+    align-items: center;
+
+}
+.todo{
+    cursor: pointer;
+    background: #424242; height: 106px; width: 91px;
+    color: #f3f3f3;
+    font-family: "Roboto-Regular";
+    font-size: 12px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.manana{
+    cursor: pointer;
+    background:#9CC100; height: 84px; width: 91px;margin-bottom: 3px;
+    color: #f3f3f3;
+    font-family: "Roboto-Regular";
+    font-size: 12px;
+    justify-content: center;
+    align-items: center;
+
+}
+.pasadoManana{
+    cursor: pointer;
+    background:#8DA500; height: 84px; width: 91px;margin-bottom: 3px;
+    color: #f3f3f3;
+    font-family: "Roboto-Regular";
+    font-size: 12px;
+    justify-content: center;
+    align-items: center;
+    display: inline-grid;
+}
+.posPasado{
+    cursor: pointer;
+    background: #758900; height: 62px; width: 91px; margin-bottom: 3px;
+    color: #f3f3f3;
+    font-family: "Roboto-Regular";
+    font-size: 12px;
+    justify-content: center;
+    align-items: center;
+    display: inline-grid;
+}
+.futuro{
+    cursor: pointer;
+    background: #5D6D00; height: 42px; width: 91px;margin-bottom: 3px;
+    color: #f3f3f3;
+    font-family: "Roboto-Regular";
+    font-size: 12px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}

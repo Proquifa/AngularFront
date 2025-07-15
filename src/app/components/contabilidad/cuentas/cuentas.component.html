@@ -1,0 +1,201 @@
+<pn-header-bc [opciones]="opcion" [homePath]="homePath"></pn-header-bc>
+<div class="cuentas">
+    <div class="cuentasActions">
+        <div class="cuentasActionsSelects">&nbsp;</div>
+        <div class="cuentasActionsBtn" (click)="fnOpenModal(0)">Nueva Cuenta</div>
+    </div>
+    <div class="cuentasListEmpresas">
+        <div [ngClass]="classLstEmpresa[0]" (click)="fnOutPutItem(lstItems[4][3], 4); classLstEmpresa.fill('cuentasListEmpresasItem'); classLstEmpresa[0] = 'cuentasListEmpresasItemActive'; ">
+            <img src="./assets/Images/ccProquifa.svg" alt="" class="cuentasListEmpresasItemImg">
+        </div>
+        <div [ngClass]="classLstEmpresa[1]" (click)="fnOutPutItem(lstItems[4][4], 4); classLstEmpresa.fill('cuentasListEmpresasItem'); classLstEmpresa[1] = 'cuentasListEmpresasItemActive'; ">
+            <img src="./assets/Images/ccProquifa_servicios.svg" alt="" class="cuentasListEmpresasItemImg">
+        </div>
+        <div [ngClass]="classLstEmpresa[2]" (click)="fnOutPutItem(lstItems[4][5], 4); classLstEmpresa.fill('cuentasListEmpresasItem'); classLstEmpresa[2] = 'cuentasListEmpresasItemActive'; ">
+            <img src="./assets/Images/ccProquifa_proveedora.svg" alt="" class="cuentasListEmpresasItemImg">
+        </div>
+        <div [ngClass]="classLstEmpresa[3]" (click)="fnOutPutItem(lstItems[4][1], 4); classLstEmpresa.fill('cuentasListEmpresasItem'); classLstEmpresa[3] = 'cuentasListEmpresasItemActive'; ">
+            <img src="./assets/Images/ccGolocaer.svg" alt="" class="cuentasListEmpresasItemImg">
+        </div>
+        <div [ngClass]="classLstEmpresa[4]" (click)="fnOutPutItem(lstItems[4][2], 4); classLstEmpresa.fill('cuentasListEmpresasItem'); classLstEmpresa[4] = 'cuentasListEmpresasItemActive'; ">
+            <img src="./assets/Images/ccMungen.svg" alt="" class="cuentasListEmpresasItemImg">
+        </div>
+        <div [ngClass]="classLstEmpresa[5]" (click)="fnOutPutItem(lstItems[4][6], 4); classLstEmpresa.fill('cuentasListEmpresasItem'); classLstEmpresa[5] = 'cuentasListEmpresasItemActive'; ">
+            <img src="./assets/Images/ccRyndem.svg" alt="" class="cuentasListEmpresasItemImg">
+        </div>
+    </div>
+    <div class="cuentasActions" style="border: none;margin-bottom: 35px;">
+        <div class="cuentasActionsSelects">
+            <div class="cuentasActionsSelect">
+                <app-pf-selector [inputHeight]="'30px'" [lstItems]="lstItems[0]" [defaultItem]="defaultItem[0]" (outPutItem)="fnOutPutItem($event, 0)"></app-pf-selector>
+            </div>
+        </div>
+        <app-pn-search [searchPlaceholder]="searchPlaceholder" (searchEmitter)="fnGetEmitSearch($event)"></app-pn-search>
+    </div>
+    <div class="cuentasList">
+        <div class="cuentasListHeader">
+            <div class="cuentasListHeaderCol" style="width: 140px;justify-content: center;">#</div>
+            <div class="cuentasListHeaderCol" style="width: 285px;">No. Cuenta</div>
+            <div class="cuentasListHeaderCol" style="width: 1200px;">Cuenta</div>
+            <div class="cuentasListHeaderCol" style="width: 500px;">Tipo</div>
+            <div class="cuentasListHeaderCol" style="width: 140px;">&nbsp;</div>
+        </div>
+        <div class="cuentasListItem" *ngFor="let item of lstCuentas; let i =  index">
+            <div class="cuentasListItemCol" style="width: 140px;text-align: center;"> {{ (i + 1) }} </div>
+            <div class="cuentasListItemCol" style="width: 285px;" [ngStyle]="{'color': (item.colorRow) ? '#008894' : '#424242','font-weight': (item.colorRow) ? '700' : '400'}"> {{ item.noCuenta }} </div>
+            <div class="cuentasListItemCol" style="width: 1200px;" [ngStyle]="{'font-weight': (item.colorRow) ? '700' : '400'}"> {{ item.cuenta }} </div>
+            <div class="cuentasListItemCol" style="width: 500px;"> {{ item.tipo }} </div>
+            <div class="cuentasListItemCol" style="width: 140px;display: flex;align-items: center;line-height: initial;">
+                <div class="cuentasListItemColBtns" *ngIf="item.isEditable" (click)="fnEditAccount(item)">
+                    <img src="./assets/Images/editarCuentas.svg" alt="" class="cuentasListItemColBtnsImg">
+                </div>
+                <div class="cuentasListItemColBtns" *ngIf="!item.isEditable" style="min-width: 16px;">&nbsp;</div>
+                <div style="min-width: 30px;">&nbsp;</div>
+                <div class="cuentasListItemColBtns">
+                    <img *ngIf="item.isRemovable" src="./assets/Images/eliminar_activoCuentas.svg" alt="" class="cuentasListItemColBtnsImg" (click)="fnOpenModalDelete(item)">
+                    <img *ngIf="!item.isRemovable" src="./assets/Images/eliminar_inactivoCuentas.svg" alt="" class="cuentasListItemColBtnsImg imgDisabled">
+                    <div class="cuentasListItemColBtnsTooltip">Eliminar Inactivo<br />{{ (item.cantPolizas === 1) ? '1 Pólizas Vinculada' : item.cantPolizas + ' Pólizas Vinculadas' }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="cuentasFooter">
+        <span class="cuentasFooterSpan">#{{(lstCuentas.length === 1) ? lstCuentas.length + ' Cuenta' : lstCuentas.length + ' Cuentas' }}</span>
+    </div>
+</div>
+
+<div [ngClass]="modal">
+    <div class="modalContent">
+        <div class="modalContentHeader">NUEVA CUENTA CONTABLE</div>
+        <div class="modalContentBody">
+            <div class="modalContentBodySelects">
+                <div class="modalContentBodySelectLabel">Empresa</div>
+                <div class="modalContentBodySelect">
+                    <app-pf-selector [colorSelectedSimple]="colorSelectedSimple" [lstItems]="lstItems[4]" [defaultItem]="defaultItem[4]" (outPutItem)="fnOutPutItem($event, 5)"></app-pf-selector>
+                </div>
+            </div>
+            <div class="modalContentBodySelects">
+                <div class="modalContentBodySelectLabel">Cuenta</div>
+                <div class="modalContentBodySelect">
+                    <app-pf-selector [isSimpleValue]="false" [placeholder]="'Folio, Cuenta'" [lstItems]="lstItems[1]" [viewSearch]="true" [defaultItem]="defaultItem[1]" (outPutItem)="fnOutPutItem($event, 1)"></app-pf-selector>
+                </div>
+            </div>
+            <div class="modalContentBodyLabels">
+                <div class="modalContentBodyLabelsItems">
+                    <div class="modalContentBodyLabelsItemTitle">Folio</div>
+                    <div class="modalContentBodyLabelsItemValue">{{ folio }}</div>
+                </div>
+                <div class="modalContentBodyLabelsItems">
+                    <div class="modalContentBodyLabelsItemTitle">Tipo de Cuenta</div>
+                    <div class="modalContentBodyLabelsItemValue">{{ tipoCuenta }}</div>
+                </div>
+                <div class="modalContentBodyLabelsItems">&nbsp;</div>
+            </div>
+            <div class="modalContentBodySelectsHoriz">
+
+                <div class="modalContentBodySelectsHorizItem" style="width:30%">
+                    <div class="modalContentBodySelectsHorizLabel">Tipo</div>
+                    <div class="modalContentBodySelectsHoriz">
+                        <app-pf-selector [maxHeight]="'130px'" [lstItems]="lstItems[6]" [defaultItem]="defaultItem[6]" (outPutItem)="fnOutPutItem($event, 7)"></app-pf-selector>
+                    </div>
+                </div>
+
+                <div class="modalContentBodySelectsHorizItem" style="width:65%">
+                    <div class="modalContentBodySelectsHorizLabel">{{ descripcionCuentaContable }}</div>
+                    <div class="modalContentBodySelectsHoriz" *ngIf="isEmpty">
+                        <app-pf-selector [isOpaque]="true" [isDisabled]="true"></app-pf-selector>
+                    </div>
+                    <div class="modalContentBodySelectsHoriz" *ngIf="isClient">
+                        <app-pf-selector [maxHeight]="'130px'" [lstItems]="lstItems[2]" [viewSearch]="'true'" [defaultItem]="defaultItem[2]" (outPutItem)="fnOutPutItem($event, 2)"></app-pf-selector>
+                    </div>
+                    <div class="modalContentBodySelectsHoriz" *ngIf="isProvider">
+                        <app-pf-selector [maxHeight]="'130px'" [lstItems]="lstItems[3]" [viewSearch]="'true'" [defaultItem]="defaultItem[3]" (outPutItem)="fnOutPutItem($event, 3)"></app-pf-selector>
+                    </div>
+                    <div class="modalContentBodySelectsHoriz" *ngIf="isBank">
+                        <app-pf-selector [maxHeight]="'130px'" [lstItems]="lstItems[5]" [viewSearch]="'true'" [defaultItem]="defaultItem[5]" (outPutItem)="fnOutPutItem($event, 6)"></app-pf-selector>
+                    </div>
+                    <div class="modalContentBodySelectsHorizItemInputs" *ngIf="isOther">
+                        <textarea [(ngModel)]="descripcion" class="modalContentBodySelectsHorizItemInputsTextArea" (keyup)=" (descripcion !== '') ? fnValidAddAccount() : descripcion = null " [ngStyle]="{'font-size': (descripcion !== undefined && descripcion != null && descripcion.length > 55) ? '13px' : '16px', 'line-height': (descripcion !== undefined && descripcion != null && descripcion.length > 55) ? '18px' : '38px'}"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modalContentFooter">
+            <div class="modalContentFooterBtnActive" (click)="fnCloseModal(0)">CANCELAR</div>
+            <div [ngClass]="modalBtn" (click)="fnSaveCA()">ACEPTAR</div>
+        </div>
+    </div>
+</div>
+
+<div [ngClass]="modalPrompt">
+    <div class="modalPromptContent">
+        <div class="modalPromptContentHeader">PROQUIFA NET</div>
+        <div class="modalPromptContentBody">
+            <img src="./assets/Images/alertaCuentaContable.svg" alt="" class="modalPromptContentBodyImg">
+            <div class="modalPromptContentBodyText">
+                ¿Estás seguro de eliminar la cuenta contable&nbsp;<span class="modalPromptContentBodyTextSpan">{{ infoDelete }}?</span>
+            </div>
+        </div>
+        <div class="modalPromptContentFooter">
+            <div class="modalPromptContentFooterBtn" (click)="fnCloseModal(1)">CANCELAR</div>
+            <div class="modalPromptContentFooterBtn" (click)="fnDeleteAccount()">ACEPTAR</div>
+        </div>
+    </div>
+</div>
+
+<div [ngClass]="modalEdit">
+    <div class="modalContent">
+        <div class="modalContentHeader">EDITAR CUENTA CONTABLE</div>
+        <div class="modalContentBody">
+            <div class="modalContentBodySelects">
+                <div class="modalContentBodySelectLabel">Empresa</div>
+                <div class="modalContentBodySelect">
+                    <app-pf-selector [isDisabled]="true" [colorSelectedSimple]="colorSelectedSimple" [lstItems]="lstItems[4]" [defaultItem]="defaultItem[4]" (outPutItem)="fnOutPutItem($event, 5)"></app-pf-selector>
+                </div>
+            </div>
+            <div class="modalContentBodySelects">
+                <div class="modalContentBodySelectLabel">Cuenta</div>
+                <div class="modalContentBodySelect">
+                    <app-pf-selector [isDisabled]="true" [isSimpleValue]="false" [placeholder]="'Folio, Cuenta'" [lstItems]="lstItems[1]" [viewSearch]="true" [defaultItem]="defaultItem[1]" (outPutItem)="fnOutPutItem($event, 1)"></app-pf-selector>
+                </div>
+            </div>
+            <div class="modalContentBodyLabels">
+                <div class="modalContentBodyLabelsItems">
+                    <div class="modalContentBodyLabelsItemTitle">Folio</div>
+                    <div class="modalContentBodyLabelsItemValue">{{ folio }}</div>
+                </div>
+                <div class="modalContentBodyLabelsItems">
+                    <div class="modalContentBodyLabelsItemTitle">Tipo de Cuenta</div>
+                    <div class="modalContentBodyLabelsItemValue">{{ tipoCuenta }}</div>
+                </div>
+                <div class="modalContentBodyLabelsItems">&nbsp;</div>
+            </div>
+            <div class="modalContentBodySelectsHoriz">
+
+                <div class="modalContentBodySelectsHorizItem" style="width:30%">
+                    <div class="modalContentBodySelectsHorizLabel">Tipo</div>
+                    <div class="modalContentBodySelectsHoriz">
+                        <app-pf-selector [isDisabled]="true" [maxHeight]="'130px'" [lstItems]="lstItems[6]" [defaultItem]="defaultItem[6]" (outPutItem)="fnOutPutItem($event, 7)"></app-pf-selector>
+                    </div>
+                </div>
+
+                <div class="modalContentBodySelectsHorizItem" style="width:65%">
+                    <div class="modalContentBodySelectsHorizLabel">Descripción</div>
+                    <div class="modalContentBodySelectsHorizItemInputs">
+                        <textarea [(ngModel)]="descripcion" class="modalContentBodySelectsHorizItemInputsTextArea" (keyup)=" (descripcion !== '') ? fnValidAddAccount() : descripcion = null " [ngStyle]="{'font-size': (descripcion !== undefined && descripcion != null && descripcion.length > 55) ? '13px' : '16px', 'line-height': (descripcion !== undefined && descripcion != null && descripcion.length > 55) ? '18px' : '38px'}"></textarea>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="modalContentBodySelects">
+                <div class="modalContentBodySelectLabel">Descripción</div>
+                <div class="modalContentBodyInputs">
+                    <input type="text" [(ngModel)]="descripcion" class="modalContentBodyInput" (keyup)="fnValidEditAccount()">
+                </div>
+            </div> -->
+        </div>
+        <div class="modalContentFooter">
+            <div class="modalContentFooterBtnActive" (click)="fnCloseModal(2)">CANCELAR</div>
+            <div [ngClass]="modalBtn" (click)="fnEditCA()">ACEPTAR</div>
+        </div>
+    </div>
+</div>

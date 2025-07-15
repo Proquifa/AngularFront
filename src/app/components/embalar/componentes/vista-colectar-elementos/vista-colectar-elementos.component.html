@@ -1,0 +1,40 @@
+<div class="vistaColectarElementos">
+  <div class="vistaColectar">
+
+    <div class="pCongelacion" *ngIf="mostrarCongelador">
+      <img class="imgCongelacion" src='./assets/Images/congelacion.svg' style="height:101px;width: 105px;"/>
+      <article class="datosConge" style="margin-top: 12%;">
+        <p class="dato">{{formatoConge}}</p>
+        <p class="tipo">Congelación</p>
+      </article>
+    </div>
+
+    <div class="flecha1" *ngIf="mostrarFlecha1">
+      <img class="img" src='./assets/Images/siguiente.svg' style="height:60px;width: 72px;"/>
+    </div>
+
+    <div class="pRefrigeracion" *ngIf="mostrarRefri">
+      <img class="imgRefrigeracion" src='./assets/Images/refrigeracion.svg' style="height:101px;width: 105px;"/>
+      <article class="datosRefri" style="margin-top: 12%;">
+        <p class="dato">{{formatoRefri}}</p>
+        <p class="tipo">Refrigeración</p>
+      </article>
+    </div>
+
+    <div class="flecha2" *ngIf="mostrarFlecha2">
+      <img class="img" src='./assets/Images/siguiente.svg' style="height:60px;width: 72px;"/>
+    </div>
+
+    <div class="pAmbiente" *ngIf="mostrarAmbiente">
+      <img class="imgAmbiente" src='./assets/Images/ambiente.svg' style="height:101px;width: 105px;"/>
+      <article class="datosAmbiente" style="margin-top: 12%;">
+        <p class="dato">{{formatoAmbiente}}</p>
+        <p class="tipo">Ambiente</p>
+      </article>
+    </div>
+  </div>
+
+  <!-- <footer class="botonesDireccion">
+    <a class="botonIngresar">COLECTAR</a>
+  </footer> -->
+</div>

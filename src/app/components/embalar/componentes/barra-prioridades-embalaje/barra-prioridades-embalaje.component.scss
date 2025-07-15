@@ -1,0 +1,210 @@
+#myProgress {
+  width: 100%;
+  // background-color: #ddd;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-content: stretch;
+  align-items: center;
+  height: 100px;
+  color: #9B9B9B;
+  font-family: 'Roboto', sans-serif;
+  margin-left: 0%;
+  padding-top: 25px;
+}
+
+#Prioridad1 {
+  height: 100%;
+  background-color: #AF3634;
+  text-align: left;
+  line-height: 19px;
+  color: white;
+  order: 0;
+  flex: 1 1 auto;
+  align-self: auto;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  //tooltips
+  position: relative;
+  display: inline-block;
+  font-size:20px;
+  border: 1px solid white;
+  padding-left: 10px;
+  padding-top: 6px;
+}
+
+#Prioridad2 {
+  height: 100%;
+  background-color: #EEB253;
+  text-align: left;
+  line-height: 19px;
+  color: white;
+  order: 0;
+  flex: 1 1 auto;
+  align-self: auto;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  //tooltips
+  position: relative;
+  display: inline-block;
+  font-size:20px;
+  border: 1px solid white;
+  padding-left: 10px;
+  padding-top: 6px;
+}
+
+#Prioridad3{
+  height: 100%;
+  background-color: #63B257;
+  text-align: left;
+  line-height: 19px;
+  color: white;
+  order: 0;
+  flex: 1 1 auto;
+  align-self: auto;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  //tooltips
+  position: relative;
+  display: inline-block;
+  font-size:20px;
+  border: 1px solid white;
+  padding-left: 10px;
+  padding-top: 6px;
+}
+
+
+p{
+  font-size:11px;
+  color : white;
+  margin-top: 1%;
+}
+
+h1{
+  font-size: 22px;
+  color: #008895;
+  font-family: 'Roboto', sans-serif;
+}
+
+h2{
+font-size: 20px;
+color: white;
+}
+
+.tipoInspeccion{
+  margin-top: 2%;
+  margin-bottom: 2%;
+  text-align: left;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.pedimento {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-content: stretch;
+    align-items: stretch;
+    // border: 2px solid;
+    padding: 3%;
+    box-sizing: border-box;
+    }
+
+.imgPedimento {
+    order: 0;
+    flex: 0 1 auto;
+    align-self: auto;
+    // border: 2px solid red;
+    padding: 3%;
+    box-sizing: border-box;
+    }
+
+.txtPedimento {
+    order: 0;
+    flex: 1 1 auto;
+    align-self: auto;
+    // border: 2px solid blue;
+    display: flex;
+   flex-direction: column;
+   flex-wrap: nowrap;
+   justify-content: space-around;
+   align-content: stretch;
+   align-items: stretch;
+   padding: 3%;
+    box-sizing: border-box;
+    }
+
+.tipoTexto {
+    order: 0;
+    flex: 0 1 auto;
+    align-self: auto;
+    font-size: 30px;
+    font-weight: 500;
+    font-family: 'Roboto', sans-serif;
+    }
+
+.datoTexto {
+    order: 0;
+    flex: 0 1 auto;
+    align-self: auto;
+    font-size: 30px;
+    font-family: 'Roboto', sans-serif;
+    }
+
+  //Test
+  .ordenDeCompra {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+      align-content: stretch;
+      align-items: stretch;
+      // border: 2px solid;
+      // padding: 3%;
+      box-sizing: border-box;
+      min-height: 121px;
+      }
+
+  .txtOC {
+      order: 0;
+      flex: 1 1 auto;
+      align-self: auto;
+      // border: 2px solid blue;
+      display: flex;
+     flex-direction: column;
+     flex-wrap: nowrap;
+     justify-content: center;
+     align-content: stretch;
+     align-items: stretch;
+     // padding: 3%;
+      box-sizing: border-box;
+      }
+
+  .tipoTextoOC {
+      order: 0;
+      flex: 0 1 auto;
+      align-self: auto;
+      font-size: 30px;
+      font-weight: 500;
+      font-family: 'Roboto', sans-serif;
+      padding-bottom: 3%;
+      box-sizing: border-box;
+      }
+
+  .datoTextoOC {
+      order: 0;
+      flex: 0 1 auto;
+      align-self: auto;
+      font-size: 30px;
+      font-family: 'Roboto', sans-serif;
+      padding-left: 7%;
+      box-sizing: border-box;
+      }

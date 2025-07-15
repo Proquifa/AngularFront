@@ -1,0 +1,68 @@
+.padre{
+  width: 100%;
+  // height: 100%;
+  background: darkkhaki;
+  flex-direction: row;
+  display: flex;
+  height: 50px;
+}
+
+.botonesDias{
+  // width: 20%;
+  height: 100%;
+  background: #ECEEF0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border: none;
+  position: relative;
+  border-bottom: 1px solid #88868A;
+  border-top: 1px solid #88868A;
+  border-left: 1px solid #88868A;
+  border-right: 1px solid #88868A;
+  box-sizing: border-box;
+  flex-direction: column;
+  line-height: 1.3;
+
+  & > a {
+    font-family: 'Novecento';
+    font-weight: bold;
+    // font-size: 18px;
+    font-size: calc( ((12) * 1px) + ((18) - (12)) * ((100vw - 1300px) / (2974 - 1300)));
+    color: #4A4A4A;
+    text-align: center;
+  }
+
+}
+
+.botonesDiasActive{
+  // width: 20%;
+  height: 100%;
+  background: #008895;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border: none;
+  color:white;
+  position: relative;
+  flex-direction: column;
+  line-height: 1.3;
+  & > a {
+    font-family: 'Novecento';
+    font-weight: bold;
+    // font-size: 18px;
+    font-size: calc( ((12) * 1px) + ((18) - (12)) * ((100vw - 1300px) / (2974 - 1300)));
+    text-align: center;
+  }
+
+}
+
+.indice{
+  font-family: 'Novecento';
+  font-weight: bold;
+  position: relative;
+  font-size: 11px;
+  top: -7px;
+}

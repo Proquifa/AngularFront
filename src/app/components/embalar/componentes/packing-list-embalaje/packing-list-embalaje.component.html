@@ -1,0 +1,12 @@
+<div class="packingList">
+  <div class="encabezado" style="font-family: Novecento-Bold"> <p>PACKING LIST </p></div>
+  <div class="contenido">
+    <div class="listado">
+      <div *ngFor="let item of bolsa; let i = index" class="lista">
+        #{{i +1}} · {{item.tipo}}
+          <p class="p1">{{item.folio}}</p>
+          <p class="p2">{{item.piezas}} Piezas</p>
+      </div>
+    </div>
+  </div>
+</div>

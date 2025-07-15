@@ -1,0 +1,23 @@
+@import "../../../mixins.scss";
+@import "../../../colors.scss";
+
+:host{
+  @include flexColumn;
+  justify-content: space-between;
+  height: calc(100vh - 231px);
+  margin: 20px;
+
+  .title{
+    margin: 0;
+    margin-bottom: 5px;
+    font-size: 34px;
+  }
+
+  .divConfiguracion{
+    @include flexRow;
+    width: calc(100%);
+    overflow: scroll;
+    color: #404040;
+  }
+
+}

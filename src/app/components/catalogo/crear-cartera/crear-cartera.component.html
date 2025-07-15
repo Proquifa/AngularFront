@@ -1,0 +1,193 @@
+<pn-header-bc [opciones]="linksCarteras" [homePath]="homePath"></pn-header-bc>
+<div class="paneles">
+  <div class="panel-lista-clientes">
+    <div class="search-container">
+      <div class="input-cont">
+        <img class="lupa" src="assets/Images/catalogo/lupa.png" />
+        <input class="buscar-input" placeholder="Buscar Cliente" (input)="changeClientsFilter($event.target.value)" />
+      </div>
+    </div>
+    <div class="filtros-container">
+      <filter-menu [filtros]="filtros" (sendValue)="getOptions($event)" [filterSelected]="filterSelected" [totalObjetos]="" [totalObjetosLabel]="''"></filter-menu>
+    </div>
+    <div id="clientes" class='container clientes-sin-cartera' [dragula]='"bag-one"' [dragulaModel]='clientesSinCarteraDisplay' [dragulaOptions]="options">
+      <div id="{{cliente.id}}" class="cliente" *ngFor="let cliente of clientesSinCarteraDisplay">
+        <client-card [idCliente]="cliente.id" [tieneImagen]="cliente.imagen" [nombre]="cliente.imagen ? '': cliente.nombre"></client-card>
+      </div>
+    </div>
+    <div *ngIf="coverListaClientes" class="container clientes-sin-cartera cover" >
+    </div>
+  </div>
+  <div class="panel-cartera">
+    <div id="clientes-cartera" class='container clientes-cartera' [dragula]='"bag-one"' [dragulaModel]='cartera.clientes' [dragulaOptions]="options">
+      <div id="{{cliente.id}}" [ngClass]="'cliente' + (cliente.esOriginal ? ' original':'') + ' en-cartera'" *ngFor="let cliente of cartera.clientes">
+        <client-card [idCliente]="cliente.id" [tieneImagen]="cliente.imagen" [conFiltro]="false" [containerClass]="'cliente-container'" [nombre]="cliente.imagen ? '': cliente.nombre" ></client-card>
+      </div>
+      <p *ngIf="cartera.clientes.length === 0" class="label-sin-clientes">ARRASTRA CLIENTE AQUÍ</p>
+    </div>
+    <div class="panel-cartera-info">
+      <div class="title">
+        <p>DATOS GENERALES</p>
+      </div>
+      <div class="wallet-form">
+        <input placeholder="Nombre de cartera" (input)="changeName($event)" [value]="cartera.nombreCartera" />
+        <div class="cmb-row">
+          <div class="cmb-container">
+            <p class="cmb-label">ESAC</p>
+            <div class="cmb">
+              <pq-drop-list [items]="esacList" [itemSelect]="esacSelected" (valueDropList)="getComboValue($event,'esac')" [isSearch]="false" ></pq-drop-list>
+              <div *ngIf="this.rolUsuario !== 'ESAC' && this.rolUsuario !== 'Direccion'" class="cmb-cover"></div>
+            </div>
+          </div>
+          <div class="cmb-container">
+            <p class="cmb-label">EV Telemarketing</p>
+            <div class="cmb">
+              <pq-drop-list [items]="evtList" [itemSelect]="evtSelected" (valueDropList)="getComboValue($event,'evt')" [isSearch]="false"></pq-drop-list>
+              <div *ngIf="this.rolUsuario !== 'ESAC' && this.rolUsuario !== 'Direccion'" class="cmb-cover"></div>
+            </div>
+          </div>
+          <div class="cmb-container">
+            <p class="cmb-label">EV Campo</p>
+            <div class="cmb">
+              <pq-drop-list [items]="evList" [itemSelect]="evSelected" (valueDropList)="getComboValue($event,'ev')" [isSearch]="false" ></pq-drop-list>
+              <div *ngIf="this.rolUsuario !== 'Ventas' && this.rolUsuario !== 'Direccion'" class="cmb-cover"></div>
+            </div>
+          </div>
+          <div class="cmb-container">
+            <p class="cmb-label">Cobrador</p>
+            <div class="cmb">
+              <pq-drop-list [items]="cobradorList" [itemSelect]="cobradorSelected" (valueDropList)="getComboValue($event,'cobrador')" [isSearch]="false" ></pq-drop-list>
+              <div *ngIf="this.rolUsuario !== 'Finanzas' && this.rolUsuario !== 'Direccion'" class="cmb-cover"></div>
+            </div>
+          </div>
+          <div class="cmb-container">
+            <p class="cmb-label">Mensajero</p>
+            <div class="cmb">
+              <pq-drop-list [items]="mensajeroList" [itemSelect]="mensajeroSelected" (valueDropList)="getComboValue($event,'mensajero')" [isSearch]="false" ></pq-drop-list>
+              <div *ngIf="this.rolUsuario !== 'Direccion'" class="cmb-cover"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="wallet-info">
+        <div class="info-row">
+          <div class="info">
+            <p class="label">Facturación Anterior</p>
+            <p class="money fant-value">${{cartera.facturacionAnterior | acFormatNumber2decimal }}</p>
+          </div>
+          <div class="info">
+            <p class="label">Objetivo Fundamental</p>
+            <p class="money of-value">${{cartera.objetivoFundamental | acFormatNumber2decimal }}</p>
+            <p class="porcent">{{calcularCambioEnProcentaje(cartera.facturacionAnterior,cartera.objetivoFundamental) | acFormatNumber2decimal }}%</p>
+          </div>
+          <div class="info">
+            <p class="label">Objetivo Deseado</p>
+            <p class="money od-value">${{cartera.objetivoDeseado | acFormatNumber2decimal }}</p>
+            <p class="porcent">{{calcularCambioEnProcentaje(cartera.facturacionAnterior,cartera.objetivoDeseado) | acFormatNumber2decimal }}%</p>
+          </div>
+          <div class="info">
+            <p class="label">Proyección Venta</p>
+            <p class="money">${{cartera.proyeccionVenta | acFormatNumber2decimal }}</p>
+            <div class="pv-arrows-cont">
+              <div class="pv-arrow">
+                <p class="fant-value">{{calcularCambioEnProcentaje(cartera.facturacionAnterior, cartera.proyeccionVenta) | acFormatNumber2decimal }}%</p>
+                <img class="arrow fant-img" [src]="'assets/Images/catalogo/' + (cartera.facturacionAnterior <= cartera.proyeccionVenta ? 'arriba1.png': 'abajo1.png')" />
+              </div>
+              <div class="pv-arrow">
+                <p class="of-value">{{calcularCambioEnProcentaje(cartera.objetivoFundamental, cartera.proyeccionVenta) | acFormatNumber2decimal }}%</p>
+                <img class="arrow of-img" [src]="'assets/Images/catalogo/' + (cartera.objetivoFundamental <= cartera.proyeccionVenta ? 'arriba2.png': 'abajo2.png')" />
+              </div>
+              <div class="pv-arrow">
+                <p class="od-value">{{calcularCambioEnProcentaje(cartera.objetivoDeseado, cartera.proyeccionVenta) | acFormatNumber2decimal }}%</p>
+                <img class="arrow od-img" [src]="'assets/Images/catalogo/' + (cartera.objetivoDeseado <= cartera.proyeccionVenta ? 'arriba3.png': 'abajo3.png')" />
+              </div>
+            </div>
+            <div>
+            </div>
+          </div>
+          <div class="info">
+            <p class="label">Facturación Actual</p>
+            <p class="money fact">${{cartera.facturacionActual | acFormatNumber2decimal }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="wallet-buttons">
+        <div (click)="true" class="green-button extra-large" >Exportar</div>
+        <div class="wallet-div">
+          <div *ngIf="cartera.idCartera !== 0 && !cartera.publicada" (click)="guardarCambios(true)" class="green-button extra-large">PUBLICAR</div>
+          <div *ngIf="cartera.idCartera === 0 || cartera.publicada" class="green-button extra-large disabled">PUBLICAR</div>
+          <div (click)="guardarCambios()" class="green-button extra-large">GUARDAR</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="modalMoverCliente" class="modal">
+  <div (click)="modalMoverCliente = false" class="modal-bg"></div>
+  <div class="modal-content">
+    <div class="header">
+      <p>ASIGNAR CARTERA</p>
+    </div>
+    <div class="body">
+      <div class="body-wrapper">
+        <div class="message">
+          <p>El cliente debe ser asignado a una nueva cartera, favor de seleccionar la cartera destino</p>
+          <p class="last-client-msg">*La cartera se borrará automaticamente al quedarse sin clientes.</p>
+        </div>
+        <div class="wallets-container">
+          <div *ngIf="listaCarteras.length === 0" class="loader">
+
+          </div>
+          <div class="wallet-item" *ngFor="let cartera of listaCarteras; let i = index">
+            <div class="row">
+              <div class="wallet-info">
+                <span>#{{i + 1}}</span>
+                <span>·</span>
+                <span>{{cartera.nombreCartera}}</span>
+              </div>
+              <img *ngIf="i === modalWalletSelected" (click)="selectNewWalletForCliente(-1)" class="radio" src="assets/Images/radio_selected.svg" />
+              <img *ngIf="i !== modalWalletSelected" (click)="selectNewWalletForCliente(i)" class="radio" src="assets/Images/radio_unselected.svg" />
+            </div>
+            <div class="row">
+              <div class="wallet-role">
+                <img src="assets/Images/catalogo/verde_esac.svg" />
+                <p>{{cartera.esac || 'Sin asignación'}}</p>
+              </div>
+              <div class="wallet-role">
+                <img src="assets/Images/catalogo/verde_ev.svg" />
+                <p>{{cartera.ev || 'Sin asignación'}}</p>
+              </div>
+              <div class="wallet-role">
+                <img src="assets/Images/catalogo/verde_cobrador.svg" />
+                <p>{{cartera.cobrador || 'Sin asignación'}}</p>
+              </div>
+              <div class="wallet-role">
+                <img src="assets/Images/catalogo/verde_clientes.svg" />
+                <p>{{cartera.numeroClientes}} Clientes</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="options">
+        <div (click)="modalMoverCliente = false" class="green-button extra-large" >Cancelar</div>
+        <div *ngIf="modalWalletSelected !== -1" (click)="moverClienteACartera()" class="green-button extra-large" >Aceptar</div>
+        <div *ngIf="modalWalletSelected === -1" class="green-button extra-large disabled" >Aceptar</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="modalSuccess" class="modal">
+  <div (click)="modalSuccess = false" class="modal-bg"></div>
+  <div class="modal-content success">
+    <div class="header">
+      <img class="gif-exito" src="assets/Images/gif_exitosa.gif" />
+    </div>
+    <div class="body">
+      <div class="message">
+        <p class="mensaje-centrado">{{mensaje}}</p>
+      </div>
+    </div>
+  </div>
+</div>

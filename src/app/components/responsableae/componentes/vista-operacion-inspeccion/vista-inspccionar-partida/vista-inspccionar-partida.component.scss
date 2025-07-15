@@ -1,0 +1,158 @@
+
+.inspeccionPartida{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid blue;
+}
+
+.subtitulo{
+    font-family: "Novecento";
+    font-size: 21px;
+    color: #008895;
+    font-weight: bold;
+    padding-bottom: 21px;
+}
+
+.direccionRow{
+    display: flex;
+    flex-direction: row;
+}
+.direccionColum{
+  display: flex;
+  flex-direction: column;
+}
+
+.letraMediana{
+    font-family: "Roboto";
+    color: #424242 ;
+    font-size: 21px;
+    font-weight: bold;
+    width: 90%;
+    height: 30px;
+    border-bottom: 1px solid #424242;
+}
+
+.letraMedianaal100{
+  font-family: "Roboto";
+  color: #424242 ;
+  font-size: 21px;
+  font-weight: bold;
+  width: 100%;
+  height: 30px;
+  border-bottom: 1px solid #424242;
+}
+
+.letraMedianaal100SinBorde{
+  font-family: "Roboto";
+  color: #424242 ;
+  font-size: 21px;
+  font-weight: bold;
+  width: 100%;
+  height: 30px;
+
+}
+
+.etiquetas{
+    font-family: "Roboto";
+    color: #242424 ;
+    font-size: 18px;
+    height: 24px;
+    padding-top: 14px;
+
+}
+
+.etiquetasGris{
+  font-family: "Roboto";
+  color: #9B9B9B ;
+  font-size: 18px;
+  height: 24px;
+  padding-top: 14px;
+
+}
+
+.fontSize14Roja{
+  font-family: "Roboto";
+  color: #C1272D;
+  font-size: 14px;
+  padding-top: 8px;
+}
+
+.formulario .checkbox {
+    /* position: absolute; */
+    top: 50%;
+    font-family: 'Roboto';
+    font-weight: bold;
+    font-size: 21px;
+    color: #424242;
+    text-align: left;
+    left: 0;
+    width: 100%;
+  }
+  //
+  .formulario .checkbox label {
+    display: inline-block;
+    cursor: pointer;
+    position: relative;
+    padding: 2px 1px 3px 40px;
+    -webkit-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    left: 0;
+  }
+
+  .formulario .checkbox label:before {
+    content: "";
+    display: inline-block;
+    width: 24px;
+    height: 23px;
+    position: absolute;
+    left: 15px;
+    border-radius: 50%;
+    background: none;
+    border: 1px solid #AFAEB4;
+    top: -1px;
+  }
+
+  .formulario .checkbox label:before {
+    border-radius: 0;
+    left: 0;
+  }
+
+  .formulario .checkbox input[type="checkbox"] {
+    display: none;
+    position: absolute;
+    -webkit-transform: scale(2);
+    transform: scale(2.3);
+    z-index: 1;
+    opacity: 0;
+    cursor: pointer;
+    top: 3px;
+    left: 5px;
+  }
+
+  .cuadroTex{
+    width: 100%;
+    height:30px;
+    font-family: 'Roboto';
+    font-weight: lighter;
+    font-size: 18px;
+    text-align: left;
+    box-sizing: border-box;
+    border: 1px solid #ECEEF0;
+    outline-style: none;
+  }
+
+  .formulario .checkbox input[type="checkbox"]:checked+label:before {
+    display: block;
+    background-image: url("../../../../../../assets/Images/editar-pieza/check_palomita.svg");
+  }
+
+  .formulario .checkbox input[type="checkbox"]:checked+label {
+    color: #000;
+  }
+
+  pn-combo-flecha-verde{
+    cursor: pointer;
+  }

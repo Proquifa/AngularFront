@@ -1,0 +1,537 @@
+/* ------------------------------------- */
+
+
+/* ------------Mixin de Flex------------ */
+
+
+/* ------------------------------------- */
+
+@mixin flexRow {
+  display: flex;
+  flex-direction: row;
+}
+
+@mixin flexRowImportant {
+  display: flex !important;
+  flex-direction: row !important;
+}
+
+@mixin flexRowWrap {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+@mixin flexColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin absoluteCenter {
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+@mixin absoluteLeft{
+    justify-content: left;
+    align-items: center;
+    align-content: center;
+  }
+
+
+/* ------------------------------------- */
+
+
+/* -----------Mixin de Fonts------------ */
+
+
+/* ------------------------------------- */
+
+@mixin fontFormat ($fontSize, $fontWeight, $color) {
+  font-size: $fontSize;
+  font-weight: $fontWeight;
+  color: $color;
+}
+
+@mixin fontFormatImportant ($fontSize, $fontWeight, $color) {
+  font-size: $fontSize !important;
+  font-weight: $fontWeight !important;
+  color: $color !important;
+}
+
+@mixin escaledFontFormat ($font-size-map, $fontWeight, $color) {
+  @include font-size-map($font-size-map);
+  @include fontScalingFix;
+  font-weight: $fontWeight;
+  color: $color;
+  transition: all 0.4s;
+}
+
+@mixin multiLineTextTruncate ($lines:2, $lineHeight:1.5em, $height: 3em, $bgcolor: rgba(255, 255, 255, 1.0), $transColor: rgba(25, 255, 255, 0)) {
+  @supports(-webkit-line-clamp: $lines) {
+      display: block;
+      display: -webkit-box !important;
+      line-height: $lineHeight;
+      -webkit-line-clamp: $lines;
+      -webkit-box-orient: vertical;
+      // -moz-line-clamp: 1;
+      // -moz-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      height: $height;
+  }
+  @supports not (-webkit-line-clamp: $lines) {
+      position: relative;
+      height: $height !important;
+      line-height: $lineHeight;
+      overflow: hidden;
+      width: 100%;
+      &:before {
+          content: "\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0";
+          position: absolute;
+          bottom: 0;
+          right: 0;
+          background: transparent linear-gradient(to right, $transColor, $bgcolor 50%) repeat scroll 0% 0%;
+      }
+  }
+}
+
+@mixin multiLineTextTruncateSinHeight ($lines:2, $lineHeight:1.5em, $bgcolor: rgba(255, 255, 255, 1.0), $transColor: rgba(25, 255, 255, 0)) {
+  @supports(-webkit-line-clamp: $lines) {
+    display: block;
+    display: -webkit-box !important;
+    line-height: $lineHeight;
+    -webkit-line-clamp: $lines;
+    -webkit-box-orient: vertical;
+    // overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  @supports not (-webkit-line-clamp: $lines) {
+    position: relative;
+    line-height: $lineHeight;
+    overflow: hidden;
+    width: 100%;
+    &:before {
+      content: "\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0";
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      background: transparent linear-gradient(to right, $transColor, $bgcolor 50%) repeat scroll 0% 0%;
+    }
+  }
+}
+@mixin placeholder ($color,  $opacity: 1, $fontWeight: 400, $fontStyle: normal) {
+  &::placeholder {
+      color: $color;
+      opacity: $opacity;
+      font-weight: $fontWeight;
+      font-style: $fontStyle;
+  }
+
+   &::-webkit-input-placeholder {
+      /* WebKit, Blink, Edge */
+      color: $color;
+      opacity: $opacity;
+      font-weight: $fontWeight;
+      font-style: $fontStyle;
+  }
+  &:-moz-placeholder {
+      /* Mozilla Firefox 4 to 18 */
+      color: $color;
+      opacity: $opacity;
+      font-weight: $fontWeight;
+      font-style: $fontStyle;
+  }
+  &::-moz-placeholder {
+      /* Mozilla Firefox 19+ */
+      color: $color;
+      opacity: $opacity;
+      font-weight: $fontWeight;
+      font-style: $fontStyle;
+  }
+  &:-ms-input-placeholder {
+      /* Internet Explorer 10-11 */
+      color: $color;
+      opacity: $opacity;
+      font-weight: $fontWeight;
+      font-style: $fontStyle;
+  }
+}
+
+
+/* ------------------------------------- */
+
+
+/* ------------Mixin Variados----------- */
+
+
+/* ------------------------------------- */
+
+@mixin noSelect {
+  user-select: none;
+}
+
+@mixin appleBlinkFix {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+@mixin appleTouchFix {
+  -webkit-overflow-scrolling: touch;
+}
+
+@mixin ieFlexColumnFix {
+  -ms-flex: 1 1 auto !important;
+}
+
+@mixin webkitFlexColumnFix {
+  -webkit-flex: 1 1 auto !important;
+}
+
+@mixin mozFlexColumnFix {
+  -moz-flex: 1 1 auto !important;
+}
+
+@mixin fontScalingFix {
+  -webkit-font-smoothing: antialiased;
+}
+
+@mixin safariOnlyStyle {
+  @media screen and (min-color-index: 0) and(-webkit-min-device-pixel-ratio: 0) {
+      @content;
+  }
+}
+
+@mixin chromeOnlyStyle {
+  @media all and (-webkit-min-device-pixel-ratio: 0) and (min-resolution: .001dpcm) {
+      @content;
+  }
+}
+
+@mixin fireFoxOnlyStyle {
+ /*  @-moz-document url-prefix() {
+      @content;
+  } */
+}
+
+@mixin clearfix {
+  *zoom: 1;
+  &:before,
+  &:after {
+      content: " ";
+      /* 1 */
+      display: table;
+      /* 2 */
+  }
+  &:after {
+      clear: both
+  }
+}
+
+@mixin noScrollBars {
+  // Solo funciona en navegadores webkit / blink
+  &::-webkit-scrollbar {
+      height: 0px;
+      width: 0px;
+  }
+}
+
+@mixin windowsScrollbars($hideStyle) {
+  @if $hideStyle == "none" {
+      -ms-overflow-style: none;
+  }
+  @if $hideStyle == "autohide" {
+      -ms-overflow-style: -ms-autohiding-scrollbar;
+  }
+}
+
+@mixin borderLine{
+  width: 1.1px;
+  height: 100%;
+  background: linear-gradient(to top, #FFFFFF 2%, #BCBCBC 70%, #FFFFFF 93%) 100%;
+}
+
+/* ------------------------------------- */
+
+
+/* -------Mixin de Media Queries-------- */
+
+
+/* ------------------------------------- */
+
+@mixin responsive_layout ($size) {
+  @if map-has-key($breakpoints, $size) {
+      @media #{inspect(map-get($breakpoints, $size))} {
+          @content;
+      }
+  }
+  @else {
+      @warn "No existe el tamaño `#{$size}`. "+"en la lista de breakpoints, revise el map de `$breakpoints`.";
+  }
+}
+
+
+/* ------------------------------------- */
+
+
+/* -----Manejo de tamaño de fuentes----- */
+
+
+/* ------------------------------------- */
+
+// Convierte puntos a la unidad pedida
+@function convertPts($value, $convertUnit) {
+  $resultValue: 0;
+  @if $convertUnit==px {
+      $resultValue: $value * 1.3333 + 0px;
+  }
+  @else if $convertUnit==ems {
+      $resultValue: $value / 12 + 0em;
+  }
+  @else if $convertUnit==percent {
+      $resultValue: percentage($value / 12);
+  }
+  @return $resultValue;
+}
+
+// convierte pixeles a em
+@function em($pixels, $context: $browser-context) {
+  @if (unitless($pixels)) {
+      $pixels: $pixels * 1px;
+  }
+  @if (unitless($context)) {
+      $context: $context * 1px;
+  }
+  @return $pixels / $context * 1em;
+}
+
+// responsive font size mixin
+@mixin font-size-map($font-size-map) {
+  @each $breakpoint,
+  $font-size in $font-size-map {
+      @if $breakpoint=='base' {
+          font-size: em($font-size);
+      }
+      @else {
+          @include responsive_layout($breakpoint) {
+              font-size: em($font-size);
+          }
+      }
+  }
+}
+
+
+/* ------------------------------------- */
+
+
+/* ------------ Componentes ------------ */
+
+
+/* ------------------------------------- */
+@mixin pfButton ($width, $height, $base_color, $hover_color, $active_color, $border_radius: 5px) {
+  @include noSelect;
+  width: $width;
+  height: $height;
+  background-color: $base_color;
+  transition: all 0.4s;
+  border-radius: $border_radius;
+  cursor: pointer;
+
+  &:hover {
+      background-color: $hover_color;
+  }
+
+  &:active {
+      background-color: $active_color;
+  }
+}
+
+
+@mixin pfNotificationBadge ($width: 20px, $height: 20px, $color: $pfTiaraGray, $padding: 3px) {
+  @include flexRow;
+  @include absoluteCenter;
+  box-sizing: border-box;
+  width: $width;
+  height: $height;
+  padding: $padding;
+  background-color: $color;
+  border-radius: 25px;
+}
+
+/* ------------------------------------- */
+
+
+/* --- Animaciones y Transisciones  --- */
+
+
+/* ------------------------------------- */
+
+@mixin borderFromCenter ($borderColor: $pfBlue) {
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px transparent;
+  position: relative;
+  overflow: hidden;
+
+  &:before {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      left: 50%;
+      right: 50%;
+      bottom: 0;
+      background: $borderColor;
+      height: 4px;
+      -webkit-transition-property: left, right;
+      transition-property: left, right;
+      -webkit-transition-duration: 0.3s;
+      transition-duration: 0.3s;
+      -webkit-transition-timing-function: ease-out;
+      transition-timing-function: ease-out;
+  }
+
+  &:hover:before, &:focus:before, &:active:before {
+      left: 0;
+      right: 0;
+  }
+}
+
+@mixin pqCircle ($size, $color) {
+    height: $size;
+    width: $size;
+    background-color: $color;
+    border-radius: 50%;
+}
+
+
+@mixin customFont($min: 16, $max: 16, $minWidth: 1300, $maxWith: 2300) {
+
+  font-size: calc( ((#{$min}) * 1px) + ((#{$max}) - (#{$min})) * ((100vw - #{$minWidth}px) / (#{$maxWith} - #{$minWidth})) );
+
+}
+
+@mixin customHeight($min: 16, $max: 16, $minWidth: 1300, $maxWith: 2300) {
+
+  height: calc( ((#{$min}) * 1px) + ((#{$max}) - (#{$min})) * ((100vw - #{$minWidth}px) / (#{$maxWith} - #{$minWidth})) );
+
+}
+
+/* ------------------------------------- */
+
+
+/* --- Tooltip --- */
+
+
+/* ------------------------------------- */
+@mixin tooltip ($left: 50%, $marginLeft: -60px, $marginTop:0px, $width:130px){
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+
+  & > .tooltiptext::after {
+    content: " ";
+    position: absolute;
+    bottom: 100%; /* At the top of the tooltip */
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent #4C4C4C transparent;
+  }
+  &:hover {
+    & > .tooltiptext {
+      visibility: visible;
+      opacity: 1;
+      text-align: center;
+      transform: translateX(-50%);
+    }
+  }
+  & > .tooltiptext {
+    visibility: hidden;
+    width: $width;
+    background-color: #424242;
+    color: #FFFFFF;
+    font-family: 'Roboto';
+    text-align: left;
+    ///border-radius: 6px;
+    padding: 5px 10px 0px 0px;
+    font-size: 9px;
+    padding: 5px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    left: $left;
+    //margin-left: $marginLeft;
+    margin-top: $marginTop;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+  }
+}
+@mixin tooltipAbove ($top: -31px, $right:-49px, $width:103px, $left: 50%, $size: 12px){
+  position: relative;
+  cursor: pointer;
+  & >.tooltiptext:before {
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid #424242;
+    bottom: -6px;
+    content: "";
+    height: 0;
+    left: $left;
+    margin-left: -6px;
+    position: absolute;
+    width: 0;
+  }
+
+  & > .tooltiptext {
+    width: $width;
+    background-color: #424242;
+    color: #FFFFFF;
+    display: none;
+    position: absolute;
+    top: $top;
+    right: $right;
+    font-size: $size;
+    font-family: Roboto;
+    padding: 5px;
+    z-index: 1;
+    text-align: center;
+  }
+
+  &:hover{
+    & > .tooltiptext {
+      display: block;
+      opacity: 1;
+    }
+  }
+}
+
+@mixin button($height: 31px, $width: 170px, $fontColor: #FFFFFF, $backgroundColor: #C2C3C9){
+  display: flex;
+  width: $width;
+  height: $height;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  background: $backgroundColor;
+  cursor: pointer;
+  & > label {
+    font-family: Novecento;
+    font-weight: bold;
+    font-size: 20px;
+    color: $fontColor;
+    text-align: left;
+    align-items: center;
+    margin-bottom: 4px;
+    cursor: pointer;
+  }
+}
+
+

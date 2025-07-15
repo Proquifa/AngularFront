@@ -1,0 +1,185 @@
+<div class="content"  *ngIf="openView" [style.display]="envioCorreo? 'none':'block'">
+  <!-- Inicio modal -->
+  <div id="pop-up-lote" class="modal" #pop>
+    <!-- Inicio modal-content -->
+    <div class="modal-content">
+      <header class="header" >
+        FACTURAR
+      </header>
+      <div class="contenido">
+        <div class="informacionGeneral">
+          <div class="infoOrden">
+            <h1 class="titulo">INFORMACIÓN DE LA O.ENTREGA</h1>
+            <label class="subtitulo">{{datosCliente[0].cliente}}</label>
+            <p class="info">{{datosCliente[0].contacto}} / {{datosCliente[0].puesto}}</p>
+          </div>
+          <div class="infoTipo">
+            <h1 class ="titulo" style="justify-content: flex-end"> {{tipoFactura}}</h1>
+            <p class="info" style="justify-content: flex-end">Tipo de Validación</p>
+          </div>
+        </div>
+        <div class="informacionFactura">
+          <div class="contenidoFac">
+            <div class="primeraSeccion">
+              <div class="tituloFacturaList">
+                FACTURAS
+              </div>
+              <div style="width: 100%; height: 8%">
+                <div class="buscar">
+                  <div>
+                    <div class="lupa">
+                      <img src="assets/Images/lupa.svg" width="22px" height="22px" alt="buscar">
+                    </div>
+                    <input type="text" [ngModel]="searchTerm" (ngModelChange)="buscar($event)" class="buscar-input" placeholder="Buscar" />
+                  </div>
+                </div>
+              </div>
+              <div class="listaFacturas">
+                <!--Lista total-->
+                <div class="segundaSeccionList">
+                  <div style="width: 97%;">
+                    <div class= "lista" style="display: unset;flex-direction: column" *ngIf="validarLista">
+                      <div [ngClass]="listaFD[i]" *ngFor="let item of lista; let i = index"   style="display: flex;flex-direction:row;width: 100%;position: relative; border-bottom: 1px solid #ECEEF0">
+                        <div class="dfSelect"></div>
+                        <div class="datosLst" style="padding-top: 5px;padding-left: 15px;display: flex; width: 100%;box-sizing: border-box;padding-bottom: 10px;" (click)="seleccionarItem(item, i)">
+                          <div class="informacionList">
+                            <label style="display: flex">#{{i +1}} · <img height="18px" width="20px" src="./assets/Images/ventas/visitas/archivos.svg"><span>{{item.factura}}</span></label>
+                            <h3>{{item.importe}}  {{item.moneda}}</h3>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!--Lista de busqueda-->
+                    <div class= "lista" style="display: unset;flex-direction: column" *ngIf="!validarLista">
+                      <div [ngClass]="listaFD[i]" *ngFor="let item of clientesSearched; let i = index"   style="display: flex;flex-direction:row;width: 100%;position: relative; border-bottom: 1px solid #ECEEF0">
+                        <div class="dfSelect"></div>
+                        <div class="datosLst" style="padding-top: 5px;padding-left: 15px;display: flex; width: 100%;box-sizing: border-box;padding-bottom: 10px;" (click)="seleccionarItem(i)">
+                          <div class="informacionList">
+                            <label>#{{i +1}} · <span>{{item.folioFactura}} </span></label>
+                            <h3>{{item.importe}} {{item.moneda}}</h3>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!---->
+                  </div>
+                </div>
+              </div>
+              <div class="totales">
+                {{totales}} Facturas
+              </div>
+            </div>
+            <div class="border"></div>
+            <div class="segundaSeccion">
+              <div class="tituloFacturaList">
+               <label *ngIf="!datos" class="titulo">{{index}}</label><u class="folio" (click)="visualizar(index)" *ngIf="!datos"> F -{{folio}}</u><label class="titulo" style="padding-left: 5px;padding-right: 5px;" *ngIf="!datos"> {{punto}}</label><a *ngIf="!datos" [href]="rutaXML" download="" target="_blank" class="titulo"> XML {{folio}}</a>
+              </div>
+              <div class="infoFacturaSinInfo" *ngIf="datos">
+                <div *ngIf="datos" class="tipoFacturacion">
+                  <label class="sinDatos">SELECCIONA UNA FACTURA
+                    PARA HABILITAR ESTA SECCIÓN</label>
+                </div>
+              </div>
+              <div class="infoFactura" *ngIf="!datos">
+                <div *ngIf="correo" class="datosTipoFac">
+                  <div>
+                    <label> Destinatarios</label>
+                  </div>
+                  <div  *ngFor="let item of correos; let i = index" style="padding-bottom: 1px">
+                    <label class="tituloCorreo" style="line-height: 1.5;">· {{item}} </label>
+                  </div>
+                </div>
+                <div *ngIf="sat" class="datosTipoFac">
+                  <div class="datosIndividuales">
+                    <label class="texto">Página SAT</label>
+                    <u id =a.linkview (click)="abrirNueva()" #a.linkview  class="linkSat">{{link}}</u>
+                  </div>
+                  <div class="datosIndividuales">
+                    <label class="texto">Folio Fiscal</label>
+                    <span class="subtituloTexto">{{folioF}}</span>
+                  </div>
+                  <div style="height: 30%; width: 100%;display: flex;box-sizing: border-box;justify-content: space-between;">
+                    <div style="display: flex; flex-direction: column">
+                      <label class="texto">RFC Emisor</label>
+                      <span class="subtituloTexto">{{RfcE}}</span>
+                    </div>
+                    <div style="display: flex; flex-direction: column">
+                      <label class="texto">RFC Receptor</label>
+                      <span class="subtituloTexto">{{RfcR}}</span>
+                    </div>
+                  </div>
+                </div>
+                <div *ngIf="portal" class="datosTipoFac">
+                  <div style="height: 50%;" class="datosIndividuales">
+                    <label class="texto">URL</label>
+                    <span class="subtituloLink" (click)="abrirNueva()">{{url}}</span>
+                  </div>
+                  <div  style="height: 30%; width: 100%;display: flex;box-sizing: border-box;justify-content: space-between;">
+                    <div style="display: flex; flex-direction: column">
+                      <label class="texto">Usuario</label>
+                      <span class="subtituloTexto">{{usuario}}</span>
+                    </div>
+                    <div style="display: flex; flex-direction: column">
+                      <label class="texto">Contraseña</label>
+                      <span class="subtituloTexto">{{password}}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div style="height: 50%" *ngIf="!datos">
+                <div class="tituloFacturaList" style="padding-bottom: 10px;">
+                  EVIDENCIA
+                </div>
+                <div class="cargaDoc">
+                  <!-- <div  *ngIf="primerCarga" style="width: 5px;height: 5px" id="preview" [innerHtml] = "htmlToAdd" [style.height]="'400px'"
+                        [style.overflow]="'auto'">
+                   </div>-->
+                  <input type="file" class="carga"  (change)="fileChange2($event)" id="cargarDocumento">
+                  <label for="cargarDocumento" style="display: flex" *ngIf="primerCarga" class="cargarDocumento"><img src="./assets/Images/cargar_permiso.svg" class="imgeArchivo">
+                    <p class="textoImagen">CARGAR EVIDENCIA</p></label>
+                  <div *ngIf="!primerCarga" class="vistDoc">
+                    <div style="width: 100%;height: 95%; justify-content: center;display: flex">
+                      <!-- <pq-visor-pdf [urlPdf]="url"></pq-visor-pdf>-->
+                      <div class="contentRefuse" id="preview" [innerHtml] = "htmlToAdd" [style.height]="'100%'"
+                           [style.overflow]="'auto'">
+                      </div>
+                    </div>
+                    <div *ngIf="!primerCarga" class="recargar">
+                      <label for="cargarDocumento" style="display: flex"><img src="./assets/Images/editar-pieza/cargar.svg"></label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style="width: 100%; height: 7%" class="btnDireccionPL">
+              <!--<div>
+                <a class="btnImprimir" (click)="cerrar()">CANCELAR</a>
+              </div>-->
+              <div>
+                <a class="btnImprimir" (click)="finalizar()" [style.pointer-events]="colorBoton?'auto':'none'" [style.background]="colorBoton?'#4BA92B':'#D8D9DD'">ACEPTAR</a>
+              </div>
+          </div>
+        </div>
+      </div>
+     </div>
+    <!-- fin modal-content -->
+  </div>
+  <!-- fin modal-->
+</div>
+<pn-pop-up-correo *ngIf="envioCorreo" [correos]="correos" [datos] = "datosEnviar" (cerrarPop)="cerrarCorreo($event)"></pn-pop-up-correo>
+<!--/*****************************************************************/-->
+<div id="popUp" class="popUp" *ngIf="popImpresion" >
+  <div class="fondo"></div>
+  <div class="popContenido">
+    <div class="popHeader">
+      <span>PROQUIFA NET</span>
+    </div>
+    <div class="popContenido">
+      <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+      <span>Imprimiendo Evidencia
+        <span></span>
+      </span>
+    </div>
+  </div>
+</div>

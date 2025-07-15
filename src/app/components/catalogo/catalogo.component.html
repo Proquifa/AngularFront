@@ -1,0 +1,5 @@
+
+<div class="header">
+ <!--  <p>Heeeere comes the Menu!!!</p> -->
+  <pq-tarjeta-menu *ngFor="let item of catalogos; let i = index" [nombre]="item.nombre" [imagen]="pathImg + item.img" [redirect]="item.redirect"></pq-tarjeta-menu>
+</div>

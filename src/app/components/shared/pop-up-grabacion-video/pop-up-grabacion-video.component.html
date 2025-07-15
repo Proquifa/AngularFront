@@ -1,0 +1,106 @@
+ <button type="button" class="btnControlPrincipal" onclick="document.getElementById('modalInicarGrabacion').style.display='block'">GRABAR</button>
+ <!-- <button type="button" class="btnControlPrincipalVerde" onclick="document.getElementById('id02').style.display='block'">(||)</button>
+ <button type="button" class="btnControlPrincipal" onclick="document.getElementById('id03').style.display='block'">[-]</button> -->
+
+<div class="w3-container">
+<!--DIV INICIAL-->
+ <div id="modalInicarGrabacion" class="modal">
+  <div class="modal-content">
+    <header class="header">
+      <img class="barra" src='./assets/Images/barra_lightbox.svg'/>
+    </header>
+
+    <div class="contenido">
+      <div class="titulo">
+        <label >Nuevo lote de {{tipo}}</label>
+      </div>
+      <hr>
+      <div class="datos">
+        <div class="Inspector">
+          <p class="campo">{{tipoUsr}}:</p>
+          <p class="dato">{{usuario}}</p>
+        </div>
+        <div class="Fecha">
+          <p class="campo">Fecha/Hora: </p>
+          <p class="dato">{{fechaHora}}</p>
+        </div>
+      </div>
+      <hr>
+    </div>
+
+    <footer class="footer">
+      <button type="button" class="btnVolver"
+        onclick="document.getElementById('modalInicarGrabacion').style.display='none'">VOLVER</button>
+      <button type="button" class="btnGrabar">INICIAR {{tipo | uppercase }}</button>
+    </footer>
+  </div>
+</div>
+<!--FIN DIV INICIO-->
+
+<!--div detener video-->
+<div id="id02" class="modal">
+  <div class="modal-content">
+    <header class="header">
+      <img class="barra" src='./assets/Images/barra_lightbox.svg'/>
+    </header>
+
+    <div class="contenido">
+      <div class="datos">
+        <div class="Inspector">
+          <p class="campo">{{tipoUsr}}:</p>
+          <p class="dato">{{usuario}}</p>
+        </div>
+        <div class="Fecha">
+          <p class="campo">Fecha/Hora: </p>
+          <p class="dato">{{fechaHora}}</p>
+        </div>
+      </div>
+      <hr>
+      <div class="txtControlVideo">
+        <label>¿Estás seguro que deseas terminar tu Lote de {{tipo}} No.{{folio}}?</label>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <button type="button" class="btnSeguir"
+        onclick="document.getElementById('id02').style.display='none'">SEGUIR {{tipo | uppercase}}</button>
+      <button type="button" class="btnGrabar">DETENER {{tipo | uppercase }}</button>
+    </footer>
+  </div>
+</div>
+  <!--fin div detener video-->
+
+  <!-- div pausar video  -->
+  <div id="id03" class="modal">
+    <div class="modal-content">
+      <header class="header">
+        <img class="barra" src='./assets/Images/barra_lightbox.svg'/>
+      </header>
+
+      <div class="contenido">
+        <div class="datos">
+          <div class="Inspector">
+            <p class="campo">{{tipoUsr}}:</p>
+            <p class="dato">{{usuario}}</p>
+          </div>
+          <div class="Fecha">
+            <p class="campo">Fecha/Hora: </p>
+            <p class="dato">{{fechaHora}}</p>
+          </div>
+        </div>
+        <hr>
+        <div class="txtControlVideo">
+            <label>Lote de {{tipo}} No.{{folio}} en Pausa</label>
+        </div>
+      </div>
+
+      <footer class="footer">
+        <button type="button" class="btnSeguir"
+          onclick="document.getElementById('id03').style.display='none'">SEGUIR {{tipo | uppercase}}</button>
+        <button type="button" class="btnGrabar">DETENER {{tipo | uppercase}}</button>
+      </footer>
+    </div>
+  </div>
+<!-- fin div pausar video -->
+
+</div>

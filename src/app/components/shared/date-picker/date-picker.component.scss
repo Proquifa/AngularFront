@@ -1,0 +1,231 @@
+@import "../../../../mixins";
+@import "../../../../colors";
+
+:host {
+  @include flexRow;
+  justify-content: space-between;
+  width:100%;
+  height: 100%;
+}
+.datepicker {
+  width:100%;
+  height: fit-content;
+  position: relative;
+  display: inline-block;
+  color: $pqBlanco ;
+  background: $pqNegro;
+}
+
+.datepicker__calendar {
+  position: absolute;
+  z-index: 1000;
+  top: 30px;
+  right: -39px;
+  height: 166px;
+  width: 150px;
+  background-color: $pqBlanco !important;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  cursor: default;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  & > .triangulo{
+    width:0px;
+    height:0px;
+    border-left:8px solid transparent; /* izquierda flecha */
+    border-right:8px solid transparent; /* derecha flecha */
+    border-bottom:8px solid $pqNegro; /* base flecha y color*/
+    font-size:0px;
+    line-height:0px;
+    position: relative;
+    left: 80%;
+    top:-8px;
+  }
+
+}
+
+
+.datepicker__calendar__content {
+  background-color: $pqBlanco;
+  color: $pqNegro;
+  overflow: hidden;
+  font-size: 10px;
+}
+
+.datepicker__calendar__labels {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.datepicker__calendar__label {
+  display: inline-block;
+  width: 2.2em;
+  height: 2.2em;
+  margin: 0 0.2em;
+  line-height: 2.2em;
+  text-align: center;
+  color: $pqNegro !important;
+}
+
+.datepicker__calendar__month {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-flow: wrap;
+  flex-flow: wrap;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  margin-top: 3px;
+}
+
+.datepicker__calendar__month__day {
+  display: flex;
+  width: 1.7em;
+  height: 1.5em;
+  margin: 0 0.2em 0.4em;
+  border-radius: 2.2em;
+  text-align: center;
+  -webkit-transition: 0.37s;
+  transition: 0.37s;
+  align-items: center;
+  justify-content: center;
+}
+
+.datepicker__calendar__nav {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 30px;
+  background-color: $pqNegro;
+
+  justify-content: space-around;
+  padding: 0 10px;
+  margin-top: -8px;
+  //border-bottom: 1px solid #e8e8e8;
+}
+
+.datepicker__calendar__nav__arrow {
+  width: 0.8em;
+  height: 0.8em;
+  cursor: pointer;
+  -webkit-transition: 0.37s;
+  transition: 0.37s;
+  margin-bottom: 3.5px;
+}
+
+.datepicker__calendar__nav__arrow:hover {
+  -webkit-transform: scale(1.05);
+  transform: scale(1.05);
+}
+
+.datepicker__calendar__nav__chevron {
+  fill: $pqBlanco;
+  -webkit-transition: 0.37s;
+  transition: 0.37s;
+}
+
+.datepicker__calendar__nav__chevron:hover {
+  fill: $pqBlanco;
+}
+
+.datepicker__calendar__nav__header {
+  @include flexRow;
+  @include absoluteCenter;
+  width: 15em;
+  margin: 0 1px;
+  text-align: center;
+  font-size: 10px;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] { -moz-appearance:textfield; }
+
+.datepicker__calendar__nav__header__form {
+  display: inline-block;
+  margin: 0;
+}
+
+.datepicker__calendar__nav__header__year {
+  display: inline-block;
+  width: 25px;
+  //padding: 2px 4px;
+  //border-radius: 2px;
+  font-size: 10px;
+  transition: 0.32s;
+  background-color: $pqNegro;
+  border: 1px solid $pqNegro;
+  color: $pqBlanco;
+  margin-left: 3px;
+  margin-top: -2px;
+}
+
+.datepicker__calendar__nav__header__year:focus.ng-invalid {
+  border: 1px solid $gnRojoSemaforo;
+}
+
+.datepicker__calendar__nav__header__year:focus.ng-valid {
+  border: 1px solid $pqNegro;
+}
+
+.datepicker__calendar__nav__header__year:focus {
+  outline: none;
+}
+
+.datepicker__input {
+  @include fontScalingFix;
+  width:100%;
+  height:22px;
+  outline: none;
+  border-top:none;
+  border-left:none;
+  border-right:none;
+  //border-bottom:solid 0.75px $gnGrisRata;
+  padding:.2em 0 0 0;
+  display: inline-block;
+  font-family: 'Roboto', sans-serif !important;
+  color: $pqBlanco;
+  font-size: 14px;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+/* input.active{
+  border-bottom: solid 0.75px $gnAzulMedio;
+} */
+
+img{
+  margin-left: 5px;
+  margin-top: -1px;
+}
+
+/* .head{
+  @include flexRow;
+  @include absoluteCenter;
+  width:100%;
+  background-color: $pqGrisFooter;
+  color:$pqNegro;
+  font-weight: 500;
+  height: 30px;
+  margin-top: -8px;
+  font-size: 12px;
+}
+*/

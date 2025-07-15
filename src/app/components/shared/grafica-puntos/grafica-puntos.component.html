@@ -1,0 +1,15 @@
+<div class="tituloGrafica">
+  <div class="contenido">
+    Curva de desempeño
+  </div>
+  <div class="combo">
+   <pq-combo-sin-border style="width:100%; justify-content: flex-end;"  [title]="'Por Año'"  [items]="rangos" [heightLi]="'35px'"  (valueDropList)="infoCombo($event)" ></pq-combo-sin-border>
+  </div>
+</div>
+<hr>
+
+<div id='lineChart1Div'
+[ngStyle]="{'height': '180px', 'width': '536px', 'max-width': '536px', 'max-height':'185px', 'box-sizing':'border-box', 'position':'absolute'}">
+<canvas id="lineChart1" [ngStyle]="{'height': '180px', 'width': '536px', 'max-width': '536px', 'max-height':'185px', 'box-sizing':'border-box', 'position':'absolute'}"></canvas>
+<!-- <img src="./assets/Images/boton-down.svg"/> -->
+</div>

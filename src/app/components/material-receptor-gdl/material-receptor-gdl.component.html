@@ -1,0 +1,50 @@
+<div class="padre">
+  <!--Seccion de menu-->
+  <div style="position: relative; display: flex; background: #E6E6E6;" class="aux">
+    <aside [ngClass]="classAsideMenu">
+      <div class="articulo" *ngIf="!ocultarAcor">
+        <pn-menu-seccion-roles [items]="itemsMenu"   style="width: 100%;" *ngIf="activeMenu"></pn-menu-seccion-roles>
+      </div>
+    </aside>
+    <div style="position: absolute; position: absolute; padding-top: 352px;right: 0">
+      <img class="img" src='./assets/Images/flecha_cuadro.svg' *ngIf="!ocultarAcor" (click)="mostarOcultarAcordeon()" />
+      <img class="img" src='./assets/Images/flecha_mostrar.svg' *ngIf="ocultarAcor" (click)="mostarOcultarAcordeon()" />
+    </div>
+  </div>
+  <!--Termina seccion de menu-->
+  <!--Empieza el area de trabajo-->
+  <div class="area">
+    <!--Empieza la cabezera-->
+    <div class="cabezera">
+      <div style="cursor: pointer;" *ngIf="!vistaPrincipal" (click)="regresarVistaP()">
+        <img class="img" src='./assets/Images/regresar.svg'/>
+      </div>
+      <label class="etiqueta">DECLARAR ARRIBO DE GUÍA</label>
+    </div>
+    <!--Termina la cabezera-->
+    <!--Empiezan los componentes-->
+    <div [ngStyle]="{'overflow':'scroll', 'width':'100%', 'height':'calc(100% - 64px)'}">
+      <div class="vistaPrincipal" *ngIf="vistaPrincipal">
+        <div class="contenidoGrafica">
+          <div class="grafica" style="padding-right: 10px;">
+            <label class="tituloGrafica">MENSAJERIA</label>
+            <pn-donut-chart *ngIf="mensajeroData" [data]="dataMensajero" [tipoGrafica]="tipoGraficaMensajero" [height]="'auto'"></pn-donut-chart>
+          </div>
+          <div  id="donaProducto" class="grafica" style="    padding-left: 10px;">
+            <label class="tituloGrafica">CLIENTES</label>
+            <pn-donut-chart *ngIf="clienteData" [idGrafica]="'producto'" [data]="dataCliente" [tipoGrafica]="tipoGraficaCliente" [height]="'auto'"> </pn-donut-chart>
+          </div>
+        </div>
+        <div id="divBoton">
+          <div class="botonIngresar" style="width: 190px; cursor:pointer" (click)="cambioDeVista()" [style.pointerEvents] = "activarBtn ? 'auto' : 'none'" [style.background]= "activarBtn ? '#008895' : '#D5DBDB'" >
+            <label>INGRESAR</label>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="!vistaPrincipal" style="width: 100%; height: 100%">
+        <pn-vista-escanear-guia (vistaP)="recargarVista($event)"></pn-vista-escanear-guia>
+      </div>
+    </div>
+    <!--Termina area de trabajo-->
+  </div>
+</div>

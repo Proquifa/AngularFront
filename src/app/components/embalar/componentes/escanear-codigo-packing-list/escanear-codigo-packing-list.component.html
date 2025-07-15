@@ -1,0 +1,28 @@
+<div class="escanearCodigoPL">
+  <textarea #textarea id="pedimento" type="text" name="firstname" autofocus="focus" (keydown.enter)="enter()" class="texArea"
+  [(ngModel)]="textoPedimento"></textarea>
+  <div class="contenidoPL" style="position: absolute">
+    <div class="codigoPL">
+      <img class="img" src='./assets/Images/Codigo_de_barras.svg' style="height:210px;width:291px;" *ngIf="escaneoNormal" />
+      <img class="img" src='./assets/Images/Codigo_de_barras_correcto.svg' style="height:210px;width:291px;" *ngIf="escaneoCorrecto" />
+      <img class="img" src='./assets/Images/Codigo_de_barras_incorrecto.svg' style="height:210px;width:291px;" *ngIf="escaneoIncorrecto" />
+    </div>
+    <div class="TextoPL">
+      <div class="textoNormalEscaneo" *ngIf="escaneoNormal">
+        <p>Escanear código de barras de </p>
+        <p>Bolsa Contenedora. </p>
+      </div>
+      <div class="textoCorrectoEscaneo" *ngIf="escaneoCorrecto">
+        <p>Lectura del código de barras de Bolsa</p>
+        <p>Contenedora de la <label style="color:#008895;font-weight:bold">OE-280991-0001</label> correcta. </p>
+      </div>
+      <div class="textoIncorrectoEscaneo" *ngIf="escaneoIncorrecto">
+        <p>Lectura del código de barras de Bolsa</p>
+        <p>Contenedora de la <label style="color:#008895;font-weight:bold;">OE-280991-0001</label></p>
+        <p> incorrecta.</p>
+      </div>
+
+    </div>
+
+  </div>
+</div>

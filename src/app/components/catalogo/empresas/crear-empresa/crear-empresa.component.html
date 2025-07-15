@@ -1,0 +1,248 @@
+<pn-header-bc [opciones]="opcion" [homePath]="homePath"></pn-header-bc>
+<div class="container">
+    <div class="containerTitle">Datos Generales</div>
+    <div class="containerForms">
+        <div class="containerFormsInputs">
+            <label for="" class="containerFormsInputsLabel">ID</label>
+            <input [(ngModel)]="empresa.nomenclaturaEmpresa" class="containerFormsInputsInput" style="width:136px" placeholder="Escribe Aquí" type="text">
+        </div>
+        <div class="containerFormsInputs">
+            <label for="" class="containerFormsInputsLabel">Nombre</label>
+            <input [(ngModel)]="empresa.alias" class="containerFormsInputsInput" style="width:337px" placeholder="Escribe Aquí" type="text">
+        </div>
+        <div class="containerFormsInputs">
+            <span class="containerFormsInputsSpan">{{ selectsLabels[0] }}</span><!-- Factor Riesgo -->
+            <pq-drop-list style="width:307px;margin-right: 20px;margin-top: 5px;height: 35px;" [items]="itemsParent[0]" [isSearch]="isSearchParent[0]" [isCategory]="isCategoryParent[0]" [size]="sizeParent[0]" [align]="alignParent[0]" [itemSelect]="itemSelectParent[0]" [widthContent]="widthContentParent[0]" [marginLeftContent]="marginLeftContentParent[0]" [tooltip]="tooltipParent[0]" [tipoDrop]="tipoDropParent[0]" [campoLabel]="campoLabelParent[0]" [heightDrop]="heightDropParent[0]" [colorBorderDrop]="colorBorderDropParent[0]" (valueDropList)="fnGetValueDropList($event, 0)"></pq-drop-list>
+        </div>
+        <div class="containerFormsInputs">
+            <label for="" class="containerFormsInputsLabel">Registro Patronal</label>
+            <input [(ngModel)]="empresa.registroPatronal" class="containerFormsInputsInput" style="width:240px" placeholder="Escribe Aquí" type="text">
+        </div>
+        <div class="containerFormsInputs">
+            <label for="" class="containerFormsInputsLabel">Sitio Web</label>
+            <input [(ngModel)]="empresa.sitioWeb" class="containerFormsInputsInput" style="width:390px" placeholder="Escribe Aquí" type="text">
+        </div>
+        <div class="containerFormsInputs">
+            <span class="containerFormsInputsSpan">{{ selectsLabels[1] }}</span><!-- Sector Empresarial -->
+            <pq-drop-list style="width:330px;margin-right: 20px;margin-top: 5px;height: 35px;" [items]="itemsParent[1]" [isSearch]="isSearchParent[1]" [isCategory]="isCategoryParent[1]" [size]="sizeParent[1]" [align]="alignParent[1]" [itemSelect]="itemSelectParent[1]" [widthContent]="widthContentParent[1]" [marginLeftContent]="marginLeftContentParent[1]" [tooltip]="tooltipParent[1]" [tipoDrop]="tipoDropParent[1]" [campoLabel]="campoLabelParent[1]" [heightDrop]="heightDropParent[1]" [colorBorderDrop]="colorBorderDropParent[1]" (valueDropList)="fnGetValueDropList($event, 1)"></pq-drop-list>
+        </div>
+        <div class="containerFormsInputs">
+            <label for="" class="containerFormsInputsLabel">Calle</label>
+            <input [(ngModel)]="empresa.calle" class="containerFormsInputsInput" style="width:385px" placeholder="Escribe Aquí" type="text">
+        </div>
+    </div>
+    <div class="containerForms">
+        <div class="containerFormsInputs">
+            <label for="" class="containerFormsInputsLabel">Número</label>
+            <input [(ngModel)]="empresa.numero" class="containerFormsInputsInput" style="width:136px" placeholder="Escribe Aquí" type="text">
+        </div>
+        <div class="containerFormsInputs">
+            <label for="" class="containerFormsInputsLabel">Colonia</label>
+            <input [(ngModel)]="empresa.colonia" class="containerFormsInputsInput" style="width:539px" placeholder="Escribe Aquí" type="text">
+        </div>
+        <div class="containerFormsInputs">
+            <label for="" class="containerFormsInputsLabel">Código Postal</label>
+            <input [(ngModel)]="empresa.cp" class="containerFormsInputsInput" style="width:136px" placeholder="Escribe Aquí" type="text">
+        </div>
+        <div class="containerFormsInputs">
+            <label for="" class="containerFormsInputsLabel">Estado</label>
+            <input [(ngModel)]="empresa.estado" class="containerFormsInputsInput" style="width:198px" placeholder="Escribe Aquí" type="text">
+        </div>
+        <div class="containerFormsInputs">
+            <label for="" class="containerFormsInputsLabel">Municipio/Delegación</label>
+            <input [(ngModel)]="empresa.delegacion" class="containerFormsInputsInput" style="width:330px" placeholder="Escribe Aquí" type="text">
+        </div>
+    </div>
+    <div class="containerTitle">Datos Fiscales</div>
+    <div class="containerForms">
+        <div class="containerFormsInputs">
+            <label for="" class="containerFormsInputsLabel">Razón Social</label>
+            <input [(ngModel)]="empresa.razonSocial" class="containerFormsInputsInput" style="width:400px" placeholder="Escribe Aquí" type="text">
+        </div>
+        <div class="containerFormsInputs">
+            <span class="containerFormsInputsSpan">{{ selectsLabels[2] }}</span><!-- Regimen Fiscal -->
+            <pq-drop-list style="width:400px;margin-right: 20px;margin-top: 5px;height: 35px;" [items]="itemsParent[2]" [isSearch]="isSearchParent[2]" [isCategory]="isCategoryParent[2]" [size]="sizeParent[2]" [align]="alignParent[2]" [itemSelect]="itemSelectParent[2]" [widthContent]="widthContentParent[2]" [marginLeftContent]="marginLeftContentParent[2]" [tooltip]="tooltipParent[2]" [tipoDrop]="tipoDropParent[2]" [campoLabel]="campoLabelParent[2]" [heightDrop]="heightDropParent[2]" [colorBorderDrop]="colorBorderDropParent[2]" (valueDropList)="fnGetValueDropList($event, 2)"></pq-drop-list>
+        </div>
+        <div class="containerFormsInputs">
+            <label for="" class="containerFormsInputsLabel">RFC</label>
+            <input [(ngModel)]="empresa.rfcEmpresa" class="containerFormsInputsInput" style="width:275px" placeholder="Escribe Aquí" type="text">
+        </div>
+        <div class="containerFormsInputs">
+            <label for="" class="containerFormsInputsLabel">Contraseña SAT</label>
+            <input [(ngModel)]="empresa.contraseniaSAT" class="containerFormsInputsInput" style="width:340px" placeholder="Escribe Aquí" type="password">
+        </div>
+        <div class="containerFormsInputs">
+            <label for="" class="containerFormsInputsLabel">Serie</label>
+            <input [(ngModel)]="empresa.serie" class="containerFormsInputsInput" style="width:345px" placeholder="Escribe Aquí" type="text">
+        </div>
+        <div class="containerFormsInputs">
+            <label for="" class="containerFormsInputsLabel">Calle</label>
+            <input [(ngModel)]="empresa.calle2" class="containerFormsInputsInput" style="width:385px" placeholder="Escribe Aquí" type="text">
+        </div>
+    </div>
+    <div class="containerForms">
+        <div class="containerFormsInputs">
+            <label for="" class="containerFormsInputsLabel">Número</label>
+            <input [(ngModel)]="empresa.numero2" class="containerFormsInputsInput" style="width:136px" placeholder="Escribe Aquí" type="text">
+        </div>
+        <div class="containerFormsInputs">
+            <label for="" class="containerFormsInputsLabel">Colonia</label>
+            <input [(ngModel)]="empresa.colonia2" class="containerFormsInputsInput" style="width:539px" placeholder="Escribe Aquí" type="text">
+        </div>
+        <div class="containerFormsInputs">
+            <label for="" class="containerFormsInputsLabel">Código Postal</label>
+            <input [(ngModel)]="empresa.cp2" class="containerFormsInputsInput" style="width:136px" placeholder="Escribe Aquí" type="text">
+        </div>
+        <div class="containerFormsInputs">
+            <label for="" class="containerFormsInputsLabel">Estado</label>
+            <input [(ngModel)]="empresa.estado2" class="containerFormsInputsInput" style="width:198px" placeholder="Escribe Aquí" type="text">
+        </div>
+        <div class="containerFormsInputs">
+            <label for="" class="containerFormsInputsLabel">Municipio/Delegación</label>
+            <input [(ngModel)]="empresa.delegacion2" class="containerFormsInputsInput" style="width:330px" placeholder="Escribe Aquí" type="text">
+        </div>
+        <div class="containerFormsInputs">
+            <span class="containerFormsInputsSpan">{{ selectsLabels[3] }}</span><!-- Periodicidad de Pago -->
+            <pq-drop-list style="width:330px;margin-right: 20px;margin-top: 5px;height: 35px;" [items]="itemsParent[3]" [isSearch]="isSearchParent[3]" [isCategory]="isCategoryParent[3]" [size]="sizeParent[3]" [align]="alignParent[3]" [itemSelect]="itemSelectParent[3]" [widthContent]="widthContentParent[3]" [marginLeftContent]="marginLeftContentParent[3]" [tooltip]="tooltipParent[3]" [tipoDrop]="tipoDropParent[3]" [campoLabel]="campoLabelParent[3]" [heightDrop]="heightDropParent[3]" [colorBorderDrop]="colorBorderDropParent[3]" (valueDropList)="fnGetValueDropList($event, 3)"></pq-drop-list>
+        </div>
+    </div>
+    <div class="containerTitle">Contacto</div>
+    <div class="containerForms">
+        <div class="containerFormsInputs">
+            <label for="" class="containerFormsInputsLabel">Nombre</label>
+            <input [(ngModel)]="empresa.nombre" class="containerFormsInputsInput" style="width:355px" placeholder="Escribe Aquí" type="text">
+        </div>
+        <div class="containerFormsInputs">
+            <label for="" class="containerFormsInputsLabel">Apellido Paterno</label>
+            <input [(ngModel)]="empresa.apellidoPaterno" class="containerFormsInputsInput" style="width:355px" placeholder="Escribe Aquí" type="text">
+        </div>
+        <div class="containerFormsInputs">
+            <label for="" class="containerFormsInputsLabel">Apellido Materno</label>
+            <input [(ngModel)]="empresa.apellidoMaterno" class="containerFormsInputsInput" style="width:355px" placeholder="Escribe Aquí" type="text">
+        </div>
+        <div class="containerFormsInputs">
+            <label for="" class="containerFormsInputsLabel">Correo Electrónico</label>
+            <input [(ngModel)]="empresa.correoElectronico" class="containerFormsInputsInput" style="width:330px" placeholder="Escribe Aquí" type="text">
+        </div>
+        <div class="containerFormsInputs">
+            <label for="" class="containerFormsInputsLabel">Lada</label>
+            <input [(ngModel)]="empresa.lada1" class="containerFormsInputsInput" style="width:75px" placeholder="000" type="text">
+        </div>
+        <div class="containerFormsInputs">
+            <label for="" class="containerFormsInputsLabel">Teléfono 1</label>
+            <input [(ngModel)]="empresa.telefono1" class="containerFormsInputsInput" style="width:145px" placeholder="Escribe Aquí" type="text">
+        </div>
+        <div class="containerFormsInputs">
+            <label for="" class="containerFormsInputsLabel">Lada</label>
+            <input [(ngModel)]="empresa.lada2" class="containerFormsInputsInput" style="width:75px" placeholder="000" type="text">
+        </div>
+        <div class="containerFormsInputs">
+            <label for="" class="containerFormsInputsLabel">Teléfono 2</label>
+            <input [(ngModel)]="empresa.telefono2" class="containerFormsInputsInput" style="width:145px" placeholder="Escribe Aquí" type="text">
+        </div>
+    </div>
+    <div class="containerTitle">Carga de Documentación</div>
+    <div class="containerForms">
+        <div class="containerFormsInputs">
+            <label for="" class="containerFormsInputsLabel">Cargar Logotipo</label>
+            <input (change)="fnGetFile($event, 0)" id="fileEmp0" class="containerFormsInputsFile" type="file" accept="image/*">
+            <div class="containerFormsInputsFileBox">
+                <div (click)="fnClickFile(0)" class="containerFormsInputsFileBoxInput"> {{ fileEmpName[0] }} </div>
+                <div (click)="fnClickFile(0)" class="containerFormsInputsFileBoxUpload" *ngIf="!fileEmpIsUp[0]">
+                    <img src="./assets/Images/cargar_archivo.svg" alt="Archivo" class="containerFormsInputsFileBoxUploadImg">
+                </div>
+                <div (click)="fnClickFile(0)" class="containerFormsInputsFileBoxReload" *ngIf="fileEmpIsUp[0]">
+                    <img src="./assets/Images/recargar_archivo.svg" alt="Archivo" class="containerFormsInputsFileBoxReloadImg">
+                </div>
+                <div class="containerFormsInputsFileBoxView" *ngIf="fileEmpIsUp[0]">
+                    <img src="./assets/Images/visualizar_archivo.svg" alt="Archivo" class="containerFormsInputsFileBoxViewImg">
+                </div>
+            </div>
+        </div>
+        <div class="containerFormsInputs">
+            <label for="" class="containerFormsInputsLabel">Cargar Registro Patronal</label>
+            <input (change)="fnGetFile($event, 1)" id="fileEmp1" class="containerFormsInputsFile" type="file" accept="application/pdf">
+            <div class="containerFormsInputsFileBox">
+                <div (click)="fnClickFile(1)" class="containerFormsInputsFileBoxInput"> {{ fileEmpName[1] }} </div>
+                <div (click)="fnClickFile(1)" class="containerFormsInputsFileBoxUpload" *ngIf="!fileEmpIsUp[1]">
+                    <img src="./assets/Images/cargar_archivo.svg" alt="Archivo" class="containerFormsInputsFileBoxUploadImg">
+                </div>
+                <div (click)="fnClickFile(1)" class="containerFormsInputsFileBoxReload" *ngIf="fileEmpIsUp[1]">
+                    <img src="./assets/Images/recargar_archivo.svg" alt="Archivo" class="containerFormsInputsFileBoxReloadImg">
+                </div>
+                <div class="containerFormsInputsFileBoxView" *ngIf="fileEmpIsUp[1]">
+                    <img src="./assets/Images/visualizar_archivo.svg" alt="Archivo" class="containerFormsInputsFileBoxViewImg">
+                </div>
+            </div>
+        </div>
+        <div class="containerFormsInputs">
+            <label for="" class="containerFormsInputsLabel">Cargar Certificado SAT</label>
+            <input (change)="fnGetFile($event, 2)" id="fileEmp2" class="containerFormsInputsFile" type="file" accept="application/pkix-cert">
+            <div class="containerFormsInputsFileBox">
+                <div (click)="fnClickFile(2)" class="containerFormsInputsFileBoxInput"> {{ fileEmpName[2] }} </div>
+                <div (click)="fnClickFile(2)" class="containerFormsInputsFileBoxUpload" *ngIf="!fileEmpIsUp[2]">
+                    <img src="./assets/Images/cargar_archivo.svg" alt="Archivo" class="containerFormsInputsFileBoxUploadImg">
+                </div>
+                <div (click)="fnClickFile(2)" class="containerFormsInputsFileBoxReload" *ngIf="fileEmpIsUp[2]">
+                    <img src="./assets/Images/recargar_archivo.svg" alt="Archivo" class="containerFormsInputsFileBoxReloadImg">
+                </div>
+            </div>
+        </div>
+        <div class="containerFormsInputs">
+            <label for="" class="containerFormsInputsLabel">Cargar Llave SAT</label>
+            <input (change)="fnGetFile($event, 3)" id="fileEmp3" class="containerFormsInputsFile" type="file" accept="application/pkcs8">
+            <div class="containerFormsInputsFileBox">
+                <div (click)="fnClickFile(3)" class="containerFormsInputsFileBoxInput"> {{ fileEmpName[3] }} </div>
+                <div (click)="fnClickFile(3)" class="containerFormsInputsFileBoxUpload" *ngIf="!fileEmpIsUp[3]">
+                    <img src="./assets/Images/cargar_archivo.svg" alt="Archivo" class="containerFormsInputsFileBoxUploadImg">
+                </div>
+                <div (click)="fnClickFile(3)" class="containerFormsInputsFileBoxReload" *ngIf="fileEmpIsUp[3]">
+                    <img src="./assets/Images/recargar_archivo.svg" alt="Archivo" class="containerFormsInputsFileBoxReloadImg">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="containerTitle">
+        <div class="containerTitleItem1">Trabajadores</div>
+        <div class="containerTitleItem2" *ngIf="lstTrabajadores.length > 0">
+            <img src="./assets/Images/maximinar.svg" alt="Maximizar" class="containerTitleItem2Img">
+        </div>
+    </div>
+    <div class="lstTrabajadores" *ngIf="lstTrabajadores.length > 0">
+        <div class="lstTrabajadoresHeader">
+            <div class="lstTrabajadoresHeaderCol" style="min-width: 20px;max-width: 20px;justify-content: center;">#</div>
+            <div class="lstTrabajadoresHeaderCol" style="min-width: 115px;max-width: 340px;">Nombre</div>
+            <div class="lstTrabajadoresHeaderCol" style="min-width: 100px;max-width: 190px;">Departamento</div>
+            <div class="lstTrabajadoresHeaderCol" style="min-width: 90px;max-width: 190px;">Puesto</div>
+            <div class="lstTrabajadoresHeaderCol" style="min-width: 95px;max-width: 130px;">RFC</div>
+            <div class="lstTrabajadoresHeaderCol" style="min-width: 100px;max-width: 150px;">Teléfono</div>
+            <div class="lstTrabajadoresHeaderCol" style="min-width: 130px;max-width: 240px;">Correo Electrónico</div>
+            <div class="lstTrabajadoresHeaderCol" style="min-width: 120px;max-width: 200px;">Fecha de Ingreso</div>
+            <div class="lstTrabajadoresHeaderCol" style="min-width: 115px;max-width: 160px;">Tipo de Contrato</div>
+            <div class="lstTrabajadoresHeaderCol" style="min-width: 80px;max-width: 150px;">Estado</div>
+            <div class="lstTrabajadoresHeaderCol" style="min-width: 15px;max-width: 15px;">&nbsp;</div>
+        </div>
+        <div class="lstTrabajadoresItem" *ngFor="let item of lstTrabajadores; let i = index">
+            <div class="lstTrabajadoresItemCol" style="min-width: 20px;max-width: 20px;justify-content: center;">{{i + 1}}</div>
+            <div class="lstTrabajadoresItemCol" style="min-width: 115px;max-width: 340px;">{{ item.nombre + ' ' + item.apellidoPaterno + ' ' + item.apellidoMaterno }}</div>
+            <div class="lstTrabajadoresItemCol" style="min-width: 100px;max-width: 190px;font-weight: 400;font-size: 16px;color: #008894;">{{ item.departamento }}</div>
+            <div class="lstTrabajadoresItemCol" style="min-width: 90px;max-width: 190px;">{{ item.puesto }}</div>
+            <div class="lstTrabajadoresItemCol" style="min-width: 95px;max-width: 130px;">{{ item.datoFiscal.rfc }}</div>
+            <div class="lstTrabajadoresItemCol" style="min-width: 100px;max-width: 150px;">{{ item.telefonoFijo }}</div>
+            <div class="lstTrabajadoresItemCol" style="min-width: 130px;max-width: 240px;">{{ item.email }}</div>
+            <div class="lstTrabajadoresItemCol" style="min-width: 120px;max-width: 200px;">{{ item.fechaInicioRelLaboral }}</div>
+            <div class="lstTrabajadoresItemCol" style="min-width: 115px;max-width: 160px;">{{ item.contrato.descripcion }}</div>
+            <div class="lstTrabajadoresItemCol" style="min-width: 80px;max-width: 150px;" [ngStyle]="{'color': (item.activo) ? '#4DA72C' : '#C1272D' }">{{ (item.activo) ? 'Activo' : 'Finiquitado' }}</div>
+            <div class="lstTrabajadoresItemCol" style="min-width: 15px;max-width: 15px;" (click)="fnVerTrabajador(item.idTrabajador)"><img class="lstTrabajadoresItemColImg" src="./assets/Images/ir.svg" alt="Ir"></div>
+        </div>
+    </div>
+    <div class="lstTrabajadoresVacia" *ngIf="lstTrabajadores.length === 0">
+        <div class="lstTrabajadoresVaciaLabel">NO HAS AGREGADO TRABAJADORES</div>
+        <div [ngClass]="classBtnAcceptTrab">AGREGAR TRABAJADOR</div>
+        <div style="display: none;">{{ empresa | json }}</div>
+    </div>
+    <div class="containerBtns">
+        <div class="containerBtnsBtnCancel" (click)="fnReturnView()">CANCELAR</div>
+        <div [ngClass]="classBtnAccept" (click)="fnSaveCompany()">ACEPTAR</div>
+    </div>
+</div>

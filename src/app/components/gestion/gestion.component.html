@@ -1,0 +1,29 @@
+<div>
+  <p class="title">
+    TABLEROS
+  </p>
+
+  <div class="divTableros">
+    <pq-tarjeta-menu *ngFor="let item of tableros; let i = index" [nombre]="item.nombre" [imagen]="pathImg + item.img"></pq-tarjeta-menu>
+  </div>
+</div>
+
+<div>
+  <p class="title">
+    CONSULTAS
+  </p>
+
+  <div class="divConsultas">
+    <pq-tarjeta-menu *ngFor="let item of consultas; let i = index" [nombre]="item.nombre" [imagen]="pathImg + item.img" [redirect]="item.redirect"></pq-tarjeta-menu>
+  </div>
+</div>
+
+<div>
+  <p class="title">
+    REPORTES
+  </p>
+
+  <div class="divReportes">
+    <pq-tarjeta-menu *ngFor="let item of reportes; let i = index" [nombre]="item.nombre" [imagen]="pathImg + item.img" [redirect]="item.redirect"></pq-tarjeta-menu>
+  </div>
+</div>

@@ -1,0 +1,52 @@
+<body>
+	<section class="plantilla">
+		<div class="botonesControl">
+	    <div class="botones">
+	      <img class="btn" src='./assets/Images/MaxSize.svg' (click)="fullScreen()"/>
+	      <img class="btn" src='./assets/Images/Minimizar.svg' (click)="minimize()"/>
+	      <img class="btn" src='./assets/Images/MinSize.svg' (click)="maximizer()"/>
+	      <img class="btn" src='./assets/Images/Salir.svg' (click)="close()"/>
+	    </div>
+	  </div>
+
+	<div class="padre">
+		<header class="header">
+			<pq-header></pq-header>
+	  </header>
+
+	<div class="articulo">
+		<div style="position: relative; display: flex; background: #292929;"  class="auxAside">
+		<aside [ngClass]="classAside">
+			<div class="botonera">
+
+					<pq-botonera style="width: 100%;" 
+					[iniciarBotonera]="iniciarBotonera" [pendientes]="pendientes" [mejoras]="mejoras" [incidente]="incidente" [solicitud]="solicitud"
+					[gestion]="gestion" [catalogos]="catalogos" [configuracion]="configuracion" >
+				</pq-botonera>
+			</div>
+		</aside>
+	</div>
+
+		<div class="outlet" style="position: relative">
+			<router-outlet></router-outlet>
+		</div>
+	</div>
+
+	<footer class="footer">
+	  <pq-footer (ocultarMenu)="ocultarMenu()"></pq-footer>
+	</footer>
+
+	</div>
+	</section>
+
+	<div class="container" *ngIf="modalLoading">
+		<div class="loading">
+			<img  height="170px" src='assets/Images/gif_loading.gif'/>
+		</div>
+	</div>
+
+	<div class="container" *ngIf="blockScreen">
+		
+	</div>
+
+</body>

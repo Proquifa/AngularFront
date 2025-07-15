@@ -1,0 +1,30 @@
+<div class="padre">
+  <div style="display: flex;  flex-direction: column;height: 100%;">
+    <div *ngFor="let item of items; let j = index;" class="seccionRol">
+      <div *ngIf="item.rol != null" class="accordion" (click)="openAccordion($event, 0)">
+       {{item.rol}}
+      </div>
+      <div  class="panel">
+        <div *ngFor="let item of item.menu; let i = index;">
+          <a class="fondoSubmenu {{itemSel[j].menu[i]}}" (click)="redirect(i, item.url, item.disable)" [style.cursor]="vistaInicialActiva ? 'pointer' : 'default'" *ngIf="itemSel.length > 0">
+            <label class="subMenu" [style.margin-left]="(20 * hijo)+'px'" [style.cursor]="vistaInicialActiva ? 'pointer' : 'default'">
+              {{item.nombre}}
+            </label>
+            <div class="contenedor" *ngIf="item.tipo == 'valor'">
+              <div class="rectangulo"></div>
+              <div class="centrado">{{item.valor}}
+              </div>
+            </div>
+            <div class="contenedor" *ngIf="item.tipo == 'flecha'">
+              <div class="flecha">
+              </div>
+            </div>
+          </a>
+          <div *ngIf="item.subMenu != null">
+            <pn-menu-seccion (clickItem)="clickItemSon($event)"  [resetSelected]="resetSelected" [hijo]="hijo + 1" [items]="item.subMenu" ></pn-menu-seccion>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

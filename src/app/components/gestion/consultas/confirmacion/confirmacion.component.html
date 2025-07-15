@@ -1,0 +1,129 @@
+<div>
+  <div (click)="backMenu()">
+    <img height="22px" src="assets/Images/gestion/consultas/facturacion/recurso_190.svg" alt="">
+  </div>
+  |
+  <div>CONSULTA DE CONFIRMACIÓN</div>
+</div>
+<div>
+  <div [ngClass]="classPanel">
+    <div class="filtroHeader">
+      <div class="abrir" (click)="openPanel()">
+        <img *ngIf="hiddenClose" width="15px" src="assets/Images/gestion/consultas/facturacion/recurso_193.svg" alt="">
+        <img *ngIf="!hiddenClose"  width="15px" src="assets/Images/gestion/consultas/facturacion/recurso_188.svg" alt="">
+      </div>
+      <div *ngIf="hiddenClose">
+        cerrar
+        <div class="cerrar" (click)="closePanel()">
+          <img height="20px" width="20px" src="assets/Images/gestion/consultas/facturacion/recurso_189.svg" alt="">
+        </div>
+      </div>
+    </div>
+
+    <div class="filtros">
+      <div>
+        <pq-radio-button [widthTotal]="'100px'" [lstItems]="lstItems" [disble]="true" [direction]="'row'" [imgSize]="'12px'" (emitItem)="emitItem($event)"></pq-radio-button>
+      </div>
+      <div>
+        <div (click)="filtroAvanzada()" [style.background]="avanzada?'#008895':'#C2C3C9'">AVANZADA</div>
+        <div (click)="filtroRapida()" [style.background]="!avanzada?'#008895':'#C2C3C9'">RÁPIDA</div>
+      </div>
+
+      <div *ngIf="avanzada" class="divAvanzada">
+        <div>
+          <div>
+            Del
+            <div>
+              <pq-date-picker [style.width]="'125px'" [(date)]="date" dateFormat="YYYYMMDD" (fecha)="getFechaImpl($event)">
+              </pq-date-picker>
+            </div>
+          </div>
+          <div>
+            Al
+            <div>
+              <pq-date-picker [style.width]="'125px'" [(date)]="date2" dateFormat="YYYYMMDD" (fecha)="getFechaImpl($event)">
+              </pq-date-picker>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div>
+            <span [style.margin-bottom]="'3px'">Solicitó</span>
+            <pq-drop-list (valueDropList)="dropList(1, $event)" [items]="itemsDropList" [isSearch]="false" [isCategory]="true" [align]="'left'" [itemSelect]="defaultSelected"></pq-drop-list>
+          </div>
+          <div>
+            <span [style.margin-bottom]="'3px'">Estado</span>
+            <pq-drop-list (valueDropList)="dropList(1, $event)" [items]="itemsDropList" [isSearch]="false" [isCategory]="true" [align]="'left'" [itemSelect]="defaultSelected"></pq-drop-list>
+          </div>
+          <div>
+            <span [style.margin-bottom]="'3px'">Prioridad</span>
+            <pq-drop-list (valueDropList)="dropList(1, $event)" [items]="itemsDropList" [isSearch]="false" [isCategory]="true" [align]="'left'" [itemSelect]="defaultSelected"></pq-drop-list>
+          </div>
+          <div>
+            <span [style.margin-bottom]="'3px'">Tipo Proveedor</span>
+            <pq-drop-list (valueDropList)="dropList(1, $event)" [items]="itemsDropList" [isSearch]="false" [isCategory]="true" [align]="'left'" [itemSelect]="defaultSelected"></pq-drop-list>
+          </div>
+          <div>
+            <span [style.margin-bottom]="'3px'">Proveedor</span>
+            <pq-drop-list (valueDropList)="dropList(1, $event)" [items]="itemsDropList" [isSearch]="false" [isCategory]="true" [align]="'left'" [itemSelect]="defaultSelected"></pq-drop-list>
+          </div>
+          <div>
+            
+          </div>
+          <div>
+            
+          </div>
+        </div>
+
+        <div>
+          <img height="31px" src="assets/Images/reload.svg" alt="">
+        </div>
+
+      </div>
+
+      <div *ngIf="!avanzada" class="divRapida">
+        <div>
+          <pq-radio-button [widthTotal]="'60px'" [lstItems]="lstRadiosRapida" [disble]="true" [direction]="'row'" [imgSize]="'12px'" (emitItem)="emitItem($event)"></pq-radio-button>
+        </div>
+
+        <div [formGroup]="">
+          <span>Folio</span>
+          <input type="text" formControlName="txtFactura">
+        </div>
+
+        <div>
+          <img height="20px" src="assets/Images/visualizar.svg" alt="">
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="resultados" [style.width]="hiddenClose ? 'calc(100% - 321px)': 'calc(100% - 50px)'">
+    <div>
+      <div>
+        RESULTADOS
+      </div>
+      <div>
+        <img height="20px" width="20px" src="assets/Images/exportar.svg" alt="">
+        <img [style.margin-right]="'15px'" height="20px" width="20px" src="assets/Images/descargar.svg" alt="">
+      </div>
+    </div>
+    <div>
+      <div>
+        <div [style.min-width]="'50px'">#</div>
+        <div [style.min-width]="'160px'">Solicitó</div>
+        <div [style.min-width]="'160px'">Cotización</div>
+        <div [style.min-width]="'160px'">Partida</div>
+        <div [style.min-width]="'160px'">FInicio</div>
+        <div [style.min-width]="'160px'">FFin</div>
+        <div [style.min-width]="'160px'">Proveedor</div>
+        <div [style.min-width]="'160px'">Tipo</div>
+        <div [style.min-width]="'160px'">Medio</div>
+        <div [style.min-width]="'160px'">Rechazos</div>
+        <div [style.min-width]="'160px'">Prioridad</div>
+        <div [style.min-width]="'160px'">Estado</div>
+      </div>
+    </div>
+  </div>
+</div>

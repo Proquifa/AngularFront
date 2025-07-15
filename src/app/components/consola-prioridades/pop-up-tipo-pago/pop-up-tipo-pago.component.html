@@ -1,0 +1,67 @@
+<div class="w3-container">
+
+  <div id="id01" class="modal" #pop>
+    <div class="modal-content">
+      <header class="header">
+        <h1> DATOS DEL CLIENTE </h1>
+      </header>
+
+      <div class="contenido">
+        <div class="datosCliente">
+          <div>
+            <label>{{datos.cliente}}</label>
+            <div>
+              <label style="color: #242424"> {{contact}}</label>
+              <label>{{numberOrders}}</label>
+            </div>
+            <div>
+              <label>Contacto</label>
+              <label>con restricción</label>
+            </div>
+          </div>
+        </div>
+        <div class="infoWarning">
+          <div><label>Imposible facturar debido a que los pedidos cuentan con un método de pago PUE y forma de pago 99</label></div>
+        </div>
+        <div>
+          <span>Esac</span>
+          <div class="datas">
+            <div style="width: 50%"><label>{{esac.name}}</label></div>
+            <div><label>{{esac.ext}}</label></div>
+            <div style="width: 35%"><label>{{esac.email}}</label></div>
+          </div>
+          <div class="datas">
+            <div style="width: 50%"><span>Contacto</span></div>
+            <div><span>Extensión</span></div>
+            <div style="width: 35%"><span>Correo Electrónico</span></div>
+          </div>
+        </div>
+        <div style="background-color: #f3f9f9">
+          <span>Cobrador</span>
+          <div class="datas">
+            <div style="width: 50%"><label>{{debtCollector.name}}</label></div>
+            <div><label>{{debtCollector.ext}}</label></div>
+            <div style="width: 35%"><label>{{debtCollector.email}}</label></div>
+          </div>
+          <div class="datas">
+            <div style="width: 50%"><span>Contacto</span></div>
+            <div><span>Extensión</span></div>
+            <div style="width: 35%"><span>Correo Electrónico</span></div>
+          </div>
+        </div>
+        <div>
+          <span style="font-weight: bold">Pedidos con Resticción</span>
+          <textarea [disabled]="true" [ngModel]="pedidos"></textarea>
+        </div>
+      </div>
+
+      <footer class="footer2">
+        <a type="submit" class="btnOk" (click)="cerrar()" >
+          <label> ACEPTAR </label>
+        </a>
+      </footer>
+    </div>
+  </div>
+
+</div>
+

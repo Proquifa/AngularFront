@@ -1,0 +1,6 @@
+<div class="padre">
+  <div [ngClass]="botones[i]" *ngFor="let item of lista; let i = index"  (click)="metodoDeFactura(item, i)" [style.width]="with">
+    <a id="dhoy" >{{item.nombre}} <span class="indice" *ngIf="conIndice">{{item.total}}</span></a>
+    <a style="font-weight: 300; font-size: 12px">{{item.total}} {{item.etiquetaTotal}}</a>
+  </div>
+</div>

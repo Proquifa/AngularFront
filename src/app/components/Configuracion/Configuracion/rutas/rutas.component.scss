@@ -1,0 +1,108 @@
+.configuracionRutas {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-content: stretch;
+    align-items: flex-start;
+    height: 97%;
+    width: auto;
+    padding: 20px;
+    }
+
+.header {
+    order: 0;
+    flex: 0 0 auto;
+    align-self: stretch;
+    font-size: 25px;
+    font-family: 'Roboto', sans-serif;
+    padding-top: 30px;
+    vertical-align: middle;
+    }
+
+.section {
+    order: 0;
+    flex: 1 1 auto;
+    align-self: stretch;
+    height: 10%;
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    overflow: scroll;
+    }
+
+.footer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-content: flex-start;
+    align-items: flex-start;
+    order: 0;
+    flex: 0 1 auto;
+    align-self: stretch;
+    padding-bottom: 5spx;
+    font-size: 20px;
+    font-family: 'Roboto', sans-serif;
+    width: 100%;
+  }
+
+.EntregaFooter,.CobroFooter,.RevisionFooter,.eEspecialFooter, .rMaterialFooter{
+    order: 0;
+    flex: 0 0 auto;
+    align-self: auto;
+    margin-left: 5%;
+    justify-content: center;
+    align-content: flex-start;
+    align-items: flex-start;
+  }
+
+  .lugar{
+    min-width: 143px;
+    width: 195px;
+    padding-left: 10px;
+    height: 16%;
+  }
+
+  .contenido{
+    //width: 18.2%;
+    min-width: 313px;
+    height: 15%;
+  }
+
+table{
+  width: 99%;
+  height: 90%;
+
+}
+
+table th{
+  text-align: left;
+  vertical-align: bottom;
+  height: 15%;
+//  height: 15%;
+}
+
+  table td{
+    border: 1px solid #D8D8D8;
+    vertical-align:middle;
+  //  height: 15%;
+  }
+
+  table tr{
+//    height: 15%;
+  }
+
+    #atras{
+      width: 19.8px;
+      height: 30.3px;
+    }
+
+    #EntregaFooter ,#CobroFooter ,#RevisionFooter ,#eEspecialFooter, #rMaterialFooter {
+      height: 20px;
+      width: 25px;
+    }
+
+    #ubicacion{
+      height: 18.2px;
+      width: 12.7px;
+    }

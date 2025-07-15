@@ -1,0 +1,43 @@
+<div class="container">
+    <div class="containerTitle">Editar Trabajador {{ trabajador.idTrabajador }}</div>
+    <div class="containerForms">
+        <input class="containerFormsInputs" style="width:80px" type="text" [(ngModel)]="trabajador.nombre" placeholder="nombre">
+        <input class="containerFormsInputs" style="width:80px" type="text" [(ngModel)]="trabajador.apellidoPaterno" placeholder="apellidoPaterno">
+        <input class="containerFormsInputs" style="width:80px" type="text" [(ngModel)]="trabajador.apellidoMaterno" placeholder="apellidoMaterno">
+        <input class="containerFormsInputs" style="width:80px" type="text" [(ngModel)]="trabajador.email" placeholder="email">
+        <input class="containerFormsInputs" style="width:80px" type="text" [(ngModel)]="trabajador.departamento" placeholder="departamento">
+        <input class="containerFormsInputs" style="width:80px" type="text" [(ngModel)]="trabajador.puesto" placeholder="puesto">
+        <input class="containerFormsInputs" style="width:80px" type="text" [(ngModel)]="trabajador.calle" placeholder="calle">
+        <input class="containerFormsInputs" style="width:80px" type="text" [(ngModel)]="trabajador.numExt" placeholder="numExt">
+        <input class="containerFormsInputs" style="width:80px" type="text" [(ngModel)]="trabajador.numInt" placeholder="numInt">
+        <input class="containerFormsInputs" style="width:80px" type="text" [(ngModel)]="codigoPostal" placeholder="C.P." (blur)="fnGetColonies()" >
+        <input class="containerFormsInputs" style="width:80px" type="text" [(ngModel)]="trabajador.referencia" placeholder="referencia">
+        <input class="containerFormsInputs" style="width:80px" type="text" [(ngModel)]="trabajador.titulo" placeholder="titulo">
+        <input class="containerFormsInputs" style="width:80px" type="text" [(ngModel)]="trabajador.telefonoFijo" placeholder="telefonoFijo">
+        <input class="containerFormsInputs" style="width:80px" type="text" [(ngModel)]="trabajador.telefonoExt" placeholder="telefonoExt">
+        <input class="containerFormsInputs" style="width:80px" type="text" [(ngModel)]="trabajador.telefonoMovil" placeholder="telefonoMovil">
+        <input class="containerFormsInputs" style="width:80px" type="text" [(ngModel)]="trabajador.numSeguridadSocial" placeholder="numSeguridadSocial">
+        <input class="containerFormsInputs" style="width:80px" type="text" [(ngModel)]="trabajador.datoFiscal.razonSocial" placeholder="Razón Social">
+        <input class="containerFormsInputs" style="width:80px" type="text" [(ngModel)]="trabajador.datoFiscal.rfc" placeholder="RFC">
+        <input class="containerFormsInputs" style="width:80px" type="text" [(ngModel)]="trabajador.datoFiscal.curp" placeholder="CURP">
+        <input class="containerFormsInputs" style="width:80px" type="text" [(ngModel)]="trabajador.antiguedad" placeholder="antiguedad">
+        <input class="containerFormsInputs" style="width:80px" type="text" [(ngModel)]="trabajador.numEmpleado" placeholder="numEmpleado">
+        <input class="containerFormsInputs" style="width:80px" type="text" [(ngModel)]="trabajador.cuentaBancaria" placeholder="cuentaBancaria">
+        <input class="containerFormsInputs" style="width:80px" type="text" [(ngModel)]="trabajador.salarioBaseCotApor" placeholder="salarioBaseCotApor">
+        <input class="containerFormsInputs" style="width:80px" type="text" [(ngModel)]="trabajador.salarioDiarioIntegrado" placeholder="salarioDiarioIntegrado">
+        <label class="containerFormsInputLabel" for="">Asimilado<input [(ngModel)]="trabajador.asimilado" class="containerFormsInputLabelCheck" style="width:100px" type="checkbox"></label>
+        <label class="containerFormsInputLabel" for="">Sindicalizado<input [(ngModel)]="trabajador.sindicalizado" class="containerFormsInputLabelCheck" style="width:100px" type="checkbox"></label>
+        <!-- SELECTS -->
+        <div class="containerFormsInputSelect" *ngFor="let item of itemsParent; let i = index">
+            <span>{{ selectsLabels[i] }}</span>
+            <pq-drop-list [items]="itemsParent[i]" [isSearch]="isSearchParent[i]" [isCategory]="isCategoryParent[i]" [size]="sizeParent[i]" [align]="alignParent[i]" [itemSelect]="itemSelectParent[i]" [widthContent]="widthContentParent[i]" [marginLeftContent]="marginLeftContentParent[i]" [tooltip]="tooltipParent[i]" [tipoDrop]="tipoDropParent[i]" [campoLabel]="campoLabelParent[i]" (valueDropList)="fnGetValueDropList($event, i)"></pq-drop-list>
+        </div>
+    </div>
+    <div>
+        {{ trabajador | json }}
+    </div>
+    <div class="containerBtns">
+        <div class="containerBtnsBtn">Cancelar</div>
+        <div class="containerBtnsBtn" (click)="fnSaveTrabajador()" >Guardar</div>
+    </div>
+</div>

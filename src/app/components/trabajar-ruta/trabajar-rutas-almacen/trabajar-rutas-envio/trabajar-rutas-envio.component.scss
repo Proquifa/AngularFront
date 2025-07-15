@@ -1,0 +1,325 @@
+@import "../../../../../mixins.scss";
+@import "../../../../../colors.scss";
+
+.subPadre {
+  display: flex;
+  box-sizing: border-box;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.menuSeccion{
+  width: 321px;
+  background-color: #E6E6E6;
+  float: left;
+  flex: 1 0 auto;
+  display: flex;
+}
+
+#divBoton {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  padding-right: 20px;
+  box-sizing: border-box;
+}
+
+.botonIngresar {
+  width: 190px;
+  height: 40px;
+  background: #008894;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 21px;
+  cursor: pointer;
+  border: none;
+  color: #FFFFFF;
+  font-weight: bold;
+  order: 0;
+  flex: 0 1 auto;
+  align-self: auto;
+}
+
+/////////Estilo del donout
+////titulos de la graficas
+.tituloGrafica {
+  width: 100px;
+  font-size: 36px;
+  font-weight: bold;
+  text-align: center
+}
+
+.tituloGMediano {
+  width: 100px;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center
+}
+
+.tituloGPequenio {
+  width: 100px;
+  font-size: 21px;
+  font-weight: bold;
+  text-align: center
+}
+
+/////prioridad estilos
+#prioridad1,
+#prioridad2,
+#prioridad3 {
+  width: 55%;
+}
+
+#donaProducto {
+  width: 75%;
+}
+/*Mixins tooltip*/
+/*& > .tooltipV {
+  & > .texto{
+    @include multiLineTextTruncate(1, 1.5em, 20px);
+  }
+  @include tooltip();
+}*/
+//////////
+/*.tooltip .tooltiptext::after {
+  content: " ";
+  position: absolute;
+  bottom: 100%;
+  !* At the top of the tooltip *!
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent #4C4C4C transparent;
+}*/
+
+/*.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 0%;
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}*/
+
+.tooltip {
+ /* visibility: hidden;
+  width: 148px;
+  height: 42px;
+  background-color: #4C4C4C;
+  text-align: left;
+  //border-radius: 6px;
+  padding: 5px 10px 0px 0px;
+  padding: 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  left: 2%;
+  margin-left: -60px;
+  font-size: 10px;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  !* Position the tooltip *!
+  position: absolute;
+  z-index: 1;
+  font-family: ArialMT;
+  font-size: 9px;
+  color: #FFFFFF;
+  text-align: center;*/
+  @include tooltip(50%);
+}
+
+
+/*Estilos nuevos*/
+
+.graficas {
+  width: 100%;
+  height: calc(100vh - 350px);
+  @include flexRow;
+  justify-content: space-around;
+
+  .padreCliente_Prioridades {
+    @include flexRow;
+    justify-content: space-between;
+    width: 70%;
+    margin: 30px 0px;
+    &>div {
+      min-width: 45%;
+
+      &>div {
+        width: 100%;
+        @include flexColumn;
+        @include absoluteCenter;
+      }
+    }
+  }
+
+  .padrePrioridades {
+    width: 20%;
+    @include flexColumn;
+    margin: 30px 0px;
+    &>div {
+      width: 100%;
+      max-height: 25%;
+      margin: 6% 0px;
+      &>div {
+        width: 100%;
+        @include flexColumn;
+        @include absoluteCenter;
+      }
+    }
+  }
+}
+// .menuRolesEmbalaje
+// {
+
+.aux
+{
+  .asideNormalMenu{
+    order: 0;
+    flex: 0 0 auto;
+    align-self: stretch;
+    min-width: 181px;
+    width: 321px;
+    height: 100%;
+    overflow-y: scroll;
+    & > .articulo{
+      width: 321px;
+      background-color: #E6E6E6;
+      float:left;
+      flex: 1 0 auto;
+      display: flex;
+      height: 100%;
+    }
+  }
+
+  > .asideOcultarMenu{
+    animation-name: ocultarMenu;
+    animation-duration: 1s;
+    transition: 1s ease-in-out;
+    animation-fill-mode: forwards;
+    box-sizing: border-box;
+    min-width: 0px;
+    width: 0px;
+    & > .articulo{
+      width: 0px;
+    }
+
+  }
+
+  > .asideMostrarMenu{
+    order: 0;
+    flex: 0 0 auto;
+    align-self: stretch;
+    animation-name: mostrarMenu;
+    animation-duration: 0.7s;
+    animation-fill-mode: forwards;
+    box-sizing: border-box;
+    overflow-y: scroll;
+    & > .articulo{
+      width: 321px;
+      background-color: #E6E6E6;
+      float:left;
+      flex: 1 0 auto;
+      display: flex;
+      height: 100%;
+    }
+  }
+
+  @keyframes ocultarMenu {
+    from {min-width: 321px;}
+    to {width: 0px;}
+  }
+
+  @keyframes mostrarMenu {
+    from {width: 0px;}
+    to {width: 321px;}
+  }
+}
+
+#divPrincipal {
+  width: 100%;
+  height: 100%;
+  flex-direction: row;
+  overflow: scroll;
+
+  & .bordeUno {
+    height: 48px;
+    box-sizing: border-box;
+    display: flex;
+    padding-left: 18px;
+    align-items: center;
+    border-bottom: 2px solid black;
+
+    &.visitaTrabajo {
+      min-width: 1760px;
+    }
+    &.visitaInicial {
+      min-width: 950px;
+    }
+
+    & > label {
+      font-family: Novecento;
+      @include fontFormat(20px, 300, #5B5B5B);
+      @include customFont(20, 25);
+      font-size: 25px;
+    }
+  }
+
+  & .datosC {
+    @include customHeight(62, 75);
+    height: 75px;
+    & .subPadre {
+      & > div {
+        & > div {
+          &.dvText {
+            @include customFont(12, 16);
+            font-size: 16px;
+          }
+          &.dvNumber {
+            @include customFont(30, 46);
+            font-size: 46px;
+          }
+        }
+      }
+    }
+  }
+
+  & .VistaInicial {      
+    & #botonera {
+      @include customHeight(30, 50);
+      height: 50px;
+      box-sizing: content-box;
+      border-bottom: 1px solid #88868A;
+      border-top: 1px solid #88868A;
+      position: relative;
+    }
+  }
+}
+
+.trabajarRutaEnvioInfo{
+  width: 100%;
+  height: 83%;
+  min-width: 1760px;
+}
+
+
+@media all and (min-height:750px) and (max-height: 770px) {
+  .trabajarRutaEnvioInfo{min-width: 1304px};
+  #divPrincipal > .bordeUno.visitaTrabajo{min-width: 1304px}
+}
+
+.estiloDatosObjetivo, .estiloDatosTrabajado, .estiloDatos, .estiloDatosMinimo{
+  font-size: 16px;
+  font-family: Roboto;
+  font-weight: bold;
+}

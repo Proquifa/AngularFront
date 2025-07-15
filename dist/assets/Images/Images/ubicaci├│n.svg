@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="14px" height="19px" viewBox="0 0 14 19" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
+    <title>ubicación</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-574.000000, -550.000000)">
+        <polygon id="Page-1" fill="#1A1A1A" points="0 1440 2500 1440 2500 0 0 0"></polygon>
+        <polygon id="Page-1" fill="#1A1A1A" points="-52 1466 2448 1466 2448 26 -52 26"></polygon>
+        <polygon id="Page-1" fill="#FFFFFF" points="525 1390 2460 1390 2460 75 525 75"></polygon>
+        <g id="Group" transform="translate(571.000000, 491.000000)">
+            <g id="nombre" font-family="Helvetica-Bold, Helvetica" font-size="20" font-weight="bold">
+                <text id="#1-·-Nombre-del-clie">
+                    <tspan x="0" y="23.9454545" fill="#404040">#1 · </tspan>
+                    <tspan x="38.9160156" y="23.9454545" fill="#008994">Nombre del cliente máximo  </tspan>
+                    <tspan x="0" y="47.9454545" fill="#008994">renglones, sie es muy gde.</tspan>
+                </text>
+            </g>
+            <g id="ubicación" transform="translate(3.000000, 59.000000)">
+                <path d="M11.3284,2.2144 C8.8404,-0.2726 4.8074,-0.2726 2.3184,2.2144 C0.0774,4.4564 -0.1746,8.6774 1.7274,11.2144 L6.8244,18.5724 L11.9214,11.2144 C13.8224,8.6774 13.5704,4.4564 11.3284,2.2144" id="Fill-54" fill="#008895"></path>
+                <path d="M6.886,8.7603 C5.724,8.7603 4.783,7.8193 4.783,6.6563 C4.783,5.4963 5.724,4.5533 6.886,4.5533 C8.048,4.5533 8.989,5.4963 8.989,6.6563 C8.989,7.8193 8.048,8.7603 6.886,8.7603" id="Fill-56" fill="#FFFFFF"></path>
+            </g>
+        </g>
+    </g>
+</svg>

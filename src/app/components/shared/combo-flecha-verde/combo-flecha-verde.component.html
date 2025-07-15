@@ -1,0 +1,20 @@
+<div [ngClass]="dropListClass">
+  <div class="container-drop">
+    <div class="Title" (click)="openDropList()" [style.border]="widthBorder? '1px solid #ECEEF0;':'0px'">
+      <p [ngClass]="align">{{title}}</p>
+      <img src="./assets/Images/drop_list_flechaVerde.svg" width="37" height="17" alt="">
+    </div>
+
+    <div [hidden]="!showDropList" class="content" [style.width]="widthContent" [style.margin-left]="marginLeftContent">
+        
+      <div>
+        <div slimScroll height="100%" size="5px" color="#3369b1" railVisible="true" railColor="#ecf0f3" opacity=".7">
+         <ul class="lista"  *ngIf="(arrayAux != undefined)">
+            <li style="font-family: 'Roboto'; font-weight: lighter;" [style.line-height]="heightLi == '35px' ? '35px': null" [style.height]="heightLi == '35px' ? '35px': null" [style.min-height]="heightLi" *ngFor="let item of arrayAux" [style.align-items]="'left'" [ngClass]="(isCategory && item.tipo =='cat')?'category tooltip':'tooltip'" (click)="selectItem(item)">{{item.nombre}} <span  class="tooltiptext" *ngIf="tooltip">{{item.nombre}}</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <label [ngClass]="effectS">Label</label> -->
+</div>

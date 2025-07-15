@@ -1,0 +1,95 @@
+<!--&lt;!&ndash; <pq-vista-operacion-embalaje *ngIf="vistaInicial"></pq-vista-operacion-embalaje> &ndash;&gt;
+<div class="graficasEmbalaje">
+   <div class="botoneraDiasEmbalaje">
+  <pq-botonera-dias-embalaje class="botoneraDiasEmbalaje" (event)="filtrarDias($event)" [iniciarBotonera]="iniciarBotonera" [tHoy]="tHoy" [tTodo]="tTodo" [tPasadoM]="tPasadoM" [tManana]="tManana" [tFuturo]="tFuturo"></pq-botonera-dias-embalaje>
+  </div>
+
+&lt;!&ndash; Graficas y contenido  &ndash;&gt;
+  <div class="graficasE">
+  &lt;!&ndash; Pruebas de graficas  &ndash;&gt;
+  <div style="width: 100%;height:100%;flex-direction:row; display:flex">
+
+    <div [ngStyle]="{'width': '42%','padding-top':'19px','height':'100%','display':'flex','align-items':'center', 'justify-content':'center', 'position':'relative', 'flex-direction':'column'}">
+      <div>
+        <label class="tituloGrafica">PRODUCTOS</label>
+      </div>
+      &lt;!&ndash; <div style="height:  4%"></div> &ndash;&gt;
+      <div id="donaProducto">
+        <pn-donut-chart [idGrafica]="'producto'" [data]="data" [tipoGrafica]="'VerdevsAzul'" [height]="'auto'"> </pn-donut-chart>
+      </div>
+    </div>
+
+
+    <div [ngStyle]="{'width': '8%', 'height':'100%'}"></div>
+
+    <div [ngStyle]="{'width':'27%', 'height':'100%', 'flex-direction':'column', 'display':'flex', 'align-items': 'center','justify-content': 'center'}">
+
+      <div [ngStyle]="{'width':'100%', 'flex-direction':'column', 'display':'flex', 'align-items': 'center','justify-content': 'center', 'margin-bottom':'10%'}">
+        <div>
+          <label class="tituloGMediano">PROVEEDORES</label>
+        </div>
+        <div style="height:  2%"></div>
+        <div id="donaProveedores">
+          <pn-donut-chart [idGrafica]="'cliente'" [data]="dataCLiente" [tipoGrafica]="'Versus'" [height]="'auto'"> </pn-donut-chart>
+        </div>
+
+      </div>
+
+      <div [ngStyle]="{'width':'100%', 'flex-direction':'column', 'display':'flex', 'align-items': 'center','justify-content': 'center'}">
+        <div>
+          <label class="tituloGMediano">PRIORIDADES</label>
+        </div>
+        <div style="height:2%"></div>
+        <div id="donaPrioridades">
+          <pn-donut-chart [idGrafica]="'prioridades'" [data]="dataPrioridades" [tipoGrafica]="'Versus'" [height]="'auto'"> </pn-donut-chart>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div [ngStyle]="{'width': '5%', 'height':'100%'}"></div>
+
+    &lt;!&ndash;    grupo de las graficas pequeñas &ndash;&gt;
+
+    <div [ngStyle]="{'width':'15%', 'height':'calc(100% - 4px)', 'flex-direction':'column', 'display':'flex', 'align-items': 'center','justify-content': 'center'}">
+
+      <div [ngStyle]="{'width':'100%', 'flex-direction':'column', 'display':'flex', 'align-items': 'center','justify-content': 'center','margin-bottom':'10%'}">
+        <div>
+          <label class="tituloGPequenio">PRIORIDAD 1</label>
+        </div>
+        <div style="height:4%"></div>
+        <div id="prioridad1">
+          <pn-dona [doughnutChartLabels]="arrayProductos" [doughnutChartData]="array2" [tipoGrafica]="tipoGraficaP1"></pn-dona>
+        </div>
+      </div>
+
+      <div [ngStyle]="{'width':'100%', 'flex-direction':'column', 'display':'flex', 'align-items': 'center','justify-content': 'center','margin-bottom':'10%'}">
+        <div>
+          <label class="tituloGPequenio">PRIORIDAD 2</label>
+        </div>
+        <div style="height:10%"></div>
+        <div id="prioridad2">
+          <pn-dona [doughnutChartLabels]="arraylabelP2" [doughnutChartData]="arrayValoresP2" [tipoGrafica]="tipoGraficaP2"></pn-dona>
+        </div>
+      </div>
+
+      <div [ngStyle]="{'width':'100%', 'flex-direction':'column', 'display':'flex', 'align-items': 'center','justify-content': 'center'}">
+        <div>
+          <label class="tituloGPequenio">PRIORIDAD 3</label>
+        </div>
+        <div style="height:4%"></div>
+        <div id="prioridad3">
+          <div>
+            <pn-dona [doughnutChartLabels]="arraylabelP3" [doughnutChartData]="arrayValoresP3" [tipoGrafica]="tipoGraficaP3"></pn-dona>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+  &lt;!&ndash; pruebas de graficas   &ndash;&gt;
+  </div>
+</div>-->

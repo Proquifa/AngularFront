@@ -1,0 +1,671 @@
+@import "./../../../../mixins";
+.buscar {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  height: 50px;
+  width: 100%;
+  border-style: solid;
+  align-items: center;
+  div {
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    border-radius: 102px 102px 102px 102px;
+    -moz-border-radius: 102px 102px 102px 102px;
+    -webkit-border-radius: 102px 102px 102px 102px;
+    border: 0.5px solid #BFC0C7;
+    height: 26px;
+    div {
+      border: none;
+      border-radius: 0px 0px 0px 0px;
+      -moz-border-radius: 0px 0px 0px 0px;
+      -webkit-border-radius: 0px 0px 0px 0px;
+      border: 0px solid #000000;
+      width: 40px;
+      background: transparent;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      align-content: center;
+    }
+    .buscar-input {
+      background: transparent;
+      border-radius: 100px;
+      -moz-border-radius: 102px 102px 102px 102px;
+      border: 0px solid #000000;
+      width: 100%;
+      font-family: Helvetica;
+      font-size: 18px;
+      color: #AAA9AF;
+      outline: none;
+    ;
+      padding-left: 5px;
+    }
+  }
+}
+.barraBusqueda {
+  order: 0;
+  flex: 1 1 auto;
+  align-self: flex-end;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/******/
+.menu {
+  position: relative;
+}
+
+.menu:HOVER {
+  cursor: pointer;
+}
+
+.menu > div {
+  width: 20px;
+  height: 2px;
+  background: #000000;
+  margin: 5px;
+}
+
+section {
+  position: absolute;
+  visibility: hidden;
+  height: 0;
+}
+
+section.visible {
+  visibility: visible;
+  height: 74px;
+  overflow: auto;
+  width: 219px;
+  background: #FFFFFF;
+  z-index: 2;
+  display: flex;
+  box-sizing: border-box;
+  border-bottom: 1px solid #ECEEF0;
+  border-top: 1px solid #ECEEF0;
+  border-left: 1px solid #ECEEF0;
+  border-right: 1px solid #ECEEF0;
+}
+.listaHamburguesa{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  justify-content: center;
+  padding-left: 15px;
+  padding-right: 15px;
+  > li{
+    display: flex;
+    box-sizing: border-box;
+    border-bottom: 0.5px solid #ECEEF0;
+    padding-bottom: 5px;
+    padding-top: 5px;
+  }
+  > li:hover{
+    background-color: #ECEEF0;
+
+  }
+}
+.areaSeccion{
+  min-width: 1175px;
+  min-height: 1000px;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 0px 20px 0px 20px;
+  > div{
+    width: 100%;
+    height: calc(100% - 71px);
+    display: flex;
+    flex-direction: column;
+    & > .datosPersonales {
+      width: 100%;
+      height: 153px;
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid #424242;
+      line-height: 1.5;
+      & >  div{
+        height: 100%;
+        justify-content: center;
+        align-items: start;
+        display: flex;
+        flex-direction: column;
+        box-sizing: border-box;
+        padding-right: 10px;
+        & > label{
+          font-family: Roboto;
+          font-weight: 400;
+          font-size: 18px;
+          color: #424242;
+          text-align: left;
+        }
+        & > span{
+          font-family: Roboto;
+          font-weight: 400;
+          font-size: 17px;
+          color: #848387;
+          text-align: left;
+        }
+        & > div{
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          & > label{
+            font-family: Roboto;
+            font-weight: 400;
+            font-size: 18px;
+            color: #424242;
+            text-align: left;
+          }
+          & > h1{
+            font-family: Novecento;
+            font-weight: bold;
+            font-size: 40px;
+            color: #D8D9DD;
+            line-height: 55px;
+          }
+        }
+      }
+    }
+    & > div{
+      width: 100%;
+      height: calc(100% - 153px);
+      display: flex;
+      flex-direction: row;
+
+    }
+  }
+  > .btn{
+    height: 71px;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: row;
+    align-items: center;
+    padding-bottom: 5px;
+    & div{
+      @include button();
+    }
+  }
+}
+.seccionListas{
+    width: 20%;
+    height: 100%;
+    display: flex;
+    box-sizing: border-box;
+  flex-direction: column;
+    & > .titulos{
+      width: 100%;
+      height: 67px;
+      display: flex;
+      border-bottom: 1px solid #242424;
+      align-items: center;
+      & > label {
+        font-family: Novecento;
+        font-weight: bold;
+        font-size: 24px;
+        color: #424242;
+        text-align: left;
+        overflow: hidden;
+        transition: 0.8s font-size;
+        & > span{
+          color:  #008894;
+          font-size: 24px;
+          font-weight: bold;
+          font-family: Novecento;
+        }
+      }
+    }
+    & > div{
+      width: 100%;
+      height: calc(100% - 67px);
+    }
+}
+.corteTexto{
+  @include multiLineTextTruncateSinHeight(1, 1.2);
+}
+.listaSeccionUno {
+  // height: 90%;
+  box-sizing: border-box;
+  min-height: 668px;
+  height: 96%;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  > div{
+    height: calc(100% - 30px);
+    border-bottom: 1px solid;
+    width: 100%;
+    border-top: 1px solid;
+    overflow: auto;
+    position: relative;
+  }
+  > .totales{
+    height: 30px;
+    width: 100%;
+    border-bottom: 0;
+    border-top: 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    line-height: 1.2;
+  }
+}
+.noSeleccionado{
+  height: 50%;
+  display: flex;
+  box-sizing: border-box;
+  padding-top: 20px;
+}
+.informacionList{
+  font-family: Roboto;
+  display: flex;
+  flex-direction: column;
+  label{
+    color: #242424;
+    font-weight: bold;
+    font-size: 20px;
+    font-family: Roboto;
+    transition: 0.8s font-size;
+  }
+  p{
+    font-weight: 400;
+    font-family: Roboto;
+    font-size: 19px;
+    color: #008894;
+    text-align: left;
+    transition: 0.8s font-size;
+  }
+  h3{
+    font-size: 18px;
+    font-family: Roboto;
+    color: #848387;
+    margin-top: 4px;
+    font-weight: 400;
+    transition: 0.8s font-size;
+  }
+}
+.pedidoInter{
+  font-weight: 400!important;
+}
+.imagenFlecha {
+  position: absolute;
+  right: 0;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  height: 100%;
+}
+.organizarLista{
+  width: 100%;
+  display: flex;
+  padding-top: 10px;
+  position: relative;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 100%;
+  align-items: center;
+  box-sizing: border-box;
+}
+.primeraSec{
+  width: 30%;
+  background: #FFFFFF;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+  margin-right: 20px;
+  min-width: 350px;
+  > .listaSeccionUno {
+    height:90%;
+    display: flex;
+    flex-direction: column;
+
+    > div{
+      height: calc(100% - 30px);
+      border-bottom: 1px solid;
+      width: 100%;
+      border-top: 1px solid;
+      overflow: scroll;
+    }
+    > .totales{
+      height: 30px;
+      width: 100%;
+      border-bottom: 0;
+      border-top: 0;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+  }
+}
+.lista {
+  width: 100%;
+  min-height: 80px;
+  font-size: 20px;
+  padding: 15px 19px 14px 13px;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+  line-height: 1.3;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-content: stretch;
+  align-items: center;
+
+  &> .index {
+    order: 0;
+    align-self: auto;
+    height: 52px;
+  }
+  flex: 0 1 auto;
+
+  & > div{
+    &> .datosLst {
+      order: 0;
+      flex: 1 1 auto;
+      align-self: auto;
+      padding-top: 5px;
+      padding-bottom: 5px;
+      padding-left: 20px;
+    }
+  }
+  // padding-top: 20px;
+  div:hover {
+    background-color: #ECEEF0;
+  }
+  >.divActual {
+    background-color: #ECEEF0;
+    box-shadow: 0 2px 4px -3px #008895;
+
+  }
+  >.divActive {
+    .dfSelect {
+      background: #008895 !important;
+      width: 5px !important;
+      color: #008895;
+
+    }
+    & > div{
+      &> .datosLst {
+        order: 0;
+        flex: 1 1 auto;
+        align-self: auto;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        padding-left: 20px;
+      }
+    }
+    background-color:#ECEEF0;
+  ;
+  }
+}
+.borderLine{
+  width: 1.1px !important;
+  height: 100% !important;
+  background: linear-gradient(to top, #FFFFFF 2%, #BCBCBC 70%, #FFFFFF 93%) 100%;
+}
+.icono{
+  width: 16px;
+  margin-right: 5px;
+}
+.flechaInicio{
+  width: 100%;
+  -webkit-transform: rotate(-180deg);
+  -moz-transform: rotate(-180deg);
+  -ms-transform: rotate(-180deg);
+  transform: rotate(-180deg);
+  padding-left: 5px;
+}
+.numeroIndex{
+  font-size: 28px;
+  font-family: Roboto;
+  font-weight: 400;
+  color: #242424;
+  text-align: left;
+  // width: 10%;
+  padding-right: 20px;
+  display: flex;
+  box-sizing: border-box;
+  padding-top: 4px;
+}
+.infoProveedor{
+  height: 100%;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  line-height: 1.2;
+  & > span{
+    font-family: Roboto;
+    font-weight: bold;
+    font-size: 20px;
+    color: #008894;
+    text-align: left;
+    transition: 0.8s font-size;
+  }
+  & > div{
+    display: flex;
+    box-sizing: border-box;
+    & > div{
+      display: flex;
+      flex-direction: column;
+      & > label{
+        font-family: Roboto;
+        font-weight: bold;
+        font-size: 18px;
+        color: #424242;
+        text-align: left;
+        padding-right: 5px;
+        transition: 0.8s font-size;
+      }
+    }
+  }
+}
+.segundaS{
+  height: 40%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  .causaProducto{
+    height: 100%;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    & > span{
+      font-family: Roboto;
+      font-weight: bold;
+      font-size: 20px;
+      color: #008894;
+      text-align: left;
+      transition: 0.8s font-size;
+    }
+    & > label{
+      overflow: hidden;
+      @include multiLineTextTruncateSinHeight(1, inital);
+      font-family: Roboto;
+      font-weight: 400;
+      font-size: 18px;
+      color: #424242;
+      text-align: left;
+      padding-right: 5px;
+      transition: 0.8s font-size;
+    }
+
+  }
+}
+.seccionContenido{
+  height: 85%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  & > .texto{
+    height: 116px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding-bottom: 5px;
+    & > div{
+      & > label {
+        font-family: Roboto;
+        font-weight: bold;
+        font-size: 20px;
+        color: #424242;
+        text-align: left;
+      }
+    }
+    & > .rechazo{
+      line-height: 84px;
+      width: 100%;
+      background-color: #f9e0e0;
+      display: flex;
+      box-sizing: border-box;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+  }
+  & > .imagenes{
+    height: calc(100% - 116px);
+    width: 100%;
+    display: flex;
+    box-sizing: border-box;
+    padding-top: 5px;
+    & > .imagenRechazo {
+      height: 100%;
+      width: 100%;
+      background-color: #F3F3F4;
+      display: flex;
+      flex-direction: column;
+      & > .image{
+        display: flex;
+        justify-content: space-around;
+        box-sizing: border-box;
+        padding-top: 10px;
+        & > label {
+          cursor: pointer;
+          font-family: Roboto;
+          font-weight: 400;
+          font-size: 20px;
+          color: #008894;
+          text-align: left;
+          height: 23px;
+        }
+        & > label:hover{
+          border-bottom: 1px solid;
+        }
+      }
+      & > .estilosImagen {
+        height: calc(100% - 20px);
+        width: calc(100% - 20px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        & > img{
+          height: 305px;
+          position: relative;
+        }
+      }
+    }
+  }
+}
+.motivos{
+  height: calc(100% - 407px);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+  & > div{
+    height: 30%;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+
+    & > div{
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      & > label{
+        font-family: Roboto;
+        font-weight: 400;
+        font-size: 18px;
+        color: #424242;
+        text-align: center;
+        transition: 0.8s font-size;
+      }
+
+      & > img{
+        height: 20px;
+        padding-right: 15px;
+      }
+    }
+    & > label{
+      font-family: Roboto;
+      font-weight: 400;
+      font-size: 16px;
+      color: #424242;
+      text-align: left;
+    }
+    & > textarea{
+      height: 77px;
+      outline: 0 none;
+      border-width: 1px;
+      border-style: solid;
+      border-color: #D8D9DD;
+      font-size: 16px;
+      font-family: Roboto;
+      font-weight: 400;
+      resize: none;
+    }
+  }
+}
+.espacios{
+  padding-right: 120px;
+}
+.subtitulo{
+  font-family: Roboto;
+  font-weight: 400;
+  font-size: 18px;
+  color: #424242;
+  text-align: left;
+}
+/deep/  .dropListSelect {
+  & .container-drop {
+    &  .Title {
+      & > p{
+        font-weight: bold !important;
+        color: #008894;
+      }
+    }
+  }
+}
+@media all and(min-width: 1300px) and(max-width: 1836px) {
+  .areaSeccion > div > .datosPersonales > div > div >h1 {font-size: 35px;};
+  .seccionListas > .titulos > label{font-size: 22px};
+  .seccionListas > .titulos > label > span{font-size: 22px};
+  .infoProveedor > span, .causaProducto > span {font-size: 18px};
+  .infoProveedor > div > div > label, .causaProducto > label{font-size: 16px};
+  .informacionList > label{font-size: 18px};
+  .informacionList > p{font-size: 17px};
+  .informacionList > h3 {font-size: 16px};
+  .motivos > div > div > label {font-size: 16px};
+}
+@media all and(min-width: 1300px) and(max-width: 1864px) {
+  .espacios{padding-right: 20px};
+}
+
+@media all and(min-height: 770px) and(max-height: 1261px) {
+  .listaSeccionUno{height: 95.5%};
+}

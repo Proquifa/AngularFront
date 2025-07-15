@@ -1,0 +1,127 @@
+<div class="areaSeccion">
+  <div>
+    <div class="datos">
+      <div>
+        <div>
+          <img src="./assets/Images/contacto.svg" class="icono">
+          <pn-combo-flecha-verde *ngIf="activarCombo" [items]="listaContacto" [itemSelect]="selectedTipoContac" [heightLi]="'35px'" [widthBorder] = 'false' (valueDropList)="recibirItem($event)" style="width: 250px;"></pn-combo-flecha-verde>
+        </div>
+        <div>
+          <img src="./assets/Images/mail.svg" class="icono">
+          <label>{{itemContacto.email}}</label>
+        </div>
+        <div>
+          <img src="./assets/Images/telefono.svg" class="icono">
+          <label>{{itemContacto.tel}}</label>
+        </div>
+      </div>
+      <div>
+        <label>{{itemContacto.titulo}}</label>
+        <span>Título de Contacto</span>
+      </div>
+      <div>
+        <label>{{itemContacto.puesto}}</label>
+        <span>Puesto</span>
+      </div>
+      <div>
+        <label>{{itemContacto.departament}}</label>
+        <span>Departamento</span>
+      </div>
+    </div>
+    <div>
+      <div style="width: 40%;flex-direction: column;padding-right: 20px">
+        <div class="titulosLista">
+          <div  class="tituloCliente">
+            <label class="tituloLista">PRODUCTOS</label>
+          </div>
+          <div class="organizarLista">
+            <div class="barraBusqueda" style="height: 100%">
+              <div class="buscar">
+                <div>
+                  <div class="lupa">
+                    <img src="assets/Images/lupa.svg" width="22px" height="22px" alt="buscar">
+                  </div>
+                  <input type="text" [ngModel]="searchTerm" (ngModelChange)="buscar($event)" class="buscar-input" placeholder="OC, Producto, Inspector, tipo , lote" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--Lista total-->
+        <div class="segundaSeccionList">
+          <div style="width: 99%;display: flex;overflow: auto;position: relative;height: 100%;">
+            <div class= "lista" style="display: unset;flex-direction: column">
+              <div [ngClass]="item.identificador === folio? 'divActive': ''" *ngFor="let item of lista; let i = index;"   style="display: flex;flex-direction:row;width: 100%;position: relative; border-bottom: 1px solid #ECEEF0">
+                <div class="dfSelect"></div>
+                <div class="datosLst" style="padding-top: 5px;padding-left: 15px;display: flex; width: 100%;box-sizing: border-box;padding-bottom: 10px;" (click)="seleccionarItem(item, i)">
+                  <div class="informacionList">
+                    <label> #{{i +1}} · <span class="producto">{{item.folio}}</span> · {{item.producto}}</label>
+                    <span class="tooltip"> <label class="descarga" (click)="visualizarDoc('OC', item.oc)">OC-{{item.oc}}</label> · <label class="descarga" (click)="visualizarDoc('PEDIDO', item.pedidoI)">Pedido Interno: {{item.pedidoI}}</label> <span class="tooltiptext" *ngIf="item.listaRechazos.length > 0"><label *ngFor="let itemR of item.listaRechazos"><label (click)="visualizarDoc('OC', itemR.compra)" class="descargaToltip">OC-{{itemR.compra}}</label> · <label (click)="visualizarDoc('PEDIDO', itemR.cpedido)" class="descargaToltip">Pedido Internio: {{itemR.cpedido}}</label></label></span></span>
+                    <h1>Fecha de Inspección: {{item.fechaI}}· Inpector: {{item.inspector}}</h1>
+                    <h3> FEE: {{item.FEE}} · DRE: {{item.DRE}} · Tipo:{{item.tipo}} · Lote: {{item.lote}}</h3>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="totales">
+          <label>#{{listaUniveso.length}}</label>
+          <label>{{datosProveedor.totalOc}} OC</label>
+          <label>{{listaUniveso.length}} Productos</label>
+        </div>
+      </div>
+      <!--linea degradada-->
+      <div class="borderLine"></div>
+      <!---->
+      <div style="padding-left: 20px" class="cargaDocument">
+        <div *ngIf="seleccionado" style="height: 94%; width: 100%">
+          <div class="infoProducto">
+            <div *ngIf="seleccionado" class="selectedData">
+              <label> #{{indice}} · <span class="producto">{{itemSelect.folio}}</span> · {{itemSelect.producto}}</label>
+              <span style="font-weight: 400; font-size: 18px;display:flex;height: 22px;"><label class="descarga" (click)="visualizarDoc('OC', itemSelect.oc)" style="font-size: 18px;">{{itemSelect.oc}} · </label>
+                <label class="descarga" (click)="visualizarDoc('PEDIDO', itemSelect.pedidoI)" style="font-size: 18px;"> Pedido Interno: {{itemSelect.pedidoI}}</label>
+              </span>
+              <h1>  Fecha de Inspección: {{itemSelect.fechaI}}· Inpector: {{itemSelect.inspector}}</h1>
+            </div>
+          </div>
+          <div class="documentoCarga">
+            <div class="seccionDocument">
+              <div class="cargaDoc">
+                <input type="file" class="carga"  (change)="fileChange2($event)" id="cargarDocumento">
+                <label for="cargarDocumento" style="display: flex" *ngIf="primerCarga" class="cargarDocumento"><img src="./assets/Images/cargar_permiso.svg" class="imgeArchivo">
+                  <p class="extension">.pdf</p>
+                  <p class="textoImagen">Certificado (carga obligatoria)</p></label>
+                <div *ngIf="!primerCarga" class="vistDoc">
+                  <div style="width: 100%;height: 95%; justify-content: center;display: flex">
+                    <div class="contentRefuse" id="preview" [innerHtml] = "htmlToAdd" [style.height]="'100%'"
+                         [style.overflow]="'auto'">
+                    </div>
+                  </div>
+                  <div *ngIf="!primerCarga" class="recargar">
+                    <label for="cargarDocumento" style="display: flex"><img src="./assets/Images/editar-pieza/cargar.svg"></label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="hojaSeguridad">
+              <div>
+                <label>Hoja de Seguridad (carga opcional)</label>
+              </div>
+                <pq-file-upload [disabled]="true" [docR]="cargarGuia" style="min-width: 260px;height: 100%;display: flex;justify-content: center;align-items: center;"
+                                (enviarDocumento)="recibeDocumentacion($event)" [fileName]="deshabilitar" *ngIf="hojaS"></pq-file-upload>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="!seleccionado" class="bloqueoCarga">
+            <label>SELECCIONA UN PRODUCTO PARA VISUALIZAR ESTA SECCIÓN</label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="btn">
+      <div [style.background-color]="activarBtn? '#4BA92B': '#C2C3C9'" [style.pointer-events]="activarBtn? 'auto':'none'" (click)="finalizar()">
+        <label>ACEPTAR</label>
+      </div>
+  </div>
+</div>

@@ -1,0 +1,9 @@
+<div>
+  <p class="title">
+    CONFIGURACIÓN
+  </p>
+
+  <div class="divConfiguracion">
+    <pq-tarjeta-menu *ngFor="let item of configuracion; let i = index" [nombre]="item.nombre" [imagen]="pathImg + item.img"></pq-tarjeta-menu>
+  </div>
+</div>

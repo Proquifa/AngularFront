@@ -1,0 +1,582 @@
+@import "../../../../mixins.scss";
+@import "../../../../colors.scss";
+
+:host {
+  @include flexColumn;
+  width: 100%;
+  height: 100%;
+
+  .header {
+    display: flex;
+    align-items: flex-start;
+    background-color: #ECEEF0;
+    width: 100%;
+    height: 16%;
+    max-height: 193px;
+    font-size: 13px;
+    .cartera-info-basica {
+      min-width: 126.16px;
+      width: 11%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      p {
+        padding: 3px 0;
+      }
+
+      p:nth-child(1){
+        font-family: 'Roboto-bold';
+      }
+      p:nth-child(2), p:nth-child(3){
+        font-family: 'Roboto-regular';
+      }
+    }
+
+    .vertical-line {
+      position: relative;
+      width: 1px;
+      height: 85%;
+      background-color: #979797;
+      align-self: center;
+    }
+
+    .periodo-facturacion{
+      min-width: 172.05px;
+      width: 15%;
+      height: 90%;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+
+      .datos-cont {
+        width: 40%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        div{
+          width: 100%;
+          text-align: center;
+        }
+
+        &.flecha-cont {
+          width: 20%;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-around;
+          align-items: center;
+
+          div {
+            width: auto;
+          }
+
+          div:nth-child(2){
+            margin-top: 30px;
+            .flecha-periodos {
+              max-width: 28px;
+              max-height: 14px;
+            }
+            .flecha-texto {
+              margin-top: 5px;
+              color: #C1272D;
+              font-weight: 300;
+            }
+          }
+        }
+      }
+    }
+
+    .datos-cartera {
+      display: flex;
+      height: 100%;
+      min-width: 573.5px;
+      width: 50%;
+
+      .objetivo-promedio {
+        height: 90%;
+        width: 40%;
+        display: flex;
+        flex-direction: row;
+
+        .datos-cont {
+          width: 33%;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          div{
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+          }
+
+          .objetivo-valor {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            p {
+              margin-left: 5px;
+            }
+
+
+          }
+        }
+      }
+
+      .proyeccion-venta {
+        height: 100%;
+        width: 35%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        .pv-label {
+          &.top {
+            margin-bottom: 13%;
+          }
+          .pv-grafica {
+            max-width: 24px;
+            max-height: 20px;
+          }
+        }
+        p {
+          text-align: center;
+        }
+
+        .pv-cont {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          position: relative;
+          .pv-arrows-cont {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            position: absolute;
+            bottom: -10px;
+            .pv-arrow {
+              width: 33%;
+              display: flex;
+              flex-direction: row;
+              justify-content: center;
+
+              .arrow {
+                margin-left: 10px;
+                max-width: 28px;
+                max-height: 14px;
+              }
+            }
+          }
+        }
+
+        .fant-value {
+          color: #008895;
+        }
+
+        .of-value {
+          color: #279E96;
+        }
+
+        .od-value {
+          color: #279E96;
+          opacity: 0.5;
+        }
+      }
+
+      .deudas-cont {
+        width: 25%;
+        display: flex;
+        flex-direction: row;
+        height: 90%;
+        .datos-cont {
+          width: 50%;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+
+          p {
+            width: 100%;
+            text-align: center;
+          }
+
+          .objetivo-valor {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            p {
+              margin-left: 5px;
+            }
+          }
+        }
+      }
+
+      & > div {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+
+    }
+
+    .cartera-info-detalle {
+      display: flex;
+      width: calc(24% - 2px);
+      height: 100%;
+      flex-direction: row;
+      font-size: 12px;
+      .detalle-column {
+        width: 25%;
+        height: 100%;
+        display:  flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+
+        .detalle {
+          width: 20%;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          img {
+           width: 34px;
+           height: 34px;
+          }
+
+          p {
+            font-size: 9px;
+            margin-top: 5px;
+          }
+        }
+      }
+    }
+
+    .space {
+      margin-bottom: 10px;
+    }
+
+    .toRight {
+      text-align: right !important;
+    }
+  }
+
+  .clients-content {
+    width: 100%;
+    height: 70%;
+    padding-top: 20px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    overflow-y: auto;
+
+    .client-wrapper {
+      width: 25%;
+      height: 40%;
+      min-height: 280px;
+
+    }
+  }
+
+  .objetivo {
+    width: 17px;
+    height: 17px;
+
+    &.min {
+      width: 10px;
+      height: 10px;
+    }
+  }
+
+
+  .nomenclatura-cont {
+    width: 100%;
+    height: 4%;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    border-top: 2px solid #ECEEF0;
+    border-bottom: 2px solid #4A4A4A;
+    padding: 10px 0;
+    .nomen-bloque {
+      max-width: 5.5%;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      flex-wrap: wrap;
+      padding: 0 10px;
+      .nomen-row {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        font-size: 10px;
+        p{
+          text-align: center;
+        }
+
+        &:last-child p{
+          margin-top: 10px;
+        }
+      }
+    }
+  }
+
+  .footer{
+    height: 5%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 5%;
+
+    .footer-column:first-child {
+      margin-left: 20px;
+      width: auto;
+      margin-right: 0;
+    }
+    .footer-column {
+      display: flex;
+      justify-content: flex-end;
+      margin-right: 20px;
+
+      & div:first-child {
+        margin-right: 20px;
+      }
+    }
+  } 
+  .bold {
+    font-weight: bold;
+  }
+
+  .green-button {
+    background-color: #008895;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Novecento-Demibold';
+    &:hover {
+      cursor: pointer;
+      background-color: #329faa;
+    }
+  }
+
+  .red-button {
+    background-color: #950d00;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Novecento-Demibold';
+    &:hover {
+      cursor: pointer;
+      background-color: #aa3d32;
+    }
+  }
+
+  .medium {
+    padding: 5px 10px;
+  }
+
+  .large {
+    padding: 3px 15px;
+  }
+
+  .extra-large {
+    width: 200px;
+    height: 30px;
+  }
+
+  .superior {
+    margin-bottom: 16%;
+    margin-top: 14%;
+  }
+
+  .inferior {
+    margin-top: 16%;
+  }
+
+  .modal {
+    .modal-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #ccc;
+      opacity: 0.7;
+      z-index: 5;
+    }
+
+    .modal-content{
+      z-index: 6;
+      position: fixed;
+      top: 45%;
+      left: 35%;
+      width: 30%;
+      min-width: 400px;
+
+      .header {
+        background-color: #008895;
+        color: #fff;
+        display: flex;
+        position: relative;
+        justify-content: center;
+        padding: 5px 0;
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+        font-size: 24px;
+        .close-modal {
+          position: absolute;
+          right: 20px;
+          font-size: 20px;
+
+          &:hover {
+            cursor: pointer;
+          }
+        }
+      }
+
+      .body {
+        border-bottom-left-radius : 15px;
+        border-bottom-right-radius : 15px;
+        background-color: #fff;
+        padding: 20px 25px;
+        .message {
+          p{
+            text-align: center;
+          }
+          margin-bottom: 15px;
+        }
+
+        .options {
+          display: flex;
+          justify-content: space-around;
+        }
+      }
+    }
+  }
+
+  .title {
+    font-family: 'Roboto-bold';
+  }
+
+  .subtitle {
+    font-family: 'Roboto-regular';
+  }
+}
+
+
+@media (max-width: 1801px){
+  :host {
+    .header {
+      font-size: 10px;
+
+      .cartera-info-detalle {
+        .detalle-column {
+
+          .detalle {
+            img {
+             width: 28px;
+             height: 28px;
+            }
+            p {
+              font-size: 7px;
+              margin-top: 5px;
+            }
+          }
+        }
+      }
+    }
+
+    .superior {
+      margin-bottom: 12%;
+    }
+
+    .inferior {
+      margin-top: 12%;
+    }
+  }
+}
+@media (max-width: 1990px) {
+  :host {
+    .clients-content {
+
+      .client-wrapper {
+        width: 33.3%;
+      }
+    }
+  }
+}
+
+@media (max-height: 1100px) {
+  :host {
+    .header {
+      .datos-cartera {
+        .proyeccion-venta {
+          .pv-label {
+            &.top {
+              margin-bottom: 6% !important;
+            }
+          }
+        }
+      }
+    }
+
+    .clients-content {
+      height: 70%;
+      padding-top: 0;
+    }
+
+    .clients-content {
+      height: 70%;
+      padding-top: 0;
+    }
+
+    .extra-large {
+      width: 150px;
+      height: 25px;
+    }
+
+    .objetivo {
+      width: 15px;
+      height: 15px;
+    }
+
+    .superior {
+      margin-bottom: 12%;
+    }
+
+    .inferior {
+      margin-top: 0;
+    }
+    .nomenclatura-cont {
+      min-height: 54px;
+      padding: 2px 0;
+      height: 5%;
+      & .nomen-bloque .nomen-row:last-child p{
+        margin-top: 3px;
+        font-size: 8px;
+      }
+    }
+
+    .footer {
+      height: 7%;
+    }
+  }
+}

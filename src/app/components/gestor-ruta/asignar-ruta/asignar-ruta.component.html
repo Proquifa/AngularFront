@@ -1,0 +1,696 @@
+<div class="padre">
+  <div style="position: relative; display: flex; background: #E6E6E6;" class="aux">
+    <aside [ngClass]="classAsideMenu">
+      <div class="articulo" *ngIf="!ocultarAcor">
+        <pn-menu-seccion-roles [items]="itemsMenu"  style="width: 100%" *ngIf="activeMenu"></pn-menu-seccion-roles>
+      </div>
+    </aside>
+    <div style="position: absolute; position: absolute; padding-top: 352px;right: 0">
+      <img class="img" src='./assets/Images/flecha_cuadro.svg' *ngIf="!ocultarAcor" (click)="mostarOcultarAcordeon()"/>
+      <img class="img" src='./assets/Images/flecha_mostrar.svg' *ngIf="ocultarAcor" (click)="mostarOcultarAcordeon()"/>
+    </div>
+
+  </div>
+  <div class="area" style="width:100%; height:100%;overflow: scroll;">
+    <div class="todo" *ngIf="show_mapa">
+      <div class="linea">
+        <img height="16px" src="assets/Images/FlechaIzqVerdee.svg" (click)="regresar()">
+        <label>Asignar Mensajero </label>
+      </div>
+      <div *ngIf="reloadMensajeros" class="mensajeros">
+        <div class="detalleMensajero" (click)="todos()">
+          <div class="nombre">TODOS</div>
+          <mat-divider></mat-divider>
+          <div class="zona">
+            <div style="min-height: 16px">Zona:<span>Todos</span></div>
+            Ruta:<span>{{rutaTotal.toFixed(2)}}&nbsp;Km</span>
+            <mat-divider></mat-divider>
+          </div>
+          <div class="total">
+            <div>
+              <div>#Total de Clientes: <span> {{ clientesTotales }}</span></div>
+              <div>#Total Eventos: <span>{{ eventosTotales }}</span></div>
+            </div>
+            <div class="iconitos" *ngFor="let item of arregloEventos">
+              <div *ngIf="item.Entrega > 0">
+                <img src="assets/Images/Images/entrega_verde.svg">
+                <div><span> {{ item.Entrega }}</span></div>
+              </div>
+              <div *ngIf="item.Cobro > 0">
+                <img src="assets/Images/Images/cobro_verde.svg">
+                <div><span> {{item.Cobro}}</span></div>
+              </div>
+              <div *ngIf="item.RecoleccionM > 0">
+                <img src="assets/Images/Images/R_material_verde.svg">
+                <div><span> {{item.RecoleccionM}} </span></div>
+              </div>
+              <div *ngIf="item.Revision > 0">
+                <img src="assets/Images/Images/revision_verde.svg">
+                <div><span> {{ item.Revision }}</span></div>
+              </div>
+              <div *ngIf="item.EntregaE > 0">
+                <img src="assets/Images/Images/e_especial_verde.svg">
+                <div><span> {{ item.EntregaE }}</span></div>
+              </div>
+              <div *ngIf="item.RevisionE > 0">
+                <img src="assets/Images/Images/revision_verde.svg">
+                <div><span> {{item.RevisionE }}</span></div>
+              </div>
+            </div>
+            <mat-divider></mat-divider>
+          </div>
+          <div class="monto"> Monto total: <span> {{montoTotal | acFormatMoney}} </span></div>
+        </div>
+        <div class="detalleMensajero no-drag" id="mensajero{{i}}" [dragula]="MANY_ITEMS" [(dragulaModel)]='auxDrop'
+             *ngFor="let items of itemsAux; let i = index;" (click)="rutasMensajero(i)">
+          <div class="nombre no-drag">
+            <div class="tooltip"><span class="texto">{{items.mensajero}}</span> <span class="tooltiptext">{{items.mensajero}}</span>
+            </div>
+            <div class="bolitaColor" [style.background]="_color[i+1]"></div>
+          </div>
+          <mat-divider class="no-drag"></mat-divider>
+          <div class="zona no-drag">
+            <div class="zonaTxt">
+              Zona:&nbsp;
+              <div class="tooltip">
+                <span class="texto"><span>{{items.zona}}</span> </span> <span class="tooltiptext">{{items.zona}}</span>
+              </div>
+            </div>
+            Ruta:
+            <span *ngIf="arregloDistancias[i] == null"> 0&nbsp;Km</span>
+            <span
+              *ngIf="arregloDistancias[i] != null">{{ arregloDistancias[i].km | acFormatNumber2decimal }}&nbsp;Km</span>
+            <mat-divider></mat-divider>
+          </div>
+
+          <div class="total no-drag">
+            <div>
+              <div>#Total de Clientes: <span>{{items.cliente}} </span></div>
+              <div>#Total Eventos: <span> {{items.RevisionE + items.EntregaE+items.Revision +items.Entrega + items.Cobro
+            +items.RecoleccionM }} </span></div>
+            </div>
+            <div class="iconitos">
+              <div *ngIf="items.Entrega > 0">
+                <img src="assets/Images/Images/entrega_verde.svg">
+                <div><span> {{items.Entrega }}</span></div>
+              </div>
+              <div *ngIf="items.Cobro > 0">
+                <img src="assets/Images/Images/cobro_verde.svg">
+                <div>
+                  <span> {{items.Cobro }}</span>
+                </div>
+              </div>
+              <div *ngIf="items.RecoleccionM > 0">
+                <img src="assets/Images/Images/R_material_verde.svg">
+                <div><span> {{items.RecoleccionM }} </span></div>
+              </div>
+              <div *ngIf="items.Revision > 0">
+                <img src="assets/Images/Images/revision_verde.svg">
+                <div><span> {{items.Revision }}</span></div>
+              </div>
+              <div *ngIf="items.EntregaE > 0">
+                <img src="assets/Images/Images/e_especial_verde.svg">
+                <div><span> {{items.EntregaE }}</span></div>
+              </div>
+              <div *ngIf="items.RevisionE > 0">
+                <img src="assets/Images/Images/revision_verde.svg">
+                <div><span> {{items.RevisionE }}</span></div>
+              </div>
+            </div>
+            <mat-divider></mat-divider>
+          </div>
+          <div class="monto no-drag"> Monto total: <span> {{ items.monto |  acFormatMoney}} </span></div>
+        </div>
+      </div>
+      <mat-divider></mat-divider>
+
+      <div class="contenedorMapa">
+        <div class="rutasMensajero" *ngIf="mostrarRutas">
+          <div class="contenedor">
+            <div class="nombre">
+              <div><span>Ruta:&nbsp;</span>{{itemsAux[colorPin].mensajero}}</div>
+            </div>
+            <mat-divider></mat-divider>
+
+            <div *ngIf="idEmpleado == 115" class="detalle">
+              <span>
+                Origen:</span> José María Morelos 164, Niño Jesús, 14080 Ciudad de México, CDMX <br>
+              <img src="assets/Images/Images/reloj.svg" height="14px"> <span>TET:
+              </span>
+              <span *ngIf="arregloDistancias[colorPin].min > 60">
+                {{arregloDistancias[colorPin].min/60 | acFormatNumber}} hr&nbsp;
+              </span>
+              <span>
+                {{arregloDistancias[colorPin].min%60}} min
+              </span>
+            </div>
+
+            <div *ngIf="idEmpleado !== 115" class="detalle">
+              <span>
+                Origen:</span> Calle La Villa #1996 Int. 3A, Col. Chapalita, Guadalajara, Jal <br>
+              <img src="assets/Images/Images/reloj.svg" height="14px"> <span>TET:
+              </span>
+              <span *ngIf="arregloDistancias[colorPin].min > 60">
+                {{arregloDistancias[colorPin].min/60 | acFormatNumber}} hr&nbsp;
+              </span>
+              <span>
+                {{arregloDistancias[colorPin].min%60}} min
+              </span>
+            </div>
+
+            <mat-divider></mat-divider>
+            <!--Se muestra la lista que se puede deslizar para mandar a almacen-->
+            <div class="contenedorDetalle" id="clientes" [dragula]="MANY_ITEMS" [(dragulaModel)]='itemsAux3'>
+              <div class="detalles" id="cliente"  *ngFor="let item of itemsAux3 ; let i = index;" [ngClass]="item.activo?'':'no-drag'" [style.background] = "item.activo ?'':'#ECEEF0'">
+                <div class="uno"> # {{ i+1 }} ·</div>
+                <div class="dos">
+                  <div class="nombreCliente"> {{ item.cliente }}
+                  </div>
+                  <div class="zona"><img [src]="_pin[colorPin+1]" height="14px"> Zona: {{ item.zona}}
+                    <label *ngIf="item.coordenada[0] == 0 && item.activo" style="color:#C1272D"> Sin validar </label>
+                  </div>
+                  <div class="direccion">{{ item.calle}}</div>
+                  <div class="tiempo">
+                    <!--<p *ngIf="item.activo"><img src="assets/Images/Images/reloj.svg" height="14px">
+                      &nbsp;TEE: 20 min · TET: {{arregloDistancias[colorPin].minT[i]}} min
+                    </p>--> <!--Se comento por que aun no se calcula-->
+                    <p  style="color:#008894">FEE+ <label  style="color:#242424">{{item.fee}}</label></p>
+                    <p *ngIf="!item.activo">
+                      Recibe: {{item.dias}}
+                    </p>
+                    <span>Horario Cliente: {{ item.horarioDe}} hrs · {{ item.horarioA }} hrs</span>
+                  </div>
+
+                  <div class="eventos" (click)="mostrarDetalleEventos(i)">
+                    <div>
+                      {{ item.eventosJuntos.length}} Eventos -
+                    </div>
+                    <div *ngIf="item.Entrega > 0">
+                      <span *ngIf="item.prioridad == 'P3'"
+                            style="color: #39B54A; font-size: 12px; "> {{item.Entrega }}</span>
+                      <span *ngIf="item.prioridad == 'P2'"
+                            style="color: #FBB03B; font-size: 12px;"> {{item.Entrega }}</span>
+                      <span *ngIf="item.prioridad == 'P1'" style="color: #C1272D; font: 12px;"> {{item.Entrega }}</span>
+                      <img src="assets/Images/Images/entrega_verde.svg">
+                    </div>
+                    <div *ngIf="item.Cobro > 0">
+                      <span *ngIf="item.prioridad == 'P3'" style="color: #39B54A; font: 12px;"> {{item.Cobro }}</span>
+                      <span *ngIf="item.prioridad == 'P2'" style="color: #FBB03B; font: 12px;">{{item.Cobro }}</span>
+                      <span *ngIf="item.prioridad == 'P1'" style="color: #C1272D; font: 12px;"> {{item.Cobro }}</span>
+                      <img src="assets/Images/Images/cobro_verde.svg">
+                    </div>
+                    <div *ngIf="item.RecoleccionM > 0">
+                      <span *ngIf="item.prioridad == 'P3'"
+                            style="color: #39B54A; font: 12px;"> {{item.RecoleccionM }}</span>
+                      <span *ngIf="item.prioridad == 'P2'"
+                            style="color: #FBB03B; font: 12px;">{{item.RecoleccionM }}</span>
+                      <span *ngIf="item.prioridad == 'P1'"
+                            style="color: #C1272D; font: 12px;"> {{item.RecoleccionM }}</span>
+                      <img src="assets/Images/Images/R_material_verde.svg">
+                    </div>
+                    <div *ngIf="item.Revision > 0">
+                        <span *ngIf="item.prioridad == 'P3'"
+                              style="color: #39B54A; font: 12px;"> {{item.Revision }}</span>
+                      <span *ngIf="item.prioridad == 'P2'" style="color: #FBB03B; font: 12px;">{{item.Revision }}</span>
+                      <span *ngIf="item.prioridad == 'P1'"
+                            style="color: #C1272D; font: 12px;"> {{item.Revision }}</span>
+                      <img src="assets/Images/Images/revision_verde.svg">
+                    </div>
+                    <div *ngIf="item.EntregaE > 0">
+                        <span *ngIf="item.prioridad == 'P3'"
+                              style="color: #39B54A; font: 12px;"> {{item.EntregaE }}</span>
+                      <span *ngIf="item.prioridad == 'P2'" style="color: #FBB03B; font: 12px;">{{item.EntregaE }}</span>
+                      <span *ngIf="item.prioridad == 'P1'"
+                            style="color: #C1272D; font: 12px;"> {{item.EntregaE }}</span>
+                      <img src="assets/Images/Images/e_especial_verde.svg">
+                    </div>
+                    <div *ngIf="item.RevisionE > 0">
+                        <span *ngIf="item.prioridad == 'P3'"
+                              style="color: #39B54A; font: 12px;"> {{item.RevisionE }}</span>
+                      <span *ngIf="item.prioridad == 'P2'"
+                            style="color: #FBB03B; font: 12px;">{{item.RevisionE }}</span>
+                      <span *ngIf="item.prioridad == 'P1'"
+                            style="color: #C1272D; font: 12px;"> {{item.RevisionE }}</span>
+                      <img src="assets/Images/Images/revision_verde.svg">
+                    </div>
+                  </div>
+                  <!-- Fin Eventos -->
+                  <div class="monto">
+                    <div> Monto: $ {{ item.monto}} USD</div>
+                    <div class="imgs" *ngIf="item.activo"><img src="assets/Images/Images/move-arrows.svg" alt=""></div>
+                    <div *ngIf="!item.activo"><img src="assets/Images/Images/block_icono.svg" alt=""></div>
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <div class="mapa">
+          <ngui-map [zoom]="zoom" [center]="_proquifaMap" (mapDrag)="mapaClick()" (zoom_changed)="mapaClick()"
+                    [streetViewControl]="false" [fullscreenControl]="false" [mapTypeControl]="false">
+
+            <marker [position]="_proquifa" [icon]="{ url:_pin[0],  size: [40,50], scaledSize: [40,50] }"
+                    (click)="info1($event)">
+              <info-window id="iw2">
+                <div class="cuadro">
+                  <div class="imagen"><img src="assets/login/logo.svg" width="66px">
+                  </div>
+
+                  <div class="texto">
+                    <span> PROQUIFA </span>
+                    <br>
+                    {{itemsAux[colorPin].mensajero}}
+                    <br>
+                    {{ clientesTotales }} Clientes
+                    <br>
+                    Tiempo de recorrido:
+                  </div>
+                </div>
+              </info-window>
+
+            </marker>
+
+
+            <marker *ngFor="let _coor of _coordenadas let i = index;" [position]="_coor"
+                    [icon]="{ url:_pin[_separadorColor[i]],  size: [40,50], scaledSize: [40,50] }"
+                    (click)="info2($event,i)">
+              <info-window id="iw3">
+                <div class="cuadro" style="height: 80px;">
+                  <div class="imagen">
+                    <img *ngIf="idCliente_C != 0" [src]="'assets/Images/clientes/'+idCliente_C+'_grande.png'"
+                         onError="this.src = 'assets/login/logo.svg'" width="66px" #img>
+                    <img *ngIf="idCliente_C == 0" src="assets/login/logo.svg" width="66px">
+                  </div>
+                  <div class="texto">
+                    <span>{{ nombre_C }} </span>
+                    <br>
+                    Zona : {{ zona_C }}
+                    <br>
+                    Direccion: {{ direccion_C }}
+                    <br>
+                    Mensajero: {{ mensajero_C }}
+                    <br>
+                  </div>
+                </div>
+              </info-window>
+            </marker>
+
+            <marker *ngFor="let marker of positions let i = index;" (click)="info($event,marker[1])"
+                    [position]="marker[0]"
+                    [label]="{ color: '#ffff', fontWeight: 'bold',fontSize:'22px',text: (marker[1]+1).toString() }"
+                    [icon]="{ url: _pin2[colorPin+1],  size: [40,50], scaledSize: [40,50] }">
+              <info-window id="iw" (closeclick)="infoWindows($event,i)">
+                <div class="cuadro">
+                  <div class="imagen">
+                    <img *ngIf="idCliente != 0" src="assets/Images/clientes/{{idCliente}}_grande.png"
+                         onError="this.src = 'assets/login/logo.svg'" width="66px">
+                    <img *ngIf="idCliente == 0" src="assets/login/logo.svg" width="66px">
+                  </div>
+                  <div class="texto">
+                    <span>{{ nombreC }} </span>
+                    <br>
+                    Zona {{ zonaC }} : {{ direccionC }}
+                    <br>
+                    {{ totaEventosC }} - Eventos: {{ eventosC }}
+                    <br>
+                    Monto: ${{ montoC }}
+                  </div>
+                  <div class="botonMap"><img src="assets/Images/Images/mover_evento.svg" width="19px"
+                                             (click)="asignar($event)">
+                  </div>
+
+                </div>
+              </info-window>
+
+              <div class="posi" *ngIf="show " [style.top]="infoWindowY" [style.left]="infoWindowX">
+                <div style="padding: 0px 20px;"> Reasignar</div>
+                <div class="separador" style="margin: 0px 20px; max-width: 190px;"></div>
+                <div class="lstReasignar">
+                  <div class="itemAlmacen" (click)="moverAlmacen()">
+                    <div>Almacén</div>
+                    <span>{{clientesAlmacen}} Clientes Asignados</span>
+                    <span>{{eventosAlmacen}} Entregas</span>
+                  </div>
+                  <div *ngFor="let item of itemsAux  let x = index">
+                    <div class="itemMensajero" (click)="moverMensajero(x)" *ngIf="colorPin != x">
+                      <div>{{item.mensajero}}</div>
+                      <span>{{item.zona }}</span>
+                      <span>{{item.cliente}} Clientes Asignados {{item.Entrega + item.Cobro + item.RecoleccionM + item.Revision + item.EntregaE + item.RevisionE}} Eventos</span>
+                      <span>Ruta: {{ arregloDistancias[x].km | acFormatNumber2decimal }} Km · </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </marker>
+
+            <polyline [path]="path" [geodesic]="true" [strokeColor]="'yellow'" [strokeWeight]="8"></polyline>
+
+            <map-polygon *ngIf="idEmpleado == 115" [paths]="CUERNAVACA" [strokeColor]="'#4F47A0'" [fillColor]="'#7368EF'" ></map-polygon>
+            <map-polygon *ngIf="idEmpleado == 115" [paths]="TOLUCA" [strokeColor]="'#0838DD'" [fillColor]="'#0838DD'"></map-polygon>
+            <map-polygon *ngIf="idEmpleado == 115" [paths]="CDMX" [strokeColor]="'#900280'" [fillColor]="'#900280'"></map-polygon>
+            <map-polygon *ngIf="idEmpleado == 115" [paths]="PUEBLA" [strokeColor]="'#FC187B'" [fillColor]="'#FC187B'"></map-polygon>
+            <map-polygon *ngIf="idEmpleado !== 115" [paths]="JALISCO" [strokeColor]="'#900280'" [fillColor]="'#900280'"></map-polygon>
+
+
+          </ngui-map>
+        </div>
+      </div>
+      <mat-divider></mat-divider>
+
+      <div class="linea2">
+        <div class="linea2Div1" *ngIf="mostrarRutas">
+          <div class="divAlmacen" id="almacen" [dragula]="MANY_ITEMS" [(dragulaModel)]='lstAlmacen'>
+            <div class="no-drag">
+              <span>Almacen</span>
+            </div>
+            <div class="no-drag">
+              <span>Clientes:</span> {{clientesAlmacen}}&nbsp;·&nbsp;<span>Entregas:</span> {{eventosAlmacen}}
+            </div>
+          </div>
+        </div>
+        <div class="linea2Div2">
+          <div class="leyenda"><span> *si no se publican los cambios antes de las 18:00 hrs, el sistema lo hará en
+          automático. </span></div>
+          <div class="boton1" *ngIf="publicar">
+            <button mat-flat-button (click)="guardarRuta()">GUARDAR</button>
+          </div>
+          <div class="boton1" *ngIf="!publicar" [style.pointerEvents]="bloquearBtn?'none':'auto'">
+            <button mat-flat-button (click)="publicarA()">PUBLICAR</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="notaciones">
+        <div class="alineacion">
+          <span style="font-weight: bold; font: 12px; margin-right: 5px;">TEE</span><label>: Tiempo Estimado de
+          Evento</label>
+          <div></div>
+
+          <span style="font-weight: bold; font: 12px;  margin-right: 5px;">TET</span><label>:Tiempo Estimado de
+          Traslado</label>
+          <div></div>
+
+          <span style="font-weight: bold; color: #C1272D; font: 12px;  margin-right: 5px;">P1</span><label>:Prioridad
+          1</label>
+          <div></div>
+
+          <span style="font-weight: bold; color: #FBB03B; font: 12px; margin-right: 5px; ">P2</span><label>:Prioridad
+          2</label>
+          <div></div>
+
+          <span style="font-weight: bold; color: #39B54A; font: 12px ;  margin-right: 5px;">P3</span> <label>:Prioridad
+          3</label>
+          <div></div>
+
+          <img src="assets/Images/Images/entrega_verde.svg" style=" margin-right: 5px; width: 12px; height: 15px;">
+          <label>:Entrega</label>
+          <div></div>
+
+          <img src="assets/Images/Images/cobro_verde.svg" style=" margin-right: 5px; width: 12px; height: 15px;"><label>:Cobro</label>
+          <div></div>
+
+          <img src="assets/Images/Images/revision_verde.svg"
+               style=" margin-right: 5px; width: 12px; height: 15px;"><label>:Revisión</label>
+          <div></div>
+
+          <img src="assets/Images/Images/e_especial_verde.svg"
+               style=" margin-right: 5px; width: 12px; height: 15px;"><label>:Entrega
+          Especial</label>
+          <div></div>
+
+          <img src="assets/Images/Images/R_material_verde.svg"
+               style=" margin-right: 5px; width: 12px; height: 15px;"><label>:Recolección
+          de Material</label>
+          <div></div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="grafica" *ngIf="show_grafica">
+      <div class="lineaGraficas">
+        <div><label>Asignar Mensajero </label></div>
+      </div>
+
+      <div class="contenedoGraficas" *ngIf="hay">
+        <div class="gr_gr">
+          <div class="canvas-container">
+            <p class="donut-title">Mensajero</p>
+            <pn-donut-chart [idGrafica]="0+'gms'" [data]="graficasValores_p[0]"
+                            [tipoGrafica]="graficaTipos_p[0]"></pn-donut-chart>
+          </div>
+        </div>
+        <div class="gr_ch">
+          <div style="height: 100%; width: 100%;">
+            <div class="alineacion">
+              <div style="height: 100%; width: 40%; margin-right: 60px;">
+                <p class="donut-title">Zona</p>
+                <pn-donut-chart [idGrafica]="1+'gms_s'" [data]="graficasValores_p[1]"
+                                [tipoGrafica]="graficaTipos_p[1]"></pn-donut-chart>
+              </div>
+              <div style="height: 100%; width: 40%; ">
+                <p class="donut-title">Eventos</p>
+                <pn-donut-chart [idGrafica]="2+'gms_s'" [data]="graficasValores_p[2]"
+                                [tipoGrafica]="graficaTipos_p[2]"></pn-donut-chart>
+              </div>
+            </div>
+            <div class="alineacion">
+              <div style="height: 100%; width: 40%;     margin-right: 60px;                     ">
+                <p class="donut-title">Prioridades</p>
+                <pn-donut-chart [idGrafica]="3+'gms_ss'" [data]="graficasValores_p[3]"
+                                [tipoGrafica]="graficaTipos_p[3]"></pn-donut-chart>
+              </div>
+              <div style="height: 100%; width: 40%;">
+                <p class="donut-title">Clientes</p>
+                <pn-donut-chart [idGrafica]="4+'gms_ss'" [data]="graficasValores_p[4]"
+                                [tipoGrafica]="graficaTipos_p[4]"></pn-donut-chart>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="contenedoGraficas" *ngIf="nohay">
+        <div class="gr_gr">
+          <div class="canvas-container">
+            <p class="donut-title">Mensajero</p>
+            <pn-donut-chart [idGrafica]="'sinDatosGr1'" [data]="dataSD" [tipoGrafica]="'Gris'"></pn-donut-chart>
+          </div>
+        </div>
+        <div class="gr_ch">
+          <div style="height: 100%; width: 100%;">
+            <div class="alineacion">
+              <div style="height: 100%; width: 40%; margin-right: 60px;">
+                <p class="donut-title">Zona</p>
+                <pn-donut-chart [idGrafica]="'sinDatosGr'" [data]="dataSD1" [tipoGrafica]="'Gris'"></pn-donut-chart>
+              </div>
+              <div style="height: 100%; width: 40%; ">
+                <p class="donut-title">Eventos</p>
+                <pn-donut-chart [idGrafica]="'sinDatosGr2'" [data]="dataSD2" [tipoGrafica]="'Gris'"></pn-donut-chart>
+              </div>
+            </div>
+            <div class="alineacion">
+              <div style="height: 100%; width: 40%;     margin-right: 60px;                     ">
+                <p class="donut-title">Prioridades</p>
+                <pn-donut-chart [idGrafica]="'sinDatosGr4'" [data]="dataSD3" [tipoGrafica]="'Gris'"></pn-donut-chart>
+              </div>
+              <div style="height: 100%; width: 40%;">
+                <p class="donut-title">Clientes</p>
+                <pn-donut-chart [idGrafica]="'sinDatosGr3'" [data]="dataSD4" [tipoGrafica]="'Gris'"></pn-donut-chart>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="boton" *ngIf="hay">
+        <div [style.pointerEvents]="activarBoton ? 'auto' : 'none'">
+          <button mat-flat-button (click)="mostrarGraficas()" [style.background]="activarBoton?'#008895' : '#ECEEF0'">
+            INGRESAR
+          </button>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="container" *ngIf="modalConfirm">
+      <div class="modal">
+        <div>PROQUIFA</div>
+        <div>
+          <div></div>
+          <div>¿Estas seguro de querer reasignar este cliente al almacén?</div>
+        </div>
+        <div>
+          <div (click)="aceptModalConfirm()">SI</div>
+          <div (click)="closeModalConfirm()">NO</div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="activarAlerta">
+      <pq-alerta *ngIf="activarAlerta" [alertaTxt]="mensaje" (confirmacion)="cerrarAlerta($event)"></pq-alerta>
+    </div>
+
+    <div class="containerDetalle" *ngIf="detalleEventos">
+      <div class="modal">
+        <div>Eventos</div>
+        <div>
+          <div>{{itemsAux[colorPin].mensajero}}</div>
+          <div><span>Cliente:</span>&nbsp;{{itemsAux3[eventoNum].cliente}}</div>
+          <div>
+            <div><span>Zona:</span>&nbsp;{{itemsAux3[eventoNum].zona}}&nbsp;·&nbsp;<span>Ruta:</span>&nbsp;N/D</div>
+            <div>
+              {{ itemsAux3[eventoNum].eventosJuntos.length}} Evento
+              <div *ngIf="itemsAux3[eventoNum].eventosJuntos.length > 1">s</div>
+              :&nbsp;
+              <div *ngIf="itemsAux3[eventoNum].Entrega > 0">
+                      <span *ngIf="itemsAux3[eventoNum].prioridad == 'P3'"
+                            style="color: #39B54A; font-size: 12px; "> {{itemsAux3[eventoNum].Entrega }}</span>
+                <span *ngIf="itemsAux3[eventoNum].prioridad == 'P2'"
+                      style="color: #FBB03B; font-size: 12px;"> {{itemsAux3[eventoNum].Entrega }}</span>
+                <span *ngIf="itemsAux3[eventoNum].prioridad == 'P1'" style="color: #C1272D; font: 12px;"> {{itemsAux3[eventoNum].Entrega }}</span>
+                <img src="assets/Images/Images/entrega_verde.svg">
+              </div>
+              <div *ngIf="itemsAux3[eventoNum].Cobro > 0">
+                <span *ngIf="itemsAux3[eventoNum].prioridad == 'P3'" style="color: #39B54A; font: 12px;"> {{itemsAux3[eventoNum].Cobro }}</span>
+                <span *ngIf="itemsAux3[eventoNum].prioridad == 'P2'" style="color: #FBB03B; font: 12px;"> {{itemsAux3[eventoNum].Cobro }}</span>
+                <span *ngIf="itemsAux3[eventoNum].prioridad == 'P1'" style="color: #C1272D; font: 12px;"> {{itemsAux3[eventoNum].Cobro }}</span>
+                <img src="assets/Images/Images/cobro_verde.svg">
+              </div>
+              <div *ngIf="itemsAux3[eventoNum].RecoleccionM > 0">
+                      <span *ngIf="itemsAux3[eventoNum].prioridad == 'P3'"
+                            style="color: #39B54A; font: 12px;"> {{itemsAux3[eventoNum].RecoleccionM }}</span>
+                <span *ngIf="itemsAux3[eventoNum].prioridad == 'P2'"
+                      style="color: #FBB03B; font: 12px;">{{itemsAux3[eventoNum].RecoleccionM }}</span>
+                <span *ngIf="itemsAux3[eventoNum].prioridad == 'P1'"
+                      style="color: #C1272D; font: 12px;"> {{itemsAux3[eventoNum].RecoleccionM }}</span>
+                <img src="assets/Images/Images/R_material_verde.svg">
+              </div>
+              <div *ngIf="itemsAux3[eventoNum].Revision > 0">
+                        <span *ngIf="itemsAux3[eventoNum].prioridad == 'P3'"
+                              style="color: #39B54A; font: 12px;"> {{itemsAux3[eventoNum].Revision }}</span>
+                <span *ngIf="itemsAux3[eventoNum].prioridad == 'P2'" style="color: #FBB03B; font: 12px;">{{itemsAux3[eventoNum].Revision }}</span>
+                <span *ngIf="itemsAux3[eventoNum].prioridad == 'P1'"
+                      style="color: #C1272D; font: 12px;"> {{itemsAux3[eventoNum].Revision }}</span>
+                <img src="assets/Images/Images/revision_verde.svg">
+              </div>
+              <div *ngIf="itemsAux3[eventoNum].EntregaE > 0">
+                        <span *ngIf="itemsAux3[eventoNum].prioridad == 'P3'"
+                              style="color: #39B54A; font: 12px;"> {{itemsAux3[eventoNum].EntregaE }}</span>
+                <span *ngIf="itemsAux3[eventoNum].prioridad == 'P2'" style="color: #FBB03B; font: 12px;">{{itemsAux3[eventoNum].EntregaE }}</span>
+                <span *ngIf="itemsAux3[eventoNum].prioridad == 'P1'"
+                      style="color: #C1272D; font: 12px;"> {{itemsAux3[eventoNum].EntregaE }}</span>
+                <img src="assets/Images/Images/e_especial_verde.svg">
+              </div>
+              <div *ngIf="itemsAux3[eventoNum].RevisionE > 0">
+                        <span *ngIf="itemsAux3[eventoNum].prioridad == 'P3'"
+                              style="color: #39B54A; font: 12px;"> {{itemsAux3[eventoNum].RevisionE }}</span>
+                <span *ngIf="itemsAux3[eventoNum].prioridad == 'P2'"
+                      style="color: #FBB03B; font: 12px;">{{itemsAux3[eventoNum].RevisionE }}</span>
+                <span *ngIf="itemsAux3[eventoNum].prioridad == 'P1'"
+                      style="color: #C1272D; font: 12px;"> {{itemsAux3[eventoNum].RevisionE }}</span>
+                <img src="assets/Images/Images/revision_verde.svg">
+              </div>
+            </div>
+          </div>
+          <div>
+            <div><span>Monto Total:</span>&nbsp;${{itemsAux3[eventoNum].monto}} USD</div>
+          </div>
+        </div>
+        <div>
+          <div *ngIf="itemsAux3[eventoNum].Entrega > 0">
+            <div>
+              <div><img src="assets/Images/Images/entrega_verde.svg"></div>
+              Entrega
+            </div>
+            <div class="divEntrega">
+              <div *ngFor="let item of itemsAux3[eventoNum].foliosPL let i = index; ">
+                <div style="display: flex; justify-content: space-between;">
+                  <span>#{{i+1}}&nbsp;·&nbsp;{{item}}</span>
+                  <span style="color:#008894 ">FEE+ <label style="color:#242424">{{itemsAux3[eventoNum].fechas[i]}}</label></span>
+                </div>
+                <div *ngFor="let item2 of facturas[item] let i2 = index;" style="padding-left:10px;margin: 7px 0 12px 0;">
+                  #{{i2+1}}&nbsp;·&nbsp;{{item2}}&nbsp;
+                </div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="itemsAux3[eventoNum].Cobro > 0">
+            <div>
+              <div><img src="assets/Images/Images/cobro_verde.svg"></div>
+              Cobro
+            </div>
+            <div>
+              <div *ngFor="let item of itemsAux3[eventoNum].foliosPC let i = index; ">
+                #{{i+1}}&nbsp;·&nbsp;{{item}}
+              </div>
+            </div>
+          </div>
+          <div *ngIf="itemsAux3[eventoNum].RecoleccionM > 0">
+            <div>
+              <div><img src="assets/Images/Images/R_material_verde.svg"></div>
+              Recolección de Material
+            </div>
+            <div>
+              <div *ngFor="let item of itemsAux3[eventoNum].foliosRM let i = index; ">
+                #{{i+1}}&nbsp;·&nbsp;{{item}}
+              </div>
+            </div>
+          </div>
+          <div *ngIf="itemsAux3[eventoNum].Revision > 0">
+            <div>
+              <div><img src="assets/Images/Images/revision_verde.svg"></div>
+              Revisión
+            </div>
+            <div>
+              <div *ngFor="let item of itemsAux3[eventoNum].foliosPR let i = index; ">
+                #{{i+1}}&nbsp;·&nbsp;{{item}}&nbsp;
+              </div>
+            </div>
+          </div>
+          <div *ngIf="itemsAux3[eventoNum].EntregaE > 0">
+            <div>
+              <div><img src="assets/Images/Images/e_especial_verde.svg"></div>
+              Entrega Especial
+            </div>
+            <div>
+              <div *ngFor="let item of itemsAux3[eventoNum].foliosES let i = index; ">
+                #{{i+1}}&nbsp;·&nbsp;{{item}}
+              </div>
+            </div>
+          </div>
+          <div *ngIf="itemsAux3[eventoNum].RevisionE > 0">
+            <div>
+              <div><img src="assets/Images/Images/revision_verde.svg"></div>
+              Revisión Especial
+            </div>
+            <div>
+              <div *ngFor="let item of itemsAux3[eventoNum].foliosRE let i = index; ">
+                #{{i+1}}&nbsp;·&nbsp;{{item}}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div># {{itemsAux3[eventoNum].eventosJuntos.length}} Eventos</div>
+          <div>
+            <div (click)="ocultarDetalleEventos()">ACEPTAR</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="activarAlerta">
+      <pq-alerta *ngIf="activarAlerta" [alertaTxt]="mensaje" (confirmacion)="cerrarAlerta($event)"></pq-alerta>
+    </div>
+
+  </div>
+
+</div>

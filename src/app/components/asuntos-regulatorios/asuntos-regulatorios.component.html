@@ -1,0 +1,128 @@
+<div class="padre">
+  <!--Seccion de menu-->
+  <div style="position: relative; display: flex; background: #E6E6E6;" class="aux">
+    <aside [ngClass]="classAsideMenu">
+      <div class="articulo" *ngIf="!ocultarAcor">
+        <pn-menu-seccion-roles [items]="itemsMenu"  style="width: 100%;" *ngIf="activeMenu"></pn-menu-seccion-roles>
+      </div>
+    </aside>
+    <div style="position: absolute; position: absolute; padding-top: 352px;right: 0">
+      <img class="img" src='./assets/Images/flecha_cuadro.svg' *ngIf="!ocultarAcor" (click)="mostarOcultarAcordeon()" />
+      <img class="img" src='./assets/Images/flecha_mostrar.svg' *ngIf="ocultarAcor" (click)="mostarOcultarAcordeon()" />
+    </div>
+  </div>
+  <!--Termina seccion de menu-->
+  <!--Empieza el area de trabajo-->
+  <div class="area"> <!--[style.width]="quitarWith? 'calc(100% - 321px)':'100%'"-->
+    <!--Empieza la cabezera-->
+    <div class="cabezera">
+      <div style="cursor: pointer;" *ngIf="!vistaPrincipal" (click)="regresarVistaP()">
+        <img class="img" src='./assets/Images/regresar.svg'/>
+      </div>
+      <label class="etiqueta" style="width: 45%">GESTIONAR CARGA PAP</label>
+      <span class="cabeceraCliente">{{cabeceraClient}}</span>
+    </div>
+    <!--Termina la cabezera-->
+    <!--Empiezan los componentes-->
+    <div [ngStyle]="{'overflow':'scroll', 'width':'100%', 'height':'calc(100% - 120px)'}">
+      <div style="width: 100%; height: 100%" *ngIf="vistaPrincipal">
+        <div style="height: 100%; width: 100%; display: -webkit-box" >
+          <div class="listaProd">
+            <div class="titulosLista">
+              <div  class="tituloCliente">
+                <label class="tituloLista">CLIENTES</label>
+              </div>
+              <div class="organizarLista">
+                <div style="width: 10%; height: 100%;    display: flex;align-items: center;">
+                  <div class="menu" (click)="abreCombo()">
+                    <div>
+                    </div>
+                    <div>
+                    </div>
+                    <div>
+                    </div>
+                    <section id="section">
+                      <ul class="listaHamburguesa">
+                        <li (click)="ordenamientoCliente()">Alfabético (A-Z)</li>
+                        <li (click)="ordenamientoFechaTramNue()">Trámites Más Nuevos</li>
+                        <li (click)="ordenamientoFechaTramAnt()">Trámites Más Antiguos</li>
+                      </ul>
+                    </section>
+                  </div>
+                </div>
+               <div style="width: 38%; height: 100%;    display: flex;align-items: center;">
+                 <h3 class="subtitulo">{{tipoOrden}}</h3>
+               </div>
+                <div class="barraBusqueda" style="height: 100%">
+                  <div class="buscar" style="padding-left: 236px;">
+                    <div>
+                      <div class="lupa">
+                        <img src="assets/Images/lupa.svg" width="22px" height="22px" alt="buscar">
+                      </div>
+                      <input type="text" [ngModel]="searchTerm" (ngModelChange)="buscar($event)" class="buscar-input" placeholder="Cliente, Producto" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--Lista total-->
+            <div class="segundaSeccionList">
+              <div style="width: 97%;">
+                <div class= "lista" style="display: unset;flex-direction: column">
+                  <div  *ngFor="let item of lista; let i = index"   style="display: flex;flex-direction:row;width: 100%;position: relative; border-bottom: 1px solid #ECEEF0">
+                    <div class="dfSelect"></div>
+                    <div class="datosLst" style="padding-top: 5px;padding-left: 15px;display: flex; width: 100%;box-sizing: border-box;padding-bottom: 10px;" (click)="seleccionarItem(i, item)">
+                      <div class="numeroIndex">
+                        <label class="index" style="font-family: Roboto-Regular">#{{i +1}}</label>
+                      </div>
+                      <div class="informacionList">
+                        <label>{{item.cliente}}</label>
+                        <span class="span">{{item.sustancia}}</span>
+                        <h3> <span class="spanPeq" style="color: #008894">{{item.cpedido}} · <span class="spanPeq">{{item.piezas}} piezas · Presentación: {{item.presentacion}}· {{item.monto}}</span></span></h3>
+                        <h3>FT: {{item.ft}}· FEE: {{item.fee}}</h3>
+                      </div>
+                      <div style="position: absolute; position: absolute; padding-top: 43px;right:0; width: 5%">
+                        <img src="./assets/Images/FlechaDerVerde.svg" class="imgFlecha">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="totales">
+              <label># {{total}}</label>
+              <label>{{totPiezas}} Pzas.</label>
+              <label>Monto: {{montoTot}} </label>
+            </div>
+          </div>
+          <div class="contenidoGrafica">
+             <div class="grafica" *ngIf="grafica" style="padding-right: 10px;">
+               <label class="tituloGrafica">CLIENTES</label>
+               <pn-donut-chart *ngIf="clienteData" [data]="dataCliente" [tipoGrafica]="tipoGraficaCliente" [height]="'auto'"></pn-donut-chart>
+             </div>
+            <div  id="donaProducto" class="grafica" style="    padding-left: 10px;">
+              <label class="tituloGrafica">PRODUCTOS</label>
+              <pn-donut-chart *ngIf="ProductoData" [idGrafica]="'producto'" [data]="dataProducto" [tipoGrafica]="tipoGraficaProducto" [height]="'auto'"> </pn-donut-chart>
+            </div>
+          </div>
+        </div>
+      </div>
+    <!--Terminan los componentes-->
+      <pn-vista-carga-documento *ngIf="vistaDocumento" [datos]= "datosProducto" (vistaP)="regresarVistaP()" (ActualizarvistaP)="recargarVista($event)"></pn-vista-carga-documento>
+  </div>
+  <!--Termina area de trabajo-->
+    <div style="width: 100%;height: 50px">
+      <footer class="footer">
+        <div class="abreviaciones">
+          <div class="Prioridad1">
+            <label class="p1">FEE: <span class="texto"> Fecha Estimada de Entrega</span></label>
+          </div>
+          <div class="Prioridad2">
+            <label class="p2">P.U: <span class="texto">Precio Unitario</span></label>
+          </div>
+
+        </div>
+      </footer>
+    </div>
+</div>
+</div>

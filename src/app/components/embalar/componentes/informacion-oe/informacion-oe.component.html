@@ -1,0 +1,18 @@
+<div class="informacionOE">
+  <div class="encabezadoInformacionOE">
+    <h1>INFORMACIÓN DE LA O. ENTREGA</h1>
+  </div>
+
+  <div class="contenidoInformacionOE">
+    <div class="cliente">{{cliente}}</div>
+    <div class="esac" *ngIf="esac !== null">ESAC: <label>{{esac}}</label> ·  Cobrador: <label *ngIf="informacionOe[0].cobrador !== undefined">{{informacionOe[0].cobrador}}</label></div>
+    <div class="usuario" style="font-family:Roboto-Regular ">{{datosPuesto}}</div>
+    <div class="ruta">
+      <img src='./assets/Images/Images/Configuracion/Rutas/ubicacion.svg' style="margin-right:  9px;"/>
+      {{datosRuta}}
+
+    </div>
+    <div class="etiquetaEntrega" *ngIf="informacionOe[0].condicionAlmacenaje === 1 && informacionOe[0].condicionAlmacenaje !== null">Entregar en condiciones de almacenaje</div>
+  </div>
+</div>
+

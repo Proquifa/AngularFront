@@ -1,0 +1,756 @@
+@import "../../../../mixins.scss";
+@import "../../../../colors.scss";
+:host {
+  @include flexColumn;
+  height: 100%;
+  margin: 0px 0;
+  width: 100%;
+  .header {
+    @include flexRow;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 0px;
+  }
+  .header-menu {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    background: transparent;
+    height: 50px;
+    .white_space {
+      width: 3%;
+    }
+    .radiop {
+      width: 40%;
+      display: flex;
+      background: transparent;
+      flex-wrap: wrap;
+      font-weight: 100;
+    }
+    .espacio_bco {
+      width: 65%;
+    }
+    .exportar {
+      @include flexRow;
+      justify-content: center;
+      width: 32px;
+      height: 34px;
+      background: #1E8893;
+      border: none;
+      margin-right: 25px;
+      cursor: pointer;
+    }
+  }
+  .container {
+    width: 98%;
+    margin-left: 1%;
+    border-top: 1px solid #424242;
+
+    .filter-container {
+      width: 100%;
+      border-bottom: 1px solid #C2C3C9;
+    }
+
+    .buscar {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      align-content: center;
+      height: 50px;
+      margin-top: 10px;
+      width: 100%;
+      border-style: solid;
+      div {
+        display: flex;
+        flex-direction: row;
+        width: 403.1px;
+        border-radius: 102px 102px 102px 102px;
+        -moz-border-radius: 102px 102px 102px 102px;
+        -webkit-border-radius: 102px 102px 102px 102px;
+        border: 0.5px solid #BFC0C7;
+        height: 30px;
+        div {
+          border: none;
+          border-radius: 0px 0px 0px 0px;
+          -moz-border-radius: 0px 0px 0px 0px;
+          -webkit-border-radius: 0px 0px 0px 0px;
+          border: 0px solid #000000;
+          width: 40px;
+          background: transparent;
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          align-items: center;
+          align-content: center;
+        }
+        .buscar-input {
+          cursor: pointer;
+          background: transparent;
+          border-radius: 102px 102px 102px 102px;
+          -moz-border-radius: 102px 102px 102px 102px;
+          -webkit-border-radius: 102px 102px 102px 102px;
+          border: 0px solid #000000;
+          width: 380px;
+          ;
+          padding-left: 5px;
+        }
+      }
+    }
+    .tabla-clientes {
+      justify-content: center;
+      align-items: center;
+      align-content: center;
+      flex-wrap: wrap;
+      overflow-x: hidden;
+      width: 98.7%;
+      margin-left: 1.3%;
+      overflow-y: auto;
+      .cliente {
+        text-align: center;
+        width: 300px;
+        filter: grayscale(100%);
+        border-right: 0px solid #ccc; //order-right: 0.5px solid #ccc;
+        //border-left: 0.5px solid #ccc;
+        .ima {
+          width: 127px;
+        }
+        &:hover {
+          filter: grayscale(0);
+        }
+      }
+    }
+    .total {
+      @include flexColumn;
+      align-items: center;
+    }
+  }
+  .tabla-clientes2 {
+    justify-content: center;
+      align-items: center;
+      align-content: center;
+      flex-wrap: wrap;
+    width: 97%;
+    overflow-y: auto;
+    margin-left: 3%;
+    flex-direction: row;
+    overflow-y: auto;
+    .cliente {
+      text-align: center;
+      width: 300px;
+      filter: grayscale(100%);
+
+      .ima {
+        width: 127px;
+      }
+      &.final {
+        border-bottom: 0px solid #ccc;
+      }
+      &:hover {
+        filter: grayscale(0);
+      }
+    }
+    .total {
+      @include flexColumn;
+      align-items: center;
+    }
+  }
+  .footer {
+    border-top: 2px solid #424242;
+    @include flexRow;
+    justify-content: space-between;
+    width: 98%;
+    margin-left: 1%;
+    margin-top: 15px;
+    padding-top: 8px;
+    margin-bottom: 5px;
+    height: 4.3vh;
+    .engrane-menu {
+      position: relative;
+      overflow: auto;
+      width: 26px;
+      height: 26px;
+      .opciones {
+        background-color: #333;
+        position: absolute;
+        z-index: -1;
+        width: 26px;
+        bottom: 0 !important;
+        align-items: center;
+        .opcion {
+          position: relative;
+          width: 20px;
+          height: 20px;
+          padding: 6px 0;
+          &:hover {
+            cursor: pointer;
+          }
+          &:hover>.opcion-label {
+            opacity: 1;
+          }
+          .opcion-label {
+            display: block;
+            background-color: #333;
+            position: absolute;
+            left: 28px;
+            top: 8px;
+            color: #fff;
+            font-size: 12px;
+            text-align: center;
+            padding: 5px 6px;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 200ms;
+
+            &::after {
+                content: " ";
+                position: absolute;
+                top: 65%;
+                right: 100%; /* To the left of the tooltip */
+                margin-top: -5px;
+                border-width: 3px;
+                border-style: solid;
+                border-color: transparent black transparent transparent;
+            }
+          }
+        }
+        transition: bottom 500ms;
+      }
+      &:hover {
+        background-color: #333;
+        overflow: visible;
+        .opciones {
+          @include flexColumn;
+          bottom: 100% !important;
+          z-index: 1;
+        }
+      }
+      .engrane {
+        width: 18px;
+        height: 18px;
+        position: relative;
+        z-index: 2;
+      }
+    }
+  }
+}
+
+.total {
+  @include flexColumn;
+  align-items: center;
+}
+
+.animationZoom {
+  animation: animatezoom 0.2s
+}
+
+@keyframes animatezoom {
+  from {
+    transform: scale(0)
+  }
+  to {
+    transform: scale(1)
+  }
+}
+
+.aniamtionTop {
+  position: absolute;
+  animation: animatetop 0.3s
+}
+
+@keyframes animatetop {
+  from {
+    margin-top: 3vh;
+    opacity: 0
+  }
+  to {
+    margin-top: 7vh;
+    opacity: 1
+  }
+}
+
+.aniamtionTopitems {
+  position: relative;
+  animation: animatetop2 0.5s
+}
+
+@keyframes animatetop2 {
+  from {
+    top: -600px;
+    opacity: 0
+  }
+  to {
+    top: 0px;
+    opacity: 1
+  }
+}
+
+/* entire container, keeps perspective */
+
+.flip-container {
+  perspective: 1000px;
+  background: white;
+  ;
+}
+
+.front:hover {
+  background: #F3F9FA;
+}
+
+.centerPagination {
+  width: 100%;
+  height: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+.paginationContent {
+  width: 98%;
+  height: 100%;
+  ;
+}
+
+.footContent {
+  margin-top: 1px;
+  width: 101%;
+  height: 14.5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  line-height: 20px;
+  //border-bottom: 0.5px solid #ccc;
+}
+
+.footContentBack {
+  width: 100%;
+  height: 12%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  border: 0 none #ccc;
+  //border-bottom: 1px solid #ccc;
+  border-radius: 0;
+}
+
+.iconsContent {
+  display: flex;
+  flex-wrap: wrap;
+  width: 98%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  font-size: 10px;
+}
+
+.buttonCardContent {
+  width: 100%;
+  height: 12%;
+  ;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  border: 0 none #ccc;
+  border-bottom: 0px solid #ccc;
+  border-radius: 0;
+}
+
+.buttonCardBtn {
+  background: #1E8893;
+  color: white;
+  width: 50%;
+  height: 60%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+.buttonCardBtn:hover {
+  cursor: pointer;
+  background: rgb(38, 161, 175);
+  color: white;
+}
+
+.flip-container:hover .flipper,
+.flip-container.hover .flipper {
+  cursor: pointer;
+}
+
+/* flip the pane when hovered */
+
+.flip-container:focus .flipper,
+.flip-container.hover .flipper {
+  cursor: pointer;
+  transform: rotateY(180deg);
+}
+
+.flip-container,
+.front,
+.back {
+  width: 300px;
+  height: 300px;
+}
+
+/* flip speed goes here */
+
+.flipper {
+  transition: 0.6s;
+  transform-style: preserve-3d;
+  position: relative;
+}
+
+.front p {
+  line-height: 5px;
+}
+
+.headerContentFront {
+  width: 100%;
+  height: 15%;
+  ;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+/* hide back of pane during swap */
+
+.front,
+.back {
+  border-style: solid;
+  border-color: rgba(110, 110, 110, 0.288);
+  border-width: 0px;
+  backface-visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* front pane, placed above back */
+
+.front {
+  z-index: 2;
+  /* for firefox 31 */
+  transform: rotateY(0deg);
+  font-family: 'Roboto', sans-serif;
+}
+
+/* back, initially hidden pane */
+
+.back {
+  font-family: 'Roboto', sans-serif;
+  transform: rotateY(180deg);
+}
+
+.backContent {
+  width: 100%;
+  height: 74%;
+}
+
+.headerBackCartera {
+  width: 100%;
+  height: 17%;
+  ;
+  font-weight: 900;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+.subheaderBackCartera {
+  width: 100%;
+  height: 5%;
+  ;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+.backCenterContent {
+  width: 100%;
+  height: 80%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+.FactCarteraContent {
+  width: 48%;
+  height: 100%;
+}
+
+.headerFactcarteraContent {
+  font-weight: 900;
+  height: 30%;
+  display: flex;
+  align-items: center;
+  align-content: center;
+}
+
+.headerFantcarteraContent {
+  font-weight: 900;
+  height: 30%;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: flex-end;
+}
+
+.FantCarteraContent {
+  width: 48%;
+  height: 100%;
+}
+
+.infoFactcarteraContent {
+  height: 65%;
+  text-align: left;
+}
+
+.infoFantcarteraContent {
+  height: 65%;
+  text-align: right
+}
+
+.rowCarteraContent {
+  width: 100%;
+  height: 33%;
+}
+
+.CVerde {
+  color: #1E8893;
+}
+
+.animationZoom {
+  animation: animatezoom 0.2s
+}
+
+@keyframes animatezoom {
+  from {
+    transform: scale(0)
+  }
+  to {
+    transform: scale(1)
+  }
+}
+
+.btn-agregar-cliente {
+  width: 200px;
+  height: 30px;
+  color: white;
+  background: #1E8893;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.btn-agregar-cliente:hover {
+  background: #1E8893;
+}
+
+@media only screen and (min-width: 600px) {
+  .container {
+    .tabla-clientes {
+      height: 33vh;
+    }
+    .tabla-clientes2 {
+      height: 40vh;
+    }
+  }
+  .engrane-menu {
+    .opciones {
+      bottom: 28px;
+    }
+  }
+}
+
+
+@media only screen and (min-width: 800px) and(min-height:700px) {
+  .container {
+    .tabla-clientes {
+      height: 35vh;
+
+    }
+    .tabla-clientes2 {
+      height: 35vh;
+    }
+  }
+
+}
+@media only screen and (min-width: 800px) and(min-height:800px) {
+  .container {
+    .tabla-clientes {
+      height: 45vh;
+
+    }
+    .tabla-clientes2 {
+      height: 45vh;
+    }
+  }
+
+
+}
+@media only screen and (min-width: 1100px) and(min-height:800px) {
+  .container {
+    .tabla-clientes {
+      height: 50vh;
+
+    }
+    .tabla-clientes2 {
+      height: 50vh;
+    }
+  }
+
+
+}
+
+@media only screen and (min-width: 1200px) and(min-height:800px) {
+  .container {
+    .tabla-clientes {
+      height: 46vh;
+
+
+    }
+    .tabla-clientes2 {
+      height: 46vh;
+    }
+  }
+
+
+}
+
+@media only screen and (min-width: 1200px) and(min-height:899px) {
+  .container {
+    .tabla-clientes {
+      height: 50vh;
+
+    }
+    .tabla-clientes2 {
+      height: 50vh;
+    }
+  }
+}
+
+  @media only screen and (min-width: 1200px) and(min-height:900px) {
+    .container {
+      .tabla-clientes {
+
+        height:49vh;
+
+      }
+      .tabla-clientes2 {
+        height: 49vh;
+      }
+    }
+  }
+
+  @media only screen and (min-width: 1200px) and(min-height:1000px) {
+    .container {
+      .tabla-clientes {
+        height:57vh;
+
+      }
+      .tabla-clientes2 {
+        height: 57vh;
+      }
+    }
+  }
+
+
+    @media only screen and (min-width: 1200px) and(min-height:1100px) {
+      .container {
+        .tabla-clientes {
+          height:58vh;
+
+        }
+        .tabla-clientes2 {
+          height: 58vh;
+        }
+      }
+    }
+    @media only screen and (min-width: 1200px) and(min-height:1200px) {
+      .container {
+        .tabla-clientes {
+          height: 55vh;
+        }
+        .tabla-clientes2 {
+          height: 55vh;
+        }
+      }
+    }
+
+
+@media only screen and (min-width: 1680px) and(min-height:1000px) {
+  .container {
+    .tabla-clientes {
+      height: calc(58vh)
+    }
+    .tabla-clientes2 {
+      height: calc(58vh)
+    }
+  }}
+
+
+
+
+
+@media only screen and (min-width: 1680px) and(min-height:1150px) {
+  .container {
+    .tabla-clientes {
+      height: calc(62vh)
+    }
+    .tabla-clientes2 {
+      height: calc(62vh)
+    }
+  }
+}
+
+
+@media only screen and (min-width: 2000px) and(min-height:1150px) {
+  .container {
+    .tabla-clientes {
+      height: calc(62vh)
+    }
+    .tabla-clientes2 {
+      height: calc(62vh)
+    }
+  }
+}
+
+
+
+hr.v {
+  width: 1px;
+  height: 158px;
+  opacity: .4;
+  background: #ECEEF0;
+  color: #ECEEF0;
+  &.final {
+    display: none;
+  }
+}
+
+hr.h {
+  width: 100%;
+  height: 1px;
+  opacity: .4;
+  background: #ECEEF0;
+  color: #ECEEF0;
+  &.final {
+    display: none;
+  }
+}

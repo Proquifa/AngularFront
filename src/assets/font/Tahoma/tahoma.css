@@ -1,0 +1,9 @@
+@font-face {
+
+    font-family: Tahoma;
+    font-weight: normal;
+    src: local('Tahoma'), url('Tahoma.eot'),
+    url('Tahoma.eot?#iefix') format('embedded-opentype'),
+        url('Tahoma.woff') format('woff');
+
+}

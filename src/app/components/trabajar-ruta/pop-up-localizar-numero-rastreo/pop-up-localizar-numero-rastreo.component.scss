@@ -1,0 +1,134 @@
+.modal {
+    z-index: 3;
+    display: flex;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: rgba(255, 255, 255, 0.7);
+    font-family: 'Roboto', sans-serif;
+}
+
+.modal-content {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-content: center;
+    align-items: flex-start;
+    margin: auto;
+    text-align: center;
+    background-color: white;
+    position: relative;
+    padding: 0;
+    outline: 0;
+    max-width: 630px;
+    width: 630px;
+    height: 385px;
+    max-height: 385px;
+    color: black;
+    border: 1px solid #008894;
+    border-radius: 20px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.header {
+    order: 0;
+    flex: 0 1 auto;
+    align-self: stretch;
+    background-color: #008894;
+    border: 1px solid #008894;
+    border-radius: 19px 19px 0px 0px;
+    color: white;
+    font-family: 'Novecento';
+    font-weight: bold;
+    font-size: 27px;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0px 15px;
+}
+
+.contenido {
+    -webkit-box-ordinal-group: 2;
+    order: 1;
+    -webkit-box-flex: 1;
+    flex: 1 1 auto;
+    align-self: stretch;
+    width: 100%;
+    height: 50%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    -webkit-box-pack: center;
+    justify-content: center;
+    align-content: stretch;
+    -webkit-box-align: stretch;
+    align-items: stretch;
+    color: #424242;
+}
+
+.footer {
+    order: 1;
+    flex: 0 1 auto;
+    align-self: stretch;
+    height: 15%;
+    justify-content: center;
+    display: flex;
+}
+
+.datos {
+    order: 1;
+    flex: 1 1 auto;
+    align-self: auto;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: stretch;
+    align-items: stretch;
+    height: 40%;
+    justify-content: center;
+    &>p {
+        font-family: 'Roboto';
+        font-weight: bold;
+        font-size: 25px;
+        color: #666666;
+        text-align: center;
+        padding: 10px 0px;
+    }
+}
+
+.btnOk {
+    width: 220px;
+    height: 30px;
+    background: #338A9C;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    &>label {
+        font-family: 'Novecento';
+        font-size: 21px;
+        font-weight: bold;
+        color: white;
+        height: 100%;
+        padding-top: 1.8%;
+    }
+}
+
+.btnControlPrincipal {
+    width: 37px;
+    height: 37px;
+    background-color: #008894;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    cursor: pointer;
+}

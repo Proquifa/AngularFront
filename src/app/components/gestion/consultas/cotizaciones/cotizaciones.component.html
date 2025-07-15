@@ -1,0 +1,1081 @@
+<div>
+  <div (click)="backMenu()">
+    <img height="22px" src="assets/Images/gestion/consultas/facturacion/recurso_190.svg" alt="">
+  </div>
+  |
+
+  <div *ngIf="!detalle">CONSULTA DE COTIZACIONES</div>
+  <div *ngIf="detalle" (click)="regresarConsulta()" class="regresar" style="  margin-right: 20px; cursor: pointer;">CONSULTA DE COTIZACIONES </div>
+  <div *ngIf="detalle" style="  margin-right: 20px;">|</div>
+  <div *ngIf="detalle">DETALLES</div>
+</div>
+<div *ngIf="!detalle">
+  <div [ngClass]="classPanel">
+    <div class="filtroHeader">
+      <div class="abrir" (click)="openPanel()">
+        <img *ngIf="hiddenClose" width="15px" src="assets/Images/gestion/consultas/facturacion/recurso_193.svg" alt="">
+        <img *ngIf="!hiddenClose" width="15px" src="assets/Images/gestion/consultas/facturacion/recurso_188.svg" alt="">
+      </div>
+      <div *ngIf="hiddenClose">
+        cerrar
+        <div class="cerrar" (click)="closePanel()">
+          <img height="20px" width="20px" src="assets/Images/gestion/consultas/facturacion/recurso_189.svg" alt="">
+        </div>
+      </div>
+    </div>
+
+    <div class="filtros">
+      <div style="display: none">
+        <pq-radio-button [widthTotal]="'100px'" [lstItems]="lstItems" [disble]="true" [direction]="'row'" [imgSize]="'12px'" (emitItem)="emitItem($event)"></pq-radio-button>
+      </div>
+      <div>
+        <div (click)="filtroAvanzada()" [style.background]="avanzada?'#008895':'#C2C3C9'">AVANZADA</div>
+        <div (click)="filtroRapida()" [style.background]="!avanzada?'#008895':'#C2C3C9'">RÁPIDA</div>
+      </div>
+
+      <div *ngIf="avanzada" class="divAvanzada">
+        <!--  Si ya hay datos dentro del compenente se manda el < Gestion-filter/> con los datos
+            Y la propiedad IsLoader como verdadera
+          -->
+        <div *ngIf="isThereData;else loader">
+          <gestion-filter [ElementsDropList]="Elements" (valueFilter)="mostrarDatos($event)" [IsImage]="IsImage" [IsDate]="IsDate"
+            [IsLoader]="isThereData" [Clear]="Clear" style="width: 100%"></gestion-filter>
+        </div>
+
+        <!--  Si no hay datos dentro del compenente se manda el < Gestion-filter/> con solo
+              una propiedad
+              IsLoader como Falsa-->
+        <ng-template #loader>
+          <gestion-filter [IsLoader]="isThereData" [Clear]="Clear"></gestion-filter>
+        </ng-template>
+      </div>
+
+      <div *ngIf="!avanzada" class="divRapida">
+        <div style="display: none">
+          <!--<pq-radio-button [widthTotal]="'60px'" [lstItems]="lstRadiosRapida" [disble]="true" [direction]="'row'" [imgSize]="'12px'" (emitItem)="emitItem($event)"></pq-radio-button>-->
+        </div>
+
+        <div>
+          <span>Folio de cotización</span>
+          <input [(ngModel)]="txtCotizacion" type="text">
+        </div>
+
+        <div (click)="Rapida()">
+          <img height="20px" src="assets/Images/visualizar.svg" alt="">
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="resultados" [style.width]="hiddenClose ? 'calc(100% - 321px)': 'calc(100% - 50px)'">
+    <div>
+      <div>
+        RESULTADOS
+      </div>
+      <div>
+        <img height="20px" width="20px" (click)="download()" src="assets/Images/exportar.svg" alt="">
+        <img [style.margin-right]="'15px'" (click)="showGraphic()" height="20px" width="20px" src="assets/Images/gestion/images/graficaminigris.svg"
+          alt="">
+      </div>
+    </div>
+
+
+    <div *ngIf="lstCotizaciones" class="sistema ">
+
+      <div style="min-width: 1520px;">
+        <div [style.min-width]="'50px'">#</div>
+        <div [style.min-width]="'160px'">Fecha</div>
+        <div [style.min-width]="'160px'">Cliente</div>
+        <div [style.min-width]="'160px'">Contacto</div>
+        <div [style.min-width]="'160px'">Medio de envío</div>
+        <div [style.min-width]="'160px'">Cotizó</div>
+        <div [style.min-width]="'160px'">Cotización</div>
+        <div [style.min-width]="'160px'">Requisición</div>
+        <div [style.min-width]="'160px'">Estado</div>
+        <div [style.min-width]="'160px'">Envío</div>
+        <div [style.min-width]="'30px'" [style.background]="red"></div>
+      </div>
+
+
+      <div>
+        <div *ngFor="let item of lstCotizaciones; let i = index">
+          <div [style.min-width]="'50px'">{{i + 1}}</div>
+          <div [style.min-width]="'160px'">{{item.fecha}}</div>
+          <div [style.min-width]="'160px'">{{item.nombreCliente}}</div>
+          <div [style.min-width]="'160px'">{{item.contacto}}</div>
+          <div [style.min-width]="'160px'">{{item.msalida}}</div>
+          <div [style.min-width]="'160px'">{{item.cotizo}}</div>
+          <div [style.min-width]="'160px'">{{item.folioCotizacion}}</div>
+          <div [style.min-width]="'160px'">{{item.requisicion}}</div>
+          <div [style.min-width]="'160px'">{{item.estado}}</div>
+          <div [style.min-width]="'160px'">
+            <div style="margin-right: 10px;">
+              {{item.enTiempoFueraDeTiempo? "ET ": "FT "}}
+            </div>
+            <div *ngIf="item.enTiempoFueraDeTiempo" class="circuloverde">
+
+            </div>
+            <div *ngIf="!item.enTiempoFueraDeTiempo" class="circulorojo">
+
+            </div>
+          </div>
+          <div [style.min-width]="'30px'" (click)="verDetalle(item)">
+            <img class="detalle" width="14px" src="assets/Images/ir_detalle.svg" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="total" style="display: flex; align-content: center; align-items: center; justify-content: center">
+      <p>Total:
+        <span>{{lstCotizaciones.length}}</span>
+        <span *ngIf="lstCotizaciones.length == 1">Cotización</span>
+        <span *ngIf="lstCotizaciones.length != 1">Cotizaciones</span>
+      </p>
+    </div>
+
+  </div>
+</div>
+
+<!--Sección de detalles-->
+<div *ngIf="detalle" class="consultaDetalles">
+  <div [ngClass]="classPanel">
+    <div class="filtroHeader">
+      <div class="abrir" (click)="openPanel()">
+        <img *ngIf="hiddenClose" width="15px" src="assets/Images/hamburguesa.svg" alt="">
+        <img *ngIf="!hiddenClose" width="15px" src="assets/Images/hamburguesa_verde.svg" alt="">
+      </div>
+      <div *ngIf="hiddenClose">
+        CERRAR
+        <div class="cerrar" (click)="closePanel()">
+          <img height="20px" width="20px" src="assets/Images/gestion/consultas/facturacion/recurso_189.svg" alt="">
+        </div>
+      </div>
+    </div>
+    <div *ngIf="Cotizacion_Detalle" class="filtros">
+      <div class="detalleCliente"> {{Cotizacion_Detalle.nombreCliente}} </div>
+      <div style="height: 0.1px; margin: 0.1px;"></div>
+      <div class="detalleTitulo ">Folio:</div>
+      <div class="detalleTexto" style="color:#008895; cursor:pointer" (click)="descargarPDF('http://201.161.12.60:51725/SAP/Cotizaciones/'+Cotizacion_Detalle.folioCotizacion+'.pdf')">
+        {{Cotizacion_Detalle.folioCotizacion}} </div>
+      <div class="detalleTitulo">Referencia:</div>
+      <div class="detalleTexto" style="color:#008895; cursor:pointer" (click)="descargarPDF('http://201.161.12.60:51725/SAP/Doctos/'+Cotizacion_Detalle.requisicion+'.pdf')">{{Cotizacion_Detalle.requisicion}}</div>
+      <div class="detalleTitulo">Fecha de origen:</div>
+      <div class="detalleTexto">{{Cotizacion_Detalle.fechaOrigen | dateFormatSlashHour}} </div>
+      <div class="detalleTitulo">Fecha de registro</div>
+      <div class="detalleTexto">{{Cotizacion_Detalle.fechaRegistro | dateFormatSlashHour}} </div>
+      <div class="detalleTitulo">Pendiente de origen:</div>
+      <div class="detalleTexto">{{Cotizacion_Detalle.pendienteOrigen}}</div>
+      <div class="detalleTitulo">Condiciones de pago:</div>
+      <div class="detalleTexto">{{Cotizacion_Detalle.cpago}}</div>
+      <div class="detalleTitulo">Monto total de la cotización:</div>
+      <div class="detalleTexto">{{Cotizacion_Detalle.montoCotiza | acFormatMoney}} USD</div>
+      <div class="detalleTitulo">Total de piezas:</div>
+      <div class="detalleTexto">{{lstPartidas.length}}</div>
+
+    </div>
+
+    <div *ngIf="hiddenClose" style=" visibility: hidden;width: 100%; opacity: 1;margin-top: 40px;background: transparent;color:#008895;;display:flex;flex-direction: column; justify-content: center;align-content: center; align-items: center">
+
+      Pedido
+      <div style="width: 70%;height:60%; opacity: 1;;background: transparent;margin-top: 20px;;display:flex; justify-content: center;align-content: center; align-items: center; position: relative">
+        <div style="width:60%;height:10vh;background:transparent;position:absolute;text-align:center; margin-top:10%;font-size:12px;
+          border-radius: 100%;">Totales
+          <p style="font-size: 10px;margin-top: 20px;color: #424242 ">
+            Monto total:#
+          </p>
+
+          <p style="font-size: 10px;color: #424242 ">
+            Partidas: #
+          </p>
+
+
+          <p style="font-size: 10px;color: #424242 ">
+            Piezas:#
+          </p>
+
+        </div>
+        <div>
+
+          <div style="min-width: 300px;min-height: 200px;">
+            <!--   <canvas id="graficoIndividual"></canvas> -->
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <div class="contenidoFactura">
+    <div class="detalleFactura" style="justify-content: center; background: transparent;overflow-y: auto">
+      <div style="background: transparent; justify-content: center">C-{{Cotizacion_Detalle.folioCotizacion}} </div>
+      <div>
+        <!--  lista de Compras-->
+        <div [ngClass]="i==0?'divActual':''" *ngFor="let item of lstPartidas; let i = index" (click)="obtenerTiempoProceso(item, i,0)">
+          <div class="dfSelect"></div>
+          <div>
+            <div>
+              <div *ngIf="item.cantidad==1" [style.color]="'#008895'">#{{(i+1)+" - "+item.cantidad +"Pza - "}}{{item.monto | acFormatMoney}} USD </div>
+
+              <div *ngIf="item.cantidad!=1" [style.color]="'#008895'">#{{(i+1)+" - "+item.cantidad +"Pzas - "}}{{item.monto | acFormatMoney}} USD </div>
+              <div></div>
+            </div>
+            <div>
+              <div style="width: 65%">{{item.concepto}}</div>
+
+              <div style="width: 5%"></div>
+
+            </div>
+
+
+            <div>
+              <div style="width:70%"> </div>
+              <div *ngIf="Cotizacion_Detalle.estado=='Abierto' ;" style="width:19%; color:red; text-align: center"> Abierto</div>
+              <div *ngIf="Cotizacion_Detalle.estado=='Cerrado'" style="width:19%; color:#91BE5F; text-align: center "> Cerrado </div>
+            </div>
+
+            <div>
+
+              <!--Aqui se muestra otra ventana
+                  http://201.161.12.60:51725/SAP/Pedidos/062218-5141.pdf
+                  -->
+              <div style="color:#008895; width:70%" (click)="descargarPDF('http://201.161.12.60:51725/SAP/Pedidos/'+item.pedido+'.pdf')">
+                PU {{item.precio | acFormatMoney}} USD </div>
+
+
+              <div *ngIf="item.estado=='Recibido'" style="color:#008895; width:30%"> {{item.estado+" "}}
+                <span style="color:#91BE5F "> ET</span>
+              </div>
+
+              <div *ngIf="item.estado=='BackOrder'" style="color:#008895; width:30%"> {{item.estado+" "}}
+                <span style="color:#D0021B  "> FT</span>
+              </div>
+
+              <div *ngIf="item.estado!='BackOrder'&&item.estado!='Recibido'" style="color:#008895; width:30%"> {{item.estado+" "}}</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="width: 100%; height: 100px;display: flex;flex-wrap: wrap; justify-content: center;align-content: center;align-items: center; background: transparent">
+          <div style="background: transparent">
+            Total: {{lstPartidas.length==1?lstPartidas.length+" Partida" :lstPartidas.length+" Partidas" }}
+          </div>
+
+
+        </div>
+
+
+      </div>
+      <div>
+
+      </div>
+    </div>
+    <div class="lineaTiempo" style="    overflow-y: scroll;">
+
+
+      <div *ngIf="lstPartidas[PartidaSeleccionada]!=null&&lstPartidas[PartidaSeleccionada].cantidad==1">
+        # {{(PartidaSeleccionada+1)}}-{{lstPartidas[PartidaSeleccionada].cantidad +"Pieza" }}</div>
+      <div *ngIf="lstPartidas[PartidaSeleccionada]!=null&&lstPartidas[PartidaSeleccionada].cantidad!=1">
+        # {{(PartidaSeleccionada+1)}}-{{lstPartidas?lstPartidas[PartidaSeleccionada].cantidad:"" }}-Piezas</div>
+
+      <div [ngClass]="i==lineaSeleccionada?'cont-timeLine cont-timeLineSelected':'cont-timeLine'" *ngFor="let item of lstTiempoProceso; let i = index"
+        (click)="SeleccionarProceso(item, i)" style="border-bottom: none; cursor: pointer;display: flex;flex-direction: row; min-width: 564px">
+
+        <div class="cuadroActivo" style="min-width: 8px;
+    background: #008895;
+    min-height:150px; display: flex; flex-direction: column">
+
+        </div>
+
+        <div class="cuadroActivo" style="min-width: 8px;
+    background: transparent;
+    min-height:150px; display: flex; flex-direction: column">
+
+        </div>
+
+        <div *ngIf="item.proceso!='Evaluar respuesta' && item.proceso!='Ingresó en catálogo'" style="display: flex;
+                              flex-direction: column;  padding-left: 1rem">
+
+          <div style="font-size: 18px;width: 100%;
+                      font-weight: bold;
+                      color: #424242;
+                      margin-bottom: 15px;display: flex; justify-content: space-between">
+            <div style="width: 90%; min-width: 520px;">
+              {{item.proceso}}
+            </div>
+
+            <div *ngIf="item.fechaFin !=null" class="circuloverde"></div>
+
+            <div *ngIf="item.fechaFin ==null" class="circulorojo"></div>
+          </div>
+
+          <div style="    font-size: 16px;
+                      color: #008895;
+                      margin-bottom: 5px;margin-bottom: 2px">{{item.responsable}}</div>
+          <div style="    font-size: 16px;
+                      color: #F3B23F;
+                      margin-bottom: 5px;">FI {{item.fechaInicio | dateFormatSlashHour}}</div>
+          <div style="    font-size: 16px;
+                      color: #571C7B;
+                      margin-bottom: 5px;">FF {{item.fechaFin | dateFormatSlashHour}}</div>
+          <div style="    font-size: 16px;
+                      color: #981E30;
+                      margin-bottom: 5px;">TT {{item.totalProceso}} día
+            <span *ngIf="item.totalProceso != 1">s</span>
+          </div>
+        </div>
+
+      </div>
+
+
+
+      <hr>
+
+    </div>
+
+
+    <div class="detalleTiempo">
+      <div style="display: flex;">
+        <div   *ngIf="ProcesoSeleccionado!=null" style="width: 90%">
+          {{ProcesoSeleccionado.proceso}}
+        </div>
+        <div *ngIf="ProcesoSeleccionado !=null" class="circuloverde"></div>
+
+        <div *ngIf="ProcesoSeleccionado ==null" class="circulorojo"></div>
+
+
+      </div>
+      <!--Seccion de Registro -->
+      <div *ngIf="ProcesoSeleccionado!=null&&ProcesoSeleccionado.proceso=='Registro'">
+        <div class="encabezadoGestion">
+          Generales
+        </div>
+
+        <div class="subencabezadoGestion">
+          Fecha de Recepción
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{ProcesoSeleccionado.fechaInicio | dateFormatSlashHour}}
+        </div>
+
+
+        <div class="subencabezadoGestion">
+          Fecha de Registro
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{ProcesoSeleccionado.fechaFin | dateFormatSlashHour}}
+
+        </div>
+
+        <div class="subencabezadoGestion">
+          Medio
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{ProcesoSeleccionado.medio ?ProcesoSeleccionado.medio : "ND"}}
+
+        </div>
+
+
+        <div class="subencabezadoGestion">
+          Contacto
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{ProcesoSeleccionado.contacto ?ProcesoSeleccionado.contacto : "ND"}}
+
+        </div>
+
+
+        <div class="subencabezadoGestion">
+          Registró
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{ProcesoSeleccionado.responsable ?ProcesoSeleccionado.responsable : "ND"}}
+
+        </div>
+
+        <div class="subencabezadoGestion">
+          Referencia
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{ProcesoSeleccionado.referencia?ProcesoSeleccionado.referencia: "ND"}}
+
+        </div>
+
+      </div>
+      <!--Seccion de Clasificación-->
+
+      <div *ngIf="ProcesoSeleccionado!=null&&ProcesoSeleccionado.proceso=='Clasificación'">
+        <div class="encabezadoGestion">
+          Generales
+        </div>
+
+        <div class="subencabezadoGestion">
+          Clasificación Inicial
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{ProcesoSeleccionado.pcotiza.clasificacion?ProcesoSeleccionado.pcotiza.clasificacion: "ND"}}
+
+        </div>
+
+
+        <div class="subencabezadoGestion">
+          Clasificación Final
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{ProcesoSeleccionado.pcotiza.clasifFinal?ProcesoSeleccionado.pcotiza.clasifFinal: "ND"}}
+        </div>
+
+        <div class="subencabezadoGestion">
+          Fecha Registro
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{ProcesoSeleccionado.fechaInicio | dateFormatSlashHour}}
+        </div>
+
+
+        <div class="subencabezadoGestion">
+          Fecha Clasificación
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{ProcesoSeleccionado.fechaFin | dateFormatSlashHour}}
+        </div>
+        <div class="subencabezadoGestion">
+          Cotización
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{ProcesoSeleccionado.referencia?ProcesoSeleccionado.referencia: "ND"}}
+        </div>
+        <div class="subencabezadoGestion">
+          Clasificó
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{ProcesoSeleccionado.responsable?ProcesoSeleccionado.responsable: "ND"}}
+        </div>
+        <div class="subencabezadoGestion">
+          contacto
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{ProcesoSeleccionado.contacto?ProcesoSeleccionado.contacto: "ND"}}
+        </div>
+      </div>
+
+
+
+      <!--Seccion de Envio-->
+
+      <div *ngIf="ProcesoSeleccionado!=null&&ProcesoSeleccionado.proceso=='Envío'">
+        <div class="encabezadoGestion">
+          Generales
+        </div>
+
+        <div class="subencabezadoGestion">
+          Clasificación
+        </div>
+        <div class="contenidoencabezadoGestion">
+
+          {{ProcesoSeleccionado.clasificacion?ProcesoSeleccionado.clasificacion: "ND"}}
+        </div>
+
+
+        <div class="subencabezadoGestion">
+          Fecha de Registro
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{Cotizacion_Detalle.fechaRegistro | dateFormatSlashHour}}
+        </div>
+
+        <div class="subencabezadoGestion">
+          fecha Inicio Envío
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{ProcesoSeleccionado.fechaFin | dateFormatSlashHour}}
+        </div>
+
+
+        <div class="subencabezadoGestion">
+          Fecha Envío
+        </div>
+        <div class="contenidoencabezadoGestion">
+
+          {{ProcesoSeleccionado.fechaFin | dateFormatSlashHour}}
+        </div>
+      </div>
+
+      <!--Seccion de  ConformacionS-->
+      <div *ngIf="ProcesoSeleccionado!=null&&ProcesoSeleccionado.proceso=='Confirmación'">
+        <div class="encabezadoGestion">
+          Generales
+        </div>
+
+        <div class="subencabezadoGestion">
+          Fecha Inicio
+        </div>
+        <div class="contenidoencabezadoGestion">
+
+          {{ProcesoSeleccionado.fechaInicio | dateFormatSlashHour}}
+        </div>
+
+
+        <div class="subencabezadoGestion">
+          Fecha Fin
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{ProcesoSeleccionado.fechaFin | dateFormatSlashHour}}
+        </div>
+
+        <div class="subencabezadoGestion">
+          Confirmo
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{ProcesoSeleccionado.responsable?ProcesoSeleccionado.responsable: "ND"}}
+        </div>
+
+
+        <div class="subencabezadoGestion">
+          Contacto
+        </div>
+        <div class="contenidoencabezadoGestion">
+
+          {{ProcesoSeleccionado.contacto?ProcesoSeleccionado.contacto: "ND"}}
+        </div>
+        <div class="subencabezadoGestion">
+          Comentarios
+        </div>
+        <div class="contenidoencabezadoGestion">
+
+          {{ProcesoSeleccionado.comentarios?ProcesoSeleccionado.comentarios: "ND"}}
+        </div>
+
+
+      </div>
+
+      <!--Seccion de  Tramitacion-->
+      <div *ngIf="ProcesoSeleccionado!=null&&ProcesoSeleccionado.proceso=='Tramitación'">
+        <div class="encabezadoGestion">
+          Generales
+        </div>
+
+        <div class="subencabezadoGestion">
+          Fecha de Registro
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{ProcesoSeleccionado.fechaInicio | dateFormatSlashHour}}
+
+        </div>
+
+
+        <div class="subencabezadoGestion">
+          Fecha de tramitación
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{ProcesoSeleccionado.fechaFin | dateFormatSlashHour}}
+        </div>
+
+        <div class="subencabezadoGestion">
+          P. Interno
+        </div>
+        <div class="contenidoencabezadoGestion CVerde" style="cursor:pointer; font-weight: 300; color:#008895;"(click)="descargarPDF('http://201.161.12.60:51725/SAP/Pedidos/'+ProcesoSeleccionado.comentarios+'.pdf')">
+
+         
+          <p style="cursor: pointer;">
+              {{ProcesoSeleccionado.comentarios?ProcesoSeleccionado.comentarios: "ND"}}
+          </p>
+        </div>
+
+
+        <div class="subencabezadoGestion">
+          Tramitó
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{ProcesoSeleccionado.responsable?ProcesoSeleccionado.responsable: "ND"}}
+        </div>
+        <div class="subencabezadoGestion">
+          Contacto de Envío
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{ProcesoSeleccionado.contacto?ProcesoSeleccionado.contacto: "ND"}}
+        </div>
+
+
+      </div>
+
+
+      <!--Seccion de  Pedido-->
+      <div *ngIf="ProcesoSeleccionado!=null&&ProcesoSeleccionado.proceso=='PEDIDO'">
+        <div class="encabezadoGestion">
+          Generales
+        </div>
+
+        <div class="subencabezadoGestion">
+          Fecha
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{ProcesoSeleccionado.fechaFin | dateFormatSlashHour}}
+
+        </div>
+
+
+        <div class="subencabezadoGestion">
+          Pedido
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{ProcesoSeleccionado.comentarios?ProcesoSeleccionado.comentarios: "ND"}}
+        </div>
+
+
+
+      </div>
+
+
+
+      <!--Seccion de  RECOTIZADA-->
+      <div *ngIf="ProcesoSeleccionado!=null&&ProcesoSeleccionado.proceso=='RECOTIZADA'">
+        <div class="encabezadoGestion">
+          Generales
+        </div>
+
+        <div class="subencabezadoGestion">
+          Fecha
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{ProcesoSeleccionado.fechaFin | dateFormatSlashHour}}
+
+        </div>
+
+
+        <div class="subencabezadoGestion">
+          Recotizada en
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{ProcesoSeleccionado.referencia?ProcesoSeleccionado.referencia: "ND"}}
+        </div>
+
+        <div class="subencabezadoGestion">
+          Comentarios
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{ProcesoSeleccionado.comentarios?ProcesoSeleccionado.comentarios: "ND"}}
+        </div>
+
+
+
+      </div>
+
+      <!--Seccion de  RECOTIZADA-->
+      <div *ngIf="ProcesoSeleccionado!=null&&ProcesoSeleccionado.proceso=='RECOTIZADA'">
+        <div class="encabezadoGestion">
+          Generales
+        </div>
+
+        <div class="subencabezadoGestion">
+          Fecha
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{ProcesoSeleccionado.fechaFin | dateFormatSlashHour}}
+
+        </div>
+
+
+        <div class="subencabezadoGestion">
+          Recotizada en
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{ProcesoSeleccionado.referencia?ProcesoSeleccionado.referencia: "ND"}}
+        </div>
+
+        <div class="subencabezadoGestion">
+          Comentarios
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{ProcesoSeleccionado.comentarios?ProcesoSeleccionado.comentarios: "ND"}}
+        </div>
+
+
+
+      </div>
+
+
+      <!--Seccion de  Investigacion-->
+      <div *ngIf="ProcesoSeleccionado!=null&&ProcesoSeleccionado.proceso=='Investigación'">
+        <div class="encabezadoGestion">
+          Generales
+        </div>
+
+        <div class="subencabezadoGestion">
+          Fecha Inicio
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{ProcesoSeleccionado.fechaFin | dateFormatSlashHour}}
+
+        </div>
+
+
+        <div class="subencabezadoGestion">
+          Fecha Fin
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{ProcesoSeleccionado.referencia?ProcesoSeleccionado.referencia: "ND"}}
+        </div>
+
+        <div class="subencabezadoGestion">
+          Investigó
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{ProcesoSeleccionado.responsable?ProcesoSeleccionado.responsable: "ND"}}
+        </div>
+        <div class="subencabezadoGestion">
+          Clasificación
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{ProcesoSeleccionado.pcotiza.clasifOrigen?ProcesoSeleccionado.pcotiza.clasifOrigen: "ND"}}
+        </div>
+
+
+        <div class="encabezadoGestion">
+          Investigación
+        </div>
+        <div class="contenidoencabezadoGestion">
+          FI: {{ProcesoSeleccionado.fechaInicio | dateFormatSlashHour}} FF:{{ProcesoSeleccionado.fechaFin | dateFormatSlashHour}} TT:
+          {{ProcesoSeleccionado.totalProceso==1?ProcesoSeleccionado.totalProceso+" dia": ProcesoSeleccionado.totalProceso+"
+          dias"}}
+
+        </div>
+        <div class="subencabezadoGestion">
+          Investigó
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{ProcesoSeleccionado.responsable?ProcesoSeleccionado.responsable: "ND"}}
+
+        </div>
+
+        <div class="encabezadoGestion">
+          Datos de Producto Investigado
+        </div>
+
+        <div class="subencabezadoGestion">
+          Producto
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{ProcesoSeleccionado.tipoProveedor?ProcesoSeleccionado.tipoProveedor: "ND"}}-{{ProcesoSeleccionado.proveedor?ProcesoSeleccionado.proveedor:
+          "ND"}}
+
+        </div>
+
+        <div class="subencabezadoGestion">
+
+          Tipo
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{ProcesoSeleccionado.pcotiza.producto.tipo?ProcesoSeleccionado.pcotiza.producto.tipo: "ND"}}
+
+        </div>
+        <div class="subencabezadoGestion">
+          Catalogo
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{ProcesoSeleccionado.pcotiza.codigo?ProcesoSeleccionado.pcotiza.codigo: "ND"}}
+
+        </div>
+
+        <div class="subencabezadoGestion">
+          concepto
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{ProcesoSeleccionado.pcotiza.descripcion?ProcesoSeleccionado.pcotiza.descripcion: "ND"}}
+
+        </div>
+        <div class="subencabezadoGestion">
+          Presentación
+        </div>
+        <div class="contenidoencabezadoGestion">
+
+          {{ProcesoSeleccionado.pcotiza.presentacion?ProcesoSeleccionado.pcotiza.presentacion: "ND"}}
+
+        </div>
+        <div class="subencabezadoGestion">
+          Marca
+        </div>
+        <div class="contenidoencabezadoGestion">
+
+          {{ProcesoSeleccionado.pcotiza.fabrica?ProcesoSeleccionado.pcotiza.fabrica: "ND"}}
+
+        </div>
+
+        <div class="subencabezadoGestion">
+          Precio de Lista
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{ProcesoSeleccionado.pcotiza.precio | acFormatMoney}}
+
+        </div>
+
+        <div class="subencabezadoGestion">
+          Dispobilidad y Manejo
+        </div>
+        <div class="subencabezadoGestion">
+          Tiempo de Entrega
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{ProcesoSeleccionado.pcotiza.tiempoEntrega?ProcesoSeleccionado.pcotiza.tiempoEntrega: "ND"}}
+
+
+        </div>
+        <div class="subencabezadoGestion">
+          Disponibilidad
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{ProcesoSeleccionado.pcotiza.producto.disponibilidad?ProcesoSeleccionado.pcotiza.producto.disponibilidad: "ND"}}
+
+        </div>
+        <div class="subencabezadoGestion">
+          Cargos por envio y adicionales
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{ProcesoSeleccionado.pcotiza.cargosEnviosAdicionales?ProcesoSeleccionado.pcotiza.cargosEnviosAdicionales: "ND"}}
+
+        </div>
+        <div class="subencabezadoGestion">
+          Manejo
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{ProcesoSeleccionado.pcotiza.producto.manejo?ProcesoSeleccionado.pcotiza.producto.manejo: "ND"}}
+
+        </div>
+        <div class="subencabezadoGestion">
+          Hielo seco
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{ProcesoSeleccionado.pcotiza.hieloSeco?ProcesoSeleccionado.pcotiza.hieloSeco: "ND"}}
+
+        </div>
+        <div class="subencabezadoGestion">
+          Comentarios Adicionales
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{ProcesoSeleccionado.pcotiza.comentariosAdicionales?ProcesoSeleccionado.pcotiza.comentariosAdicionales: "ND"}}
+
+        </div>
+
+
+
+        <div class="encabezadoGestion">
+          Evaluar Respuesta
+        </div>
+        <div class="contenidoencabezadoGestion">
+          FI: {{EvaluarPropuesta.fechaInicio | dateFormatSlashHour}} FF:{{EvaluarPropuesta.fechaFin | dateFormatSlashHour}} TT: {{EvaluarPropuesta.totalProceso==1?EvaluarPropuesta.totalProceso+"
+          dia": EvaluarPropuesta.totalProceso+" dias"}}
+
+        </div>
+        <div class="subencabezadoGestion">
+          Evaluó
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{EvaluarPropuesta.responsable?EvaluarPropuesta.responsable: "ND"}}
+
+        </div>
+
+        <div class="subencabezadoGestion">
+          Clasificación
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{EvaluarPropuesta.pcotiza.clasifOrigen?EvaluarPropuesta.pcotiza.clasifOrigen: "ND"}}
+
+        </div>
+        <div class="subencabezadoGestion CVerde">
+          Producto
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{EvaluarPropuesta.tipoProveedor?EvaluarPropuesta.tipoProveedor: "ND"}}-{{EvaluarPropuesta.proveedor?EvaluarPropuesta.proveedor:
+          "ND"}}
+
+        </div>
+        <div class="subencabezadoGestion">
+          Catálogo
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{EvaluarPropuesta.pcotiza.codigo?EvaluarPropuesta.pcotiza.codigo: "ND"}}
+
+        </div>
+        <div class="subencabezadoGestion">
+          Concepto
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{EvaluarPropuesta.pcotiza.descripcion?EvaluarPropuesta.pcotiza.descripcion: "ND"}}
+
+
+        </div>
+        <div class="subencabezadoGestion">
+          Presentación
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{EvaluarPropuesta.pcotiza.presentacion?EvaluarPropuesta.pcotiza.presentacion: "ND"}}
+
+        </div>
+        <div class="subencabezadoGestion">
+          Marca
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{EvaluarPropuesta.pcotiza.fabrica?EvaluarPropuesta.pcotiza.fabrica: "ND"}}
+
+        </div>
+        <div class="subencabezadoGestion">
+          Precio de Lista
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{EvaluarPropuesta.pcotiza.precio | acFormatMoney}}
+
+        </div>
+
+        <div class="subencabezadoGestion CVerde">
+          Disponibilida y Manejo
+        </div>
+        <div class="subencabezadoGestion">
+          Tiempo de Entrega
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{EvaluarPropuesta.pcotiza.tiempoEntrega?EvaluarPropuesta.pcotiza.tiempoEntrega: "ND"}}
+
+        </div>
+        <div class="subencabezadoGestion">
+          Disponibilidad
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{EvaluarPropuesta.pcotiza.producto.disponibilidad?EvaluarPropuesta.pcotiza.producto.disponibilidad: "ND"}}
+
+        </div>
+        <div class="subencabezadoGestion">
+          Cargos por Envío y Adicionales
+        </div>
+        <div class="contenidoencabezadoGestion">
+
+
+          {{EvaluarPropuesta.pcotiza.cargosEnviosAdicionales?EvaluarPropuesta.pcotiza.cargosEnviosAdicionales: "ND"}}
+
+        </div>
+        <div class="subencabezadoGestion">
+          Manejo
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{EvaluarPropuesta.pcotiza.producto.manejo?EvaluarPropuesta.pcotiza.producto.manejo: "ND"}}
+
+        </div>
+        <div class="subencabezadoGestion">
+          Hielo Seco
+        </div>
+        <div class="contenidoencabezadoGestion">
+
+          {{EvaluarPropuesta.pcotiza.hieloSeco?EvaluarPropuesta.pcotiza.hieloSeco: "ND"}}
+
+        </div>
+        <div class="subencabezadoGestion">
+          Comentarios Adicionales
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{EvaluarPropuesta.pcotiza.comentariosAdicionales?EvaluarPropuesta.pcotiza.comentariosAdicionales: "ND"}}
+
+        </div>
+        <div class="subencabezadoGestion">
+          Comentarios Adicionales para el Responsable C-Productos
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{EvaluarPropuesta.pcotiza.comentariosAdicionales?EvaluarPropuesta.pcotiza.comentariosAdicionales: "ND"}}
+
+        </div>
+        <div class="encabezadoGestion">
+          Ingreso de Catálogo
+        </div>
+
+
+        <div class="contenidoencabezadoGestion">
+          FI: {{IngresoCatalogo.fechaInicio | dateFormatSlashHour}} FF:{{IngresoCatalogo.fechaFin | dateFormatSlashHour}} TT: {{IngresoCatalogo.totalProceso==1?IngresoCatalogo.totalProceso+"
+          dia": IngresoCatalogo.totalProceso+" dias"}}
+
+        </div>
+        <div class="subencabezadoGestion">
+          Ingresó
+        </div>
+        <div class="contenidoencabezadoGestion">
+          ND
+
+        </div>
+      </div>
+
+
+      <!--Seccion de  Seguimiento-->
+      <div *ngIf="ProcesoSeleccionado!=null&&ProcesoSeleccionado.proceso=='Seguimiento'">
+        <div class="encabezadoGestion">
+          Historial
+        </div>
+
+        <div *ngFor="let historial of lstHistorial; let i = index">
+
+
+
+          <div class="subencabezadoGestion">
+            #{{(lstHistorial.length)-i}}
+          </div>
+          <div class="contenidoencabezadoGestion">
+
+
+          </div>
+
+          <div class="subencabezadoGestion">
+            Estado
+          </div>
+          <div class="contenidoencabezadoGestion">
+            {{historial.estadoFinal?historial.estadoFinal: "ND"}}
+
+          </div>
+
+
+          <div class="subencabezadoGestion">
+            {{historial.vendedor?historial.vendedor: "ND"}}
+          </div>
+          <div class="contenidoencabezadoGestion">
+          </div>
+          <div class="subencabezadoGestion">
+            Origen
+          </div>
+          <div class="contenidoencabezadoGestion">
+            {{historial.estado?historial.estado: "ND"}}
+          </div>
+
+          <div class="subencabezadoGestion">
+            Contacto
+          </div>
+          <div class="contenidoencabezadoGestion">
+            {{historial.contacto?historial.contacto: "ND"}}
+          </div>
+
+          <div class="subencabezadoGestion">
+            FER
+          </div>
+          <div class="contenidoencabezadoGestion">
+            {{historial.fer | dateFormatSlashHour}}
+          </div>
+
+          <div class="subencabezadoGestion">
+            FR
+          </div>
+          <div class="contenidoencabezadoGestion">
+            {{historial.fr | dateFormatSlashHour}}
+          </div>
+
+
+          <div class="subencabezadoGestion">
+            Comentarios
+          </div>
+          <div class="contenidoencabezadoGestion">
+            {{historial.comentarios?historial.contacto: "ND"}}
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+</div>

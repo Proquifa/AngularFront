@@ -1,0 +1,67 @@
+<div class="inspeccionPorPrioridad">
+  <h1  *ngIf="mostrarPedimento || mostrarPrioridad "> TIPO DE INSPECCIÓN</h1>
+  <h1  *ngIf="mostrarOrdenDeCompra" style="display: flex; box-sizing: border-box; padding-left: 40px;"> TIPO DE INSPECCIÓN</h1>
+
+  <!--Inspeccion por prioridad  -->
+  <div class="tipoInspeccion" *ngIf="mostrarPrioridad">
+    <label> Por Prioridad</label>
+  </div>
+  <div id="myProgressPrioridad" *ngIf="mostrarPrioridad">
+    <div id="Prioridad1" [style.width]="porcentajeP1" *ngIf="mostrarP1">
+      <h2>Prioridad 1</h2>
+      <p><label>Por Inspeccionar: </label>{{formatoPzaP1 | acFormatNumber}}</p>
+      <p><label *ngIf="!existo">Tiempo Estimado de Inspección: </label>{{TEIPrioridad1}}</p>
+    </div>
+    <div id="Prioridad2" [style.width]="porcentajeP2" *ngIf="mostrarP2">
+
+      <div class="descripcionLargaP2" *ngIf="descripcionLargaP2">
+        <h2>Prioridad 2</h2>
+        <p><label>Por Inspeccionar: </label>{{formatoPzaP2 | acFormatNumber }} </p>
+        <p><label >Tiempo Estimado de Inspección: </label>{{TEIPrioridad2}}</p>
+      </div>
+
+      <div class="descripcionCortaP2" *ngIf="descripcionCortaP2">
+        <h2>P2</h2>
+        <p><label>PI: </label>{{formatoPzaP2 | acFormatNumber }} </p>
+        <p><label >TEI: </label>{{TEIPrioridad2}}</p>
+      </div>
+
+    </div>
+
+    <div id="Prioridad3" [style.width]="porcentajeP3" *ngIf="mostrarP3">
+
+      <div class="descripcionLargaP3" *ngIf="descripcionLargaP3">
+        <h2>Prioridad 3</h2>
+        <p><label>Por Inspeccionar: </label>{{formatoPzaP3}}</p>
+        <p><label >Tiempo Estimado de Inspección: </label>{{TEIPrioridad3}}</p>
+      </div>
+
+      <div class="descripcionCortaP3" *ngIf="descripcionCortaP3">
+        <h2>P3</h2>
+        <p><label>PI: </label>{{formatoPzaP3}} </p>
+        <p><label >TEI: </label>{{TEIPrioridad3}}</p>
+      </div>
+
+    </div>
+  </div>
+
+<!-- Inspeccion por orden de compra -->
+ <div class="inspeccionPorFolio" >
+  <div class="ordenDeCompra" *ngIf="mostrarOrdenDeCompra" style="display: flex; box-sizing: border-box; padding-left: 40px;">
+    <div class="txtOC">
+    <div class="tipoTextoOC">Por Orden de Compra </div>
+    <div class="datoTextoOC">OC-{{ordenDeCompra}}</div>
+  </div>
+  </div>
+
+<!--Inspeccion por pedimento  -->
+  <div class="pedimento" *ngIf="mostrarPedimento" >
+  <div class="imgPedimento">
+    <img class="img" src='./assets/Images/pedimento.svg' style="width: 68px;height: 72px;"/>
+  </div>
+  <div class="txtPedimento">
+    <div class="tipoTexto">Por Pedimento </div>
+    <div class="datoTexto">{{pedimento}}</div>
+  </div>
+  </div>
+</div>

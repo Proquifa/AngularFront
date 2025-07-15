@@ -1,0 +1,268 @@
+@import "../../../../mixins.scss";
+@import "../../../../colors.scss";
+
+:host {
+  @include flexColumn;
+  height: 100%;
+  width: 100%;
+
+  .header {
+    @include flexRow;
+    justify-content: flex-start;
+    width: calc(100% - 50px);
+    margin: 0 25px 10px 25px;
+
+    div{
+      @include flexRow;
+      align-items: center;
+    }
+  }
+
+  .container {
+    width: calc(100% - 40px);
+    height: calc(100% - 41px);
+    margin: 0 20px 0 20px;
+    .buscar {
+      @include flexRow;
+      justify-content: space-between;
+      width: 100%;
+      align-items: center;
+      margin: 10px 0 20px 0;
+
+      .big {
+        padding: 5px 10px;
+      }
+
+      .input-cont {
+        width: 200px;
+        position: relative;
+
+        .lupa{
+          position: absolute;
+          width: 20px;
+          height: 20px;
+          top: 5px;
+          left: 5px;
+        }
+        .buscar-input {
+          border-radius: 25px;
+          width: 428px;
+          height: 25px;
+          border: 1px solid #BFC0C7;
+          padding-left: 25px;
+          outline: none;
+
+          &:focus {
+            border: 1px solid #333;
+          }
+        }
+      }
+    }
+
+    .tabla-clientes {
+      @include flexRow;
+      justify-content: flex-start;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      height: calc(100% - 61px);
+      width: 100%;
+      overflow-y: auto;
+
+      .filter-cont{
+        width: 100%;
+        border-top: 2px solid #424242;
+        border-bottom: 1px solid #C2C3C9;
+      }
+
+      .clientes-content {
+        @include flexRow;
+        justify-content: flex-start;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        height: 100%;
+        width: 100%;
+        .cliente {
+          text-align: center;
+          width: 25%;
+          height: 40%;
+          display: flex;
+          max-height: 425px;
+          min-height: 425px;
+          justify-content: center;
+          position: relative;
+          border-bottom: 1px solid #ECEEF0;
+          margin-top: 20px;
+
+          &:last-child .vertical-line{
+            opacity: 0;
+          }
+          img {
+            width: 60%;
+          }
+          .cliente-cont{
+            height: 100%;
+            width: calc(100% - 2px);
+          }
+          .vertical-line{
+            top: 5px;
+            right: 1px;
+            width: 2px;
+            height: 92%;
+            margin: 0 12px;
+            margin-left: 4px;
+            background-color: #ECEEF0;
+            &.final {
+              opacity: 0;
+            }
+          }
+          .horizontal-line {
+            position: absolute;
+            bottom: 1px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #ECEEF0;
+          }
+        }
+
+      }
+
+    }
+
+    .total{
+      @include flexColumn;
+      align-items: center;
+    }
+  }
+
+  .footer {
+    @include flexRow;
+    justify-content: space-between;
+    margin: 0 25px;
+
+    .engrane-menu {
+      position: relative;
+      overflow: hidden;
+      .opciones {
+        background-color: #333;
+        position: absolute;
+        bottom: -2px;
+        z-index: -1;
+        width: 29px;
+        align-items: center;
+
+        .opcion {
+          position: relative;
+          width: 20px;
+          height: 20px;
+          padding: 6px 0;
+
+          &:hover {
+            cursor: pointer;
+          }
+          &:hover  > .opcion-label {
+            display: block;
+          }
+          .opcion-label {
+            display: none;
+            min-width: 40px;
+            background-color: #333;
+            position: absolute;
+            left: 28px;
+            top: 5px;
+            color: #fff;
+            font-size: 12px;
+            text-align: center;
+            padding: 3px;
+            white-space: nowrap;
+          }
+        }
+        transition: all 500ms;
+      }
+
+      &:hover {
+        background-color: #333;
+        overflow: visible;
+        .opciones {
+          @include flexColumn;
+          bottom: 30px;
+          z-index: 1;
+        }
+        .engrane {
+          background-color: #333;
+        }
+      }
+
+      .engrane {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        z-index: 2;
+        background-color: #fff;
+      }
+    }
+  }
+}
+
+@media (min-width: 2175px) {
+  :host {
+    .container {
+
+      .buscar {
+        .input-cont{
+          width: 428px;
+          .buscar-input {
+            width: calc(100% - 26px);
+          }
+        }
+
+        .radio-cont{
+          margin-right: 128px;
+        }
+      }
+
+      .tabla-clientes {
+        .clientes-content{
+
+          .cliente {
+            width: 20%;
+            height: 40%;
+            &.second{
+              padding-left: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+
+@media (max-width: 1500px) {
+  :host {
+    .container {
+
+      .buscar {
+        .input-cont{
+          width: 200px !important;
+          .buscar-input {
+            width: calc(100% - 26px);
+          }
+        }
+      }
+
+      .tabla-clientes {
+        .clientes-content{
+
+          .cliente {
+            width: 33%;
+            height: 75%;
+            &.second{
+              padding-left: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+}

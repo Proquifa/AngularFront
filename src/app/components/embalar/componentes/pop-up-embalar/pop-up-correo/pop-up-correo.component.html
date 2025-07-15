@@ -1,0 +1,40 @@
+<div class="content" *ngIf="correo">
+  <!-- Inicio modal -->
+  <div id="pop-up-lote" class="modal" #pop>
+    <!-- Inicio modal-content -->
+    <div class="modal-content">
+      <header class="header" >
+        ENVIAR EVIDENCIA DE FACTURACIÓN
+      </header>
+      <div class="contenido">
+        <div style="width: 100%;height: 90%">
+          <div class="remitentes">
+            <label>Contacto: <span *ngFor="let item of correoContacto; let i = index" class="destinatarios">{{item}} </span></label>
+          </div>
+          <div class="remitentes" style="padding-left: 63px;">
+            <label>CC : <input #textCopia (blur)="cambioCopia(textCopia.value, 'CC')" value="{{cc}}"  type="text" class="copiaCorreo"></label>
+          </div>
+          <div class="remitentes" style="padding-left: 50px;">
+            <label>CCO : <input #textCopiaO (blur)="cambioCopia(textCopiaO.value, 'CCO')" value="{{destinatarioCopia}}"  type="text" class="copiaCorreo"></label>
+          </div>
+          <div  class="remitentes" style="padding-left: 20px;">
+            <label>ASUNTO : <span style="font-weight: 300"> Factura {{this.datos.factura}}</span></label>
+          </div>
+          <div class="comentarios">
+            <textarea placeholder=" Escribe Comentarios Adicionales" [(ngModel)]="comentario"></textarea>
+          </div>
+        </div>
+        <div style="width: 100%;height: 10%" class="btnDireccionPL">
+          <!--<div>
+            <a class="btnImprimir" (click)="cambiarVista()">CANCELAR</a>
+          </div>-->
+          <div>
+            <a class="btnImprimir" (click)="finalizar()">ACEPTAR</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--Fin modal-content-->
+  </div>
+  <!--Fin modal-->
+</div>

@@ -1,0 +1,90 @@
+<div *ngIf="cambiaCliente">
+    <div class="content-area">
+        <div class="area" style=" display: flex; border-bottom: 1px solid #D8D8D8;  min-width: 800px; border-top: 1px solid #D8D8D8;display: flex;position: relative">
+            <!--Inicio Div Daos C-->
+            <div id="bordeDatosC" class="datosC" style="display: flex; flex-direction:row; height: 80%; justify-content: space-between; width: 100%; ">
+                <label class="encabezadoCliente">CLIENTES</label>
+                <div style="padding-right: 10px; " ng-model="searchText" class="form-control">
+                    <div class="buscar">
+                        <div>
+                            <div class="lupa">
+                                <img src="assets/Images/lupa.svg" width="22px" height="22px" alt="buscar">
+                            </div>
+                            <input type="text" [ngModel]="searchTerm" (ngModelChange)="buscar($event)" class="buscar-input" placeholder="clientes" />
+                        </div>
+                    </div>
+                </div>
+                <!--Fin datos C-->
+            </div>
+        </div>
+    </div>
+    <div class="catalogoClientes">
+        <div class="container">
+            <div id="datosArreglo" class="tabla-clientes" *ngIf="muestraArregloClientes">
+                <div class="item" *ngFor="let datos of auxDataCurrent let i= index">
+                    <div style="display: flex;">
+                        <img style="height:106px; width: 106px; " src="./assets/Images/clientes/{{datos.idCliente}}.png" onerror="this.src='./assets/Images/clientes/default.png';">
+                    </div>
+                    <div id="datosCliente">
+                        <label class="numCliente ">{{'#'}}{{i+1}} <span class= "nombreClienteEstilo " > {{datos.nombreCliente}} </span></label>
+                        <label class="datosCllienteEstilo "> {{datos.cant}} {{'Piezas '}} · {{datos.numPL}}{{' Packing List'}}</label>
+                        <div style="display: flex; flex-direction: row;">
+                            <label class="p1 "> P1. {{datos.p1}} </label>
+                            <label class="p2 "> P2  {{datos.p2}} </label>
+                            <label class="p3 "> P3  {{datos.p3}} </label>
+                        </div>
+                    </div>
+                    <div class="imagenMas" (click)="cambiarVistaPorCliente(datos.nombreCliente,datos.idCliente)">
+                        <img type=image src="./assets/Images/Images/entrar.svg" />
+                    </div>
+                </div>
+            </div>
+            <div id="datosArreglo2" class="tabla-clientes" style=" padding-left: 55px; min-width: 900px; " *ngIf="!muestraArregloClientes">
+
+                <div class="item" *ngFor="let datos of ClientesSearched; let i = index" style=" padding-top: 25px;">
+                    <div style=" display: flex; ">
+                        <img style="height:106px; width: 106px; " src="./assets/Images/clientes/{{datos.idCliente}}.png">
+                    </div>
+                    <div id="datosClienteSearch" style=" width: 64%; display: flex; flex-direction: column; padding-left: 20px; justify-content: space-between; ">
+                        <label class="numCliente ">{{'#'}}{{i+1}} <span class= "nombreClienteEstilo " > {{datos.nombreCliente}} </span></label>
+                        <label class="datosCllienteEstilo "> {{datos.cant}} {{'Piezas '}} · {{datos.numPL}}{{' Packing List'}}</label>
+                        <div style="display: flex; flex-direction: row ;     padding-left: 10px;">
+                            <label class="p1 "> P1. {{datos.p1}} </label>
+                            <label class="p2 "> P2  {{datos.p2}} </label>
+                            <label class="p3 "> P3  {{datos.p3}} </label>
+                        </div>
+                    </div>
+                    <div style="width: 9%; display: flex; padding-bottom: 0px; ">
+                        <img style="padding-top: 70px; " type=image src="./assets/Images/Images/entrar.svg " (click)="cambiarVistaPorCliente(datos.nombreCliente,datos.idCliente)" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="detalle-rutas" *ngIf="!cambiaCliente">
+    <pn-trabajar-rutas-clientes-detalle style="width: 100%; height: 100%;  min-width: 2030px;" [Cliente]="enviaNombreCliente" [idCliente]="enviarIdCliente" (event)="cerrarDetalle($event)" (RegresarVistaClie)="regresarVistaClientes($event)"></pn-trabajar-rutas-clientes-detalle>
+</div>
+
+<footer class="footer " style="  border: none; border-top: solid;">
+    <div class="datosFooter " style="width: 100%;height: 100%; ">
+        <div class="Prioridad1 ">
+            <label class="p1 ">P1</label> Prioridad 1
+        </div>
+        <div class="Prioridad2 ">
+            <label class="p2 ">P2</label> Prioridad 2
+        </div>
+        <div class="Prioridad3 ">
+            <label class="p3 ">P3</label> Prioridad 3
+        </div>
+        <div class="Ambiente ">
+            <img class="img " src='./assets/Images/ambiente.svg' /> Ambiente
+        </div>
+        <div class="Congelación ">
+            <img class="img " src='./assets/Images/congelacion.svg' /> Congelación
+        </div>
+        <div class="Refrigeración ">
+            <img class="img " src='./assets/Images/refrigeracion.svg' /> Refrigeración
+        </div>
+    </div>
+</footer>

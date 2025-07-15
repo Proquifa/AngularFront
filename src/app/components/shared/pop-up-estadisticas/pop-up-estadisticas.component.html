@@ -1,0 +1,56 @@
+<img class="barra" src='./assets/Images/graficasBtn.svg' class="btnControlPrincipal" (click)="mostrarModal()"/>
+
+<div class="w3-container">
+<div id="id01" class="modal" [style.display]= "modal ? 'flex' : 'none' "  >
+ <div class="modal-content">
+   <header class="header">
+     ESTADÍSTICAS DEL USUARIO
+   </header>
+
+   <div class="contenido">
+      <div class="datos">
+
+          <div class="totalesHistoricos">
+            <label class="titulo">Totales Históricos</label>
+            <hr>
+            <div class="valores">
+              <p class="dato">{{totalesPorInspector.total_partidas | acFormatNumber}}</p>
+              <p class="campo">Partidas {{tipoTotales}}</p>
+            </div>
+
+            <div class="valores">
+              <p class="dato">{{totalesPorInspector.total_piezas | acFormatNumber }}  </p>
+              <p class="campo">Piezas {{tipoTotales}}</p>
+            </div>
+
+            <div class="valores" *ngIf="muestraHallazgos">
+              <p class="dato">{{totalesPorInspector.total_hallazgos | acFormatNumber }}</p>
+              <p class="campo">Hallazgos encontrados</p>
+            </div>
+          </div>
+
+          <div class="insPorPrioridad" *ngIf="activarGraficas">
+            <label class="titulo">{{tipo}} por prioridad</label>
+            <hr>
+             <div *ngIf = "donaData" [ngStyle]="{'width': '205px', 'height':'210px', 'max-width': '368px', 'padding-left': '13%'}" >
+               <pn-donut-chart [idGrafica]="tipoGrafica" [data]="donaChart" [tipoGrafica]="tipoGrafica" [height]= "'22%'"> </pn-donut-chart>
+             </div>
+             <div *ngIf = "!donaData" [ngStyle]="{'width': '205px', 'height':'210px', 'max-width': '368px', 'padding-left': '13%'}">
+               <!--<pn-dona [doughnutChartLabels]="donita.arrayLabel" [doughnutChartData]="donita.arrayValores" [tipoGrafica]="donita.tipoGrafica"></pn-dona>-->
+             </div>
+          </div>
+
+      </div>
+
+      <div class="graficaPuntos">
+        <pq-grafica-puntos [listaQuincena]= "totalesPorInspector.listaQuincena" [listaMes]= "totalesPorInspector.listaMes" [listaAnio] = "totalesPorInspector.listaAnio"></pq-grafica-puntos>
+      </div>
+
+   </div>
+
+   <footer class="footer">
+     <button type="button" class="btnAplicar"  (click)="cerrarModal()">CERRAR</button>
+   </footer>
+ </div>
+</div>
+</div>

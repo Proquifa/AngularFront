@@ -1,0 +1,41 @@
+<div class="pop-escanear">
+
+  <div id="id01" class="modal" #pop>
+    <div class="modal-content">
+
+
+      <header class="header">
+        <h1> PROQUIFA NET </h1>
+      </header>
+      <textarea *ngIf="!infoCodigoQr" #textarea id="codigo" (keydown.enter)="enter()" [(ngModel)]="codigoQr"
+      style="position: absolute; height: 400px; width: 615px; opacity: 0;  resize:none;" autofocus>
+               </textarea>
+      <div class="contenido">
+        <div class="datos">
+
+          <div class="alerta">
+            <img src="assets/Images/flecha_blanca_encirculoverde.svg" alt="" class="alert" />
+          </div>
+
+          <div class="alertaTxt">
+            <p class="dato" *ngIf="!infoCodigoQr">
+              Escanea el código de la Bolsa {{bolsa}} que se utilizara para almacenar este producto.
+            </p>
+            <p class="dato" *ngIf="infoCodigoQr" style = " width: 75%;">
+              Bolsa {{tipoBolsa}}
+              Código QR : {{codigoQr}}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <footer class="footer2">
+        <a type="submit" class="btnOk" (click)="cerrar()"  *ngIf="infoCodigoQr">
+          <label> OK </label>
+        </a>
+
+      </footer>
+    </div>
+  </div>
+
+</div>

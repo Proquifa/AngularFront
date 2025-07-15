@@ -1,0 +1,413 @@
+.btnLOTE {
+  width: 190px;
+  height: 35px;
+  font-family: 'Novecento';
+  font-weight: bold;
+  font-size: 21px;
+  color: #008894;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #008894;
+
+  img {
+    width: 30px;
+    height: 30px;
+  }
+}
+// ----- Estilos modal -------
+.modal {
+  z-index: 3;
+  display: flex;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.7);
+  font-family: 'Roboto', sans-serif;
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-content: center;
+  align-items: flex-start;
+  margin: auto;
+  top: 0%;
+  background-color: white;
+  position: relative;
+  padding: 0;
+  outline: 0;
+  //max-width: 1210px;
+  width: 1210px;
+  height: 680px;
+  //max-height: 680px;
+  color: black;
+  border: 1px solid #008894;
+  font-family: 'Roboto', sans-serif;
+  border-radius: 11px 11px 11px 11px;
+}
+
+.header {
+  width: 100%;
+  height: 55px;
+  color: white;
+  font-family: 'Novecento';
+  font-weight: bold;
+  font-size: 26px;
+  background: #008895;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px 10px 0px 0px;
+  // & > div{
+  //   width: 50%;
+  //   height: 100%;
+  //   justify-content: center;
+  //   align-items: center;
+  //   display: flex;
+  //   cursor: pointer;
+  // }
+}
+
+.contenido {
+  order: 1;
+  flex: 1 1 auto;
+  align-self: stretch;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  box-sizing: border-box;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.footer {
+
+  align-self: stretch;
+  display: flex;
+  justify-content: space-between;
+}
+
+.btnCancelar {
+  width: 329px;
+  height: 40px;
+  background: #008895;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  & > label{
+    font-family: 'Novecento';
+    font-size: 21px;
+    font-weight: bold;
+    color: white;
+    height: 100%;
+    padding-top: 4.7%;
+    cursor: pointer;
+  }
+}
+
+.btnAceptar {
+  width: 329px;
+  height: 40px;
+  background: #008895;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  & > label{
+    font-family: 'Novecento';
+    font-size: 21px;
+    font-weight: bold;
+    color: white;
+    height: 100%;
+    padding-top: 4.7%;
+    cursor: pointer;
+  }
+}
+// ----- Estilos lote -------
+.divLote {
+  width: 100%;
+  height: calc(100% - 70px);
+  padding-top: 30px;
+}
+
+.titulo {
+  font-family: 'Roboto';
+  font-weight: bold;
+  font-size: 18px;
+  color: #424242;
+  text-align: left;
+  box-sizing: border-box;
+  //border-bottom:1px solid #008895;
+}
+
+.datos {
+  width: 100%;
+  height: 250px;
+  display: flex;
+  flex-direction: row;
+  align-content: stretch;
+  align-items: stretch;
+  top: 60px;
+}
+
+.tituloDato {
+  font-family: 'Roboto';
+  font-weight: normal;
+  font-size: 18px;
+  color: #242424;
+  text-align: left;
+}
+
+.inf {
+
+  font-family: 'Roboto';
+  font-weight: lighter;
+  font-size: 16px;
+  color: #424242;
+  text-align: left;
+  outline-style: none;
+  height: 27px;
+  width: 370px;
+  border-radius: 1px;
+  border: 1px solid #ECEEF0;
+  /*  -webkit-appearance: none; */
+  padding: 1px 5px;
+}
+
+.arriba {
+  width: 100%;
+  padding-top: 15px;
+  display: flex;
+  flex-direction: row;
+
+}
+
+.abajo {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  padding-top: 61px;
+  align-items: center;
+
+}
+.Seguridad {
+  width: 50%;
+  padding-left: 20%;
+}
+
+
+.certificado {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.docto {
+  font-family: 'Roboto';
+  font-size: 14px;
+  font-weight: bold;
+  color: #424242;
+  padding-left: 10px;
+}
+/////////////////////////  checkbox    ////////////////
+.formulario .checkbox {
+  position: absolute;
+  top: 50%;
+  font-family: 'Roboto';
+  font-weight: bold;
+  font-size: 21px;
+  color: #424242;
+  text-align: left;
+  left: 0;
+  width: 100%;
+  display: flex;
+  box-sizing: border-box;
+}
+//
+
+/************PIAZA DESPACHABLE *****/
+.textArea {
+  width: 100%;
+  height: 115px;
+  /*  -webkit-appearance: none; */
+  outline-style: none;
+  border: none;
+  font-family: 'Roboto';
+  font-weight: lighter;
+  font-size: 18px;
+  color: #424242;
+  font-style: italic;
+  resize: none;
+}
+/****** CARGAR FOTO*****/
+.cargar {
+  display: block;
+}
+
+.archivos {
+  position: absolute;
+  top: 10px;
+  width: 500px;
+}
+
+.cargarMas {
+  border: 1px solid #DFDEE1;
+  width: 543px;
+  position: absolute;
+  height: 30px;
+  top: 58px;
+}
+
+.cargarMas label {
+  cursor: pointer;
+  margin: 0;
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  right: 0;
+  background: url("../../../../assets/Images/editar-pieza/cargarImg.svg") no-repeat center;
+}
+.labelCheck{
+  font-family: 'Roboto';
+  font-weight: bold;
+  font-size: 16px;
+  color: #008A98;
+  text-align: left;
+
+  & > span {
+    font-family: 'Roboto';
+    font-weight: 300;
+    font-size: 16px;
+    color: #008A98;
+    text-align: left;
+  }
+}
+
+.enfocarProducto{
+  position: relative;
+  height:51%;
+  & > video{
+    display:flex;
+    padding:15px 1px 8px;
+    width: 100%;
+    height: 100%;
+    box-sizing:border-box;
+    padding: 15px 0px 8px;
+    position: absolute;
+  }
+
+  & > label{
+    opacity: 0.3;
+    font-family: 'Novecento';
+    font-weight: bold;
+    font-size: 20px;
+    color: #008895;
+    text-align: center;
+    top: 50%;
+    position: absolute;
+    left: 29%;
+  }
+}
+
+.tiposEnfoque{
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  padding-top: 10px;
+
+  & > div{
+    display: flex;
+    width: 33%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    & > label{
+      font-family: 'Roboto';
+      font-weight: 300;
+      font-size: 12px;
+      color: #424242;
+      text-align: center;
+      padding-bottom: 5px;
+    }
+    & > div {
+      display: flex;
+      position: relative;
+      width: 100%;
+      height: 127px;
+      border: 1px solid #D8D9DD;
+      box-sizing: border-box;
+      & > canvas{
+        display: flex;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+      }
+      & > p{
+        opacity: 0.5;
+        font-family: 'Roboto';
+        font-weight: bold;
+        font-size: 9px;
+        color: #008894;
+        text-align: center;
+        top: 40%;
+        position: absolute;
+      }
+    }
+    & > img{
+      height: 29px;
+      width: 29px;
+      padding-top: 8px;
+      cursor: pointer;
+
+    }
+  }
+}
+
+pn-combo-flecha-verde{
+  cursor: pointer;
+}
+
+.botonera{
+  width: 100%;
+  height: 40px;
+  display: flex;
+  flex-direction: row;
+  font-family: 'Novecento';
+  font-weight: bold;
+  font-size: 21px;
+  color: #424242;
+  text-align: center;
+  border: #88868A;
+
+  & > div{
+    width: 50%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    cursor: pointer;
+    color: #FFFFFF;
+
+  }
+}
+/deep/  .fileInput {
+  & .content {
+   & > img {
+     display: none;
+   }
+  }
+}
+/************/

@@ -1,0 +1,40 @@
+<div class="barraProgreso">
+
+  <div class="barra">
+    <h1>PROGRESO DE {{evento| uppercase}}</h1>
+    <div class="datos">
+      <div class="mensaje">
+        <label class="mensajeBarra">{{mensaje}}</label>
+      </div>
+      <div class="hora">
+        <img src='./assets/Images/reloj.svg' style="margin-right: 10px;" class="imagenReloj"/>
+        <label>{{hora}}</label>
+      </div>
+    </div>
+
+
+    <div class="padreBarraProgreso" style="position: relative">
+      <div id="myProgress">
+        <div id="myBar" [style.width]="promedio" [style.background]="colorBarra">
+          <span class="tooltiptextleft" *ngIf="tooltiptextLeft">{{formatoPzasInspeccionadas}}</span>
+          <label class="textLeft" *ngIf="textLeft">{{formatoPzasInspeccionadas}}</label>
+        </div>
+
+        <div id="myBar2" [style.width]="restante">
+          <span class="tooltiptextRigth" *ngIf="toolTipRigth">{{formatoPzasRestantes}}</span>
+          <label class="textRigth" *ngIf="textRigth">{{formatoPzasRestantes}}</label>
+        </div>
+      </div>
+      <div class="datosBarra">
+        <div class="PzasIniciales">
+          0 Packing List
+        </div>
+        <div class="pzasTotales">
+          {{pzasTotales}} Packing List
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+

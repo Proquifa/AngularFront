@@ -1,0 +1,224 @@
+<pn-header-bc [opciones]="opcion"> </pn-header-bc>
+
+<div class="header-menu">
+  <div class="white_space"></div>
+  <div class="radiop">
+
+    <img class="animationZoom" (click)="Habilitar(0)" [src]="HabilidatosSelected ? 'assets/Images/radio_selected.svg ' : 'assets/Images/radio_unselected.svg' "
+      (click)="Habilitar(1)" style=" cursor:pointer" width="14px" height="14px" alt="radioInactive">
+    <p style="cursor: pointer; margin-left: 10px" (click)="Habilitar(1)">Habilitados</p>
+
+    <img class=" animationZoom" (click)="Habilitar(0)" [src]="!HabilidatosSelected ?'assets/Images/radio_selected.svg' : 'assets/Images/radio_unselected.svg' "
+      (click)="Habilitar(2)" style="margin-left: 40px; cursor:pointer" width="14px" height="14px" alt="radioInactive">
+    <p style="cursor: pointer; margin-left: 10px" (click)="Habilitar(0)">Deshabilitados</p>
+  </div>
+  <div class="espacio_bco"></div>
+  <button (click)="clickToExport()" class="exportar">
+    <img src='assets/Images/exportar.png' width="16px ">
+  </button>
+</div>
+
+<div class="container" style="height: calc(80vh);">
+  <div class="filter-container">
+    <filter-menu [filtros]="filtros" [filterSelected]="filterSelected" (sendValue)="getOptions($event)"></filter-menu>
+  </div>
+  <div class="buscar">
+    <div>
+      <div class="lupa">
+        <img src="assets/Images/lupa.svg" width="22px" height="22px" alt="buscar">
+      </div>
+      <input type="text" [ngModel]="searchTerm" (ngModelChange)="buscar($event)" class="buscar-input" placeholder="clientes" />
+    </div>
+  </div>
+  <hr>
+  <div *ngIf="clientesDisplay.length>0; else cargando">
+    <div *ngIf="isByCorporativo==false; else ByCorp" class="tabla-clientes ">
+      <div style="margin-top:5px;width: 100%; display: flex; flex-direction: row; flex-wrap: wrap; margin-left: 2.5%;">
+        <div *ngFor="let cliente of ClientesSearched; let i = index" style="display: flex; flex-wrap: wrap">
+          <div [ngClass]="'cliente' ">
+            <div class="flip-container" onclick="this.classList.toggle('hover');">
+              <div class="flipper">
+                <div class="front">
+                  <!-- front content -->
+                  <div class="headerContentFront">
+                  </div>
+                  <div class="centerPagination">
+                    <img class=" ima animationZoom" [src]="cliente.imagen !== null ? 'assets/Images/clientes/' + cliente.idCliente+'.png' : 'assets/Images/clientes/default.png'"
+                    />
+                    <!-- CLIENTES TIENEN IMAGEN PERO CAMPO EN BD SIGUE SIENDO NULO -->
+                    <!-- <img [src]="'assets/Images/clientes/' + cliente.idCliente+'.png'" onerror="this.src = 'assets/Images/clientes/default_select.png'" /> -->
+                  </div>
+                  <div class="footContent">
+                    <span *ngIf="cliente.imagen==null ">{{cliente.nombre}}</span>
+
+                  </div>
+                </div>
+                <div class="back">
+                  <!-- back content -->
+                  <div class="backContent">
+                    <div class="crossContent" style="width: 100%;display: flex; justify-content: flex-end; align-content: center;align-items: center;">
+                      <img src="assets/Images/tachecito.png " height="20px" width="20px" alt="Cerrar">
+                    </div>
+                    <div class="headerBackCartera CVerde">
+                      {{cliente.nombre}}
+
+                    </div>
+
+                    <hr>
+                    <div class="backCenterContent">
+
+                      <p style="width:100%;font-weight: 100">
+                        {{cliente.nivelIngreso}}
+                      </p>
+
+                      <p style="width:100%;font-weight: 100">
+                        {{cliente.rol}}&nbsp; {{cliente.sector}}
+                      </p>
+                      <p style="width:100%;font-weight: 100">
+                        {{cliente.industria}}
+                      </p>
+                      <p style="width:100%;font-weight: 100">
+                        {{cliente.ruta}}
+                      </p>
+                    </div>
+                  </div>
+                  <div class="footContentBack">
+                    <div class="iconsContent">
+                    </div>
+                  </div>
+                  <!--(click)="Entrar($event)"-->
+                  <a (click)="Entrar($event)">
+                    <div class="buttonCardContent">
+                      <div class="buttonCardBtn">
+                        <h4>Entrar</h4>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style="display: flex; justify-content: center;align-content: center;align-items: center; ">
+            <hr [ngClass]="'v' + (i !== 0 && (i+1) % carterasPorFila === 0  ?' final': '')" />
+          </div>
+          <hr [ngClass]="'h'"/>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #ByCorp>
+      <div class="tabla-clientes2 ">
+        <div *ngFor="let Grupo of clientesAgrupados; let i = index">
+          <h3 style="margin-bottom: 10px; margin-top: 30px;margin-left: 30px; color:#739ba5; ">
+            {{Grupo.nombreGrupo}}
+          </h3>
+          <div style="margin-top:10px;width: 100%; display: flex; flex-direction: row; flex-wrap: wrap;">
+            <div *ngFor="let cliente of Grupo.clientes; let i = index" [ngClass]="'cliente' + (i !== 0 && (i+1) % Grupo.clientes.length == 0  ?' final': '')">
+              <div>
+                <div class="flip-container" onclick="this.classList.toggle('hover');">
+                  <div class="flipper">
+                    <div class="front">
+                      <!-- front content -->
+                      <div class="headerContentFront">
+                      </div>
+                      <div class="centerPagination">
+
+                        <img class=" ima animationZoom" [src]="cliente.imagen !== null ? 'assets/Images/clientes/' + cliente.idCliente+'.png' : 'assets/Images/clientes/default_select.png'"
+                        />
+                        <!-- CLIENTES TIENEN IMAGEN PERO CAMPO EN BD SIGUE SIENDO NULO -->
+                        <!-- <img [src]="'assets/Images/clientes/' + cliente.idCliente+'.png'" onerror="this.src = 'assets/Images/clientes/default_select.png'" /> -->
+                      </div>
+                      <div class="footContent" style="border-bottom: 0.5px solid #ccc;">
+                        <p *ngIf="cliente.imagen==null">{{cliente.nombre}}</p>
+                      </div>
+                    </div>
+                    <div class="back">
+                      <!-- back content -->
+                      <div class="backContent">
+                        <div class="crossContent" style="width: 100%;display: flex; justify-content: flex-end; align-content: center;align-items: center; ">
+                          <img src="assets/Images/tachecito.png " height="20px" width="20px" alt="Cerrar">
+                        </div>
+                        <div class="headerBackCartera CVerde">
+                          {{cliente.nombre}}
+                        </div>
+                        <hr>
+                        <div class="backCenterContent">
+                          <p style="width:100%;font-weight: 100">
+                            {{cliente.rol}}&nbsp; {{cliente.sector}}
+                          </p>
+                          <p style="width:100%;font-weight: 100">
+                            {{cliente.industria}}
+                          </p>
+                          <p style="width:100%;font-weight: 100">
+                            {{cliente.ruta}}
+                          </p>
+                        </div>
+                      </div>
+                      <div class="footContentBack">
+                        <div class="iconsContent">
+                        </div>
+                      </div>
+                      <a (click)="Entrar($event)">
+                        <div class="buttonCardContent">
+                          <div class="buttonCardBtn">
+                            <h4>Entrar</h4>
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+  <ng-template #cargando>
+    <div class="tabla-clientes">
+    </div>
+  </ng-template>
+</div>
+<div class="footer" style="margin-top:10px">
+  <div style="width: 100%;height: 90%;display: flex; justify-content: space-between; align-content: center;align-items: center; ">
+    <div style="width: 10%; text-align: left;">
+      <div class="engrane-menu">
+        <div class="opciones">
+          <div class="opcion" (click)="redirectTo('/protected/catalogo/clientes')">
+            <img src="assets/Images/catalogo/objetivoscrecimiento.png" />
+            <p class="opcion-label">Objetivos de crecimiento</p>
+          </div>
+          <div class="opcion" (click)="redirectTo('/protected/catalogo/clientes')">
+            <img src="assets/Images/catalogo/nivelingresoblanco20x20px.png" />
+            <p class="opcion-label">Intervalos Nivel Ingreso</p>
+          </div>
+          <div class="opcion" (click)="redirectTo('/protected/catalogo/clientes')">
+            <img src="assets/Images/catalogo/corporativoblanco20x20px.png" />
+            <p class="opcion-label">Corporativos</p>
+          </div>
+          <div class="opcion" (click)="redirectTo('/protected/catalogo/clientes/carteras/')">
+            <img src="assets/Images/catalogo/carteras.png" />
+            <p class="opcion-label">Carteras</p>
+          </div>
+        </div>
+        <div style="width: 100%;height: 90%; display: flex;justify-content: center; align-content: center;align-items: center;">
+          <img class="engrane" src="assets/Images/catalogo/engraneGrisGrande.png" />
+        </div>
+      </div>
+    </div>
+    <div style="width: 20%;">
+      <div class="total" *ngIf="isByCorporativo==false; else ByCorpTot">
+        <p>Total: {{ClientesSearched.length}} Clientes</p>
+      </div>
+      <ng-template #ByCorpTot>
+        <div class="total">
+          <p>Total: {{clientesAgrupados.length}} Clientes</p>
+        </div>
+      </ng-template>
+    </div>
+    <div style="width: 20%;height: 90%; display: flex; justify-content: flex-end; align-content: center;align-items: center; ">
+      <div class="btn-agregar-cliente">Agregar</div>
+    </div>
+  </div>
+</div>

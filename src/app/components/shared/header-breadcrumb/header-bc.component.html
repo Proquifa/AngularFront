@@ -1,0 +1,17 @@
+<div class="header-bc">
+  <div class="home-cont">
+    <img (click)="backMenu()" class="home" height="22px" src="assets/Images/gestion/consultas/facturacion/recurso_190.svg" alt="">
+  </div>
+  <div *ngFor="let opcion of opciones; let i = index" class="breadcrumb">
+    <div class="divider"></div>
+    <div *ngIf="!opcion.urlImg || opcion.urlImg === ''" class="link-cont">
+      <div *ngIf="i !== opciones.length-1" class="link" (click)="goTo(opcion.path)">{{opcion.label}}</div>
+      <div *ngIf="i === opciones.length-1" class="link last">{{opcion.label}}</div>
+    </div>
+    <div *ngIf="opcion.urlImg && opcion.urlImg !== ''" class="link-cont">
+      <img *ngIf="i !== opciones.length-1" (click)="goTo(opcion.path)" class="link" height="22px" [src]="opcion.urlImg" alt="{{opcion.label}}">
+      <img *ngIf="i === opciones.length-1" class="link" height="22px" [src]="opcion.urlImg" alt="{{opcion.label}}">
+    </div>
+
+  </div>
+</div>

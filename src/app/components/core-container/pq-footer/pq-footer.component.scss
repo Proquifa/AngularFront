@@ -1,0 +1,77 @@
+/*footer*/
+@import "../../../../colors";
+
+.footer
+{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    flex-grow:1;
+    flex-basis:100%;
+
+    border: 1px solid #E0E0E0;
+    }
+
+.flechaFooter
+{
+  display: flex;
+   order: 0;
+   flex: 1 1 auto;
+   align-self: auto;
+   text-align: left;
+   position: relative;
+   padding-left: 11px;
+   justify-content: flex-end;
+   align-content: flex-end;
+   align-items: center;
+   }
+
+.logoRyndem
+{
+   order: 1;
+   flex: 1 1 auto;
+   align-self: auto;
+   text-align: left;
+   justify-content: center;
+   align-items: center;
+   width: 97px;
+   height: 25px;
+   }
+
+#logoRyndem{
+  width: 97px;
+  height: 25px;
+}
+
+.flechaIzqFooter,.flechaDerFooter{
+  width: 15px;
+  height: 18px;
+  //border: 2px solid grey;
+  position: absolute;
+  left: 11px;
+  top: -10px;
+  z-index: auto;
+  cursor: pointer;
+}
+
+
+.flechaDerFooter{
+  visibility: visible;
+}
+
+.flechaIzqFooter{
+  visibility: visible;
+  }
+
+ .flechaDerFooter:focus{
+ visibility: visible;
+ z-index: -1;
+}
+
+.flechaIzqFooter:focus{
+  visibility: visible;
+  z-index: -1;
+}

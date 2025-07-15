@@ -1,0 +1,10 @@
+@import "../../../../mixins";
+@import "../../../../colors";
+
+:host{
+    @include flexRow;
+
+    &>div{
+        margin:5px 2px;
+    }
+}

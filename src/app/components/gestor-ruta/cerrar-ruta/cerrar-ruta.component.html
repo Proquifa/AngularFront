@@ -1,0 +1,449 @@
+<div class="padre">
+  <div style="position: relative; display: flex; background: #E6E6E6;" class="aux">
+    <aside [ngClass]="classAsideMenu">
+      <div class="articulo" *ngIf="!ocultarAcor">
+        <pn-menu-seccion  [items]="itemsMenu"  style="width: 100%" *ngIf="activeMenu"></pn-menu-seccion>
+      </div>
+    </aside>
+    <div style="position: absolute; position: absolute; padding-top: 352px;right: 0">
+      <img class="img" src='./assets/Images/flecha_cuadro.svg' *ngIf="!ocultarAcor" (click)="mostarOcultarAcordeon()" />
+      <img class="img" src='./assets/Images/flecha_mostrar.svg' *ngIf="ocultarAcor" (click)="mostarOcultarAcordeon()" />
+    </div>
+
+  </div>
+  <div class="area" style="width:100%; height:100%;overflow: scroll;">
+  <div class="todo" *ngIf="show_mapa">
+    <div class="linea">
+      <img height="20px" width="20px" style="margin-top: 2px; " src="./assets/Images/FlechaIzqVerdee.svg"
+        (click)="regresar()" />
+      <div><label>Cerrar Ruta </label></div>
+    </div>
+    <div class="detalleMensajero">
+      <div class="nombre">{{nombreMensajero}}</div>
+      <mat-divider></mat-divider>
+      <div class="zona">
+        Total de Zonas <br />
+        <span> {{lstZonas.length}} </span>
+      </div>
+      <mat-divider></mat-divider>
+      <div class="clientes">
+        Total de Clientes <br />
+        <span> {{lstClientes.length}}</span> <img src="./assets/login/usuario.svg" />
+      </div>
+      <mat-divider></mat-divider>
+      <div class="estrellas">
+        Clasificacion {{totEstrellas}}/5 <br />
+        <pn-calificacion-estrella style="justify-content: center;" (eventCambio)="recibirTotEstrellas($event)"></pn-calificacion-estrella>
+      </div>
+      <mat-divider></mat-divider>
+      <div class="eficacia">
+        Eficacia <br />
+        <span> 80%</span>
+      </div>
+      <mat-divider></mat-divider>
+      <div class="clientesNO">
+        Clientes No alcanzados <br />
+        <span> {{noEntregados.length}} </span> <img src="./assets/login/usuario.svg" />
+      </div>
+      <mat-divider></mat-divider>
+      <div class="tiempoRuta">
+        Tiempo Total de Ruta <br /><span> {{horaFin}}:{{minFin}} hrs</span>
+      </div>
+    </div>
+    <div class="contenedorMapa">
+      <div class="rutaDefinida">
+        <div class="contenedor">
+          <div class="ruta">
+            <div class="bolitaColor" style="background: #F8E71C;margin-top: 10px;"></div>
+            <div class="texto">
+              Ruta Proyectada <br /><span> Tiempo Total Real:6 hrs 45 min</span>
+            </div>
+          </div>
+          <mat-divider style="background: rgb(22, 22, 23)"></mat-divider>
+
+          <div class="detalle">
+            <span> Origen:</span> José María Morelos 164, Niño Jesús, 14080
+            <br />Ciudad de México, CDMX <br />
+            <img src="./assets/Images/Images/reloj.svg" height="14px" />
+            <span>TET: </span> 25min
+          </div>
+
+          <mat-divider></mat-divider>
+          <div class="contenedorDetalle">
+            <div class="detalles" *ngFor="let item of r1; let i = index">
+              <div class="uno"># {{ i + 1 }} ·</div>
+              <div class="dos">
+                <div class="nombreCliente">{{ item.cliente }}</div>
+                <div class="zona">
+                  <img src="./assets/Images/Images/pines/pin_proquifa.png" height="14px" />
+                  Zona: {{ item.zona }}
+                </div>
+                <div class="direccion">{{ item.calle }}</div>
+                <div class="tiempo">
+                  <img src="./assets/Images/Images/reloj.svg" height="14px" />
+                  TEE: 20 min · TET: {{ item.TET }} min <br />
+                </div>
+                <div class="eventos">
+                  {{ item.evento }} Eventos:
+                  <span style=" color: #C1272D; font: 12px; ">P1</span>: {{item.p1}}
+                  <span style=" color: #FBB03B; font: 12px; ">P2</span>: {{item.p2}}
+                  <span style=" color: #39B54A; font: 12px; ">P3</span>: {{item.p3}}
+                </div>
+                <div class="monto">
+                  <div>Monto: ${{ item.monto }}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <mat-divider></mat-divider>
+
+        <div class="totales">
+          <span> Totales: {{ totales1 }}</span>
+        </div>
+      </div>
+      <mat-divider [vertical]="true" style=" height: 93%;"></mat-divider>
+
+      <div class="rutaTomada">
+        <div class="contenedor" style="position: relative">
+          <div class="ruta">
+            <div class="bolitaColor" style="background: #0098DA ;margin-top: 10px;"></div>
+
+            <div class="texto">
+              Ruta Realizada <br /><span> Tiempo Total Real:{{horaFin}} hrs {{minFin}} min</span>
+            </div>
+
+            <div class="imagens" (click)="justificacion()" style="position: absolute; right: 15px">
+              <img [src]="
+                  showJustify
+                    ? './assets/Images/Images/comentarios_gris.svg'
+                    : './assets/Images/Images/comentarios_verde.svg'
+                "
+                height="20px" />
+            </div>
+          </div>
+          <mat-divider style="background: rgb(22, 22, 23)"></mat-divider>
+          <div class="detalle">
+            <span> Origen:</span> José María Morelos 164, Niño Jesús, 14080
+            <br />Ciudad de México, CDMX <br />
+            <img src="./assets/Images/Images/reloj.svg" height="14px" />
+            <span>TTT: </span> {{minTTTString}}
+          </div>
+
+          <mat-divider></mat-divider>
+          <div class="contenedorDetalle">
+            <div class="detalles" *ngFor="let item of r2; let i = index">
+              <div class="uno">#{{ i + 1 }}·</div>
+              <div class="dos">
+                <div class="nombreCliente">{{ item.cliente }}</div>
+                <div class="zona">
+                  <img src="./assets/Images/Images/pines/pin_proquifa.png" height="14px" />
+                  Zona: {{ item.zona }}
+                </div>
+                <div class="direccion">{{ item.calle }}</div>
+                <div class="tiempo">
+                  <img src="./assets/Images/Images/reloj.svg" height="14px" />
+                  TTE: {{ arrayTiempos[i].TTE }} min · TTT: {{ arrayTiempos[i].TTT }} min <br />
+                </div>
+                <div class="eventos">
+                  {{ item.eventos }} Eventos:
+                  <span style=" color: #C1272D; font: 12px; ">P1</span>: {{item.p1}}
+                  <span style=" color: #FBB03B; font: 12px; ">P2</span>: {{item.p2}}
+                  <span style=" color: #39B54A; font: 12px; ">P3</span>: {{item.p3}}
+                </div>
+                <div class="monto">
+                  <div>Monto: ${{ item.monto }}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <mat-divider></mat-divider>
+
+        <div class="totales">
+          <span> Totales: {{ totales2 }} </span>
+        </div>
+      </div>
+      <div class="justificacion" *ngIf="showJustify">
+        <div class="titulo">Justificación de resultados en tiempo de Ruta</div>
+        <div class="texto">
+          <textarea style="height: 100%; width: 100%;" [(ngModel)]="justificacionV"></textarea>
+        </div>
+        <div class="btn"><button mat-flat-button>OK</button></div>
+      </div>
+
+      <!--<div class="botonHamburgesa">
+        <img [src]="
+            checksRutas
+              ? './assets/Images/hamburguesa.svg'
+              : './assets/Images/hamburguesa_verde.svg'
+          "
+          height="20px" (click)="checkRutas()" />
+      </div>-->
+
+      <div class="checkRutas" *ngIf="checksRutas">
+        <div class=" texto">
+          <div>
+            <div class="info">
+              <div class="bolitaColor" style="background: #C1272D ;"></div>
+              <label>Ruta no apropiada</label>
+            </div>
+            <div class="cheks">
+              <mat-checkbox value="no_apropiada"> </mat-checkbox>
+            </div>
+          </div>
+          <mat-divider></mat-divider>
+          <div>
+            <div class="info">
+              <div class="bolitaColor" style="background: #39B54A ;"></div>
+              <label> Ruta apropiada</label>
+            </div>
+            <div class="cheks">
+              <mat-checkbox value="apropiada"> </mat-checkbox>
+            </div>
+          </div>
+          <mat-divider></mat-divider>
+          <div>
+            <div class="info">
+              <div class="bolitaColor" style="background: #F8E71C ;"></div>
+              <label> Ruta Proyectada</label>
+            </div>
+            <div class="cheks">
+              <mat-checkbox value="proyectada"> </mat-checkbox>
+            </div>
+          </div>
+          <mat-divider></mat-divider>
+          <div>
+            <div class="info">
+              <div class="bolitaColor" style="background: #0098DA ;"></div>
+              <label>Ruta Realizada</label>
+            </div>
+            <div class="cheks">
+              <mat-checkbox value="realizada"> </mat-checkbox>
+            </div>
+          </div>
+          <mat-divider></mat-divider>
+        </div>
+      </div>
+
+      <div class="mapa" *ngIf="refresh_mapa">
+        <ngui-map zoom="10" center="19.2856554, -99.1595433" [streetViewControl]="false" [fullscreenControl]="false" [mapTypeControl]="false" *ngIf="refresh_mapa">
+          <!-- Maker Proquifa -->
+
+          <marker [position]="_proquifa" [icon]="{ url:_pin[0],  size: [40,50], scaledSize: [40,50] }"
+                  (click)="info1($event)">
+            <info-window id="iw2">
+              <div class="cuadro">
+                <div class="imagen"><img src="assets/login/logo.svg" width="66px">
+                </div>
+                <div class="texto">
+                  <span> PROQUIFA </span>
+                  <br>
+                  {{r1[0].mensajero}}
+                  <br>
+                  {{ lstClientes.length }} Clientes
+                 <!-- <br>
+                  Tiempo de recorrido:-->
+                </div>
+              </div>
+            </info-window>
+          </marker>
+
+          <!-- RUTA 1 -->
+          <marker *ngFor="let marker of positions let i = index;" (click)="info($event,marker[1],1)"
+                  [position]="marker[0]"
+                  [label]="{ color: '#ffff', fontWeight: 'bold',fontSize:'22px',text: (marker[1]+1).toString() }"
+                  [icon]="{ url: _pin2[1],  size: [40,50], scaledSize: [40,50] }">
+            <info-window id="iw" (closeclick)="infoWindows($event,i)">
+              <div class="cuadro">
+                <div class="imagen">
+                  <img *ngIf="idCliente != 0" src="assets/Images/clientes/{{idCliente}}_grande.png"
+                       onError="this.src = 'assets/login/logo.svg'" width="66px">
+                  <img *ngIf="idCliente == 0" src="assets/login/logo.svg" width="66px">
+                </div>
+                <div class="texto">
+                  <span>{{ nombreC }} </span>
+                  <br>
+                  Zona {{ zonaC }} : {{ direccionC }}
+                  <br>
+                  <!--{{ totaEventosC }} - Eventos: {{ eventosC }}-->
+                  <br>
+                  Monto: ${{ montoC }}
+                </div>
+              </div>
+            </info-window>
+          </marker>
+          <polyline [path]="path" [geodesic]="true" [strokeColor]="'yellow'" [strokeWeight]="8"></polyline>
+
+          <!-- RUTA 2 -->
+          <marker *ngFor="let marker of positions2 let i = index;" (click)="info($event,marker[1],2)"
+                  [position]="marker[0]"
+                  [label]="{ color: '#ffff', fontWeight: 'bold',fontSize:'22px',text: (marker[1]+1).toString() }"
+                  [icon]="{ url: _pin[1],  size: [40,50], scaledSize: [40,50] }">
+            <info-window id="iw" (closeclick)="infoWindows($event,i)">
+              <div class="cuadro">
+                <div class="imagen">
+                  <img *ngIf="idCliente != 0" src="assets/Images/clientes/{{idCliente}}_grande.png"
+                       onError="this.src = 'assets/login/logo.svg'" width="66px">
+                  <img *ngIf="idCliente == 0" src="assets/login/logo.svg" width="66px">
+                </div>
+                <div class="texto">
+                  <span>{{ nombreC }} </span>
+                  <br>
+                  Zona {{ zonaC }} : {{ direccionC }}
+                  <br>
+                  <!--{{ totaEventosC }} - Eventos: {{ eventosC }}-->
+                  <br>
+                  Monto: ${{ montoC }}
+                </div>
+              </div>
+            </info-window>
+          </marker>
+          <polyline [path]="path2" [geodesic]="true" [strokeColor]="'#0098DA'" [strokeWeight]="8"></polyline>
+
+          <map-polygon [paths]="CUERNAVACA" [strokeColor]="'#4F47A0'" [fillColor]="'#7368EF'"></map-polygon>
+          <map-polygon [paths]="TOLUCA" [strokeColor]="'#0838DD'" [fillColor]="'#0838DD'"></map-polygon>
+          <map-polygon [paths]="CDMX" [strokeColor]="'#900280'" [fillColor]="'#900280'"></map-polygon>
+          <map-polygon [paths]="PUEBLA" [strokeColor]="'#FC187B'" [fillColor]="'#FC187B'"></map-polygon>
+        </ngui-map>
+
+        <div class="boton1" [style.pointerEvents]="activarBtnFin?'auto':'none'" (click)="finalizarRuta()">
+          <div style="width: 63%;"></div>
+          <button mat-flat-button [style.background]="activarBtnFin?'#008895' : '#ECEEF0'" style="height: 30px;width: 170px;font-size: 22px">Aceptar</button>
+        </div>
+      </div>
+    </div>
+
+    <mat-divider style="background: rgb(22, 22, 23)"></mat-divider>
+
+    <div class="notaciones">
+      <div class="alineacion">
+        <span style="font-weight: bold; color: #C1272D; font: 12px; ">P1</span><label>:Prioridad 1</label>
+        <div></div>
+
+        <span style="font-weight: bold; color: #FBB03B; font: 12px; ">P2</span><label>:Prioridad 2</label>
+        <div></div>
+
+        <span style="font-weight: bold; color: #39B54A; font: 12px ;  ">P3</span>
+        <label>:Prioridad 3</label>
+        <div></div>
+
+        <img src="./assets/Images/Images/ubicación.svg" width="10px" height="10px" />
+        <label>:Ubicación</label>
+        <div></div>
+
+        <span style="font-weight: bold; font: 12px;">TEE</span><label>: Tiempo Estimado de Evento</label>
+        <div></div>
+
+        <span style="font-weight: bold; font: 12px;  ">TET</span><label>:Tiempo Estimado de Traslado</label>
+        <div></div>
+        <span style="font-weight: bold; font: 12px; ">TRE</span><label>:Tiempo Real Estancia</label>
+        <div></div>
+        <span style="font-weight: bold; font: 12px; ">TRT</span><label>:Tiempo Real Traslado</label>
+        <div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Primera vista -->
+  <div class="grafica" *ngIf="show_grafica">
+    <div class="linea"><label>Cerrar Ruta </label></div>
+
+    <div class="contenidoInicio">
+      <div class="seccionMensajeros">
+        <div>MENSAJEROS</div>
+        <div class="buscar">
+          <div>
+            <div class="lupa">
+              <img src="./assets/Images/lupa.svg" width="22px" height="22px" alt="buscar" />
+            </div>
+            <!-- <input type="text" [ngModel]="searchMensajero" class="buscar-input" placeholder="Nombre" /> -->
+          </div>
+        </div>
+        <div class="listaMensajeros">
+          <div class="itemMensajero" *ngFor="let item of rutaMensajeros; let i = index"  (click)="mostrarGraficas(i)">
+            <div># {{ i + 1}}</div>
+            <div>
+              <div>{{item.mensajero}}</div> <!-- <div>Nombre Mensajero</div>-->
+              <div><b>{{item.totalZonas}}</b> - <b *ngIf="item.totalZonas > 1"> Zonas</b> <b *ngIf="item.totalZonas == 1"> Zona</b> · <b>{{item.totalClientes}}</b> <b *ngIf="item.totalClientes > 1"> Clientes</b> <b *ngIf="item.totalClientes == 1"> Cliente</b> </div> <!--<div>CDMX - Norte · 4 Clientes</div>-->
+              <div><div *ngIf="Eficacion">Eficacia 80% ·</div> <span>Clientes no alcanzados {{item.totalNoEntregado}}</span></div>
+            </div>
+            <div>
+              <img height="20px" src="./assets/Images/FlechaDerVerdee.svg" (click)="regresar()">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="graficasInicio">
+        <div  class="graficas">
+          <div class="padreCliente_Prioridades">
+            <div class="graficasGrande">
+              <div class="tituloGrafica">
+                MENSAJEROS
+              </div>
+              <div id="donaCliente" style="width: 100%; height: 100%; display: flex;">
+                <pn-donut-chart  *ngIf="activarMensajero" [data]="dataMensajero" [tipoGrafica]="tipoGraficaMensajeros"[height]="'auto'"></pn-donut-chart>
+              </div>
+            </div>
+            <div class="GrafiPeque">
+              <div class="graficaPequeña">
+                <div class="tituloGrafica">
+                  PRIORIDADES
+                </div>
+                <div id="donaPrioridades" style="width: 100%; height: 100%; display: flex;">
+                  <pn-donut-chart  *ngIf="activarPrioridades" [data]="dataPrioridades" [tipoGrafica]="tipoGraficaPrioridades"[height]="'auto'"></pn-donut-chart>
+                </div>
+              </div>
+              <div class="graficaPequeña">
+                <div class="tituloGrafica">
+                  PRIORIDAD 1
+                </div>
+                <div id="donaPrioridades" style="width: 100%; height: 100%; display: flex;">
+                  <pn-donut-chart  *ngIf="activarPrioridad1" [data]="dataPrioridad1" [tipoGrafica]="tipoGraficaPrioridad1"[height]="'auto'"></pn-donut-chart>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- fin grafica clientes y productos -->
+          <div class="padreCliente_Prioridades">
+            <div class="graficasGrande">
+              <div class="tituloGrafica">
+                CLIENTES
+              </div>
+              <div id="donaCliente" style="width: 100%; height: 100%; display: flex;">
+                <pn-donut-chart  *ngIf="activarClientes" [data]="dataClientes" [tipoGrafica]="tipoGraficaClientes"[height]="'auto'"></pn-donut-chart>
+              </div>
+            </div>
+            <div class="GrafiPeque">
+              <div class="graficaPequeña">
+                <div class="tituloGrafica">
+                  PRIORIDAD 2
+                </div>
+                <div id="donaPrioridades" style="width: 100%; height: 100%; display: flex;">
+                  <pn-donut-chart  *ngIf="activarPrioridad2" [data]="dataPrioridad2" [tipoGrafica]="tipoGraficaPrioridad2"[height]="'auto'"></pn-donut-chart>
+                </div>
+              </div>
+              <div class="graficaPequeña">
+                <div class="tituloGrafica">
+                  PRIORIDAD 3
+                </div>
+                <div id="donaPrioridades" style="width: 100%; height: 100%; display: flex;">
+                  <pn-donut-chart  *ngIf="activarPrioridad3" [data]="dataPrioridad3" [tipoGrafica]="tipoGraficaPrioridad3"[height]="'auto'"></pn-donut-chart>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- fin div graficas -->
+        </div>
+      </div>
+    </div>
+
+    <!--
+      <div class="boton">
+        <div style=" width: 80%; height: 100%;"></div>
+        <div><button mat-flat-button (click)="mostrarGraficas()">INGRESAR</button></div>
+      </div>
+    -->
+  </div>
+</div>
+</div>

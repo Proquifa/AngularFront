@@ -1,0 +1,135 @@
+<div>
+  <div (click)="backMenu()">
+    <img height="22px" src="assets/Images/gestion/consultas/facturacion/recurso_190.svg" alt="">
+  </div>
+  |
+  <div>CONSULTA DE ASISTENCIA</div>
+</div>
+<div>
+  <div [ngClass]="classPanel">
+    <div class="filtroHeader">
+      <div class="abrir" (click)="openPanel()">
+        <img *ngIf="hiddenClose" width="15px" src="assets/Images/gestion/consultas/facturacion/recurso_193.svg" alt="">
+        <img *ngIf="!hiddenClose" width="15px" src="assets/Images/gestion/consultas/facturacion/recurso_188.svg" alt="">
+      </div>
+      <div *ngIf="hiddenClose">
+        CERRAR
+        <div class="cerrar" (click)="closePanel()">
+          <img height="20px" width="20px" src="assets/Images/gestion/consultas/facturacion/recurso_189.svg" alt="">
+        </div>
+      </div>
+    </div>
+
+    <div class="filtros">
+
+      <div *ngIf="avanzada" class="divAvanzada">
+        <!--  Si  ya hay datos dentro del compenente se manda el < Gestion-filter/> con los datos
+            Y la propiedad IsLoader como verdadera
+          -->
+        <div *ngIf="isThereData;else loader">
+          <gestion-filter [ElementsDropList]="Elements" (valueFilter)="mostrarDatos($event)" [IsImage]="IsImage" [IsDate]="IsDate"
+            [IsLoader]="isThereData" [Clear]="Clear" style="width: 100%"></gestion-filter>
+        </div>
+
+        <!--  Si  no hay datos dentro del compenente se manda el < Gestion-filter/> con solo
+            una propiedad
+            IsLoader como Falsa-->
+        <ng-template #loader>
+          <gestion-filter [IsLoader]="isThereData" [Clear]="Clear"></gestion-filter>
+        </ng-template>
+      </div>
+
+    </div>
+  </div>
+
+  <div [ngClass]="'resultados' + (!showGraphic ? ' visible' : '')" [style.width]="hiddenClose ? 'calc(100% - 321px)': 'calc(100% - 50px)'"  *ngIf="!showGraphic">
+    <div>
+      <div>
+        RESULTADOS
+      </div>
+      <div>
+        <img [style.margin-right]="'15px'" height="20px" width="20px" src="assets/Images/gestion/consultas/cobros/graficaminigris.svg"
+          alt="" (click)="showGraphicPanel()">
+        <img height="20px" width="20px" src="assets/Images/exportar.svg" alt="" (click)="download()">
+      </div>
+    </div>
+    <div>
+      <div>
+        <div [style.min-width]="'50px'">#</div>
+        <div [style.min-width]="'100px'">Colaborador</div>
+        <div [style.min-width]="'100px'">Fecha</div>
+        <div [style.min-width]="'80px'">Hora</div>
+        <div [style.min-width]="'140px'">Tipo checada</div>
+        <div [style.min-width]="'100px'">Empresa</div>
+        <div [style.min-width]="'80px'">Área</div>
+        <div [style.min-width]="'130px'">Departamento</div>
+        <div [style.min-width]="'130px'">Categoría</div>
+        <div [style.min-width]="'120px'">Incidencia</div>
+      </div>
+      <div>
+        <div *ngFor="let item of lstAsistencias; let i = index">
+          <div [style.min-width]="'50px'">{{i + 1}}</div>
+          <div [style.min-width]="'100px'">{{item.nombreCorto}}</div>
+          <div [style.min-width]="'100px'">{{item.fecha | dateFormatSlash}}</div>
+          <div [style.min-width]="'80px'">
+            <span *ngIf="item.hora != null">{{item.hora}}</span>
+            <span *ngIf="item.hora == null">NA</span>
+          </div>
+          <div [style.min-width]="'140px'">
+            <span *ngIf="item.tipoChecada != null">{{item.tipoChecada}}</span>
+            <span *ngIf="item.tipoChecada == null">NA</span>
+          </div>
+          <div [style.min-width]="'100px'">
+            <span *ngIf="item.localidad == 'DISTRITO FEDERAL'">PROQUIFA</span>
+            <span *ngIf="item.localidad == 'CUERNAVACA'">RYNDEM</span>
+            <span *ngIf="item.localidad == 'GUADALAJARA'">GUADALAJARA</span>
+          </div>
+          <div [style.min-width]="'80px'">
+            <!-- {{item.area}} -->
+            <div>
+              <img *ngIf="item.area == 'OPERACIONES'" height="30px" src="assets/Images/gestion/consultas/asistencias/asis_flechas.svg"
+                matTooltip="{{item.area}}" />
+              <img *ngIf="item.area == 'SERVICIOS'" height="30px" src="assets/Images/gestion/consultas/asistencias/asis_mas.svg" matTooltip="{{item.area}}"
+              />
+              <img *ngIf="item.area == 'COMERCIALIZACION'" height="30px" src="assets/Images/gestion/consultas/asistencias/asis_box.svg"
+                matTooltip="{{item.area}}" />
+              <img *ngIf="item.area == 'FINANZAS'" height="30px" src="assets/Images/gestion/consultas/asistencias/asis_cal.svg" matTooltip="{{item.area}}"
+              />
+            </div>
+          </div>
+          <div [style.min-width]="'130px'">{{item.depto}}</div>
+          <div [style.min-width]="'130px'">{{item.categoria}}</div>
+          <div [style.min-width]="'120px'">
+            <div>
+              <div [ngClass]="item.incidencia == 'NINGUNA'?'circleGreen':item.incidencia == 'RETARDO' || item.incidencia == 'FUERA DE TIEMPO'?'circleYellow':'circleRed'"></div>
+              <span *ngIf="item.incidencia != 'NINGUNA' && item.incidencia != 'FALTA'">{{item.incidencia}}</span>
+              <span *ngIf="item.incidencia == 'FALTA'">FALTÓ</span>
+              <span *ngIf="item.incidencia == 'NINGUNA'">ASISTIÓ</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="total">
+      <p>Total:
+        <span>{{lstAsistencias.length}}</span>
+        <span>Registros</span>
+      </p>
+    </div>
+  </div>
+  <div style="position: relative;" [style.width]="hiddenClose ? 'calc(100% - 321px)': 'calc(100% - 50px)'" *ngIf="showGraphic">
+    <div [ngClass]="'graphics-panel-container' + (showGraphic ? ' visible' : '')" [style.top]="topGraphics">
+      <div class="graphics-panel-option">
+        <img src="assets/Images/gestion/images/tablaminigris.svg" (click)="showTablePanel()">
+      </div>
+      <div class="graphics-container" *ngIf="refrescar">
+        <div class="donut-container" *ngFor="let item of graficas; let i = index">
+          <p clasfgh jºº= b s="donut-title">{{item}}</p>
+          <div id="asistencia-canvas" class="canvas-container">
+            <pn-donut-chart [idGrafica]="i+'asis'" [data]="graficasValores[i]" [tipoGrafica]="'General'"></pn-donut-chart>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

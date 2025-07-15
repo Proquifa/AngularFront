@@ -1,0 +1,129 @@
+:host{
+  user-select: none;
+  height: calc(100vh - 130px);
+  pn-header-bc{
+    user-select: none;
+    display: flex;
+    width: 100%;
+    height: 41px;
+  }
+  .trabContainer{
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 170px);
+    padding: 0px 20px;
+    & > .trabContainerHeader{
+      display: flex;
+      justify-content: space-between;
+      height: 90px;
+      align-items: center;
+      & > .trabContainerHeaderTitle{
+        display: flex;
+        font-size: 24px;
+        color: #424242;
+        font-family: Novecento;
+        font-weight: 700;
+      }
+      & > .trabContainerHeaderSearch{
+        display: flex;
+        min-width: 235px;
+        width: 430px;
+        padding: 0px 10px;
+        & > app-pn-search{
+          width: 100%;
+        }
+      }
+      & > .trabContainerHeaderActions{
+        display: flex;
+        & > .trabContainerHeaderActionsFilter{
+          display: flex;
+        }
+        & > .trabContainerHeaderActionsBtn{
+          display: flex;
+          width: 293px;
+          height: 34px;
+          background: #008894;
+          align-items: center;
+          justify-content: center;
+          font-size: 21px;
+          color: #FFFFFF;
+          font-weight: 700;
+          cursor: pointer;
+          transition: all 0.2s ease-in-out;
+        }
+        & > .trabContainerHeaderActionsBtn:hover{
+          opacity: 0.5;
+        }
+        & > .trabContainerHeaderActionsBtn:active{
+          opacity: 0.75;
+        }
+      }
+    }
+    & > .lstTrabajadores{
+      display: flex;
+      flex-direction: column;
+      overflow: scroll;
+      height: 100%;
+      & > .lstTrabajadoresHeader{
+        display: flex;
+        font-size: 15px;
+        color: #424242;
+        font-weight: 700;
+        padding-bottom: 4px;
+        border-bottom: 1px solid #424242;
+        min-height: 30px;
+        align-items: flex-end;
+        justify-content: space-between;
+        & > .lstTrabajadoresHeaderCol{
+          display:flex;
+          width: calc(100% - 10px);
+          justify-content: center;
+          margin: 0px 5px;
+          justify-content: flex-start;
+        }
+      }
+      & > .lstTrabajadoresItem{
+        display: flex;
+        font-size: 16px;
+        color: #424242;
+        font-weight: 400;
+        padding-bottom: 4px;
+        border-bottom: 1px solid #424242;
+        background: white;
+        min-height: 43px;
+        align-items: center;
+        border-bottom: 1px solid #ECEEF0;
+        cursor: pointer;
+        justify-content: space-between;
+        transition: all 0.2s ease-in-out;
+        & > .lstTrabajadoresItemCol{
+          display:flex;
+          width: calc(100% - 10px);
+          justify-content: center;
+          margin: 0px 5px;
+          justify-content: flex-start;
+          display: inline-block;
+          text-overflow: ellipsis;
+          /* Required for text-overflow to do anything */
+          white-space: nowrap;
+          overflow: hidden;
+          & > img.lstTrabajadoresItemColImg{
+            display: flex;
+            width: 14px;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+          }
+          & > img.lstTrabajadoresItemColImg:hover{
+            opacity: 0.5;
+          }
+          & > img.lstTrabajadoresItemColImg:active{
+            opacity: 0.75;
+          }
+        }
+      }
+      & > .lstTrabajadoresItem:hover{
+        background: #ECEEF0;
+      }
+    }
+  }
+}

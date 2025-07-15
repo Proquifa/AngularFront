@@ -1,0 +1,9 @@
+<footer class="footer">
+    <div class="flechaFooter" (click)="eventOcultar($event)">
+  <img alt="flechaDerFooter" *ngIf="!boton" (click)="boton = !boton" class="flechaDerFooter" src="./assets/Images/flechaIzquierdaCatProNormal.png" />
+  <img alt="flechaIzqFooter" *ngIf="boton" (click)="boton = !boton" class="flechaIzqFooter" src="./assets/Images/flechaDerechaCatProNormal.png" />
+</div>
+<div class="logoRyndem">
+    <img alt="logoRyndem" id="logoRyndem" [src]="url_logoRyndem" />
+</div>
+</footer>

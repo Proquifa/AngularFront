@@ -1,0 +1,22 @@
+<div id="popUp" class="popUp" *ngIf="popUpTimbrado" >
+  <div class="fondo"></div>
+  <div class="popContenido">
+    <div class="popHeader">
+      <span>PROQUIFA NET</span>
+    </div>
+    <div class="popContenido">
+      <span>Timbrado incorrecto.
+        <span></span>
+      </span>
+      <span>¿Desea realizar el timbrado de nuevo?</span>
+    </div>
+    <div class="dvBotones">
+      <div class="dvBoton" (click)="closePopUp()">
+        Cancelar
+      </div>
+      <div class="dvBoton" (click)="aceptar()" style="width: 170px; margin-left: 10px;">
+        Reintentar
+      </div>
+    </div>
+  </div>
+</div>

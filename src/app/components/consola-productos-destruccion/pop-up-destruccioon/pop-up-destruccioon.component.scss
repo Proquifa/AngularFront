@@ -1,0 +1,316 @@
+.modal{
+  z-index:11;
+  display:flex;
+  position:fixed;
+  left:0;
+  top:0;
+  width:100%;
+  height:100%;
+  overflow:auto;
+  background-color:rgba(238, 238, 238, 0.8);
+  font-family: 'Roboto', sans-serif;
+}
+.modal-content{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-content: center;
+  align-items: flex-start;
+  margin:auto;
+  text-align: center;
+  background-color:white;
+  position:relative;
+  padding:0;
+  outline:0;
+  width:795px;
+  height: 675px;
+  color:#424242;
+  border-radius: 25px;
+  font-family: 'Roboto';
+  font-size: 20px;
+  border: 1px solid #008A98;
+}
+.header{
+  order: 0;
+  flex: 0 1 auto;
+  align-self: stretch;
+  height: 52px;
+  background-color: #008894;
+  border-radius: 24px 24px 0px 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  h1{
+    top: 20px;
+    color: white;
+    font-size: 25px;
+    order: 0;
+    flex: 0 1 auto;
+    align-self: auto;
+    font-weight: bold;
+  }
+}
+.contenido {
+  order: 1;
+  flex: 1 1 auto;
+  align-self: stretch;
+  width: 100%;
+  height: 534px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-content: stretch;
+  align-items: stretch;
+  color: #424242;
+}
+
+
+.footer2 {
+  order: 1;
+  flex: 0 1 auto;
+  align-self: stretch;
+  height: 85px;
+  justify-content: space-between;
+  display: flex;
+  box-sizing: border-box;
+  padding-right: 20px;
+  padding-left: 20px;
+  align-items: center;
+}
+.btnOk {
+  width: 170px;
+  height: 30px;
+  background-color: #008A98;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  & > label{
+    font-family: 'Roboto';
+    font-size: 21px;
+    font-weight: bold;
+    color: white;
+    padding-top: 1.8%;
+    cursor: pointer;
+  }
+}
+.datos {
+  -webkit-box-ordinal-group: 2;
+  order: 1;
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  align-self: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  -webkit-box-pack: center;
+  justify-content: center;
+  align-content: center;
+  -webkit-box-align: center;
+  align-items: center;
+  height: 40%;
+  padding-bottom: 10%;
+  box-sizing: border-box;
+}
+
+.alerta{
+  display: flex;
+  order: 0;
+  flex: 0 1 auto;
+  align-self: auto;
+  img.alert{
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.alertaTxt {
+  order: 1;
+  flex: 1 1 auto;
+  align-self: auto;
+  display: flex;
+  height: 18px;
+  order: 0;
+  flex: 0 1 auto;
+  align-self: auto;
+  p{
+    font-family: 'Roboto';
+    font-size: 25px;
+    color:#424242;
+    padding-top: 25px;
+
+  }
+}
+.total{
+  height: 444px;
+  width: 100%;
+  display: flex;
+  box-sizing: border-box;
+  padding-right: 20px;
+  padding-left: 20px;
+  flex-direction: column;
+
+  & >.material{
+    width: 100%;
+    height: 65px;
+    border-bottom: 1px solid #242424;
+    display: flex;
+    align-items: center;
+    & >label{
+      font-family: Novecento;
+      font-weight: bold;
+      font-size: 22px;
+      color: #008894;
+    }
+  }
+
+  & >.piezas{
+    width: 100%;
+    height: 378px;
+    display: flex;
+    box-sizing: border-box;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+}
+
+.uploadDoc{
+  width: 100%;
+  height: 90px;
+  background-color: rgba(0,136,148,0.05);
+  display: flex;
+  justify-content: center;
+  & >div{
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.lista {
+  width: 100%;
+  font-size: 20px;
+  padding: 15px 19px 14px 13px;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+  line-height: 1.3;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-content: stretch;
+  align-items: center;
+  flex: 0 1 auto;
+  display: unset;
+  flex-direction: column;
+  div{
+    & > .div{
+      width: 100%;
+      display: flex;
+      border-bottom: 1px solid #ECEEF0;
+
+      .datosLst {
+        align-items: center;
+        flex: 1 1 auto;
+        align-self: auto;
+        padding: 5px 10px 5px 10px;
+        display: flex;
+          width: 10%;
+          display: flex;
+          & > label {
+            font-family: Roboto;
+            font-weight: bold;
+            font-size: 16px;
+            color: #008894;
+
+            & > span{
+              font-family: Roboto;
+              font-weight: 400;
+              font-size: 16px;
+              color: #424242;
+            }
+          }
+      }
+    }
+
+    >.divActual {
+      background-color: #ECEEF0;
+      box-shadow: 0 2px 4px -3px #008895;
+
+    }
+
+    >.divActive {
+      border-bottom: 1px solid #ECEEF0;
+      display: flex;
+      background-color:#ECEEF0;
+      width: 100%;
+
+      .dfSelect {
+        background: #008895 !important;
+        width: 5px !important;
+        color: #008895;
+      }
+      & > .datosLst {
+        align-items: center;
+        flex: 1 1 auto;
+        align-self: auto;
+        padding: 5px 10px 5px 5px;
+        display: flex;
+        & > div{
+          box-sizing: border-box;
+          padding-right: 5px;
+          padding-left: 5px;
+          width: 10%;
+          display: flex;
+          justify-content: center;
+          flex-direction: column;
+          align-items: center;
+          & > label{
+            font-family: Roboto;
+            font-weight: 400;
+            font-size: 16px;
+            color: #424242;
+            text-align: center;
+          }
+          & > span{
+            font-family: Roboto;
+            font-weight: 400;
+            font-size: 16px;
+            color: #008894;
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
+}
+.centerFile{
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+.sinDatos{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  & > label {
+    color: #D8D9DD;
+    font-family: Novecento;
+    font-weight: bold;
+    font-size: 50px;
+    text-align: center;
+    width: 100%;
+  }
+}

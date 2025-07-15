@@ -1,0 +1,43 @@
+<div class="padre">
+
+    <div [ngClass]="botones[0]" (click)="metodoDeDias('hoy', 0)" >
+        <a id="dhoy" >Hoy <span class="indice">{{tHoy}}</span></a>
+    </div>
+
+
+    <div>
+        <hr style=" width:1px; height:100%; margin:0px; border-width:0" color='#88868A' />
+    </div>
+
+    <div [ngClass]="botones[2]" (click)="metodoDeDias('manana', 2)" >
+      <a  >Mañana <span class="indice">{{tManana}}</span></a>
+    </div>
+
+    <div>
+        <hr style=" width:1px; height:100%; margin:0px; border-width:0" color='#88868A' />
+    </div>
+
+    <div [ngClass]="botones[3]" (click)="metodoDeDias('pasado', 3)" >
+       <a  style="flex-direction: column" >
+            Pasado Mañana <span class="indice">{{tPasadoM}}</span>
+        </a>
+    </div>
+
+    <div>
+        <hr style=" width:1px; height:100%; margin:0px; border-width:0" color='#88868A' />
+    </div>
+
+    <div [ngClass]="botones[4]" (click)="metodoDeDias('futuro', 4)" >
+        <a >Futuro <span class="indice">{{tFuturo}}</span></a>
+    </div>
+    <div>
+        <hr style=" width:1px; height:100%; margin:0px; border-width:0" color='#88868A' />
+    </div>
+
+
+    <div [ngClass]="botones[1]" (click)="metodoDeDias('todo', 1)" >
+        <a >Todo <span class="indice">{{tTodo}}</span></a>
+    </div>
+
+
+</div>

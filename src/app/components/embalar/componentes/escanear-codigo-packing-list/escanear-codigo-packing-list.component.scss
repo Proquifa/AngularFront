@@ -1,0 +1,64 @@
+.escanearCodigoPL {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-content: stretch;
+  align-items: stretch;
+  height: 100%;
+  width: 100%;
+  font-family: 'Roboto';
+  display: flex;
+  flex-direction: column;
+  // justify-content: center;
+  align-content: stretch;
+  align-items: center;
+  text-align: center;
+  height: 100%;
+  width: 100%;
+
+}
+
+.codigoPL {
+  order: 0;
+  flex: 1 1 auto;
+  align-self: auto;
+  height: auto;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0% 6% 6% 6%;
+  box-sizing: border-box;
+}
+
+.TextoPL {
+  order: 0;
+  flex: 1 1 auto;
+  align-self: auto;
+  height: auto;
+  width: 100%;
+  color: #323433;
+  font-size: 55px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: center;
+  }
+
+  .texArea{
+   width: 100%;
+   height: 100%;
+   border: 1px solid red;
+   z-index: 1;
+   opacity: 0;
+
+  }
+
+
+.contenidoPL{
+  // position: absolute;
+  display: flex;
+  flex-direction: column;
+}

@@ -1,0 +1,22 @@
+<div id="popUp" class="popUp" *ngIf="popUpCerrar">
+  <div class="fondo"></div>
+  <div class="popContenido">
+    <div class="popHeader">
+      <span>PROQUIFA NET</span>
+    </div>
+    <div class="popContenido">
+      <div class="alerta" *ngIf="imagen">
+        <img src="assets/Images/flecha_blanca_encirculoverde.svg" alt="" class="alert" />
+      </div>
+      <div [style.padding-top]="imagen?'15px':'80px'">
+        <label>
+          Has enviado exitosamente a cuarentena
+        </label>
+        <span>
+        {{label}}
+      </span>
+      </div>
+    </div>
+  </div>
+</div>
+

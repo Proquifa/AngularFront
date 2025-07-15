@@ -1,0 +1,209 @@
+// ----- Estilos modal -------
+.modal {
+  z-index: 3;
+  display: flex;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.7);
+  font-family: 'Roboto', sans-serif;
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-content: center;
+  align-items: flex-start;
+  margin: auto;
+  top: 0%;
+  background-color: white;
+  position: relative;
+  padding: 0;
+  outline: 0;
+  width: 795px;
+  height: 567px;
+  color: black;
+  border: 1px solid #008894;
+  font-family: 'Roboto', sans-serif;
+  border-radius: 11px 11px 11px 11px;
+}
+
+.header {
+  width: 100%;
+  height: 55px;
+  color: white;
+  font-family: 'Novecento';
+  font-weight: bold;
+  font-size: 26px;
+  background: #008895;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px 10px 0px 0px;
+
+}
+
+.contenido {
+  order: 1;
+  flex: 1 1 auto;
+  align-self: stretch;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  box-sizing: border-box;
+  padding: 0px 30px 30px 30px;
+  display: flex;
+  flex-direction: column;
+}
+.cantidades{
+  height: 135px;
+  width: 100%;
+  background: #f3f9f9;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 22px 0;
+  & > div{
+    display: flex;
+    flex-direction: column;
+    font-family: Roboto;
+    font-weight: 400;
+    font-size: 18px;
+    color: #424242;
+    text-align: left;
+    width: 25%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    & >h3{
+      font-size: 15px;
+      color: #848387;
+      // height: 50%;
+      align-items: center;
+      align-content: center;
+      display: flex;
+      width: 100%;
+      font-weight: 400;
+      justify-content: flex-end;
+    }
+    & > label{
+      // height: 50%;
+      align-items: center;
+      display: flex;
+      width: 100%;
+      justify-content: flex-end;
+      margin-bottom: 3px;
+    }
+  }
+
+}
+.btn{
+  height: 148px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: flex-end;
+  & > div{
+    display: flex;
+    background-color: #008894;
+    width: 170px;
+    height: 31px;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    & > label {
+      ont-family: Novecento;
+      font-weight: bold;
+      font-size: 22px;
+      color: #FFFFFF;
+      text-align: left;
+      align-items: center;
+    }
+  }
+}
+.titulos{
+  height: 85px;
+  width: 100%;
+  padding-top: 30px;
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid #424242;
+  & > div {
+    height: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    & > label{
+      font-family: Novecento;
+      font-weight: bold;
+      font-size: 22px;
+      color: #008894;
+      text-align: left;
+    }
+    & > span{
+      font-family: Roboto;
+      font-weight: 300;
+      font-size: 16px;
+      color: #424242;
+      text-align: left;
+    }
+  }
+}
+.tipoPago{
+  height: 160px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  & > label{
+    font-family: Roboto;
+    font-weight: 400;
+    font-size: 16px;
+    color: #424242;
+    text-align: left;
+    padding-right: 10px;
+  }
+}
+.inputs{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 159px;
+  height: 30px;
+}
+
+.input{
+  width: 128px;
+  height: 29px;
+}
+
+.porcentaje{
+  height: 50px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  box-sizing: border-box;
+  padding-top: 25px;
+  & > label{
+    font-family: Roboto;
+    font-weight: 300;
+    font-size: 16px;
+    color: #848387;
+    text-align: right;
+
+    >span{
+      font-family: Roboto;
+      font-weight: bold;
+      font-size: 19px;
+      color: #008894;
+    }
+  }
+}

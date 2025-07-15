@@ -1,0 +1,41 @@
+.botoneraDiasEmbalaje{
+    width: 100%;
+    height: 100%;
+    background: darkkhaki;
+    flex-direction: row;
+    display: flex;
+}
+
+    .botonesDias{
+        width: 20%;
+        height: 100%;
+        background: #ECEEF0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 21px;
+        cursor: pointer;
+        border: none;
+        position: relative;
+
+    }
+
+    .botonesDiasActive{
+        width: 20%;
+        height: 100%;
+        background: #008895;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 21px;
+        cursor: pointer;
+        border: none;
+        color:white;
+        position: relative;
+    }
+
+    .indice{
+        position: relative;
+        font-size: 14px;
+        top: -7px;
+    }

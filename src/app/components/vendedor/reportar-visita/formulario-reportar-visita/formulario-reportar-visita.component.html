@@ -1,0 +1,403 @@
+<div class="cabezera">
+  <label class="etiqueta">VISITA # {{indexVisita + 1}} · <span class="textVerdeTitulo">{{currentCliente.cliente.nombre}}</span></label>
+</div>
+<div class="contenedor">
+  <div class="libreta">
+    <div class="tituloNotas">
+      Notas
+    </div>
+    <div class="notas">
+      {{currentCliente.notas}}
+    </div>
+  </div>
+  <div class="contenido">
+    <div class="datosClientes">
+      <div style="width: 20%;margin-right: 10px;">
+        <img [src]="currentCliente.cliente.imagen !== null ? 'assets/Images/clientes/' + currentCliente.cliente.idCliente+'.png' : 'assets/Images/clientes/default_select.png'" />
+      </div>
+      <div style="width: 35%;margin-right: 10px;">
+        <div style="margin-bottom: 5px;">
+          <span class="textVerde">{{currentCliente.cliente.nombre}}</span>
+        </div>
+        <div>
+          Cliente
+        </div>
+      </div>
+      <div style="width: 45%;">
+        <div style="margin-bottom: 10px;">
+          <img width="18px" src="assets/Images/ventas/visitas/contacto.svg" />
+          <span class="textVerde">{{currentCliente.contacto.nombre}}</span>
+        </div>
+        <div style="margin-bottom: 10px;">
+          <img width="18px" src="assets/Images/ventas/visitas/correo.svg" />
+          {{currentCliente.contacto.email}}
+        </div>
+        <div>
+          <img width="18px" src="assets/Images/ventas/visitas/telefono.svg" />
+          {{currentCliente.contacto.telefono}}
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <pn-barra-pasos [lstItems]="pasos" [blockItems]="true" (eventCambio)="vistaSelected($event)"></pn-barra-pasos>
+    </div>
+    <!-- Requerimientos -->
+    <div class="divRequerimientos" *ngIf="vistaSeleccionada == 'REQUERIMIENTOS' && data != null">
+      <div class="listaRequerimientos">
+        <div class="divLst">
+          <div *ngFor="let item of data.requerimientos; let i = index" (click)="selectItem(i)" class="divItem {{lstActive[i]}}">
+            <div>
+              <img src="assets/Images/ventas/visitas/req_respuesta.svg" *ngIf="item.respuesta != null" />
+              <img src="assets/Images/ventas/visitas/req_sin_respuesta.svg" *ngIf="item.respuesta == null" />
+              <div>#{{i+1}} · {{item.asunto}}</div>
+              <div>{{item.fechaSolicitud}}</div>
+            </div>
+            <div>
+              <img src="assets/Images/ventas/visitas/aviso_perfil.svg" width="15px" height="100%" />
+              <div>{{item.nombreSolicitante}}</div>
+            </div>
+            <div>
+              {{item.motivo}}
+            </div>
+          </div>
+        </div>
+        <div class="totalRequerimientos">
+          #{{data.requerimientos.length}} REQUERIMIENTO<span *ngIf="data.requerimientos.length != 1">S</span>
+        </div>
+      </div>
+      <div class="contenedorRequerimientos">
+        <div>
+          <div>
+            <div>
+              {{data.requerimientos[indexSelected].asunto}}
+            </div>
+            <div>
+              <img src="assets/Images/ventas/visitas/aviso_perfil.svg" width="21px" height="100%" />
+              {{data.requerimientos[indexSelected].nombreSolicitante}}
+            </div>
+          </div>
+          <div>
+            Calificación:
+            <pn-calificacion-estrella></pn-calificacion-estrella>
+          </div>
+        </div>
+        <div>
+          {{data.requerimientos[indexSelected].motivo}}
+        </div>
+        <div>
+          <div>Redactar Respuesta</div>
+          <form [formGroup]="reqForm">
+            <textarea formControlName="reqFormRespuesta" [value]="reqFormRespuesta"></textarea>
+          </form>
+          <div>Cargar Documento</div>
+          <pq-file-upload [disabled]="true" [docR]="reqArchivo" (enviarDocumento)="enviarDocumentacion($event,'Requerimientos')"></pq-file-upload>
+        </div>
+      </div>
+    </div>
+    <!-- Fin Requerimientos -->
+    <!-- Pendientes -->
+    <div class="divPendientes" *ngIf="vistaSeleccionada == 'PENDIENTES' && data != null">
+      <div class="listaPendientes">
+        <div class="divLst">
+          <span *ngIf="itemSelected == -1">NO HAS AGREGADO PENDIENTES</span>
+          <div *ngFor="let item of data.pendientes; let i = index" [ngClass]="lstItemSelected[i]" (click)="selectPenItem(i)">
+            <div *ngIf="itemSelected != -1">{{item.ferealizacion | dateFormatSlashNumber}}</div>
+            <div *ngIf="itemSelected != -1">#{{i+1}} · {{item.descripcion}}</div>
+          </div>
+        </div>
+        <div class="totalPendientes">
+          <span *ngIf="data.pendientes != null">#{{data.pendientes.length}} PENDIENTE<span *ngIf="data.pendientes.length != 1">S</span></span>
+          <span *ngIf="data.pendientes == null">#0 PENDIENTES</span>
+        </div>
+      </div>
+      <div class="contenedorPendientes">
+        <div>
+          <div [ngClass]="btnPenAgregar" (click)="agregarPendiente()">+ AGREGAR PENDIENTE</div>
+        </div>
+        <div>
+          <div>
+            <div>
+              <span *ngIf="data.pendientes != null && penAgregar">Pendiente #{{data.pendientes.length + penAgregando}}</span>
+              <span *ngIf="data.pendientes != null && !penAgregar">Pendiente #{{itemSelected + 1}}</span>
+              <span *ngIf="data.pendientes == null">Pendiente #{{penAgregando}}</span>
+            </div>
+          </div>
+          <div class="penAgregar" *ngIf="penAgregar || itemSelected > -1">
+            <div>
+              <div><span *ngIf="penAgregar" >Redactar&nbsp;</span>Pendiente</div>
+              <div *ngIf="!penAgregar && data.pendientes[itemSelected] != null">{{data.pendientes[itemSelected].descripcion}}</div>
+              <form [formGroup]="penForm" *ngIf="penAgregar">
+                <textarea formControlName="penFormRespuesta" [value]="penFormRespuesta"></textarea>
+              </form>
+            </div>
+            <div>
+              <div>Fecha Estimada de Realización:</div>
+              <div>
+                <div *ngIf="!penAgregar && data.pendientes[itemSelected] != null">{{data.pendientes[itemSelected].ferealizacion
+                  | dateFormatSlash}}</div>
+                <mat-form-field style="width: 122px;" *ngIf="penAgregar">
+                  <input matInput [matDatepicker]="picker" [formControl]="dateForm" disabled>
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker disabled="false"></mat-datepicker>
+                </mat-form-field>
+              </div>
+            </div>
+            <div>
+              <div *ngIf="penAgregar" (click)="cancelarPendiente()">CANCELAR</div>
+              <div *ngIf="!penAgregar" (click)="openModalConfirm('¿Desea eliminar este Pendiente?')">ELIMINAR</div>
+              <div *ngIf="penAgregar" (click)="guardarPendiente()" [style.background]="penFormRespuesta != ''?'#60AF47':'#EAEAEA'">ACEPTAR</div>
+              <div *ngIf="!penAgregar" (click)="editarPendiente()">EDITAR</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Fin Pendientes -->
+    <!-- Hallazgos -->
+    <div class="divHallazgos" *ngIf="vistaSeleccionada == 'HALLAZGOS' && data != null">
+      <div class="listaHallazgos">
+        <div class="divLst">
+          <span *ngIf="itemHallSelected == -1">NO HAS AGREGADO HALLAZGOS</span>
+          <div *ngFor="let item of data.hallazgos; let i = index" [ngClass]="lstItemHallSelected[i]" (click)="selectHallItem(i)">
+            <div *ngIf="itemHallSelected != -1">#{{i+1}} ·&nbsp;<span>{{item.tipoHallazgo}}</span></div>
+            <div *ngIf="itemHallSelected != -1"> {{item.descripcion}}</div>
+          </div>
+        </div>
+        <div class="totalHallazgos">
+          <span *ngIf="data.hallazgos != null">#{{data.hallazgos.length}} HALLAZGO<span *ngIf="data.hallazgos.length != 1">S</span></span>
+          <span *ngIf="data.hallazgos == null">#0 HALLAZGOS</span>
+        </div>
+      </div>
+      <div class="contenedorHallazgos">
+        <div>
+          <div [ngClass]="btnHallAgregar" (click)="agregarHallazgo()">+ AGREGAR HALLAZGO</div>
+        </div>
+        <div>
+          <div>
+            <div>
+              <span *ngIf="data.hallazgos != null && hallAgregar">Hallazgo #{{data.hallazgos.length + hallAgregando}}</span>
+              <span *ngIf="data.hallazgos != null && !hallAgregar">Hallazgo #{{itemHallSelected + 1}}</span>
+              <span *ngIf="data.hallazgos == null">Hallazgo #{{hallAgregando}}</span>
+            </div>
+          </div>
+          <div class="hallAgregar" *ngIf="hallAgregar || itemHallSelected > -1">
+            <div>
+              <div>
+                <div>
+                  <div>Tipo de Hallazgo</div>
+                  <div *ngIf="!hallAgregar && data.hallazgos[itemHallSelected] != null">{{data.hallazgos[itemHallSelected].tipoHallazgo}}</div>
+                  <pq-drop-list *ngIf="hallAgregar" style="width: 200px;" (valueDropList)="dropListHall($event)"
+                    [itemSelect]="cmbTipoHallDefault" [items]="cmbTipoHall" [isSearch]="true" [isCategory]="true"
+                    [align]="'left'"></pq-drop-list>
+                </div>
+                <div class="hallEmpresaImp" *ngIf="isNombreEmpresa || (!hallAgregar && itemHallSelected != -1 && data.hallazgos[itemHallSelected].tipoHallazgo == 'Competencia')">
+                  <div>Nombre de la Empresa</div>
+                  <div class="truncateTowLines" *ngIf="!hallAgregar && data.hallazgos[itemHallSelected] != null">{{data.hallazgos[itemHallSelected].competencia}}</div>
+                  <input *ngIf="hallAgregar" type="text" [(ngModel)]="hallEmpresa" #yearInput />
+                </div>
+                <div class="hallEmpresaImp" *ngIf="isMarca || (!hallAgregar && itemHallSelected != -1 && data.hallazgos[itemHallSelected].tipoHallazgo == 'Marca')">
+                  <div *ngIf="!hallAgregar && data.hallazgos[itemHallSelected] != null">Marcas</div>
+                  <div class="truncateTowLines" *ngIf="!hallAgregar && data.hallazgos[itemHallSelected] != null"
+                    matTooltip="{{data.hallazgos[itemHallSelected].txtMarcas}}">{{data.hallazgos[itemHallSelected].txtMarcas}}</div>
+                  <div *ngIf="hallAgregar">Seleccionar</div>
+                  <pq-drop-list *ngIf="hallAgregar" [items]="proveedores" (valueDropList)="dropSelecHall($event)"
+                    [itemSelect]="lstMarcas" [isSearch]="false" [isCategory]="true" [align]="'left'" [tipoDrop]="'multiple'"
+                    [campoLabel]="'valor'"></pq-drop-list>
+                </div>
+              </div>
+              <div style="margin-top:20px;"><span *ngIf="hallAgregar">Redactar&nbsp;</span>Observaciones</div>
+              <div *ngIf="!hallAgregar && data.hallazgos[itemHallSelected] != null">{{data.hallazgos[itemHallSelected].descripcion}}</div>
+              <form [formGroup]="hallForm" *ngIf="hallAgregar">
+                <textarea formControlName="hallFormRespuesta" [value]="hallFormRespuesta"></textarea>
+              </form>
+            </div>
+            <div>
+              <div>Cargar Documento</div>
+              <div style="color:black; font-size: 16px;" *ngIf="!hallAgregar && data.hallazgos[itemHallSelected] != null && data.hallazgos[itemHallSelected].documento != null && data.hallazgos[itemHallSelected].documento.archivo != null">{{data.hallazgos[itemHallSelected].documento.archivo[0].name}}</div>
+              <div style="color:black; font-size: 16px;" *ngIf="!hallAgregar && data.hallazgos[itemHallSelected] != null && data.hallazgos[itemHallSelected].documento == null">Sin
+                Documentos</div>
+              <pq-file-upload *ngIf="hallAgregar" [disabled]="true" [docR]="hallArchivo" (enviarDocumento)="enviarDocumentacion($event,'Hallazgo')"></pq-file-upload>
+            </div>
+            <div>
+              <div *ngIf="hallAgregar" (click)="cancelarHallazgo()">CANCELAR</div>
+              <div *ngIf="!hallAgregar" (click)="openModalConfirm('¿Desea eliminar este Hallazgo?')">ELIMINAR</div>
+              <div *ngIf="hallAgregar" (click)="guardarHallazgo()" [style.background]=" ((cmbTipoHallSelected == 'Marca' && lstMarcas.length > 0 ) || (cmbTipoHallSelected == 'Competencia' && hallEmpresa != '' ) || cmbTipoHallSelected == 'Regulatorio' )&& hallFormRespuesta != ''?'#60AF47':'#EAEAEA'">ACEPTAR</div>
+              <div *ngIf="!hallAgregar" (click)="editarHallazgo()">EDITAR</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Fin Hallazgos -->
+    <!-- Requisitar -->
+    <div class="divRequisitar" *ngIf="vistaSeleccionada == 'REQUISITAR' && data != null">
+      <div class="listaRequisitar">
+        <div class="divLst">
+          <span *ngIf="data.requisicion == null">NO HAS AGREGADO PARTIDAS</span>
+          <div *ngFor="let item of data.requisicion; let i = index" [ngClass]="lstItemRqrSelected[i]" (click)="selectRqrItem(i)">
+            <div *ngIf="itemRqrSelected != -1">#{{i+1}} ·&nbsp;<span>{{item.numPiezas}}</span></div>
+            <div *ngIf="itemRqrSelected != -1"> {{item.descripcion}}</div>
+          </div>
+        </div>
+        <div class="totalRequisitar">
+          <span *ngIf="data.requisicion != null">#{{data.requisicion.length}} PARTIDA<span *ngIf="data.requisicion.length != 1">S</span></span>
+          <span *ngIf="data.requisicion == null">#0 PARTIDAS</span>
+        </div>
+      </div>
+      <div class="contenedorRequisitar">
+        <div>
+          <div [ngClass]="btnRqrAgregar" (click)="agregarRequisitar()">+ AGREGAR</div>
+        </div>
+        <div>
+          <div class="reqAgregar" *ngIf="rqrAgregar || itemRqrSelected > -1">
+            <div class="rqrPiezaImp">
+              <div>Número de Piezas</div>
+              <div class="truncateTowLines" *ngIf="!rqrAgregar && data.requisicion[itemRqrSelected] != null">{{data.requisicion[itemRqrSelected].numPiezas}}</div>
+              <input *ngIf="rqrAgregar" type="text" (keydown)="validNumber($event)" [(ngModel)]="rqrNumPiezas"  />
+            </div>
+            <div>Descripción</div>
+            <form [formGroup]="rqrForm">
+                <div *ngIf="!rqrAgregar && data.requisicion[itemRqrSelected] != null">{{data.requisicion[itemRqrSelected].descripcion}}</div>
+              <textarea *ngIf="rqrAgregar" formControlName="rqrFormDescripcion" [value]="rqrFormDescripcion"></textarea>
+            </form>
+            <div>
+              <div *ngIf="rqrAgregar" (click)="cancelarRequisitar()">CANCELAR</div>
+              <div *ngIf="!rqrAgregar" (click)="openModalConfirm('¿Desea eliminar esta Requisición?')">ELIMINAR</div>
+              <div *ngIf="rqrAgregar" (click)="guardarRequisitar()" [style.background]="rqrFormDescripcion != '' && rqrNumPiezas != '' ?'#60AF47':'#EAEAEA'">ACEPTAR</div>
+              <div *ngIf="!rqrAgregar" (click)="editarRequisitar()">EDITAR</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Fin Requisitar -->
+    <!-- Cotizar -->
+    <div class="divCotizar" *ngIf="vistaSeleccionada == 'COTIZAR'">
+      <div class="divBuscar">
+        <div>
+          <div>Buscar Productos</div>
+          <div class="buscar">
+            <div>
+              <div class="lupa">
+                <img src="assets/Images/lupa.svg" width="22px" height="22px" alt="buscar">
+              </div>
+              <input type="text" [ngModel]="searchTerm" (ngModelChange)="buscarProducto($event)" class="buscar-input"
+                placeholder="Concepto, Familia" />
+            </div>
+          </div>
+          <div class="filtros">
+            <div class="cmb" *ngIf="lstCmbMarcas != null">
+              <pq-drop-list [items]="lstCmbMarcas" [itemSelect]="lstCmbMarcas[0]" (valueDropList)="getComboValue($event,'esac')"
+                [isSearch]="false" [align]="'left'"></pq-drop-list>
+            </div>
+            <div class="cmb" *ngIf="lstCmbCampanas != null">
+              <pq-drop-list [items]="lstCmbCampanas" [itemSelect]="lstCmbCampanas[0]" (valueDropList)="getComboValue($event,'esac')"
+                [isSearch]="false" [align]="'left'"></pq-drop-list>
+            </div>
+            <div class="cmb" *ngIf="lstCmbFamilias != null">
+              <pq-drop-list [items]="lstCmbFamilias" [itemSelect]="lstCmbFamilias[0]" (valueDropList)="getComboValue($event,'esac')"
+                [isSearch]="false" [align]="'left'"></pq-drop-list>
+            </div>
+            <div class="cmb" *ngIf="lstCmbPrecios != null">
+              <pq-drop-list [items]="lstCmbPrecios" [itemSelect]="lstCmbPrecios[0]" (valueDropList)="getComboValue($event,'esac')"
+                [isSearch]="false" [align]="'left'"></pq-drop-list>
+            </div>
+            <div class="btnAplicar">
+              APLICAR
+            </div>
+          </div>
+        </div>
+        <div>
+          <div>Resultados de Búsqueda · {{lstProductosSearched.length}} Productos Encontrados</div>
+        </div>
+        <div>
+          <div *ngFor="let item of lstProductosSearched; let i = index">
+            <div>
+              <img src="assets/Images/ventas/visitas/vial_3.png" height="75px"/>
+            </div>
+            <div>
+                <div>
+                    {{item.concepto}}
+                </div>
+                <div>
+                    Lote Vigente:{{item.lote}}
+                    Origen: {{item.origen}}
+                </div>
+                <div>
+                    CAS: {{item.cas}}
+                </div>
+            </div>
+            <div>
+              <div>
+                  {{item.costo | acFormatMoney}}
+              </div>
+              <div class="btnAgregar">
+                AGREGAR
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="divSeleccionados">
+        <div>Productos Seleccionados</div>
+        <div class="buscar">
+          <div>
+            <div class="lupa">
+              <img src="assets/Images/lupa.svg" width="22px" height="22px" alt="buscar">
+            </div>
+            <input type="text" [ngModel]="searchTerm" (ngModelChange)="buscar($event)" class="buscar-input"
+              placeholder="Concepto, Marca" />
+          </div>
+        </div>
+        <div>
+          Ordenar Por:
+          <div class="cmb">
+            <pq-drop-list [items]="esacList" [itemSelect]="esacSelected" (valueDropList)="getComboValue($event,'esac')"
+              [isSearch]="false"></pq-drop-list>
+          </div>
+        </div>
+        <div>
+
+        </div>
+        <div>
+            <div>
+              Productos
+            </div>
+            <div>
+              Total
+            </div>
+            <div>
+              $0.00
+            </div>
+        </div>
+        <div class="btnCotizar">
+          COTIZAR
+        </div>
+      </div>
+    </div>
+    <!-- Fin Cotizar -->
+    <!-- Reporte Final -->
+    <div *ngIf="vistaSeleccionada == 'REPORTE FINAL'">
+
+    </div>
+    <!-- Fin Reporte Final -->
+    <div class="divBtn">
+      <div>GUARDAR</div>
+    </div>
+  </div>
+</div>
+
+<div class="container" *ngIf="modalConfirm">
+  <div class="modal">
+    <div>PROQUIFA NET</div>
+    <div>
+      <div></div>
+      <div>{{modalConfirmTxt}}</div>
+    </div>
+    <div>
+      <div (click)="aceptModalConfirm(vistaSeleccionada)">SI</div>
+      <div (click)="closeModalConfirm()">NO</div>
+    </div>
+  </div>
+</div>

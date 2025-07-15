@@ -1,0 +1,111 @@
+<div style="width:100%; height:100%; position:relative; z-index: 0">
+<textarea #input (keydown)="uniKeyCode($event)"  autofocus="focus"  class="textArea" > </textarea>
+  <form>
+    <p class="titulo">INSPECCIÓN A NIVEL PIEZA</p>
+
+    <div class="direccionRow" *ngIf="!esPublicacion">
+
+      <div style="width: 50%; display: flex; box-sizing: border-box; flex-direction: column;">
+        <label class="subtitulo">Descripción</label>
+
+        <div [ngStyle]="{'display':'flex', 'flex-direction':'column', 'width':'90%'}">
+          <label class="etiqueta"> Presentación</label>
+          <div>
+             <p class="infoDato">{{presentacion}}</p>
+          </div>
+        </div>
+
+        <div [ngStyle]="{'display':'flex', 'flex-direction':'column', 'width':'90%', 'padding-top':'46px'}">
+          <label class="etiqueta"> Lote</label>
+          <div>
+             <p class="infoDato">{{nolote}}</p>
+          </div>
+        </div>
+
+        <div [ngStyle]="{'display':'flex', 'flex-direction':'column', 'width':'90%', 'padding-top':'43px'}">
+          <label class="etiqueta"> Caducidad</label>
+          <div>
+               <p class="infoDato">{{caducidad}}</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="width: 50%; display: flex; box-sizing: border-box; flex-direction: column">
+        <label class="subtitulo">Manejos</label>
+
+        <div [ngStyle]="{'display':'flex', 'flex-direction':'column', 'width':'90%'}">
+          <label class="etiqueta">Almacenaje </label>
+          <div>
+            <p class="infoDato">{{almacenaje}}</p>
+          </div>
+        </div>
+
+        <div [ngStyle]="{'display':'flex', 'flex-direction':'column', 'width':'90%', 'padding-top':'43px'}">
+          <label class="etiqueta">Transportación </label>
+          <div>
+             <p class="infoDato">{{transportacion}}</p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="publicacion" *ngIf="esPublicacion" style="width: 100%; display: flex; box-sizing: border-box; flex-direction: column;">
+      <label style="width: 97.5%" class="subtitulo">Descripción</label>
+      <div [ngStyle]="{'display':'flex', 'flex-direction':'row', 'width':'97.5%'}">
+        <div [ngStyle]="{'display':'flex', 'flex-direction':'column', 'width':'50%'}">
+          <label class="etiqueta" >Edición </label>
+          <p class="infoDato">{{edicion}}</p>
+        </div>
+        <div [ngStyle]="{'display':'flex', 'flex-direction':'column', 'width':'50%'}">
+          <label class="etiqueta">Idioma </label>
+          <p class="infoDato">{{idioma}}</p>
+        </div>
+      </div>
+    </div>
+
+
+    <div style="width: 96.8%; padding-top: 50px" *ngIf= "conDocumentacion" >
+       <p class="subtituloCentro">Documentación</p>
+    </div>
+
+    <div class="direccionRow" style="width: 100%"  *ngIf= "conDocumentacion" >
+      <div class="doctos">
+        <div [ngStyle]="{'display':'flex', 'flex-direction':'column', 'width':'90%', 'padding-top':'24px'}" >
+          <label class="etiqueta"> Certificado:</label>
+          <div>
+            <img class="docto-img" src="assets/Images/editar-pieza/docto.svg" alt="docto">
+             <p class="infoDato" style="margin: -23px 30px;">{{archCertificado !== undefined ? 'Certificado.pdf' : ''}}
+          </div>
+        </div>
+      </div>
+
+      <div class="doctos">
+        <div [ngStyle]="{'flex-direction':'column', 'width':'90%', 'padding-top':'24px'}" [style.display] = "mostrarHoja ? 'flex':'none'">
+          <label class="etiqueta"> Hoja de Seguridad:</label>
+          <div >
+            <img class="docto-img" src="assets/Images/editar-pieza/docto.svg" alt="docto">
+             <p class="infoDato" style="margin: -23px 30px;">{{archSeguridad !== undefined ? archSeguridad.nombre : ''}}</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </form>
+    <div class="pop-up" *ngIf ="mostrar" style="display:block;" >
+      <pq-pop-up-editar-lote  style="position: absolute; z-index: 1;" [partidaPrioridad]="partidaPrioridad" [pza]= "pzaAux"
+                              [conDocumentacion]="conDocumentacion"
+                             [publicacion]= "esPublicacion" [vistaPieza] = "vistaPieza" (activo)="cierraEditarlote($event)" (actualizarPieza)="actualizarPieza($event)"
+                              (enviarUbicacionNoDesp)="recibirUbicacionNoDesp($event)">
+                             </pq-pop-up-editar-lote>
+                             <!-- [archCertificado]="archCertificado" [archSeguridad]="archSeguridad"  -->
+    </div>
+    <div class="pop-inf" #popInf   *ngIf ="cambioI">
+        <pq-pop-informativo *ngIf="partidaPrioridad.pasosImprimirEtiqueta" (cambioIndex)="cerrarPopInf($event)" > </pq-pop-informativo>
+        <pq-pop-escanear-qr *ngIf="!partidaPrioridad.pasosImprimirEtiqueta"   (cambioIndex)="cerrarPopInf($event)" [bolsa] = "tipoBolsa" > </pq-pop-escanear-qr>
+    </div>
+
+    <div class="pop-inf" #popInf   *ngIf ="cambioAlmacenar">
+        <pq-pop-informativo (cambioIndex)="cerrarPopInf($event)" > </pq-pop-informativo>
+    </div>

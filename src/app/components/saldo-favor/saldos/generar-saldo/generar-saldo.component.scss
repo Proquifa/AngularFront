@@ -1,0 +1,294 @@
+@import "../../../../../mixins.scss";
+@import "../../../../../colors.scss";
+.vistaP{
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  & > .areaTrabajo{
+    width: 100%;
+    height: calc(100% - 70px);
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding-left: 20px;
+    padding-right: 20px;
+    overflow: auto;
+  }
+
+  & > .botones{
+    width: 100%;
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    padding-right: 20px;
+    padding-left: 20px;
+    cursor: pointer;
+   & > div{
+     @include button(31px, 170px, #FFFFFF,#008A98);
+   }
+  }
+}
+.informacion{
+  border-bottom: 1px #242424 solid;
+  height: 43px;
+  & > label{
+    font-family: Novecento;
+    font-weight: bold;
+    font-size: 24px;
+    color: #424242;
+    text-align: left;
+  }
+}
+
+.combos{
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  & > div{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    box-sizing: border-box;
+    align-items: center;
+
+    & >label {
+      font-family: Roboto;
+      font-weight: 400;
+      font-size: 16px;
+      color: #424242;
+      text-align: left;
+      padding-right: 10px;
+    }
+  }
+}
+.cargaDocument{
+  justify-content: center;
+  align-items: center;
+  > div{
+    display: flex;
+    flex-direction: column;
+    > label{
+      font-family: Novecento;
+      font-weight: bold;
+      font-size: 40px;
+      color: #D8D9DD;
+      text-align: center;
+      line-height: 55px;
+      max-width: 677px;
+    }
+  }
+}
+
+.datos{
+  height: 30%;
+  display: flex;
+  box-sizing: border-box;
+  padding-top: 10px;
+  flex-direction: column;
+  & > div{
+    display: flex;
+    width: 100%;
+    height: 50%;
+    flex-wrap: wrap;
+    & > div{
+      width: 16%;
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
+      padding-right: 10px;
+      & > label{
+        font-family: Roboto;
+        font-weight: 400;
+        font-size: 16px;
+        color: #424242;
+        padding-bottom: 5px;
+      }
+    }
+  }
+}
+.datosSaldo{
+  max-width: 250px;
+  min-width: 171px;
+}
+.cargarDocumento{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  height: 100%;
+  justify-content: center;
+  width: 100%;
+}
+.documentoCarga{
+  height: 90%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding-top: 10px;
+}
+.seccionDocument{
+  height: 100%;
+  width: 100%;
+  display: flex;
+  box-sizing: border-box;
+}
+.cargaDoc{
+  width: 100%;
+  height: 100%;
+  background-color:#ECEEF0 ;
+  justify-content: center;
+  display: flex;
+  position: relative;
+}
+.carga{
+  display: none;
+  &::-webkit-file-upload-button {
+    opacity: 0;
+  }
+}
+.vistDoc{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding-top: 20px;
+  padding-bottom: 10px;
+  padding-right: 30px;
+  padding-left: 30px;
+}
+.recargar{
+  width: 100%;
+  height: 5%;
+  display: flex;
+  box-sizing: border-box;
+  justify-content: flex-end;
+}
+
+.contentRefuse{
+  height: 100%;
+  overflow: auto;
+  width: 69%;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  position: relative;
+}
+.textoImagen{
+  color: #424242;
+  font-size: calc( ((20) * 1px) + ((40) - (20)) * ((100vw - 420px) / (2300 - 420)));
+  text-align: center;
+  position: relative;
+  font-family: Roboto;
+  font-weight: bold;
+  opacity: 0.5;
+  margin-top: 5px;
+}
+.imgeArchivo{
+  height: 60%;
+  max-height: 265px;
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  text-align: center;
+  box-sizing: border-box;
+  padding-bottom: 20px;
+  padding-top: 20px;
+  cursor: pointer;
+}
+
+/deep/  .list {
+  justify-content: center;
+}
+.sinDatos{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  & > label {
+    color: #D8D9DD;
+    font-family: Novecento;
+    font-weight: bold;
+    font-size: 50px;
+    text-align: center;
+    width: 100%;
+  }
+}
+
+.datosEmpresa{
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  box-sizing: border-box;
+  padding-left: 10px;
+  align-items: flex-start !important;
+}
+.areaGeneral{
+  width: 100%;
+  height: 99%;
+  min-height: 822px;
+  display: flex;
+  flex-direction: column;
+}
+.area{
+  width: 100%;
+  height: 103px;
+  display: flex;
+}
+.elementos{
+  display: flex;
+  width: 100%;
+  height: 50%;
+  flex-wrap: wrap;
+}
+
+.document{
+  height: 70%
+}
+
+.monto{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  & > label{
+    font-size: 16px;
+    font-family: Roboto;
+    font-weight: bold;
+    padding-left: 5px;
+    color: #008894;
+  }
+}
+@media all and (max-height: 880px) and (min-height: 770px){
+  .document{height: 55%};
+}
+@media all and (max-width: 1500px) and (min-width: 1300px){
+  .combos{width: initial;margin-bottom: 5px;};
+  .area{flex-wrap: wrap; width: initial;height: initial;margin-top: 10px;min-height: 103px;}
+
+}
+@media all and (max-width: 1650px) and (min-width: 1300px) {
+  .datos{height: 45%};
+  .datos > div{height: 65%}
+  .elementos{height: 35% !important;}
+}
+input{
+  height: 24px;
+  font-size: 14px;
+  font-family: Roboto;
+}
+textarea{
+  resize: none;
+  font-size: 14px;
+  font-family: Roboto;
+}

@@ -1,0 +1,133 @@
+<pn-header-bc [opciones]="opcion" [homePath]="homePath"></pn-header-bc>
+<div class="catalogo">
+    <div class="catalogoHeader">
+        <div class="catalogoHeaderChecks">
+            <div class="catalogoHeaderChecksItem" (click)="fnToogleHeaderChecks()">
+                <img class="catalogoHeaderChecksItemImg" [src]="habilitadosSelected ? './assets/Images/radio_selected.svg' : './assets/Images/radio_unselected.svg' " alt="Habilidar">
+                <span class="catalogoHeaderChecksItemSpan">Habilitados</span>
+            </div>
+            <div class="catalogoHeaderChecksItem" (click)="fnToogleHeaderChecks()">
+                <img class="catalogoHeaderChecksItemImg" [src]="!habilitadosSelected ? './assets/Images/radio_selected.svg' : './assets/Images/radio_unselected.svg' " alt="Deshabilitar">
+                <span class="catalogoHeaderChecksItemSpan">Deshabilitados</span>
+            </div>
+        </div>
+        <div class="catalogoHeaderBtn" (click)="fnCreateCompany()">AGREGAR PATRÓN</div>
+    </div>
+    <div class="catalogoSearch">
+        <app-pn-search [searchPlaceholder]="searchPlaceholder" (searchEmitter)="fnGetEmitSearch($event)" ></app-pn-search>
+    </div>
+    <div class="catalogoLst">
+        <app-pn-flip-card
+        [inpLogo]="item.parentLogo"
+        [inpFrontValue]="item.parentFrontValue"
+        [inpBackTitle]="item.parentBackTitle"
+        [inpBackSubtitle]="item.parentBackSubtitle"
+        [inpLstItemsBackBody]="item.parentLstItemsBackBody"
+        [inpPath]="item.parentPath"
+        [id]="item.id"
+        *ngFor="let item of empresaSearched; let i = index" ></app-pn-flip-card>
+    </div>
+    <div class="catalogoFooter">
+        {{ (empresaSearched.length === 0 ) ? 'Sin Patrones' : '#' + empresaSearched.length + ' Patrones' }}
+    </div>
+
+</div>
+
+
+<!-- <div class="header-menu">
+    <div class="white_space"></div>
+    <div class="radiop">
+        <img class="animationZoom" (click)="Habilitar(0)" [src]="habilidatosSelected ? 'assets/Images/radio_selected.svg ' : 'assets/Images/radio_unselected.svg' " (click)="Habilitar(1)" style=" cursor:pointer" width="14px" height="14px" alt="radioInactive">
+        <p style="cursor: pointer; margin-left: 10px" (click)="Habilitar(1)">Habilitados</p>
+        <img class=" animationZoom" (click)="Habilitar(0)" [src]="!habilidatosSelected ?'assets/Images/radio_selected.svg' : 'assets/Images/radio_unselected.svg' " (click)="Habilitar(2)" style="margin-left: 40px; cursor:pointer" width="14px" height="14px" alt="radioInactive">
+        <p style="cursor: pointer; margin-left: 10px" (click)="Habilitar(0)">Deshabilitados</p>
+    </div>
+    <div class="espacio_bco"></div>
+    <div class="exportar" (click)="fnCreateCompany()" >AGREGAR PATRÓN</div>
+</div>
+<div class="container" style="height: calc(80vh);">
+    <div class="buscar">
+        <div>
+            <div class="lupa">
+                <img src="assets/Images/lupa.svg" width="22px" height="22px" alt="buscar">
+            </div>
+            <input type="text" [ngModel]="searchTerm" (ngModelChange)="buscar($event)" class="buscar-input" placeholder="Patrones, RFC" />
+        </div>
+    </div>
+</div>
+<div class="footer" style="margin-top:10px">
+    <div style="width: 100%;height: 90%;display: flex; justify-content: space-between; align-content: center;align-items: center; ">
+        <div style="width: 10%; text-align: left;">&nbsp;</div>
+        <div style="width: 20%;">
+            <div class="total">
+                <p>Total: {{empresaSearched.length}} Empresas</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="container" style="height: calc(80vh);">
+    
+    
+    <div *ngIf="empresaSearched.length>0; else cargando">
+        <div class="tabla-clientes ">
+            <div style="margin-top:5px;width: 100%; display: flex; flex-direction: row; flex-wrap: wrap; margin-left: 2.5%;">
+                <div *ngFor="let empresa of empresaSearched; let i = index" style="display: flex; flex-wrap: wrap">
+                    <div class="cliente">
+                        <div class="flip-container" onclick="this.classList.toggle('hover');">
+                            <div class="flipper">
+                                <div class="front">
+                                    <div class="headerContentFront">
+                                    </div>
+                                    <div class="centerPagination">
+                                        <img class=" ima animationZoom" src="assets/Images/clientes/default.png" />
+                                    </div>
+                                    <div class="footContent">
+                                        <span>{{empresa.valor}}</span>
+                                    </div>
+                                </div>
+                                <div class="back">
+                                    <div class="backContent">
+                                        <div class="crossContent" style="width: 100%;display: flex; justify-content: flex-end; align-content: center;align-items: center;">
+                                            <img src="assets/Images/tachecito.png " height="20px" width="20px" alt="Cerrar">
+                                        </div>
+                                        <div class="headerBackCartera CVerde">
+                                            {{empresa.valor}}
+                                        </div>
+                                        <hr>
+                                        <div class="backCenterContent">
+                                            <p style="width:100%;font-weight: 100">RFC: {{empresa.valor1}}</p>
+                                            <p style="width:100%;font-weight: 100">Razón Social: {{empresa.valor2}}</p>
+                                            <p style="width:100%;font-weight: 100">{{ (empresa.valor3 === 1) ? 'Trabajador: 1' : 'Trabajadores: ' + empresa.valor3 }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="footContentBack">
+                                        <div class="iconsContent">&nbsp;</div>
+                                    </div>
+                                    <a (click)="Entrar($event, empresa.llave)">
+                                        <div class="buttonCardContent">
+                                            <div class="buttonCardBtn">
+                                                <h4>Entrar</h4>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="display: flex; justify-content: center;align-content: center;align-items: center; ">
+                        <hr [ngClass]="'v' + (i !== 0 && (i+1) % carterasPorFila === 0  ?' final': '')" />
+                    </div>
+                    <hr [ngClass]="'h'" />
+                    <ng-template #cargando>
+                        <div class="tabla-clientes">
+                        </div>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->

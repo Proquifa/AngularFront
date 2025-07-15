@@ -1,0 +1,62 @@
+<div class="tarjetaRutas">
+  <div class="listaEventos" (click)="botonEntrega = !botonEntrega">
+    <div class="tipoEvento">
+      <img id="entrega" *ngIf="!botonEntrega" [src]="btnEntrega"/>
+      <img id="entregaGris" *ngIf="botonEntrega" [src]="btnEntregaGris"/>
+      <label>Entrega</label>
+    </div>
+    <div class="accion" (hover)="botonEntrega = !botonEntrega">
+      <img id="eliminar" *ngIf="!botonEntrega" [src]="btnEliminar"/>
+      <img id="agregar" *ngIf="botonEntrega" [src]="btnAgregar"/>
+    </div>
+</div>
+
+<div class="listaEventos">
+  <div class="tipoEvento" (click)="botonCobro = !botonCobro">
+    <img id="cobro" *ngIf="!botonCobro" [src]="btnCobro"/>
+    <img id="cobroGris" *ngIf="botonCobro" [src]="btnCobroGris"/>
+    <label>Cobro</label>
+  </div>
+  <div class="accion" (hover)="botonCobro = !botonCobro">
+    <img id="eliminar" *ngIf="!botonCobro" [src]="btnEliminar"/>
+    <img id="agregar" *ngIf="botonCobro" [src]="btnAgregar"/>
+  </div>
+</div>
+
+<div class="listaEventos">
+  <div class="tipoEvento" (click)="botonRevision = !botonRevision">
+    <img id="revision" *ngIf="!botonRevision" [src]="btnRevision"/>
+    <img id="revisionGris" *ngIf="botonRevision" [src]="btnRevisionGris"/>
+    <label>Revisión</label>
+  </div>
+  <div class="accion" (hover)="botonRevision = !botonRevision">
+    <img id="eliminar" *ngIf="!botonRevision" [src]="btnEliminar"/>
+    <img id="agregar" *ngIf="botonRevision" [src]="btnAgregar"/>
+  </div>
+</div>
+
+<div class="listaEventos">
+  <div class="tipoEvento" (click)="botonEspecial = !botonEspecial">
+    <img id="eEspecial" *ngIf="!botonEspecial" [src]="btnEspecial"/>
+    <img id="eEspecialGris" *ngIf="botonEspecial" [src]="btnEspecialGris"/>
+    <label>E.Especial</label>
+  </div>
+  <div class="accion" (hover)="botonEspecial = !botonEspecial">
+    <img id="eliminar" *ngIf="!botonEspecial" [src]="btnEliminar"/>
+    <img id="agregar" *ngIf="botonEspecial" [src]="btnAgregar"/>
+  </div>
+</div>
+
+  <div class="listaEventos">
+  <div class="tipoEvento" (click)="botonrMaterial = !botonrMaterial">
+    <img id="rMaterial" *ngIf="!botonrMaterial" [src]="btnRmaterial"/>
+    <img id="rMaterialGris" *ngIf="botonrMaterial" [src]="btnRMaterialGris"/>
+    <label>R.Material</label>
+  </div>
+  <div class="accion" (hover)="botonrMaterial = !botonrMaterial">
+    <img id="eliminar" *ngIf="!botonrMaterial" [src]="btnEliminar"/>
+    <img id="agregar" *ngIf="botonrMaterial" [src]="btnAgregar"/>
+  </div>
+</div>
+
+</div>

@@ -1,0 +1,377 @@
+:host{
+    user-select: none;
+    height: calc(100vh - 130px);
+    pn-header-bc{
+        user-select: none;
+        display: flex;
+        width: 100%;
+        height: 41px;
+    }
+    & > .container{
+        display: flex;
+        flex-direction: column;
+        padding: 0px 20px;
+        height: calc(100vh - 170px);
+        overflow: scroll;
+        & > .containerTitle{
+            display: flex;
+            min-height: 44px;
+            border-bottom: 1px solid #424242;
+            align-items: flex-end;
+            padding-bottom: 5px;
+            font-size: 17px;
+            color: #424242;
+            font-weight: 700;
+            font-family: Novecento;
+            text-transform: uppercase;
+            justify-content: space-between;
+            & > .containerTitleItem1{
+                display: flex;
+            }
+            & > .containerTitleItem2{
+                display: flex;
+                & > img.containerTitleItem2Img{
+                    display: flex;
+                    width: 30px;
+                    cursor: pointer;
+                    transition: all 0.2s ease-in-out;
+                }
+                & > img.containerTitleItem2Img:hover{
+                    opacity: 0.5;
+                }
+                & > img.containerTitleItem2Img:active{
+                    opacity: 0.75;
+                }
+            }
+        }
+        & > .containerForms{
+            display: flex;
+            min-height: max-content;
+            width: 100%;
+            flex-wrap: wrap;
+            margin: 15px 0px;
+            & > .containerFormsInputs{
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                min-height: 85px;
+                & > .containerFormsInputsChecks{
+                    display: flex;
+                    flex-direction: column;
+                    margin-right: 20px;
+                    & > .containerFormsInputsChecksLabel{
+                        display: flex;
+                        font-size: 16px;
+                        color: #424242;
+                        font-weight: 400;
+                    }
+                    & > .containerFormsInputsChecksHoriz{
+                        display: flex;
+                        align-items: center;
+                        height: 30px;
+                        margin-top: 5px;
+                        cursor: pointer;
+                        transition: all 0.2s ease-in-out;
+                        & > .containerFormsInputsChecksUncheck{
+                            display: flex;
+                            width: 18px;
+                            height: 18px;
+                            margin-right: 10px;
+                            border: 1px solid #424242;
+                            transition: all 0.2s ease-in-out;
+                        }
+                        & > .checked{
+                            content: url('/assets/Images/checked20px.svg');
+                        }
+                        & > span.containerFormsInputsChecksSpan{
+                            display: flex;
+                            font-size: 16px;
+                            color: #424242;
+                            font-weight: 400;
+                        }
+                    }
+                    & > .containerFormsInputsChecksHoriz:hover{
+                        opacity: 0.5;
+                    }
+                    & > .containerFormsInputsChecksHoriz:active{
+                        opacity: 0.75;
+                    }
+                }
+                & > .containerFormsInputsFile{
+                    display: none;
+                }
+                & > .containerFormsInputsFileBox{
+                    display:flex;
+                    margin-right: 90px;
+                    align-items: center;
+                    & > .containerFormsInputsFileBoxInput{
+                        display: flex;
+                        width: 250px;
+                        height: 28px;
+                        display: flex;
+                        border: 1px solid #D8D8D8;
+                        font-size: 16px;
+                        color: #424242;
+                        font-weight: 400;
+                        align-items: center;
+                        cursor: pointer;
+                        transition: all 0.2s ease-in-out;
+                    }
+                    & > .containerFormsInputsFileBoxInput:hover{
+                        opacity: 0.5;
+                    }
+                    & > .containerFormsInputsFileBoxInput:active{
+                        opacity: 0.75;
+                    }
+                    & > .containerFormsInputsFileBoxUpload{
+                        display:flex;
+                        cursor: pointer;
+                        transition: all 0.2s ease-in-out;
+                        & > .containerFormsInputsFileBoxUploadImg{
+                            display:flex;
+                        }
+                    }
+                    & > .containerFormsInputsFileBoxUpload:hover{
+                        opacity: 0.5;
+                    }
+                    & > .containerFormsInputsFileBoxUpload:active{
+                        opacity: 0.75;
+                    }
+                    & > .containerFormsInputsFileBoxReload{
+                        display:flex;
+                        cursor: pointer;
+                        margin-right: 10px;
+                        transition: all 0.2s ease-in-out;
+                        & > .containerFormsInputsFileBoxReloadImg{
+                            display:flex;
+                        }
+                    }
+                    & > .containerFormsInputsFileBoxReload:hover{
+                        opacity: 0.5;
+                    }
+                    & > .containerFormsInputsFileBoxReload:active{
+                        opacity: 0.75;
+                    }
+                    & > .containerFormsInputsFileBoxView{
+                        display:flex;
+                        cursor: pointer;
+                        transition: all 0.2s ease-in-out;
+                        & > .containerFormsInputsFileBoxViewImg{
+                            display:flex;
+                        }
+                    }
+                    & > .containerFormsInputsFileBoxView:hover{
+                        opacity: 0.5;
+                    }
+                    & > .containerFormsInputsFileBoxView:active{
+                        opacity: 0.75;
+                    }
+                }
+                & > .containerFormsInputsSpan{
+                    display: flex;
+                    font-size: 16px;
+                    color: #424242;
+                    font-weight: 400;
+                }
+                & > pq-drop-list{
+                    display: flex;
+                }
+                & > label.containerFormsInputsLabel{
+                    display: flex;
+                    font-size: 16px;
+                    color: #424242;
+                    font-weight: 400;
+                }
+                & > input.containerFormsInputsInput{
+                    display: flex;
+                    width: 100%;
+                    height: 30px;
+                    margin-right: 20px;
+                    margin-top: 5px;
+                    border: 1px solid #D8D8D8;
+                    font-size: 16px;
+                    color: #424242;
+                    font-weight: 400;
+                }
+            }
+            & > .containerFormsInputLabel{
+                display: flex;
+                align-items: center;
+                height: 55px;
+                & > .containerFormsInputLabelCheck{
+                    display: flex;
+                }
+            }
+        }
+        & > .lstTrabajadores{
+            display: flex;
+            min-height: 320px;
+            flex-direction: column;
+            overflow: hidden;
+            & > .lstTrabajadoresHeader{
+                display: flex;
+                font-size: 15px;
+                color: #424242;
+                font-weight: 700;
+                padding-bottom: 4px;
+                border-bottom: 1px solid #424242;
+                min-height: 49px;
+                align-items: flex-end;
+                justify-content: space-between;
+                & > .lstTrabajadoresHeaderCol{
+                    display:flex;
+                    width: calc(100% - 10px);
+                    justify-content: center;
+                    margin: 0px 5px;
+                    justify-content: flex-start;
+                }
+            }
+            & > .lstTrabajadoresItem{
+                display: flex;
+                font-size: 16px;
+                color: #424242;
+                font-weight: 400;
+                padding-bottom: 4px;
+                border-bottom: 1px solid #424242;
+                background: white;
+                min-height: 43px;
+                align-items: center;
+                border-bottom: 1px solid #ECEEF0;
+                cursor: pointer;
+                justify-content: space-between;
+                transition: all 0.2s ease-in-out;
+                & > .lstTrabajadoresItemCol{
+                    display:flex;
+                    width: calc(100% - 10px);
+                    justify-content: center;
+                    margin: 0px 5px;
+                    justify-content: flex-start;
+                    display: inline-block;
+                    text-overflow: ellipsis;
+                    /* Required for text-overflow to do anything */
+                    white-space: nowrap;
+                    overflow: hidden;
+                    & > img.lstTrabajadoresItemColImg{
+                        display: flex;
+                        width: 14px;
+                        cursor: pointer;
+                        transition: all 0.2s ease-in-out;
+                    }
+                    & > img.lstTrabajadoresItemColImg:hover{
+                        opacity: 0.5;
+                    }
+                    & > img.lstTrabajadoresItemColImg:active{
+                        opacity: 0.75;
+                    }
+                }
+            }
+            & > .lstTrabajadoresItem:hover{
+                background: #ECEEF0;
+            }
+        }
+        & > .lstTrabajadoresVacia{
+            display:flex;
+            flex-direction: column;
+            min-height: 396px;
+            justify-content: center;
+            align-items: center;
+            & > .lstTrabajadoresVaciaLabel{
+                display:flex;
+                font-size: 36px;
+                color: #D8D9DD;
+                font-family: Novecento;
+                font-weight: 700;
+                padding: 25px 0px;
+            }
+            & > .lstTrabajadoresVaciaBtn{
+                display:flex;
+                background: #008894;
+                width: 293px;
+                height: 30px;
+                font-size: 21px;
+                color: #FFFFFF;
+                font-family: Novecento;
+                font-weight: 700;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+                transition: all 0.2s ease-in-out;
+            }
+            & > .lstTrabajadoresVaciaBtn:hover{
+                opacity: 0.5;
+            }
+            & > .lstTrabajadoresVaciaBtn:active{
+                opacity: 0.75;
+            }
+            
+            & > .lstTrabajadoresVaciaBtnDisabled{
+                display:flex;
+                background: #C2C3C9;
+                width: 293px;
+                height: 30px;
+                font-size: 21px;
+                color: #FFFFFF;
+                font-family: Novecento;
+                font-weight: 700;
+                justify-content: center;
+                align-items: center;
+                pointer-events: none;
+            }
+        }
+        & > .containerBtns{
+            display: flex;
+            min-height: 68px;
+            align-items: center;
+            border-top: 2px solid #424242;
+            justify-content: space-between;
+            font-size: 21px;
+            color: #FFFFFF;
+            font-weight: 700;
+            & > .containerBtnsBtnCancel{
+                display: flex;
+                font-family: Novecento;
+                background: #008894;
+                cursor: pointer;
+                transition: all 0.2s ease-in-out;
+                width: 170px;
+                height: 30px;
+                justify-content: center;
+                align-items: center;
+            }
+            & > .containerBtnsBtnCancel:hover{
+                opacity: 0.5;
+            }
+            & > .containerBtnsBtnCancel:active{
+                opacity: 0.75;
+            }
+            & > .containerBtnsBtnDisabled{
+                display: flex;
+                font-family: Novecento;
+                background: #C2C3C9;
+                pointer-events: none;
+                transition: all 0.2s ease-in-out;
+                width: 170px;
+                height: 30px;
+                justify-content: center;
+                align-items: center;
+            }
+            & > .containerBtnsBtnActive{
+                display: flex;
+                font-family: Novecento;
+                background: #4DA72C;
+                cursor: pointer;
+                transition: all 0.2s ease-in-out;
+                width: 170px;
+                height: 30px;
+                justify-content: center;
+                align-items: center;
+            }
+            & > .containerBtnsBtnActive:hover{
+                opacity: 0.5;
+            }
+            & > .containerBtnsBtnActive:active{
+                opacity: 0.75;
+            }
+        }
+    }
+}

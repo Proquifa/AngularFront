@@ -1,0 +1,31 @@
+<div class="selectContainer" [ngStyle]="{'opacity': (isOpaque) ? '0.5' : '1', 'pointer-events': (isDisabled) ? 'none' : 'auto', 'height': inputHeight}" >
+  <div class="selectContainerHeader" (click)="fnOpenList()">
+    <div class="selectContainerHeaderValues">
+      <input type="text" [(ngModel)]="valueSelected.texto" class="selectContainerHeaderValuesInput" *ngIf="isSimpleValue" (focus)="fnOpenList()" [id]="randomValue" [style.color]="colorSelectedSimple" >
+      <div class="selectContainerHeaderValuesItems" *ngIf="!isSimpleValue" [ngStyle]="{'line-height': inputHeight}" >
+        <input type="text" [(ngModel)]="valueSelected.texto + ' ' + valueSelected.separador" class="selectContainerHeaderValuesItemInput" (focus)="fnOpenList()" [id]="randomValue" [ngStyle]="{'color': (valueSelected.texto1 !== '') ? '#008894' : '#424242', 'height': inputHeight}" [style.width.ch]="valueSelected.texto.length" >
+        <div class="selectContainerHeaderValuesItem" [ngStyle]="{'width': 'calc(100% - ' + (valueSelected.texto.length + 3) + 'ch)' }" >{{valueSelected.texto1}}</div>
+      </div>
+    </div>
+    <img src="./assets/Images/Images/drop_list.svg" alt="" class="selectContainerHeaderImg">
+  </div>
+  <div [ngClass]="classDropList" [ngStyle]="{'height': maxHeight}">
+    <div class="selectContainerDropSearch" *ngIf="viewSearch">
+      <app-pn-search [searchPlaceholder]="placeholder" (searchEmitter)="fnGetSearchValue($event)"></app-pn-search>
+    </div>
+    <div class="selectContainerDropListSimple" *ngIf="isSimpleValue" [ngStyle]="{'height': (viewSearch) ? 'calc(' + maxHeight + ' - 92px)' : 'calc(' + maxHeight + ' - 42px)'}" >
+      <div class="selectContainerDropListSimpleItem" *ngFor="let item of lstItems" (click)="fnSelectItem(item)" [ngStyle]="{'height': inputHeight, 'line-height': inputHeight}" >{{item.texto}}</div>
+    </div>
+    <div class="selectContainerDropListLevels" *ngIf="!isSimpleValue" [ngStyle]="{'height': (viewSearch) ? 'calc(' + maxHeight + ' - 92px)' : 'calc(' + maxHeight + ' - 42px)'}" >
+      <div class="selectContainerDropListLevelsItem" (click)="fnSelectItem(item)" *ngFor="let item of lstItems" [ngStyle]="{'pointer-events': (item.aux) ? 'none' : 'auto', 'height': inputHeight}" >
+        <div class="selectContainerDropListLevelsItemValue1" *ngIf="item.aux">
+          <span class="selectContainerDropListLevelsItemValue1Span1" [ngStyle]="{'line-height': inputHeight}">{{item.texto}}&nbsp;{{item.separador}}</span>
+          <span class="selectContainerDropListLevelsItemValue1Span2" [ngStyle]="{'line-height': inputHeight}">{{item.texto1}}</span>
+        </div>
+        <div class="selectContainerDropListLevelsItemValue2" [ngStyle]="{'line-height': inputHeight}" *ngIf="!item.aux">
+            {{item.texto}}&nbsp;{{item.separador}}&nbsp;{{item.texto1}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

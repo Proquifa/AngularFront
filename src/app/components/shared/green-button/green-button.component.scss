@@ -1,0 +1,31 @@
+@import "../../../../mixins.scss";
+@import "../../../../colors.scss";
+
+:host {
+  .green-button {
+    background-color: #008895;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Novecento-Demibold';
+    font-size: 12px;
+    &:hover {
+      cursor: pointer;
+      background-color: #329faa;
+    }
+  }
+
+  .medium {
+    padding: 5px 10px;
+  }
+
+  .large {
+    padding: 5px 15px;
+  }
+
+  .extra-large {
+    width: 200px;
+    height: 30px;
+  }
+}

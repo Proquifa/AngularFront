@@ -1,0 +1,74 @@
+@import "../../../colors";
+@import "../../../variables";
+@import "../../../mixins";
+
+.padre {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.aux {
+  .asideNormalMenu {
+    order: 0;
+    flex: 0 0 auto;
+    align-self: stretch;
+    min-width: 181px;
+    width: 321px;
+    height: 100%;
+    overflow-y: scroll;
+    &>.articulo {
+      width: 321px;
+      background-color: #E6E6E6;
+      float: left;
+      flex: 1 0 auto;
+      display: flex;
+    }
+  }
+  >.asideOcultarMenu {
+    animation-name: ocultarMenu;
+    animation-duration: 1s;
+    transition: 1s ease-in-out;
+    animation-fill-mode: forwards;
+    box-sizing: border-box;
+    min-width: 0px;
+    width: 0px;
+    &>.articulo {
+      width: 0px;
+    }
+  }
+  >.asideMostrarMenu {
+    order: 0;
+    flex: 0 0 auto;
+    align-self: stretch;
+    animation-name: mostrarMenu;
+    animation-duration: 0.7s;
+    animation-fill-mode: forwards;
+    box-sizing: border-box;
+    overflow-y: scroll;
+    &>.articulo {
+      width: 321px;
+      background-color: #E6E6E6;
+      float: left;
+      flex: 1 0 auto;
+      display: flex;
+    }
+  }
+  @keyframes ocultarMenu {
+    from {
+      min-width: 321px;
+    }
+    to {
+      width: 0px;
+    }
+  }
+  @keyframes mostrarMenu {
+    from {
+      width: 0px;
+    }
+    to {
+      width: 321px;
+    }
+  }
+}

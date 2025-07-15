@@ -1,0 +1,46 @@
+.iniciarInspeccion{
+  color: #9B9B9B;
+  font-family: 'Roboto';
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-content: stretch;
+  align-items: center;
+  height: 100%;
+}
+
+.titulo {
+    display: flex;
+
+    }
+
+.btnGrabar{
+  display: flex;
+background-color: #C1292E;
+color: white;
+border: none;
+width: 248px;
+height: 51px;
+font-size: 30px;
+cursor: pointer;
+outline: none;
+justify-content: center;
+align-items: center;
+}
+
+
+h1{
+  font-size: 50px;
+  font-weight: bold;
+  color: #008895;
+
+}
+
+
+.up {
+ border-left: 25px solid #FFFFFF ;
+ border-top: 12.5px solid transparent;
+ border-bottom: 12.5px solid transparent;
+ display:flex;
+}

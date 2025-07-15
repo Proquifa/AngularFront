@@ -1,0 +1,203 @@
+.modal {
+  z-index: 3;
+  display: block;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: rgba(255, 255, 255, 0.7);
+  font-family: 'Roboto', sans-serif;
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-content: center;
+  align-items: flex-start;
+  top: 25%;
+  margin: auto;
+  text-align: center;
+  background-color: white;
+  position: relative;
+  padding: 0;
+  outline: 0;
+  max-width: 630px;
+  width: 630px;
+  height: 385px;
+  max-height: 385px;
+  color: #424242;
+  font-size: 20px;
+  border: 1px solid #008894;
+  border-radius: 20px;
+  font-family: 'Roboto', sans-serif;
+}
+
+.header {
+  order: 0;
+  flex: 0 1 auto;
+  align-self: stretch;
+  background-color: #008894;
+  border: 1px solid #008894;
+  border-radius: 19px 19px 0 0;
+  color: white;
+  font-family: 'Novecento';
+  font-weight: bold;
+  font-size: 27px;
+  height: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 15px;
+}
+
+.contenido {
+  -webkit-box-ordinal-group: 2;
+  -ms-flex-order: 1;
+  order: 1;
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  -ms-flex-item-align: stretch;
+  align-self: stretch;
+  width: 100%;
+  height: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  -webkit-box-pack: center;
+  justify-content: center;
+  align-content: stretch;
+  -webkit-box-align: stretch;
+  align-items: stretch;
+  color: #424242;
+}
+
+.footer {
+  order: 1;
+  flex: 0 1 auto;
+  align-self: stretch;
+  height: 13%;
+  padding-left: 3%;
+  padding-right: 3%;
+  justify-content: space-between;
+  display: flex;
+}
+
+.datos {
+  -webkit-box-ordinal-group: 2;
+  order: 1;
+  -webkit-box-flex: 1;
+  flex: 1 1 auto;
+  align-self: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-content: stretch;
+  -webkit-box-align: stretch;
+  align-items: stretch;
+  height: 40%;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+
+  & > label {
+    font-family: 'Roboto-Regular';
+    font-size: 29px;
+    color: #323433;
+    text-align: left;
+    padding-top: 27px;
+    height: 68px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+  }
+
+  & > div > p {
+    font-family: 'Roboto';
+    font-weight: bold;
+    font-size: 29px;
+    color: #39B54A;
+    text-align: center;
+    height: 34px;
+
+  }
+}
+//BOTONES
+.btnCancelar {
+  width: 220px;
+  height: 30px;
+  background: #338A9C;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  & > label {
+    font-family: 'Novecento';
+    font-size: 21px;
+    font-weight: bold;
+    color: white;
+    height: 100%;
+    padding-top: 1.8%;
+    cursor: pointer;
+  }
+}
+
+.btnAceptar {
+  width: 220px;
+  height: 30px;
+  background: #338A9C;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  & > label {
+    font-family: 'Novecento';
+    font-size: 21px;
+    font-weight: bold;
+    color: white;
+    height: 100%;
+    padding-top: 1.8%;
+    cursor: pointer;
+  }
+}
+
+.etiquetas {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-content: space-around;
+  align-items: center;
+  box-sizing: border-box;
+  width: 82%;
+
+}
+
+.mensajeEtiqueta {
+  order: 0;
+  flex: 0 1 auto;
+  align-self: auto;
+  box-sizing: border-box;
+}
+
+.datoEtiqueta {
+  order: 0;
+  flex: 0 1 auto;
+  align-self: auto;
+}

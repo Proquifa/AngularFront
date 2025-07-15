@@ -1,0 +1,81 @@
+.barraActividades{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-content: stretch;
+  align-items: center;
+  max-height: 70px;
+}
+
+.flechaIzq {
+  order: 1;
+  flex: 0 0 auto;
+  align-self: auto;
+  cursor: pointer;
+}
+
+.contenido {
+  display: flex;
+  flex-direction: row;
+  order: 1;
+  flex: 1 0 auto;
+  align-self: auto;
+  text-align: center;
+  padding: 15px;
+}
+
+.elemento{
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin: 3px;
+  font-size: 12px;
+  font-family: 'Roboto', sans-serif;
+  text-decoration: none;
+  color :grey;
+  padding-bottom: 15px;
+}
+
+.flechaDer {
+  order: 1;
+  flex: 0 0 auto;
+  align-self: auto;
+  cursor: pointer;
+}
+
+.texto{
+  font-size: 12px;
+  font-family: 'Roboto', sans-serif;
+  text-decoration: none;
+  color :grey;
+}
+
+.hr{
+  height:8px;
+  background-color:#D8D9DD ;
+  width:100%;
+  border: 1px solid #D8D9DD;
+}
+
+//Imagenes
+#FlechaIzqVerde,#FlechaDerVerde{
+  width: 19.5px;
+  height: 29.5px;
+}
+
+.hrFocus{
+  height:8px;
+  width:100%;
+  border: 1px solid #008895;
+  background-color: #008895;
+}
+
+
+.textFocus{
+  font-size: 12px;
+  font-family: 'Roboto', sans-serif;
+  text-decoration: none;
+  color: black;
+  font-weight: 600;
+}

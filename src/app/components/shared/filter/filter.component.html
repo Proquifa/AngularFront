@@ -1,0 +1,148 @@
+<!--Si aun no hay datos en los dropbox se muestra
+  un Loader
+-->
+<div *ngIf="!IsLoader;else component" class="loader">
+
+</div>
+
+<ng-template #component>
+  <!--Se carga el componente con los datos
+  -->
+  <div *ngIf="IsDate" style="display: flex;flex-wrap: wrap; width: 100%; justify-content: space-between;">
+    <div>
+
+
+      Del
+      <div>
+        <pq-date-picker [style.width]="'125px'" [(date)]="date" dateFormat="YYYYMMDD" (fecha)="getFechaImpl($event)">
+        </pq-date-picker>
+      </div>
+    </div>
+    <div>
+      Al
+      <div>
+        <pq-date-picker [style.width]="'125px'" [(date)]="date2" dateFormat="YYYYMMDD" (fecha)="getFechaImpl2($event)">
+        </pq-date-picker>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="istextbox" style="margin-top: 15px;">
+    <div>Referencia</div>
+    <input type="text" style="height: 16px;width: 274px;" [(ngModel)]="txtFactura" />
+  </div>
+
+
+  <div *ngFor="let element of ElementsDropList; let i= index" style="margin-top: 20px;">
+    <span [style.margin-bottom]="'3px'">{{element.label}}</span>
+    <pq-drop-list (valueDropList)="dropList(i, $event)" [items]="element.items" [isSearch]="element.isSearch"
+      [isCategory]="true" [align]="'left'" [itemSelect]="defaultSelected"></pq-drop-list>
+
+  </div>
+  <div *ngIf="istextboxSeguimiento" style="margin-top: 15px;">
+    <div>Busqueda por Folio</div>
+    <input type="text" style="height: 16px;width: 274px;" [(ngModel)]="txtFactura" />
+  </div>
+  <div *ngIf="istextboxCobros" style="margin-top: 15px;">
+    <div>Factura:</div>
+    <input type="text" style="height: 16px;width: 274px;" [(ngModel)]="txtFactura" />
+  </div>
+  <div *ngIf="true" style="width: 100%">
+    <hr style="margin-bottom: 20px;">
+    <div *ngIf="isSeguimiento || isCobros">
+      <div  *ngIf="isSeguimiento" style="display: flex;margin-bottom: 11px;justify-content: flex-end;">
+        <div [style.background]="activarHoy===2 || activarTodo===2 || activarManana===2 || activarPasadoMa===2 || activarFuturo===2 || activarAyer===2 || activarAntier===2 || activarAnteAntier===2 || activarPasado===2 ? '#424242':'#008895'"
+          style="width: 50px; height: 35px; background:  #424242 !important;margin-right: 5px;justify-content: center; display: flex;">
+          <img width="20.4px" src="assets/Images/botontabla.svg" alt="">
+        </div>
+        <div [style.background]="activarHoy===2 || activarTodo===2 || activarManana===2 || activarPasadoMa===2 || activarFuturo===2 || activarAyer===2 || activarAntier===2 || activarAnteAntier===2 || activarPasado===2 ?'#008895':'#424242'"
+          style="width: 50px; height: 35px; background: #424242 !important;justify-content: center; display: flex;">
+          <img width="22.7px" src="assets/Images/Gestion.svg" alt="">
+        </div>
+      </div>
+      <div  *ngIf="isCobros" style="display: flex;margin-bottom: 11px;justify-content: flex-end;">
+        <div [style.background]="activeHoy || activeTodo? '#424242':'#008895'"
+          style="width: 50px; height: 35px; background:  #424242 !important;margin-right: 5px;justify-content: center; display: flex;">
+          <img width="20.4px" src="assets/Images/botontabla.svg" alt="">
+        </div>
+        <div [style.background]="activeHoy || activeTodo?'#008895':'#424242'"
+          style="width: 50px; height: 35px; background: #424242 !important;justify-content: center; display: flex;">
+          <img width="22.7px" src="assets/Images/Gestion.svg" alt="">
+        </div>
+      </div>
+
+      <div style="display: flex;    height: 298px; border-bottom: 1px solid #424242;margin-bottom: 13px;">
+        <div style=" height: 280px; width: 91px; margin-right: 3px">
+          <div [style.background]="activo===7?'#008895':''" (click)="ayer()" class="ayer">
+            <div style="height: 40px;width: 77px;text-align: center;display: flex;justify-content: center;align-items: center; border-bottom: 2px solid #ffff;margin-left: 8px;">
+              AYER
+            </div>
+            <div style="margin-top: 10px;">
+              {{dAyer}}
+            </div>
+          </div>
+          <div [style.background]="activo===8?'#008895':''" (click)="antier()" class="atier">
+            ANTIER
+          </div>
+          <div [style.background]="activo===9?'#008895':''" (click)="anteAntier()" class="anteAntier">
+            <div> ANTE </div>
+            <div>ANTIER</div>
+          </div>
+          <div [style.background]="activo===10?'#008895':''" (click)="pasado()" class="pasado">
+            PASADO
+          </div>
+        </div>
+        <div style="height: 280px; width: 91px; margin-right: 3px">
+          <div [style.background]="activo===1?'#008895':''" (click)="hoy()" class="hoy">
+            <div style="text-align: center;display: flex;justify-content: center;align-items: center; border-bottom: 2px solid #ffff;margin-left: 8px;height: 90px; width: 77px;">
+              HOY
+            </div>
+            <div style="margin-top: 30px; display: flex; justify-content: center;">
+              {{dhoy}}
+            </div>
+          </div>
+          <div [style.background]="activo===2?'#008895':''" (click)="todo()" class="todo">
+            TODO
+          </div>
+        </div>
+        <div style="height: 280px; width: 91px; margin-right: 3px">
+          <div (click)="manana()" [style.background]="activo===3?'#008895':''" class="manana">
+            <div style="height: 40px;width: 77px;text-align: center;display: flex;justify-content: center;align-items: center; border-bottom: 2px solid #ffff;margin-left: 8px;">
+              MAÑANA
+            </div>
+            <div style="margin-top: 10px; display: flex; justify-content: center;">
+              {{dManana}}
+            </div>
+          </div>
+          <div [style.background]="activo===4?'#008895':''" (click)="pasadoManana()" class="pasadoManana">
+            <div> PASADO </div>
+            <div>MAÑANA</div>
+          </div>
+          <div [style.background]="activo===5?'#008895':''" (click)="posPasado()" class="posPasado">
+            <div> POS </div>
+            <div>PASADO</div>
+          </div>
+          <div [style.background]="activo===6?'#008895':''" (click)="futuro()" class="futuro">
+            FUTURO
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="IsImage" class="refresh" (click)="getValues()" style=" margin-top: 5px">
+
+      <div *ngIf="showRefresh; else visual">
+        <img class="img-filter" height="31px" src="{{ruta}}" alt="">
+
+      </div>
+      <ng-template #visual>
+
+        <img class="img-filter2" height="20px" src="{{ruta}}" alt="">
+      </ng-template>
+    </div>
+
+  </div>
+  <div *ngIf="isSeguimiento">
+
+    <div style="justify-content: center;display: flex;margin-top: 27px;">{{tasa}}</div>
+  </div>
+
+</ng-template>

@@ -1,0 +1,68 @@
+@import "../../../../mixins.scss";
+@import "../../../../colors.scss";
+
+:host{
+  background: $pqPanelTitulo;
+  .header-bc {
+    @include flexRow;
+    height: 41px;
+    color: $pqBlanco;
+    align-items: center;
+    font-size: 12px;
+    padding: 0px 20px;
+    box-sizing: border-box;
+
+    .home-cont {
+      width: 30px;
+      height: 25px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .home:hover {
+        cursor: pointer;
+        width: 30px;
+        height: 25px;
+      }
+    }
+
+    .breadcrumb{
+      display: flex;
+    }
+
+    .link{
+      @include flexRow;
+      align-items: center;
+      font-size: 14px;
+      font-weight: 200;
+      &:hover{
+        text-decoration: underline;
+        cursor: pointer;
+      }
+
+      &.last{
+        font-weight: bold;
+        &:hover{
+          text-decoration: none;
+        }
+      }
+    }
+
+    .link-cont {
+      display: flex;
+      align-items: center;
+
+      img {
+        width: 30px;
+        height: 25px;
+      }
+    }
+
+    .divider{
+      background-color: #fff;
+      position: relative;
+      width: 2px;
+      height: 25px;
+      margin: 0 20px;
+    }
+  }
+}

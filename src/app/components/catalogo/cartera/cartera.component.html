@@ -1,0 +1,27 @@
+<pn-header-bc [opciones]="linksCarteras" [homePath]="homePath"></pn-header-bc>
+<div class="container">
+  <div class="buscar">
+    <div class="input-cont">
+      <img class="lupa" src="assets/Images/catalogo/lupa.png" />
+      <input class="buscar-input" placeholder="Buscar Cliente" (input)="changeText($event.target.value)" />
+    </div>
+    <div class="radio-cont">
+      <pq-radio-button [lstItems]="lstItems" [width]="'15px'" (emitItem)="onRadioChange($event)"></pq-radio-button>
+    </div>
+    <pn-green-button btnClasses="large" (emitAction)="goToNewWallet()" ></pn-green-button>
+  </div>
+  <div class="tabla-clientes">
+    <div class="filter-cont">
+      <filter-menu [filtros]="filtros" (sendValue)="getOptions($event)" [filterSelected]="filterSelected" [totalObjetos]="totalCarteras" [totalObjetosLabel]="'CARTERAS'"></filter-menu>
+    </div>
+    <div class="clientes-content">
+      <div *ngFor="let cartera of carterasDisplay; let i = index" [ngClass]="'cliente' + (i !== 0 && (i+1) % carterasPorFila === 0  ?' final': '')" >
+        <div class="cliente-cont">
+          <pn-information-card [cartera]="cartera" [carteraSelected]="idCarteraSelected" (flipEvent)="onSelectedCartera($event)" (showMoreEvent)="selectWallet($event)"></pn-information-card>
+        </div>
+        <!-- <img [src]="cliente.imagen !== null ? 'assets/Images/clientes/' + cliente.idCliente+'.png' : 'assets/Images/clientes/default_select.png'" /> CLIENTES TIENEN IMAGEN PERO CAMPO EN BD SIGUE SIENDO NULO -->
+        <div [ngClass]="'vertical-line' + (i !== 0 && (i+1) % carterasPorFila === 0  ?' final': '')"></div>
+      </div>
+    </div>
+  </div>
+</div>

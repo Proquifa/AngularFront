@@ -1,0 +1,200 @@
+<div class="areaSeccion">
+  <div>
+    <div class="datosPersonales" *ngIf="contacto !== 'Seleccionar'">
+      <div>
+        <div>
+          <img src="./assets/Images/contacto.svg" class="icono">
+          <pn-combo-flecha-verde [validar]="true"  [items]="itemContacto" [itemSelect]="selected" [heightLi]="'35px'" [widthBorder] = 'false' (valueDropList)="recibirItem($event)" style="width: 250px;" *ngIf="activarCombo"></pn-combo-flecha-verde>
+        </div>
+        <div>
+          <img src="./assets/Images/mail.svg" class="icono">
+          <label>{{itemContactoS.email}}</label>
+        </div>
+        <div>
+          <img src="./assets/Images/telefono.svg" class="icono">
+          <label>{{itemContactoS.tel}}</label>
+        </div>
+      </div>
+      <div>
+        <label>{{itemContactoS.titulo}}</label>
+        <span>Título de Contacto</span>
+      </div>
+      <div>
+        <label>{{itemContactoS.puesto}}</label>
+        <span>Puesto</span>
+      </div>
+      <div>
+        <label>{{itemContactoS.departament}}</label>
+        <span>Departamento</span>
+      </div>
+    </div>
+    <div class="datosPersonales" *ngIf="contacto == 'Seleccionar'">
+      <div style="width: 100%">
+        <div class="noSeleccionado">
+          <img src="./assets/Images/contacto.svg" class="icono">
+          <pn-combo-flecha-verde  [items]="itemContacto" [itemSelect]="selected" [heightLi]="'35px'" [widthBorder] = 'false' (valueDropList)="recibirItem($event)" style="width: 250px;display: flex;align-items: center" *ngIf="activarCombo"></pn-combo-flecha-verde>
+        </div>
+        <div style="height: 50%;width: 100%">
+          <h1>SELECCIONA UN CONTACTO PARA VISUALIZAR ESTA SECCIÓN</h1>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div style="padding-right: 20px;" class="seccionListas">
+        <div class="titulos" style="border-bottom: initial">
+          <label>PRODUCTOS RECHAZADOS</label>
+        </div>
+        <div>
+          <div class="titulosLista">
+            <div class="organizarLista" style="padding-bottom: 10px; padding-top: initial">
+              <div style="height: 100%;    display: flex;align-items: center;">
+                <div class="menu" (click)="abreCombo()">
+                  <div>
+                  </div>
+                  <div>
+                  </div>
+                  <div>
+                  </div>
+                  <section id="section">
+                    <ul class="listaHamburguesa">
+                      <li (click)="ordenamientoFechaTramNue()">Más Recientes</li>
+                      <li (click)="ordenamientoFechaTramAnt()">Más Antiguos</li>
+                    </ul>
+                  </section>
+                </div>
+              </div>
+              <div style="height: 100%;    display: flex;align-items: center;">
+                <h3 class="subtitulo">{{tipoOrden}}</h3>
+              </div>
+              <div class="barraBusqueda" style="height: 100%">
+                <div class="buscar">
+                  <div>
+                    <div class="lupa">
+                      <img src="assets/Images/lupa.svg" width="22px" height="22px" alt="buscar">
+                    </div>
+                    <input type="text" [ngModel]="searchTerm" (ngModelChange)="buscar($event)" class="buscar-input" placeholder="Buscar" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--Lista total-->
+          <div class="listaSeccionUno">
+            <div>
+              <div class= "lista" style="display: unset;flex-direction: column" >
+                <div [ngClass]="item.identificador === folio? 'divActive': ''"  *ngFor="let item of lista; let i = index"
+                     style="display: flex;flex-direction:row;width: 100%;position: relative; border-bottom: 1px solid #ECEEF0" (click)="seleccionarItem(i, item)">
+                  <div class="dfSelect"></div>
+                  <div class="datosLst">
+                    <div class="informacionList">
+                      <label>#{{i +1}} · <span style="color:#008894">{{item.codigo}} </span>{{item.concepto}}</label>
+                      <p>Fecha de Inspección: <span style="text-transform: capitalize;">{{item.fechaInspeccionFormato}}</span> · Inspector: {{item.inspector}}</p>
+                      <h3 class="textoPiezas">Lugar: {{item.destino}} · FEE: <span style="text-transform: capitalize;">{{item.feeFormato}}</span> · DRE: {{item.dre}} · Tipo: {{item.tipo}}</h3>
+                      <p>OC: {{item.compra}} · Pedido Interno {{item.cpedido}}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="totales">
+              <label>#{{lista.length}}</label>
+              <label>{{lista.length}} Piezas</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--linea degradada-->
+      <div class="borderLine"></div>
+      <!---->
+      <div style="width: 65%;padding-left: 20px" class="seccionListas">
+        <div class="titulos">
+          <label *ngIf="activarOc" class="corteTexto">#{{indiceOc}} · <span>{{itemOc.codigo}}</span> {{itemOc.concepto}}</label>
+        </div>
+        <div>
+          <div style="height: 10%; width: 100%; display: flex;flex-direction: column">
+            <div style="height: 60%; width: 100%;display: flex;flex-direction: row;justify-content: space-between">
+              <div class="infoProveedor">
+                <span>Producto Rechazado</span>
+                <div>
+                  <div style="padding-right: 5px;">
+                    <label style="font-weight: 400">Tipo:</label>
+                    <label>{{itemOc.tipo}}</label>
+                  </div>
+                  <div>
+                    <label style="font-weight: 400">Manejo:</label>
+                    <label>{{itemOc.manejo}}</label>
+                  </div>
+                </div>
+              </div>
+              <div class="infoProveedor">
+                <div style="padding-top: 20px">
+                  <div>
+                    <label style="font-weight: 400;color: #008894;">Causa:</label>
+                    <label>{{itemOc.origen}}</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="seccionContenido">
+            <div class="texto">
+              <div style="height: calc(100% - 54px)">
+                <label>Reporte de Rechazo</label>
+              </div>
+              <div class="rechazo">
+                <label class="rechazoMotivo">{{itemOc.rechazo}}</label>
+              </div>
+            </div>
+            <div class="imagenes">
+              <div class="imagenRechazo">
+                <div class="image">
+                  <label (click)="visualizarImg('frente')" [style.font-weight]="fotoF? 'bold': ''">Foto Frente</label>
+                  <label (click)="visualizarImg('arriba')" [style.font-weight]="fotoAr? 'bold': ''">Foto Arriba</label>
+                  <label (click)="visualizarImg('abajo')" [style.font-weight]="fotoAb? 'bold': ''">Foto Abajo</label>
+                </div>
+                <div class="estilosImagen">
+                  <img [src]="pathImg">
+                </div>
+              </div>
+            </div>
+            <div class="motivos">
+              <div style="justify-content: flex-start;align-items: center;padding-top: 5px;">
+                <div class="etiquetaInstruc">
+                  <label class="instruc">Instrucciones</label>
+                </div>
+                <div class="tipoInstruc">
+                  <label style="padding-left: 13px;">Reclamar la reposición del producto</label>
+                </div>
+              </div>
+              <div  style="flex-direction: row;height: 55%;padding-top: 5px;">
+                <div style="flex-direction: column;width: 70%">
+                  <label>Solicitud de Reclamo</label>
+                  <textarea [ngModel]="instruccion" (ngModelChange)="recibirInstruccion($event)" placeholder="Escribe Aquí"></textarea>
+                </div>
+                <div class="tipoEnvio">
+                  <label>Medio de Reclamo</label>
+                  <div style="padding-right: 47px;">
+                    <img src="./assets/Images/radio_unselected.svg" *ngIf="!entregarSelect" (click)="activarSelect('tel')">
+                    <img src="./assets/Images/radio_selected.svg" *ngIf="entregarSelect" (click)="activarSelect('tel')">
+                    <label>Tel</label>
+                  </div>
+                  <div>
+                    <img src="./assets/Images/radio_unselected.svg" *ngIf="!reclamarSelect" (click)="activarSelect('mail')">
+                    <img src="./assets/Images/radio_selected.svg" *ngIf="reclamarSelect" (click)="activarSelect('mail')">
+                    <label>Mail/Fax</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="btn">
+    <div [style.background-color]="activarBtn? '#4BA92B': '#C2C3C9'" [style.pointer-events]="activarBtn? 'auto':'none'" (click)="finalizar()">
+      <label>ACEPTAR</label>
+    </div>
+  </div>
+</div>
+<pn-envio-correo *ngIf="activarPop" (cerrarPop)="finalizarEnvio($event)" [correoContacto]="this.itemContactoS.email"></pn-envio-correo>

@@ -1,0 +1,68 @@
+<div class="cabezera">
+  <label class="etiqueta">REPORTAR VISITA</label>
+</div>
+
+<div class="filtros" *ngIf="visitaCliente != null">
+  <div>Visitas · Sprint # {{visitaCliente.sprint.numeroSprint}} ({{visitaCliente.sprint.fechaInicio}} /
+    {{visitaCliente.sprint.fechaFin}})</div>
+  <div>
+    <pn-botones-tab [listItmes]="listBotonesFiltro" (itemSelected)="itemSelected($event)"></pn-botones-tab>
+  </div>
+</div>
+
+<div class="cuadricula">
+  <div>
+    <div *ngFor="let item of lstVistaCliente; let i = index"  (click)="reportarVisita(item.estado, i)" [ngClass]="item.estado != 'NO REALIZADAS'? item.estado: 'NO_REALIZADAS'">
+      <div class="textoNegro">#{{i+1}} · <span class="tituloVerde">{{item.cliente.nombre}}</span></div>
+      <div class="tituloGris" style="margin-top: 5px">Fecha estimada de visita</div>
+      <div class="textoNegro">Antes del {{item.fechaEstimadaVisita}}</div>
+      <div class="tituloGris">Asunto</div>
+      <div class="textoNegro" style="height: 32px">{{item.asunto}}</div>
+      <div>
+        <div>
+          <div *ngIf="item.tipoVisita == 'CRM'" style="margin-right: 5px">
+            <img width="20px" src='./assets/Images/ventas/visitas/crm.svg' />
+          </div>
+          <div *ngIf="item.tipoVisita == 'Programada'" style="margin-right: 5px">
+            <img width="19px" src='./assets/Images/ventas/visitas/aviso_perfil.svg' />
+          </div>
+          <div class="documentoCargado">
+            <img width="20px" src='./assets/Images/ventas/visitas/archivos.svg' />
+            <div>{{item.totalDocsCargados}}</div>
+          </div>
+        </div>
+        <div>
+          <img width="21px" *ngIf="item.estado == 'NO REALIZADAS'" src='./assets/Images/ventas/visitas/no_realizada.svg' />
+          <img width="21px" *ngIf="item.estado == 'PENDIENTES'" src='./assets/Images/ventas/visitas/parcial.svg' />
+          <img width="25px" *ngIf="item.estado == 'FINALIZADAS'" src='./assets/Images/ventas/visitas/realizada.svg' />
+          <img width="45px" *ngIf="item.estado == 'REPORTADAS'" src='./assets/Images/ventas/visitas/reportada.svg' />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="nomenclatura">
+  <div>CRM 10/20</div>
+  <div>SOLICITUDES 10/15</div>
+  <div>
+    <img class="img" src='./assets/Images/ventas/visitas/no_realizada.svg' />
+    <div>Visitas No Realizadas</div>
+  </div>
+  <div>
+    <img class="img" src='./assets/Images/ventas/visitas/realizada.svg' />
+    <div>Visita Realizada sin Reporte</div>
+  </div>
+  <div>
+    <img class="img" src='./assets/Images/ventas/visitas/parcial.svg' />
+    <div>Visitas Pendiente</div>
+  </div>
+  <div>
+    <img class="img" src='./assets/Images/ventas/visitas/reportada.svg' />
+    <div>Visita Reportada</div>
+  </div>
+  <div>
+    <img class="img" src='./assets/Images/ventas/visitas/archivos.svg' />
+    <div>Archivos Cargados</div>
+  </div>
+</div>

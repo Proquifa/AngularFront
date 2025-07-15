@@ -1,0 +1,311 @@
+<!-- <div style="width: 100%;flex-direction: row; display: flex; min-width: 800px; " class="content-area" *ngIf="!cambiaVista"> -->
+<div style="width: 100%; flex-direction: column; display: flex;" class="VistaInicial">
+    <!-- height: 90%;  -->
+    <!-- height: 25%; -->
+    <div id="principal" style="    margin-left: 20px;">
+        <div style=" width: 100%; height: 100%; justify-content: space-between; display: flex; min-width: 2000px; ">
+            <div id="encabezados" style="    height: 100%; padding-top: 20px;">
+                <!-- < height: 220px;> -->
+                <!-- border:1px solid #D8D8D8; -->
+                <!-- padding-left: 20px; -->
+                <div style=" width: 25%; height: 100%; justify-content: space-between; display: flex; flex-direction: column; ">
+                    <label class="label_estilo_encabezado ">INFORMACIÓN PACKING LIST</label>
+                    <label class="label_nombre_lugar ">CENTRO DE ESTUDIOS CIENTÍFICOS Y CLÍNICOS PHARMA</label>
+                    <label class="label_cliente ">Pedro Alejandro Hernández L. / Almacenista</label>
+                    <!-- display: flex;  -->
+                    <div style="flex-direction: row;     padding-top: 20px; ">
+                        <!-- <img class="img " src='./assets/Images/ubicacion.svg' style=" width: 68px; height: 30px;" /> -->
+                        <img id="ubicacion" src="./assets/Images/Configuracion/Rutas/ubicacion.svg" style="width: 13.20px; height: 10px;" />
+                        <label class="label_ubicacion " style="padding-left: 20px;"> Local · Toluca</label>
+                    </div>
+                </div>
+                <div style=" width: 50%; justify-content: space-between; display: flex; border-left: 1px solid #D8D8D8; border-right: 1px solid #D8D8D8;  min-width: 800px; ">
+                    <pn-barra-progreso-trabajar-ruta-envio></pn-barra-progreso-trabajar-ruta-envio>
+                </div>
+                <div style=" width: 25%; justify-content: space-between; display: flex; padding-left: 20px; padding-top: 20px;">
+                    <pn-barra-prioridades-trabajar-ruta-envio></pn-barra-prioridades-trabajar-ruta-envio>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- height: 71%; border-top: 1px solid #D8D8D8; -->
+    <!-- border-bottom: 1px solid #D8D8D8; -->
+    <div class="contenedor" style=" width: 98%; flex-direction: row; justify-content: space-between;  margin-left: 20px; padding-top: 20px; min-width: 800px; ">
+
+
+        <!-- style="height: 67vh" -->
+        <div id="datosArreglo" class="tabla-clientes" style=" padding-right: 20px; ">
+            <!-- class=" contenido -->
+            <!-- border: 1px solid #D8D8D8 -->
+            <!-- padding-top: 20px; -->
+            <label class="encabezadoLista">PACKING LIST</label>
+            <div id="estilo_borde_verde_lista" class="lista">
+                <!-- padding-bottom: 10px;
+                    padding-top: 10px; -->
+                <!-- border-bottom: solid 1px #ECEEF0; -->
+                <div [ngClass]="lstResultadoCotizaciones[i]" *ngFor="let datos of packing_list; let i = index " style="flex-direction: row; display: flex; width: 80% ; min-width: 250px; border-bottom: solid 1px #ECEEF0;  " (click)="itemSelect(i,datos.numeracion )">
+
+                    <div class="ltSelect"></div>
+
+                    <div id="listaContent" style="display: flex; flex-direction: column;  justify-content: space-between; ">
+                        <!-- padding-left: 20px; -->
+                        <label style="  padding-bottom: 15px;" class="numPacking_list ">{{datos.num}} <span  style="  padding-bottom: 15px;"   class= "nombrePacking_list " > {{datos.numeracion}} </span></label>
+                        <label style="  padding-bottom: 15px;" class="piezasPacking_llist "> {{datos.piezas}}</label>
+                        <div style="display: flex; flex-direction: row ">
+                            <label class="p1"> P1 {{datos.separaciom}} {{datos.p1}} </label>
+                            <label class="p2 "> P2 {{datos.separaciom}} {{datos.p2}} </label>
+                            <label class="p3 "> P3 {{datos.separaciom}} {{datos.p3}} </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- total -->
+        </div>
+        <div class="colectarElementos ">
+            <!-- <div style="flex-direction: column; display: flex;padding-left: 20px;padding-right: 20px;width: 30% ;min-width: 220px;padding-left: 20px;border: 1px solid #D8D8D8; "> -->
+            <div class="escanearCodigos" style="border-bottom: 1px solid #D8D8D8;">
+                <!-- width: 25%; height: 100%;flex-direction: column; display: flex; padding-left: 20px; padding-right: 20px; justify-content: space-between; border-left: 1px solid #D8D8D8;
+border-right: 1px solid #D8D8D8; margin-top: 20px; "
+lo quite de los estilos -->
+                <label style="padding-bottom: 10px; align-content: center;font-family: Helvetica-Bold;font-weight: bold;font-size: 25px;color: #008895;width: 100%;"> COLECTAR ELEMENTO </label>
+                <label class="estiloNombreSeleccioncliente"> {{folio_packing_list}}</label>
+                <!-- div de tipos de -->
+                <div id="seccionUno">
+                    <!-- div congelacion -->
+                    <div style="height: 100%">
+                        <div style=" justify-content: space-between; display: flex; flex-direction: column; border:1px solid #D8D8D8; align-items: center; ">
+                            <label class="estiloTipoElemento"> CONGELACIÓN </label>
+
+                            <img class="img " src='./assets/Images/hielera_congelador.svg' style=" width: 68px; height: 74px;" />
+                            <div class="divColectarElementos" style="border:1px solid #D8D8D8; display: flex; flex-direction: column; ">
+                                <label class="labelcolectarElementos">ET-022318-0099</label>
+                                <label class="labelcolectarElementos"> Hielera</label>
+                                <label class="labelcolectarElementos"> 10 Piezas</label>
+                            </div>
+                        </div>
+                        <div class="escanear" style="flex-direction: row; display: flex; position: relative; ">
+
+                            <textarea type="text" name="firstname" autofocus="focus" (keydown.enter)="enter()" #textarea [(ngModel)]="textoCongelacion" class="textArea">
+</textarea>
+                            <div class="imgEscanear">
+                                <img src='./assets/Images/Images/codigo_gris.svg' [style.display]="codigoImgCongelacion ? 'block': 'none'" />
+                                <img src='./assets/Images/Images/codigobarras_verde.svg' [style.display]="codigoImgCongelacion ? 'none': 'block'" />
+                            </div>
+                        </div>
+                    </div>
+                    <!-- div refirgeracion -->
+                    <div>
+                        <div style=" justify-content: space-between; display: flex; flex-direction: column; border:1px solid #D8D8D8; align-items: center;">
+                            <label class="estiloTipoElemento"> REFRIGERACIÓN </label>
+                            <img class="img " src='./assets/Images/hielera_refri.svg' style=" width: 68px; height: 74px;" />
+                            <div class="divColectarElementos" style="border:1px solid #D8D8D8; display: flex; flex-direction: column; ">
+                                <label class="labelcolectarElementos">ET-022318-0099</label>
+                                <label class="labelcolectarElementos"> Hielera</label>
+                                <label class="labelcolectarElementos"> 10 Piezas</label>
+                            </div>
+                        </div>
+                        <div class="escanear" style="flex-direction: row; display: flex; position: relative; ">
+                            <!-- [(ngModel)]="textoRefrigeracion" -->
+
+                            <textarea id="pedimento" type="text" name="firstname" autofocus="focus" (keydown.enter)="enter()" #textarea [(ngModel)]="textoRefrigeracion" class="textArea">
+</textarea>
+                            <div class="imgEscanear">
+                                <img src='./assets/Images/Images/codigo_gris.svg' [style.display]="codigoImgRefrigeracion? 'block': 'none'" />
+                                <img src='./assets/Images/Images/codigobarras_verde.svg' [style.display]="codigoImgRefrigeracion ? 'none': 'block'" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- segundoDiv -->
+                <!-- div ambiente -->
+                <div id="seccionDos" style=" display: flex; flex-direction: row; justify-content: space-between; height: 60%">
+                    <!-- div congelacion -->
+                    <div style="height: 100%">
+                        <div style=" justify-content: space-between; display: flex; flex-direction: column; border:1px solid #D8D8D8; align-items: center; ">
+                            <label class="estiloTipoElemento"> AMBIENTE </label>
+
+                            <img class="img " src='./assets/Images/bolsa_ambiente.svg' style=" width: 60px; height: 76px;" />
+                            <div class="divColectarElementos" style="border:1px solid #D8D8D8; display: flex; flex-direction: column;">
+                                <label class="labelcolectarElementos">ET-022318-0099</label>
+                                <label class="labelcolectarElementos"> Bolsa</label>
+                                <label class="labelcolectarElementos"> 10 Piezas</label>
+                            </div>
+                        </div>
+                        <div class="escanear" style="flex-direction: row; display: flex; position: relative; ">
+
+                            <textarea id="pedimento" type="text" name="firstname" autofocus="focus" (keydown.enter)="enter()" #textarea [(ngModel)]="textoAmbiente" class="textArea">
+</textarea>
+                            <div class="imgEscanear">
+                                <img src='./assets/Images/Images/codigo_gris.svg' [style.display]="codigoImgAmbiente ? 'block': 'none'" />
+                                <img src='./assets/Images/Images/codigobarras_verde.svg' [style.display]="codigoImgAmbiente ? 'none': 'block'" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div style=" justify-content: space-between; display: flex; flex-direction: column; border:1px solid #D8D8D8; align-items: center; ">
+                            <label class="estiloTipoElemento"> DOCUMENTACIÓN </label>
+                            <img class="img " src='./assets/Images/bolsa_doc.svg' style=" width: 58px; height: 75px;" />
+                            <div class="divColectarElementos" style="border:1px solid #D8D8D8; display: flex; flex-direction: column; ">
+                                <label class="labelcolectarElementos">ET-022318-0099</label>
+                                <label class="labelcolectarElementos"> Bolsa Chica</label>
+                                <label class="labelcolectarElementos"> 2 Piezas</label>
+                            </div>
+                        </div>
+                        <div class="escanear" style="flex-direction: row; display: flex; position: relative; ">
+
+                            <textarea id="pedimento" type="text" name="firstname" autofocus="focus" (keydown.enter)="enter()" #textarea [(ngModel)]="textoDocumentacion" class="textArea">
+</textarea>
+                            <div class="imgEscanear">
+                                <img src='./assets/Images/Images/codigo_gris.svg' [style.display]="codigoImgDocumentacion? 'block': 'none'" />
+                                <img src='./assets/Images/Images/codigobarras_verde.svg' [style.display]="codigoImgDocumentacion ? 'none': 'block'" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- <div style=" padding-left: 20px; justify-content: space-between; width: 65%; padding-bottom: 10px; padding-right: 20px; padding-left: 20px; margin-right: 20px; min-width: 220px; padding-left: 20px; border: 1px solid #D8D8D8;"> -->
+        <!-- 1275px -->
+        <div class="formularioRutas" style=" padding-left: 20px; justify-content: space-between; width: 65%; padding-bottom: 10px; padding-right: 20px; padding-left: 20px; margin-right: 20px; min-width: 1200px; padding-left: 20px; 
+            border-bottom: 1px solid #D8D8D8;
+">
+            <!-- width: 55%; height: 100%; padding-left: 20px; justify-content: space-between; padding-bottom: 20px; margin-right: 20px; " -->
+            <!-- display: flex; lo quite de los estilos -->
+            <!-- <label class="seleccionLista" style="padding-top: 40px;">EJECUTAR RUTA </label> -->
+
+            <label class="seleccionLista"> EJECUTAR RUTA </label><br><br>
+            <div style=" padding-top: 20px;">
+                <!-- border-bottom: 1px solid #008895; -->
+                <label class=" subtitulos " style=" border-bottom: 1px solid #008895; padding-top: 20px; padding-bottom: 20px; display: flex;">
+Detalles</label>
+                <!-- <form [formGroup]="formsCLienteDetalle " (submit)="onSubmitFinalizar(formsCLienteDetalle.value) "> -->
+
+
+                <div style="flex-direction: row" *ngFor="let informacion of contactoArray;">
+                    <label class=" subtituloPeque " style=" padding-top: 20px; padding-bottom: 20px; display: flex;">
+Destino</label>
+                    <br>
+
+                    <div style=" justify-content: space-between; display: flex; flex-direction: row; padding-top: 20px; padding-bottom: 20px; ">
+                        <label class="estiloLabelData">País:</label>
+                        <label class="estiloLabelsContacto">{{informacion.pais}}</label>
+                        <label class="estiloLabelData">Estado:</label>
+                        <label class="estiloLabelsContacto">{{informacion.estado}}</label>
+                        <label class="estiloLabelData">Calle / Nº / Colonia:</label>
+                        <label class="estiloLabelsContacto">{{informacion.direccion}}</label>
+                    </div>
+
+                    <div style=" justify-content: space-between; display: flex; flex-direction: row; padding-top: 20px; padding-bottom: 20px; ">
+                        <label class="estiloLabelData">Delegación / Municipio:</label>
+                        <label class="estiloLabelsContacto">{{informacion.delegacion_municipio}}</label>
+                        <label class="estiloLabelData">Ruta:</label>
+                        <label class="estiloLabelsContacto">{{informacion.ruta}}</label>
+                        <label class="estiloLabelData">Mensajeria:</label>
+                        <label class="estiloLabelsContacto">{{informacion.mensajeria}}</label>
+                    </div>
+                    <label class=" subtituloPeque " style=" padding-top: 20px; padding-bottom: 20px; display: flex;">
+Contacto :</label>
+                    <br>
+                    <div style=" justify-content: space-between; display: flex; flex-direction: row; padding-top: 20px; padding-bottom: 20px; ">
+                        <label class="estiloLabelData">Nombre:</label>
+                        <label class="estiloLabelsContacto">{{informacion.nombre}}</label>
+                        <label class="estiloLabelData">Puesto:</label>
+                        <label class="estiloLabelsContacto">{{informacion.puesto}}</label>
+                        <label class="estiloLabelData">Departamento:</label>
+                        <label class="estiloLabelsContacto">{{informacion.depTo}}</label>
+                    </div>
+                    <div style=" justify-content: space-between; display: flex; flex-direction: row; padding-top: 20px; padding-bottom: 20px; ">
+                        <label class="estiloLabelData">Tel:</label>
+                        <label class="estiloLabelsContacto">{{informacion.telefono}}</label>
+                        <label class="estiloLabelData" for="email">Email</label>
+                        <label class="estiloLabelsContacto">{{informacion.email}}</label>
+                    </div>
+
+                    <div style=" justify-content: space-between; display: flex; flex-direction: column; padding-top: 20px; padding-bottom: 20px; ">
+                        <label class="subtituloPeque0" style=" padding-top: 20px; padding-bottom: 20px; display: flex;">Comentario de envío</label>
+
+                        <div>
+                            <div class="estiloLabelData" *ngIf="etiquetaComentarios">
+                                <label class="estiloLabelsContacto">{{informacion.comentario_envio}}</label>
+                            </div>
+                        </div>
+                        <div>
+                            <div *ngIf="!etiquetaComentarios">
+                                <div class="contenedorComentario" *ngIf="!etiquetaComentarios">
+                                    <label>SIN COMENTARIOS</label>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <label class="subtituloPeque" style="padding-bottom: 20px; display: flex;">Registro de envío</label>
+                    <!-- padding-top: 20px; -->
+                    <div id="archivo" style=" justify-content: space-between; display: flex; flex-direction: row;padding-top: 20px; padding-bottom: 20px; ">
+                        <label class="estiloLabelData"> Guía de envío DHL:</label>
+                        <label id="localizacion"></label>
+                        <!-- La imagen cambiara de color, ddepende la validacion -->
+
+                        <img style="width: 30px; height: 30px;" src='./assets/Images/Images/Recurso 266100.svg' [style.display]="validarImgGps? 'block': 'none'" />
+                        <img style="width: 30px; height: 30px;" src='./assets/Images/Images/Recurso 265100.svg' [style.display]="validarImgGps ? 'none': 'block'" />
+
+
+                        <input class="estiloCargarArchivo" style="width: 239.9px;
+height: 29.5px;
+border-bottom-color:#D8D8D8;">
+                        <label class="estiloLabelData"> Guía de envío escaneada:</label>
+
+                        <div style=" justify-content: space-between; display: flex; flex-direction: row; ">
+
+                            <!-- <input class="estiloCargarArchivo" style="width: 239.9px; height: 29.5px; border: 1px solid #D8D8D8;" placeholder="Archivo PDF">
+<img type=image style="width: 29.5px; height: 29.5px;" src="./assets/Images/Images/entrar.svg " /> -->
+                            <pq-file-upload (enviarDocumento)="recibeDocumentacion($event)" style="min-width: 260px;"></pq-file-upload>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+    <!-- <label class="totalPacking_llist " style="align-content: center ; padding-left: 50px; margin-top: 20px;">{{'Total :'}} {{packing_list.length}} {{'Packing list'}}</label> -->
+
+</div>
+
+<label class="totalPacking_llist " style="align-content: center ; padding-left: 50px; margin-top: 20px;">{{'Total :'}} {{packing_list.length}} {{'Packing list'}}</label>
+<!-- </div> -->
+
+
+<div class="botonFinalizar" (click)="onSubmitFinalizar()" [style.pointerEvents]="btnAceptar ? 'auto':'none'" [style.background]="btnAceptar ? '#008895':'#D5DBDB'"> FINALIZAR </div>
+
+<!-- agrege margin-bottom: 20px; margin-top: 100px; -->
+
+
+<footer class="footer " style=" border: none; border-top: solid;">
+    <!-- margin-left: 20px; margin-right: 20px; loquiete de los estilos porque afecta en lo responsivo-->
+    <!-- quite el boder gris border-bottom:1px solid #D8D8D8;-->
+    <div class="datosFooter " style="width: 100%;height: 100%;">
+        <div class="Prioridad1 ">
+            <label class="p1 ">P1</label> Prioridad 1
+        </div>
+        <div class="Prioridad2 ">
+            <label class="p2 ">P2</label> Prioridad 2
+        </div>
+        <div class="Prioridad3 ">
+            <label class="p3 ">P3</label> Prioridad 3
+        </div>
+        <div class="Ambiente ">
+            <img class="img " src='./assets/Images/ambiente.svg' /> Ambiente
+        </div>
+        <div class="Congelación ">
+            <img class="img " src='./assets/Images/congelacion.svg' /> Congelación
+        </div>
+        <div class="Refrigeración ">
+            <img class="img " src='./assets/Images/refrigeracion.svg' /> Refrigeración
+        </div>
+    </div>
+</footer>

@@ -1,0 +1,33 @@
+@import "../../../../mixins.scss";
+@import "../../../../colors.scss";
+
+:host{
+  width: 100%;
+  height: 100%;
+  .navs{
+    @include flexRowWrap;
+    color: $pqNegro;
+    height: 100%;
+    justify-content: space-between;
+    & > div{
+      @include flexRow;
+      align-items: center;
+      height: 30px;
+      cursor: pointer;
+      & > img{
+        margin-right: 5px;
+        height: 100%;
+      }
+    }
+  }
+}
+
+.borderBottom{
+  border-bottom: solid 0.75px $gnGrisRata !important;
+}
+
+.blueHover{
+  :hover{
+    color:$gnAzulMedio !important;
+  }
+}

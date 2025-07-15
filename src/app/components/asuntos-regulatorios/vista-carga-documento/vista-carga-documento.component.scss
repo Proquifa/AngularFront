@@ -1,0 +1,238 @@
+@import "./../../../../mixins.scss";
+@import "../../../../colors.scss";
+.areaPrincipal{
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  padding-left: 22px;
+  padding-right: 22px;
+  flex-direction: column;
+  min-width: 1431px;
+  min-height: 988px;
+}
+.cargaDoc{
+  width: 100%;
+  height: 95%;
+  background-color:#ECEEF0 ;
+  justify-content: center;
+  display: flex;
+  position: relative;
+}
+.carga{
+  display: none;
+  // position: absolute;
+  // width: 100%;
+  // height: 80%;
+  // color: transparent;
+  &::-webkit-file-upload-button {
+    opacity: 0;
+  }
+}
+.titulo {
+  width: 100%;
+  height: 5%;
+  box-sizing: border-box;
+  border-bottom: 1px solid #424242;
+  padding: 5px;
+  min-height: 40px;
+  label{
+    font-family: novecento;
+    font-weight: bold;
+    font-size: 24px;
+    justify-items: center;
+  }
+}
+ .infoProd{
+   height: 100%;
+   width: 35%;
+   display: flex;
+   flex-direction: column;
+   line-height: 1.3;
+   box-sizing: border-box;
+   padding-right: 25px;
+   .nombre{
+     width: 100%;
+     min-height: 28px;
+     max-height: 56px;
+     line-height: 1.3;
+     overflow: hidden;
+     @include multiLineTextTruncateSinHeight(2, 1.1);
+     label{
+       color: #008894;
+       font-family: Roboto;
+       font-weight: bold;
+       font-size: 24px;
+     }
+     span{
+       color: #424242;
+     }
+   }
+   .cantidadProd{
+     line-height: 1.3;
+     width: 100%;
+     height: 53%;
+     display: flex;
+     flex-direction: row;
+     span{
+       color: #424242;
+       font-size: 18px;
+       font-family: Roboto-Regular;
+       display: flex;
+       margin-top: 6px;
+     }
+     h1{
+       color: #008894;
+       font-size: 18px;
+       font-family: Roboto-Regular;
+     }
+   }
+ }
+.fechas{
+  height: 100%;
+  width: 65%;
+  display: flex;
+  div{
+    box-sizing: border-box;
+    padding-right: 20px;
+    label{
+      font-family: Roboto-Regular;
+      font-size: 17px;
+      color: #424242;
+      display: flex;
+      box-sizing: border-box;
+      padding-bottom: 6px;
+    }
+  }
+}
+.datos{
+  box-sizing: border-box;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  width: 100%;
+  min-height: 10%;
+  display: flex;
+  min-height: 90px;
+}
+.btnDireccionPL{
+  display: flex;
+  box-sizing: border-box;
+  width: 100%;
+  height: 5%;
+  padding-top: 15px;
+  justify-content: space-between;
+  justify-items: center;
+}
+.btnImprimir {
+  width: 170px;
+  height: 30px;
+  background-color: #008894;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 21px;
+  cursor: pointer;
+  border: none;
+  color: #FFFFFF;
+  font-weight: bold;
+  order: 0;
+  flex: 0 1 auto;
+  align-self: auto;
+}
+.titulo2{
+  font-family: novecento;
+  font-weight: bold;
+  font-size: 24px;
+  justify-items: center;
+}
+.recargar{
+  width: 100%;
+  height: 5%;
+  display: flex;
+  box-sizing: border-box;
+  justify-content: flex-end;
+}
+.contentRefuse{
+  height: 100%;
+  overflow: auto;
+  width: 69%;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  position: relative;
+  /*display: flex;
+  box-sizing: border-box;
+  padding-top: 20px;
+  padding-left: 30px;
+  padding-right: 30px;*/
+}
+.vistDoc{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding-top: 20px;
+  padding-bottom: 10px;
+  padding-right: 30px;
+  padding-left: 30px;
+}
+.textoImagen{
+  color: #D8D9DD;
+  font-size: 36px;
+  text-align: center;
+  position: relative;
+  font-family: Novecento;
+  font-weight: bold;
+}
+.imgeArchivo{
+  height: 265px;
+  width: 204px;
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  text-align: center;
+}
+.cargarDocumento{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  height: 100%;
+  justify-content: center;
+  width: 100%;
+  cursor: pointer;
+}
+.documento{
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 10px;
+  width: 100%;
+  height: 80%
+}
+.labelPeq{
+  font-size: 18px !important;
+  font-weight: 400 !important;
+}
+
+/deep/  .dropListSelect {
+  min-width: 186px;
+  & .container-drop {
+    &  .Title {
+      & > p{
+        font-size: 15px!important;
+      }
+    }
+  }
+}
+/deep/ .dropList{
+  min-width: 186px;
+}
+@media all and(min-width: 1300px) and (max-width: 1509px){
+  .infoProd > .nombre > label{font-size: 22px;};
+  .infoProd > .nombre{min-height: 24px;max-height: 48px;};
+  .infoProd > .cantidadProd{font-size: 16px};
+  .btnDireccionPL{padding-bottom: 6px;padding-top: 6px;}
+}

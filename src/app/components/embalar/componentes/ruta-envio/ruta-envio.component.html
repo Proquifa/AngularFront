@@ -1,0 +1,288 @@
+<script src='http://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-resource.js'></script>
+<script src='../../../../../../app/services/session/consume-rest.js'></script>
+<div class="content-area ">
+  <div class="contenedorFormulario">
+   <!-- <div class="tabla-clientes">
+      <label class="encabezadoLista">PACKING LIST</label>
+      <div id="estilo_borde_verde_lista" class="lista">
+        <div [ngClass]="lstResultadoCotizaciones[i]" *ngFor="let packing_list of encabezadosPasckinList; let i = index "
+             class="listaItem" (click)="itemSelect(i)">
+          <div class="ltSelect"></div>
+          <div id="listaContent" style="display: flex; flex-direction: column; justify-content: space-between; ">
+            <label class="numPacking_list "> #{{i+1}}· <span
+              style=" padding-bottom: 15px;"
+              class="nombrePacking_list "> {{packing_list.folio}}  </span></label>
+            <label class="piezasPacking_llist "> {{packing_list.piezas}}&nbsp;{{'Piezas'}}</label>
+            <div style="display: flex; flex-direction: row ">
+              <label class="p1"> P1 · {{packing_list.p1}} </label>
+              <label class="p2"> P2 · {{packing_list.p2}} </label>
+              <label class="p3"> P3 · {{packing_list.p3}} </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      &lt;!&ndash; total &ndash;&gt;
+    </div>-->
+    <div class="segundaSeccion">
+      <!--<div class="escanearCodigos">
+        <div class="tituloColectar">
+          <span class="tituloColectarElem">
+          COLECTAR ELEMENTO </span>
+          <span class="estiloNombreSeleccioncliente"> {{datoPL}}</span>
+        </div>
+        &lt;!&ndash; div de tipos de elementos &ndash;&gt;
+
+        &lt;!&ndash; prueba&ndash;&gt;
+      </div>-->
+      <!--padding-right: 20px;-->
+      <div class="formularioRutas">
+        <label class="seleccionLista"> EJECUTAR RUTA </label>
+        <div>
+          <label class=" subtitulos " style=" border-bottom: 1px solid #008895;display: flex;">Detalles</label>
+          <div style="flex-direction: row">
+            <div class=" subtituloPeque "
+                 style=" padding-top: 20px; display: flex;">Destino
+            </div>
+            <div class="rowFormulario">
+              <div class="datosForm">
+                <div class="estiloLabelData">País:</div>
+                <div class="estiloLabelsContacto">{{destino[0].pais}}</div>
+              </div>
+              <div class="datosForm">
+                <div class="estiloLabelData">Estado:</div>
+                <div class="estiloLabelsContacto">{{destino[0].estado}}</div>
+              </div>
+              <div class="datosForm">
+                <div class="estiloLabelData">Calle / Nº / Colonia:</div>
+                <div class="estiloLabelsContacto">{{destino[0].calle}}</div>
+              </div>
+              <div class="datosForm">
+                <div class="estiloLabelData">Delegación / Municipio:</div>
+                <div class="estiloLabelsContacto">{{destino[0].delegacion}}</div>
+              </div>
+              <div class="datosForm">
+                <div class="estiloLabelData">C.P:</div>
+                <div class="estiloLabelsContacto">{{destino[0].CP}}</div>
+              </div>
+              <div class="datosForm">
+                <div class="estiloLabelData">Ruta:</div>
+                <div class="estiloLabelsContacto">{{destino[0].ruta}}</div>
+              </div>
+            </div>
+            <div class="rowFormulario">
+             <!-- <div class="datosForm">
+                <div class="estiloLabelData">Delegación / Municipio:</div>
+                <div class="estiloLabelsContacto"></div>
+              </div>-->
+             <!-- <div class="datosForm">
+                <div class="estiloLabelData">C.P:</div>
+                <div class="estiloLabelsContacto"></div>
+              </div>-->
+              <!--<div class="datosForm">-->
+                <!--<div class="estiloLabelData">Ruta:</div>-->
+                <!--<div class="estiloLabelsContacto"></div>-->
+              <!--</div>-->
+              <!--Agregar lo siguiente comentado a Mensajeria-->
+              <!--<div class="datosForm">
+                <div class="estiloLabelData">Mensajeria:</div>
+                <div class="estiloLabelsContacto"></div>
+              </div>-->
+            </div>
+            <label class=" subtituloPeque " style=" padding-top: 20px; display: flex;"> Contacto</label>
+            <div class="rowFormulario">
+              <div class="datosForm">
+                <div class="estiloLabelData">Nombre:</div>
+                <div class="estiloLabelsContacto">{{this.datosContacto[0].contacto}}</div>
+              </div>
+              <div class="datosForm">
+                <div class="estiloLabelData">Puesto:</div>
+                <div class="estiloLabelsContacto">{{this.datosContacto[0].puesto}}</div>
+              </div>
+              <div class="datosForm">
+                <div class="estiloLabelData">Departamento:</div>
+                <div class="estiloLabelsContacto">{{this.datosContacto[0].departamento}}</div>
+              </div>
+              <div class="datosForm">
+                <label class="estiloLabelData">Tel:</label>
+                <div class="estiloLabelsContacto">{{this.datosContacto[0].tel}}</div>
+              </div>
+              <div class="datosForm">
+                <label class="estiloLabelData">Email:</label>
+                <div class="estiloLabelsContacto">{{this.datosContacto[0].mail}}</div>
+              </div>
+            </div>
+           <!-- <div class="rowFormulario">
+              <div class="datosForm">
+                <label class="estiloLabelData">Tel:</label>
+                <div class="estiloLabelsContacto"></div>
+              </div>
+              <div class="datosForm">
+                <label class="estiloLabelData">Email</label>
+                <div class="estiloLabelsContacto"></div>
+              </div>
+            </div>-->
+            <!--<div
+              style=" justify-content: space-between; display: flex; flex-direction: column; padding-bottom: 30px; ">
+              <label class="subtituloPeque0" style=" padding-top: 20px; display: flex;">Comentario
+                de envío</label>
+              <div>
+                <div class="estiloLabelData" *ngIf="etiquetaComentarios">
+                  <label class="estiloTxtAreaContacto"></label>
+                </div>
+              </div>
+              <div>
+                <div *ngIf="!etiquetaComentarios">
+                  <div class="contenedorComentario" *ngIf="!etiquetaComentarios">
+                    <label>SIN COMENTARIOS</label>
+                  </div>
+                </div>
+              </div>
+            </div>-->
+            <!--<div class="rowFormulario">
+              <div
+                style=" justify-content: space-between; display: flex; flex-direction: column; padding-bottom: 30px; ">
+                <label class="subtituloPeque0" style=" padding-top: 20px; display: flex;">Comentario
+                  de envío</label>
+                <div>
+                  <div class="estiloLabelData" *ngIf="etiquetaComentarios">
+                    <label class="estiloTxtAreaContacto"></label>
+                  </div>
+                </div>
+                <div>
+                  <div *ngIf="!etiquetaComentarios">
+                    <div class="contenedorComentario" *ngIf="!etiquetaComentarios">
+                      <label>SIN COMENTARIOS</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>-->
+            <div class="rowFormulario"></div>
+            <label class=" subtituloPeque " style="display: flex;">Datos del paquete</label>
+            <br>
+            <div
+              style=" justify-content: space-between; display: flex; flex-direction: row; padding-top: 20px; padding-bottom: 20px;flex-wrap: wrap;">
+              <div style="padding-bottom: 5px;">
+                <label class="estiloLabelData">Peso:</label>
+                <input class="inputPaquete" name="peso" id="peso"
+                       (input)="recibeContacto($event.target.value,'peso')" [value]="valorInicial"
+                       [disabled]="activarInputs" style="z-index: 3" [(ngModel)]="peso">
+                <label class="estiloLabelData">kg</label>
+              </div>
+              <div style="padding-bottom: 5px;">
+                <label class="estiloLabelData">Longitud:</label>
+                <input class="inputPaquete" name="longitud" id="longitud"
+                       (input)="recibeContacto($event.target.value,'longitud')" value=" " [disabled]="activarInputs"
+                       style="z-index: 3" [(ngModel)]="longitud">
+                <label class="estiloLabelData">cm</label>
+              </div>
+
+              <div style="padding-bottom: 5px;">
+                <label class="estiloLabelData">Altura:</label>
+                <input class="inputPaquete" name="altura" id="altura"
+                       (input)="recibeContacto($event.target.value,'altura')" value=" " [disabled]="activarInputs"
+                       style="z-index: 3" [(ngModel)]="altura">
+                <label class="estiloLabelData">cm</label>
+              </div>
+
+              <div style="padding-bottom: 5px;">
+                <label class="estiloLabelData">Ancho:</label>
+                <input class="inputPaquete" name="ancho" id="ancho"
+                       (input)="recibeContacto($event.target.value, 'ancho')" value=" " [readonly]="activarInputs"
+                       style="z-index: 3" [(ngModel)]="ancho">
+                <label class="estiloLabelData">cm</label>
+              </div>
+              <!-- <input class="inputPaquete" name="ancho" type="number" (input)="recibeContacto($event.target.value,'ancho')" value=" "> -->
+            </div>
+            <div class="rowFormulario"></div>
+            <label class="subtituloPeque" style="padding-top: 20px;">Registro de envío</label>
+            <!--<div class="archivo" *ngIf="tipoEnviar">
+              <div class="datosForm" style="align-items: center;">
+                <label class="estiloLabelData" style="min-width: 140px;"> Mensajería</label>
+                <div [ngStyle]="{'display':'flex', 'flex-direction':'row'}">
+                  <pn-combo-flecha-verde [title]="'Seleccionar'"  [itemSelect]="selectedEnvio" id="cmbEnvio"  (valueDropList)="recibeValosCombo($event,'envio')" [items]="tiposEnvios" [heightLi]="'35px'" ></pn-combo-flecha-verde>
+                </div>
+              </div>
+            </div>-->
+            <div *ngIf="tipoEnviar" id="archivo" class="archivo">
+              <div class="datosForm" style="align-items: center;">
+                <label class="estiloLabelData" style="min-width: 100px;" *ngIf="tipoEnviar"> Mensajería <label *ngIf="activarSelect"> :</label></label>
+                <div [ngStyle]="{'display':'flex', 'flex-direction':'row'}"  style="min-width: 210px;">
+                  <pn-combo-flecha-verde [title]="'Seleccionar'"  [itemSelect]="selectedEnvio" id="cmbEnvio"  (valueDropList)="recibeValosCombo($event,'envio')" [items]="tiposEnvios" [heightLi]="'35px'" *ngIf="!activarSelect"></pn-combo-flecha-verde>
+                  <label *ngIf="activarSelect">{{recibioMensajeria}}</label>
+                </div>
+              </div>
+              <div class="datosForm" style="align-items: center;">
+                <label class="estiloLabelData" style="min-width: 140px;"> Guía de envío:</label>
+                <div *ngIf=validarPaquteria>
+                  <input id="ingresoNumTracking" class="estiloInputMensajero" name="mensajero " value=" " type="text "
+                         maxlength="13" [ngModel]="ingresoTracking" (ngModelChange)="incluirTrackingArreglo($event)"
+                         style="z-index: 3; position: relative">
+                </div>
+                <div *ngIf=!validarPaquteria>
+                  <label class="estiloLabelData" style="border-bottom: red;">{{numeroTracking}}</label>
+                </div>
+                <label id="localizacion"></label>
+                <div *ngIf="!validarPaquteria">
+                  <!--GRIS-->
+                  <div *ngIf="activarBotonEnvio">
+                    <img style="width: 40px; height: 40px;z-index: 4;position: relative"
+                         src='./assets/Images/Images/Recurso 265100.svg' #dato
+                         (click)="realizarEnvioTipoMensajero(mensajeria, estado)" *ngIf="activarBotonEnvio"/>
+                  </div>
+                  <div *ngIf="popUpLocalizar">
+                    <!--<pn-pop-up-localizar-numero-rastreo></pn-pop-up-localizar-numero-rastreo>-->
+                  </div>
+                  <!--VERDE-->
+                  <div *ngIf="!activarBotonEnvio">
+                    <img style="width: 40px; height: 40px;;z-index: 3" src='./assets/Images/Images/Recurso 266100.svg'
+                         *ngIf="!activarBotonEnvio"/>
+                  </div>
+                  <!--   <img style="width: 40px; height: 40px;" src='./assets/Images/Images/Recurso 265100.svg' *ngIf="mostarPopUp" /> -->
+                </div>
+              </div>
+              <div class="datosForm" style="align-items: center;">
+                <label class="estiloLabelData"> Guía de envío escaneada:</label>
+                <div id="EstiloCargarArchivo">
+
+                  <div *ngIf="activar">
+                    <!--<pn-file-upload-envio [nombreArchivo]=valor_tracking [fileName]=cargarGuia
+                                          [mensajeria]=validarPaquteria (enviarDocumento)="recibeDocumentacion($event)"
+                                          style="min-width: 260px;" [paqDistinta]=paqDistinta
+                                          [ruta]=cargarGuia></pn-file-upload-envio>-->
+
+                    <pq-file-upload [disabled]="true" [docR]="cargarGuia" style="min-width: 260px;display: flex;"
+                                    (enviarDocumento)="recibeDocumentacion($event)"
+                                    [activarOjito]="tipoEnvio"></pq-file-upload>
+
+                  </div>
+                  <!--<div *ngIf="!activar">
+                    <pn-file-upload-envio [nombreArchivo]=valor_tracking [fileName]=cargarGuia
+                                          [mensajeria]=validarPaquteria (enviarDocumento)="recibeDocumentacion($event)"
+                                          style="min-width: 260px;" [paqDistinta]=paqDistinta
+                                          [ruta]=cargarGuia></pn-file-upload-envio>
+                  </div>-->
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="totalFinalizar">
+  <div class="botonFinalizar" (click)="finalizar()" [style.pointerEvents]="btnAceptar ? 'auto':'none'"
+       [style.background]="btnAceptar ? '#008895':'#C2C3C9'"> FINALIZAR
+  </div>
+</div>
+<div *ngIf="activarAlerta">
+  <pq-alerta [alertaTxt]="mensaje" (confirmacion)="cerrarAlert($event)"></pq-alerta>
+</div>
+<div *ngIf="activarAlertExit">
+
+</div>
+<div *ngIf="activarPopFin">
+  <pn-pop-up-exito [label]="'El proceso terminó exitosamente'" [imagen]="false" (desactivarPop)="desactivarPop($event)"></pn-pop-up-exito>
+</div>

@@ -1,0 +1,66 @@
+@import 'assets/styles/reset.scss';
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import '~@angular/material/theming';
+@include mat-core();
+
+$mat-Proquifa: (
+  50: #e0f1f2,
+  100: #b3dbdf,
+  200: #80c4ca,
+  300: #4dacb5,
+  400: #269aa5,
+  500: #008895,
+  600: #00808d,
+  700: #007582,
+  800: #006b78,
+  900: #005867,
+  A100: #96edff,
+  A200: #63e4ff,
+  A400: #30dbff,
+  A700: #17d7ff,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $dark-primary-text,
+    400: $dark-primary-text,
+    500: $dark-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $dark-primary-text,
+    A400: $dark-primary-text,
+    A700: $dark-primary-text,
+  )
+);
+
+$my-theme-primary: mat-palette($mat-Proquifa);
+$my-theme-accent: mat-palette($mat-Proquifa);
+$my-theme-warn: mat-palette($mat-Proquifa);
+
+
+$my-theme: mat-light-theme(
+    $my-theme-primary,
+    $my-theme-accent,
+    $my-theme-warn
+);
+
+@include angular-material-theme($my-theme);
+
+
+
+
+
+/* .mat-calendar-body {
+  tr:nth-of-type(1) {
+    td:nth-of-type(1) {
+      color: white;
+    }
+  }
+} */
+
+/* .mat-datepicker-content{
+    height: 320px !important;
+} */

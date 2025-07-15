@@ -1,0 +1,7 @@
+
+    <div (click)= "activeItem(i)"
+      [class]= "borderBottom ?hover+' borderBottom':hover"
+      [style.width]= "widthTotal">
+      <img [style.width] = "imgSize" alt="check" 
+      [src]="!disble ? 'assets/Images/radio_inactive.svg' : !select ? 'assets/Images/radio_unselected.svg' :'assets/Images/radio_selected.svg' " [style.width]="width">
+    </div>

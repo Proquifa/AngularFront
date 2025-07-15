@@ -1,0 +1,55 @@
+<div class="informacionPartida" style="max-width: 523px;overflow: hidden;">
+  <h1> INFORMACIÓN DE LA PARTIDA</h1>
+    <div class="info">
+    <div class="descripcion">
+    {{idPartida}} · {{descripcion}} - {{marca}} {{presentacion}}
+    </div>
+
+    <div class="oc">
+      <label  *ngIf="!banderaTxt"> {{oc}}</label>
+      <label *ngIf="banderaTxt"> {{pedimento}}</label>
+    </div>
+
+    <div class="pzas">
+      <div class="cantidad">
+        <img class="img" *ngIf="iconoAmbiente" src='./assets/Images/ambiente.svg'/>
+        <img class="img" *ngIf="iconoCongelacion" src='./assets/Images/congelacion.svg'/>
+        <img class="img" *ngIf="iconoRefrigeracion"  src='./assets/Images/refrigeracion.svg'/>
+        <label class="pzas">· {{formatoPzas}} </label>
+      </div>
+      <div [ngClass]="classPrioridad">
+        <div class="tooltip"> {{prioridad}}  · {{puntaje}}
+          <span class="tooltiptext">
+            <table style="width:100%">
+              <tr style="color:#FFF;" *ngIf="mostrarFEE">
+                <td>FEE: {{fechaFEE | dateFormatSlash}}· {{diasRestantes}} </td>
+                <td style="text-align: Right;">+{{pFEE}}</td>
+              </tr>
+              <tr *ngIf="mostrarManejo">
+                <td>Manejo: </td>
+                <td style="text-align: Right;">+{{pManejo}}</td>
+              </tr>
+              <tr *ngIf="mostrarRuta">
+                <td>Ruta: </td>
+                <td style="text-align: Right;" >+{{pRuta}}</td>
+              </tr>
+              <tr *ngIf="mostrarParciales">
+                <td>Parciales: </td>
+                <td style="text-align: Right;">+{{pParciales}}</td>
+              </tr>
+              <tr *ngIf="mostrarArribo">
+                <td>Días arribo: </td>
+                <td style="text-align: Right;">+{{pArribo}}</td>
+              </tr>
+              <tr *ngIf="mostrarControl">
+                <td>Control: </td>
+                <td style="text-align: Right;">+{{pControl}}</td>
+              </tr>
+            </table>
+            </span>
+        </div>
+
+      </div>
+    </div>
+    </div>
+</div>

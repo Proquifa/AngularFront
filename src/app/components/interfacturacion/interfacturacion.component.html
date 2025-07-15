@@ -1,0 +1,32 @@
+<div class="padre">
+  <!--Seccion de menu-->
+  <div style="position: relative; display: flex; background: #E6E6E6;" class="aux">
+    <aside [ngClass]="classAsideMenu">
+      <div class="articulo" *ngIf="!ocultarAcor">
+        <pn-menu-seccion [items]="itemsMenu" [titulo]="'FACTURISTA'"  style="width: 100%;"></pn-menu-seccion>
+      </div>
+    </aside>
+    <div style="position: absolute; position: absolute; padding-top: 352px;right: 0">
+      <img class="img" src='./assets/Images/flecha_cuadro.svg' *ngIf="!ocultarAcor" (click)="mostarOcultarAcordeon()" />
+      <img class="img" src='./assets/Images/flecha_mostrar.svg' *ngIf="ocultarAcor" (click)="mostarOcultarAcordeon()" />
+    </div>
+  </div>
+  <!--Termina seccion de menu-->
+  <!--Empieza el area de trabajo-->
+  <div class="area">
+    <!--Empieza la cabezera-->
+    <div class="cabezera">
+      <div style="cursor: pointer;" *ngIf="!vistaInicialActiva" (click)="regresarVistaP()">
+        <img class="img" src='./assets/Images/regresar.svg'/>
+      </div>
+      <label class="etiqueta">INTERFACTURACIÓN</label>
+    </div>
+    <!--Termina la cabezera-->
+    <!--Empiezan los componentes-->
+    <div [ngStyle]="{'overflow':'scroll', 'width':'100%', 'height':'calc(100% - 64px)'}" *ngIf="vistaFacturacion">
+      <pn-facturacion (cambiarBarraRegreso)="cambiarDireccionamiento($event)"></pn-facturacion>
+    </div>
+    <!--Terminan los componentes-->
+  </div>
+  <!--Termina area de trabajo-->
+</div>

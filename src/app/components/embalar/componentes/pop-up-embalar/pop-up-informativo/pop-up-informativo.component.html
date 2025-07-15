@@ -1,0 +1,48 @@
+<div id="popUp" class="popUp" *ngIf="openPopcolocar">
+  <div class="fondo"></div>
+  <div class="popContenido">
+    <div class="popHeader">
+      <span>PROQUIFA NET</span>
+    </div>
+    <div class="popContenido" *ngIf="activarHielera">
+      <label>Colocar Etiqueta Corporativa</label>
+        <label>a {{tipoMensaje}}.</label>
+    </div>
+    <div class="popContenido" *ngIf="activarSobre">
+      <label>Colocar Etiqueta QR</label>
+      <label>a sobre de documentos.</label>
+    </div>
+    <div class="popContenido" *ngIf="activarBolsaInfo">
+      <label>Colocar Etiqueta QR</label>
+      <label>a la Bolsa.</label>
+    </div>
+    <!--<div class="dvBotones" style="justify-content: flex-start; padding-left: 34px">
+      <div class="dvBoton" (click)="closePopUp()">
+        Cancelar
+      </div>
+    </div>-->
+    <div class="dvBotones" style="justify-content: center; /*padding-left: 200px*/">
+      <div class="dvBoton" (click)="cambiarVistaEmbalar()">
+        <label>Aceptar </label>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--<div id="popUp" class="popUp" *ngIf="openPopImprimir">
+  <div class="fondo"></div>
+  <div class="popContenido">
+    <div class="popHeader">
+      <span>PROQUIFA NET</span>
+    </div>
+    <div class="popContenido">
+      <label>Imprimir Etiqueta para </label>
+             <label> colocar en Etiqueta Corporativa</label>
+    </div>
+    <div class="dvBotones" style="justify-content: center">
+      <div class="dvBoton" (click)="CambiarVista()">
+        Aceptar
+      </div>
+    </div>
+  </div>
+</div>-->

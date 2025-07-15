@@ -1,0 +1,21 @@
+<div class="padre" (click)="selected()" *ngIf= "!disabled">
+
+
+  <div class="checkbox" *ngIf="check">
+    <input  type="checkbox" name="checkbox" id="checkbox1">
+    <label for="checkbox1" style="background-image: url('./assets/Images/editar-pieza/seleccionar.svg');  background-size: 21px 23px; background-repeat: no-repeat;">
+    </label>
+  </div>
+
+  <div class="checkbox" *ngIf="!check">
+    <input  type="checkbox" name="checkbox" id="checkbox1">
+    <label   for="checkbox1"></label>
+  </div>
+</div>
+
+<div class="padre" *ngIf= "disabled" >
+  <div class="checkbox" *ngIf="!check">
+    <input  type="checkbox" name="checkbox" id="checkbox1">
+    <label   for="checkbox1"></label>
+  </div>
+</div>

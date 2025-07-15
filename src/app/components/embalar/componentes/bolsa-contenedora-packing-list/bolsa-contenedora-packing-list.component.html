@@ -1,0 +1,212 @@
+<div class="PbolsaContenedoraPL" style="height: 100%;">
+  <div class="bolsaContenedoraPL" *ngIf="bolsaContenedora">
+    <div class="datosBolsaPL">
+      <p class="p1">Packing list - {{arrayFolioPacking[0]}}</p>
+    </div>
+    <div class="paquetesPl">
+      <!--Empieza-->
+      <div class="numCopias">
+        <div style="height: 90%">
+          <div class="pPedido">
+            <div class="btnMas" (click)="mostrarDetalles('Pedido')">
+              <div class="tooltip">
+                <img class="img" src='./assets/Images/Agregar.svg' style="height:29px;width:29px;" />
+                <span class="tooltiptext">
+                  <p>Ver detalles</p>
+                  </span>
+              </div>
+            </div>
+            <div class="imgP">
+              <img class="img" src='./assets/Images/doc_gris.svg' style="height:121px;width:124px;" *ngIf="printPedido" />
+              <img class="img" src='./assets/Images/doc_verde.svg' style="height:121px;width:124px;" *ngIf="!printPedido" />
+            </div>
+            <div class="datosP">
+              <p style="font-size: 18px;font-weight:bold;">Pedido</p>
+              <p style="font-size: 15px;">Total: {{arrayPathPedidosAux.length}}</p>
+            </div>
+          </div>
+        </div>
+        <div class="total">
+          <label>{{textoNumCopPed}}</label>
+        </div>
+      </div>
+      <!--Empieza-->
+      <div class="numCopias">
+        <div style="height: 90%">
+          <div class="pFacturas">
+            <div class="btnMas" (click)="mostrarDetalles('Facturas')">
+              <div class="tooltip">
+                <img class="img" src='./assets/Images/Agregar.svg' style="height:29px;width:29px;" />
+                <span class="tooltiptext">
+                <p>Ver detalles</p>
+                </span>
+              </div>
+            </div>
+            <div class="imgP">
+              <img class="img" src='./assets/Images/doc_gris.svg' style="height:121px;width:124px;" *ngIf="printFacturas" />
+              <img class="img" src='./assets/Images/doc_verde.svg' style="height:121px;width:124px;" *ngIf="!printFacturas" />
+            </div>
+            <div class="datosP">
+              <p style="font-size: 18px;font-weight:bold;">Facturas</p>
+              <p style="font-size: 15px;">Total: {{arrayPathFacturas.length}}</p>
+            </div>
+          </div>
+        </div>
+        <div class="total">
+          <label> {{textoNumCopFac}}</label>
+        </div>
+    </div>
+      <!--Remisiones-->
+      <div class="pCertificados" *ngIf="activarEvidencia">
+        <div class="btnMas" (click)="mostrarDetalles('Evidencia')">
+          <div class="tooltip">
+            <img class="img" src='./assets/Images/Agregar.svg' style="height:29px;width:29px;" />
+            <span class="tooltiptext">
+              <p>Ver detalles</p>
+              </span>
+          </div>
+        </div>
+        <div class="imgP">
+          <img class="img" src='./assets/Images/doc_gris.svg' style="height:121px;width:124px;" *ngIf="printCertificado" />
+          <img class="img" src='./assets/Images/doc_verde.svg' style="height:121px;width:124px;" *ngIf="!printCertificado" />
+        </div>
+        <div class="datosP">
+          <p style="font-size: 18px;font-weight:bold;">Evidencias</p>
+          <p style="font-size: 15px;">Total: {{arrayEvidenciaCFDI.length}}</p>
+        </div>
+      </div>
+      <!---->
+    <!--Termina-->
+      <!--Remisiones-->
+      <div class="pCertificados" *ngIf="activarRemision">
+        <div class="btnMas" (click)="mostrarDetalles('Remisiones')">
+          <div class="tooltip">
+            <img class="img" src='./assets/Images/Agregar.svg' style="height:29px;width:29px;" />
+            <span class="tooltiptext">
+              <p>Ver detalles</p>
+              </span>
+          </div>
+        </div>
+        <div class="imgP">
+          <img class="img" src='./assets/Images/doc_gris.svg' style="height:121px;width:124px;" *ngIf="printCertificado" />
+          <img class="img" src='./assets/Images/doc_verde.svg' style="height:121px;width:124px;" *ngIf="!printCertificado" />
+        </div>
+        <div class="datosP">
+          <p style="font-size: 18px;font-weight:bold;">Remisiones</p>
+          <p style="font-size: 15px;">Total: {{arrayPathRemisiones.length}}</p>
+        </div>
+      </div>
+      <!---->
+      <div class="pCertificados" *ngIf="activarCertificado">
+        <div class="btnMas" (click)="mostrarDetalles('Certificados')">
+          <div class="tooltip">
+            <img class="img" src='./assets/Images/Agregar.svg' style="height:29px;width:29px;" />
+            <span class="tooltiptext">
+              <p>Ver detalles</p>
+              </span>
+          </div>
+        </div>
+        <div class="imgP">
+          <img class="img" src='./assets/Images/doc_gris.svg' style="height:121px;width:124px;" *ngIf="printCertificado" />
+          <img class="img" src='./assets/Images/doc_verde.svg' style="height:121px;width:124px;" *ngIf="!printCertificado" />
+        </div>
+        <div class="datosP">
+          <p style="font-size: 18px;font-weight:bold;">Certificados</p>
+          <p style="font-size: 15px;">Total: {{arrayPathCertificados.length}}</p>
+        </div>
+      </div>
+
+      <div class="pHojaSeguridad" *ngIf="activarHojaSeg">
+        <div class="btnMas" (click)="mostrarDetalles('Hoja de Seguridad')">
+          <div class="tooltip">
+            <img class="img" src='./assets/Images/Agregar.svg' style="height:29px;width:29px;" />
+            <span class="tooltiptext">
+              <p>Ver detalles</p>
+              </span>
+          </div>
+        </div>
+        <div class="imgP">
+          <img class="img" src='./assets/Images/doc_gris.svg' style="height:121px;width:124px;" *ngIf="printHoja" />
+          <img class="img" src='./assets/Images/doc_verde.svg' style="height:121px;width:124px;" *ngIf="!printHoja" />
+        </div>
+        <div class="datosP">
+          <p style="font-size: 18px;font-weight:bold;">Hoja de Seguridad</p>
+          <p style="font-size: 15px;">Total: {{arrayPathHojas.length}}</p>
+        </div>
+      </div>
+
+      <div class="pPackingList">
+        <div class="btnMas" (click)="mostrarDetalles('Packing List')">
+          <div class="tooltip">
+            <img class="img" src='./assets/Images/Agregar.svg' style="height:29px;width:29px;" />
+            <span class="tooltiptext">
+              <p>Ver detalles</p>
+              </span>
+          </div>
+        </div>
+        <div class="imgP">
+          <img class="img" src='./assets/Images/doc_gris.svg' style="height:121px;width:124px;" *ngIf="printPacking" />
+          <img class="img" src='./assets/Images/doc_verde.svg' style="height:121px;width:124px;" *ngIf="!printPacking" />
+        </div>
+        <div class="datosP">
+          <p style="font-size: 18px;font-weight:bold;">Packing List</p>
+        </div>
+      </div>
+      <!--Nuevo-->
+      <div class="pCertificados" *ngIf="arrayEntregas !== undefined && arrayEntregas.length > 0">
+        <div class="btnMas" (click)="mostrarDetalles('Entregas')">
+          <div class="tooltip">
+            <img class="img" src='./assets/Images/Agregar.svg' style="height:29px;width:29px;" />
+            <span class="tooltiptext">
+              <p>Ver detalles</p>
+              </span>
+          </div>
+        </div>
+        <div class="imgP">
+          <img class="img" src='./assets/Images/doc_gris.svg' style="height:121px;width:124px;"  />
+        </div>
+        <div class="datosP" style="min-height: 70px;">
+          <p style="font-size: 18px;font-weight:bold;">Reg. Entrega Controlado</p>
+          <p style="font-size: 15px;">Total: {{arrayPathEntregas.length}}</p>
+        </div>
+      </div>
+      <!---->
+    </div>
+  </div>
+  <footer *ngIf="mostrarFooter" class="btnDireccionPL">
+    <div *ngIf="btnImprimir">
+      <a class="btnImprimir" (click)="validarImpresion()" [style.pointer-events]="colorBoton?'auto':'none'" [style.background]="colorBoton?'#008895':'#D8D9DD'">Imprimir</a>
+    </div>
+    <div *ngIf="btnFinalizar" style="display: flex;">
+      <div style="padding-right: 10px">
+        <a class="btnImprimir" (click)="popImpresion(false)" style="width: 170px;">Finalizar</a>
+      </div>
+    </div>
+    <div *ngIf="btnGdl" style="display: flex;">
+      <div style="padding-right: 10px">
+        <a class="btnImprimir" (click)="popImpresion(false)" style="width: 262px;">CONTINUAR EMBALANDO</a>
+      </div>
+      <div>
+      <a class="btnImprimir" (click)="popImpresion(true)" style="background-color: #4BA92B">GENERAR GUÍA</a>
+      </div>
+      <!--(click)="enviarPaquete()"-->
+    </div>
+    <!-- <div *ngIf="footerSBorde">
+      <a class="btnImprimir">IMPRIMIR</a>
+    </div> -->
+  </footer>
+  <div *ngIf="activarPopFin">
+    <pn-pop-up-exito [label]="'El proceso terminó exitosamente'" [imagen]="false" (desactivarPop)="desactivarPop($event)"></pn-pop-up-exito>
+  </div>
+  <!--Fin guadalajara-->
+  <div *ngIf="activarPopFinGdl">
+    <pn-pop-up-exito [label]="'El proceso terminó exitosamente'" [imagen]="false" (desactivarPop)="desactivarPopGdl($event)"></pn-pop-up-exito>
+  </div>
+  <div *ngIf="activarPopVerificar">
+    <pn-impresion-confirmada (activarFinalizar)="enviarPaquete($event)" (cerrarPop)="popImpresionDes($event)"></pn-impresion-confirmada>
+  </div>
+    <pq-detalle-paquete *ngIf="detalles" [titulo]="titulo" [array] = "arrayRutas" [foliosAux]= "arrayFolios" (cancelar) = "cancelaDetalle ($event)" [totales]="totCopias"></pq-detalle-paquete>
+    <pn-ruta-envio *ngIf="activarEnvio"></pn-ruta-envio>
+</div>
+<pn-pop-up-facturacion *ngIf="Cfdi" (cerrarPop)="cerrarPop($event)" [recibirLista]="datosCfdi" [datosCliente] ="valoresCLiente"></pn-pop-up-facturacion>
+<pn-pop-up-medidas *ngIf="activeMedidas" [client]="valoresCLiente" (updateMeter)="actualizarPop($event)"></pn-pop-up-medidas>

@@ -1,0 +1,129 @@
+<div class="vistaOperacion">
+    <div class="informacionGerneral">
+      <div class="informacionOE">
+        <pq-informacion-oe [informacionOe]="listaCliente"></pq-informacion-oe>
+      </div>
+      <div class="barraProgreso">
+        <pq-barra-progreso-embalaje [datosBarra]="datosBarraProgreso" [datosTiempo]="tiempoPrioridad"></pq-barra-progreso-embalaje>
+      </div>
+      <!--<div class="prioridadEmbalaje">
+        <pq-barra-prioridades-embalaje [datosPrioridades]="datosPrioridad"></pq-barra-prioridades-embalaje>
+      </div>-->
+    </div>
+
+    <div class="barraActividades">
+      <!--<Pq-barra-actividades (verificarSiAvanza)="verificarAvance($event)" (eventCambio)="recibeIndex($event)" [maxItemList]="maxItemList" [clickArrows]="clickArrows" [clickArrows2]="clickArrows2" [actividades]="actividades">
+      </Pq-barra-acti>vidades>-->
+      <pn-barra-pasos [activarPasos]= "activarPasos"[lstItems]="pasos" [blockItems]="true" (eventCambio)="vistaSelected($event)" [blockLeft]="bloqueoIzquier" [blockRight]="bloqueoDerecho" [siguiente]="avanzar" [anterior]="regresar"></pn-barra-pasos>
+    </div>
+  <div class="contenido">
+  <pq-vista-colectar-elementos [partidasPorColectar]="listaPartidas" *ngIf="vColectarElementos"></pq-vista-colectar-elementos>
+    <!--Descomentar se omitio parapruebas-->
+    <!--<pn-ruta-envio *ngIf="vEmbalarProductos"></pn-ruta-envio>-->
+    <pq-vista-embalar-productos *ngIf="vEmbalarProductos" (activarImprimirGenerar)="activarImpresionSobreG($event)" [activarPaking]="activarGenerarPaking" (cambiarVistaGenerar)="cambiarAPackingList($event)" [activarImpresionSobreProd]="activarImpresionSobre" (eventActivarPopVistaP)="activarPopPaking($event)" (event)="mostrarBotones($event)" (activarBoton)="recibirActivacionB($event)" [datosCliente]="listaCliente" [activarEnviarInfo]="enviarInfo" [estadoVistaUsuario]="estadoVista" (sobrante)="validarSobrantes($event)"></pq-vista-embalar-productos> <!--(cambiarVistaGenerar)="validarBotonGenerar($event)"-->
+  <pq-vista-generar-packing-list *ngIf="vPackingList" [valorCliente]="listaCliente" (vistaColectar)="actualizarVista($event)" (vistaEnvioVista)="cambiaraEnviar($event)"></pq-vista-generar-packing-list>
+   <!--Vista de envio solo para guadalajara-->
+    <pn-ruta-envio *ngIf="vEnviar" (informacionDatos)="recibirDatos($event)"></pn-ruta-envio>
+    <footer class="botonesDireccion" *ngIf="visualizarBotones">
+      <div class="modificacionBoton">
+        <a class="botonIngresar" (click)="mostrarPopUp()" *ngIf="btnVistaColectar">COLECTAR</a> <!--(click)="cambiarAColectar()"-->
+        <!--<a class="botonIngresar" (click)="validarBotonGenerar()" *ngIf="btnVistaEmbalar" [style.pointer-events] = "habilitarBoton?'auto':'none'" [style.background] = "habilitarBoton?'#008895':'#9B9B9B'">GENERAR</a>-->
+       <!-- <a class="botonIngresar" (click)="activarImpresionSobreG()" *ngIf="btnVistaEmbalar" [style.pointer-events] = "habilitarBoton?'auto':'none'" [style.background] = "habilitarBoton?'#008895':'#9B9B9B'">GENERAR</a>-->
+        <a class="botonIngresar" (click)="verificarStock()" *ngIf="btnVistaEmbalar" [style.pointer-events] = "habilitarBoton?'auto':'none'" [style.background] = "habilitarBoton?'#008895':'#9B9B9B'">GENERAR</a>
+      </div>
+      <div *ngIf="btnVistaPackingList">
+        <a class="botonIngresar" >IMPRIMIR</a>
+      </div>
+    </footer>
+</div>
+</div>
+<footer class="footer">
+  <div class="datosFooter">
+    <div class="Prioridad1">
+      <label class="p1">P1</label> Prioridad 1
+    </div>
+
+    <div class="Prioridad2">
+      <label class="p2">P2</label> Prioridad 2
+    </div>
+
+    <div class="Prioridad3">
+      <label class="p3">P3</label> Prioridad 3
+    </div>
+
+    <div class="Ambiente">
+      <img class="img" src='./assets/Images/ambiente.svg' /> Ambiente
+    </div>
+
+    <div class="Congelación">
+      <img class="img" src='./assets/Images/congelacion.svg' /> Congelación
+    </div>
+
+    <div class="Refrigeración">
+      <img class="img" src='./assets/Images/refrigeracion.svg' /> Refrigeración
+    </div>
+    <div class="Refrigeración" *ngIf="vPackingList">
+      <img class="img" src='./assets/Images/Images/Configuracion/Rutas/ubicacion.svg' /> Ubicaciòn
+    </div>
+  </div>
+</footer>
+<div *ngIf="activarPopUpPaking">
+ <!-- <pn-pop-up-paking-list (cambiarVistaPaking)="cambiarAPackingList($event)"></pn-pop-up-paking-list>-->
+  <pn-pop-up-paking-list (cambiarVistaPaking)="cerrarPopPaking($event)"></pn-pop-up-paking-list>
+</div>
+<!-----------------------------------SECCIÓN DE LOS POP-UP------------------->
+<!--<div *ngIf="vistaEtiquetaPoP">
+  &lt;!&ndash;<pn-pop-up-informativo  (vistaPopEstado)="mostrarModalEtiqueta($event)" ></pn-pop-up-informativo>&ndash;&gt;
+  <pn-pop-up-informativo  (vistaListaEmbalar)="mostrarListaEmbalar($event)"  ></pn-pop-up-informativo>
+</div>
+<div *ngIf="openModal">
+  <pn-pop-up-generar-etiqueta-estado [activarSobre]="false" (vistaPopEstado)="mostrarModalEtiqueta($event)"(folio)="recibirFolio($event)"  [recibirManejo]="manejoAScanear" [valorIndice]="i" [folioTemHie]="folioHielera"></pn-pop-up-generar-etiqueta-estado>
+</div>-->
+<!--/*****************************************************************/-->
+<div id="popUp" class="popUp" *ngIf="popUpColectarElementos" >
+  <div class="fondo"></div>
+  <div class="popContenido">
+    <div class="popHeader">
+      <span>PROQUIFA NET</span>
+    </div>
+    <div class="popContenido">
+      <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+      <span>Colectando en dispositivo móvil
+        <span></span>
+      </span>
+    </div>
+    <div class="dvBotones">
+      <div class="dvBoton" (click)="closePopUp()">
+        Cancelar
+      </div>
+     <!-- <div class="dvBoton" (click)="webSocket()" style="width: 20px; margin-left: 10px;">
+        X
+      </div>-->
+    </div>
+  </div>
+</div>
+<!--/*****************************************************************/-->
+<div id="popUp" class="popUp" *ngIf="activarAdv">
+  <div class="fondo"></div>
+  <div class="popContenido">
+    <div class="popHeader">
+      <span>PROQUIFA NET</span>
+    </div>
+    <div class="popContenido">
+      <img src="assets/Images/alerta.svg" alt="" class="alert"/>
+      <div class="informacion">
+          <label>No se han escaneado todos los folios</label>
+          <label>¿ Deseas continuar ?</label>
+      </div>
+    </div>
+    <div class="dvBotonAdv">
+      <div class="dvBoton" (click)="cerrarAdvertencia(false)">
+        <label>Cancelar</label>
+      </div>
+       <div class="dvBoton" (click)="cerrarAdvertencia(true)">
+         <label>Continuar</label>
+       </div>
+    </div>
+  </div>
+</div>
+

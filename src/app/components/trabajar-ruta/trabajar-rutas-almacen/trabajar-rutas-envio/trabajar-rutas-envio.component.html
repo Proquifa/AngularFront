@@ -1,0 +1,162 @@
+<div class="animationZoom" style="width: 100%; height: 100%; flex-direction: row; display: flex; min-width: 800px;">  <!--overflow: scroll;-->
+
+ <!-- <div class="aux" *ngIf="true" style="position:relative; display:flex;background: #E6E6E6;">
+    <aside [ngClass]="classAsideMenuE">
+      <div class="articulo" *ngIf="!ocultarAcorE">
+        <pn-menu-seccion [pendiente]="totalPendientes" [items]="itemsMenu" [titulo]="'GESTOR ENVÍO'" [vistaInicialActiva]="vistaInicialActiva" style="width: 100%;"></pn-menu-seccion>
+      </div>
+    </aside>
+    <div style="position: absolute;  padding-top: 352px;right: 0">
+      <img class="img" src='./assets/Images/flecha_cuadro.svg' *ngIf="!ocultarAcorE" (click)="mostarOcultarAcordeon()" style="margin-right: 0px"/>
+      <img class="img" src='./assets/Images/flecha_mostrar.svg' *ngIf="ocultarAcorE" (click)="mostarOcultarAcordeon()" />
+    </div>
+  </div>-->
+  <div style="position:relative; display: flex; background: #E6E6E6;" class="aux">
+    <aside [ngClass]="classAsideMenu">
+      <div class="articulo" *ngIf="!ocultarAcorE">
+        <pn-menu-seccion-roles [pendiente]="totalPendientes" [items]="itemsMenu" [titulo]="'GESTOR ENVÍO'" [vistaInicialActiva]="vistaInicialActiva" style="width: 100%" *ngIf="activeMenu"></pn-menu-seccion-roles>
+      </div>
+    </aside>
+    <div style="position: absolute; position: absolute; padding-top: 352px;right: 0">
+      <img class="img" src='./assets/Images/flecha_cuadro.svg' *ngIf="!ocultarAcorE" (click)="mostarOcultarAcordeon()" />
+      <img class="img" src='./assets/Images/flecha_mostrar.svg' *ngIf="ocultarAcorE" (click)="mostarOcultarAcordeon()" />
+    </div>
+
+  </div>
+  <!---->
+  <div id="divPrincipal" >
+    <div class="bordeUno"
+    [ngClass]="!vistaInicialActiva ? 'visitaTrabajo' : 'visitaInicial'">
+      <div style="cursor: pointer; height: 35px; width: 20px; " *ngIf="!vistaInicialActiva" (click)="regresarVista()">
+        <img class="img" src='./assets/Images/regresar.svg' style="width: 100%; height: 100%;" />
+      </div>
+      <label class="encabezadoCliente" style="text-align: left; min-width: 800px;"
+             class="etiqueta">TRABAJAR RUTA. ENVÍO</label>
+    </div>
+
+
+    <div class="datosC" style="display: flex; flex-direction:column; box-sizing: border-box; min-width: 950px;" *ngIf="actualizarDatos">
+      <div class="subPadre">
+        <div style=" flex-direction: row; display: flex; box-sizing: border-box; padding-top: 15px; padding-bottom: 15px; width: 100%">
+          <div class="dvText" style="width:165px; height:40px; display: flex; flex-direction: column; font-family: Roboto-Bold; color: #9B9B9B; position: 564px; ">
+            <label style="height: 50%; width: 100%" class="estiloDatos"> TU OBJETIVO </label>
+            <label style="height: 50%; width: 100% " class=" estiloDatos "> DE PACKING LIST HOY </label>
+          </div>
+
+          <div class="dvNumber" style="max-width: 85px; min-width: 30px; height:75px; font-family: Roboto; font-weight:bold; color: #39B54A; text-align: center;">
+            <label class="estiloNumero"> {{objetivoDeinspeccion}}</label>
+          </div>
+          <img class="img" src='./assets/Images/objetivo.svg' style="width:22px; padding-bottom: 3px; padding-left: 10px;" />
+          <div style="padding-left: 19px">
+            <hr style=" width:2px; height:38px; margin:0px; border-width:0" color='#979797' />
+          </div>
+          <div class="dvText" style="width:145px; height:40px; display: flex; flex-direction:column; font-family: Roboto-Bold; color: #9B9B9B; padding-left: 17px; ">
+            <label style="height: 50%; width: 100%" class="estiloDatos "> PACKING LIST </label>
+            <label style="height: 50%; width: 100%" class="estiloDatos "> TRABAJADAS HOY </label>
+          </div>
+          <div class="tooltip dvNumber" style="max-width:85px; height:50px; font-family: Roboto; font-weight:bold; color: #008895; text-align: center;">
+            <label class="estiloNumero"> {{piezasInspeccionadas}}</label>
+          </div>
+          <div style="padding-left: 19px">
+            <hr style=" width:2px; height:38px; margin:0px; border-width:0" color='#979797' />
+          </div>
+
+          <div class="dvText" style="width:120px; height:35px; display: flex; flex-direction: column; font-family: Roboto-Bold; color: #9B9B9B; padding-left: 17px;">
+            <label style="height: 50%; width: 100%" class="estiloDatos "> PACKING LIST</label>
+            <label style="height: 50%; width: 100%" class="estiloDatos "> DESEADAS </label>
+          </div>
+          <div class="tooltip dvNumber" style="flex-direction: row; min-width: 45px; max-width: 100px; height:50px; position: relative; font-family: Roboto; font-weight:bold; color: #008895; text-align: center;">
+            <label class="estiloNumero"> {{inspeccionDeceada}}</label>
+            <label [style.color]="colorIndiceInspeccionDeceada" style="font-size:16px; color:#D0021B; font-weight: bold; left: 57px; position: absolute; top: -7px">
+              {{inspeccionDeceadaHastaElMomento}}</label>
+            <span class="tooltiptext">{{mensajePackingDeseadas}}</span>
+          </div>
+          <div style="padding-left: 35px"></div>
+          <hr style=" width:2px; height:38px; margin:0px; border-width:0" color='#979797' />
+
+          <div class="dvText" style="width:108px; height:40px; display: flex; flex-direction: column;font-family: Roboto-Bold; color: #9B9B9B; padding-left: 17px; ">
+            <label style="height: 50%; width: 100%" class="estiloDatos "> MÍNIMO DE</label>
+            <label style="height: 50%; width: 100%" class="estiloDatos "> PACKING LIST </label>
+          </div>
+          <div class="tooltip dvNumber" style="flex-direction: row; min-width: 45px; max-width: 100px; height:50px; position: relative; font-family: Roboto; font-weight:bold; color: #008895; text-align: center;">
+            <label class="estiloNumero"> {{minimoDeInspeccion}}</label>
+            <label [style.color]="colorMinimoInspeccion" style="font-size:16px; color:#D0021B; font-weight: bold; left: 40px; position: absolute; top: -7px">
+              {{valorSigno}}{{minimaInspeccionHastaElMomento}}</label>
+            <span class="tooltiptext">{{mensajeEmbDeseado}}</span>
+          </div>
+          <div [ngStyle]="{'flex-direction':'column', 'display':'flex','padding-left': '2%'}">
+            <pq-pop-up-estadisticas *ngIf="activarGraficasPrioEsta" [tipo]="'Paking list'" [muestraHallazgos]="false" [tipoTotales]="'Paking list'" [totalesPorInspector]= "totales_estadisticas" [donaChart] = "dataPrioridadEstadisticas" [tipoGrafica]="graficasEstadisticas"></pq-pop-up-estadisticas>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- FIN DATOSC -->
+    <div style="calc(100% - 123px); width: 100%; flex-direction: column; display: flex; min-width: 950px;" class="VistaInicial" *ngIf="vistaInicialActiva">
+      <div id="botonera" style="width:100%">
+        <pn-botonera-dias style="font-size: 21px; color: #4A4A4A; text-align: center; font-family: Roboto-Regular;"
+                          [iniciarBotonera]="iniciarBotonera" [tHoy]="valoresTabs[0]" [tManana]="valoresTabs[1]" [tPasadoM]="valoresTabs[2]" [tTodo]="valoresTabs[4]" [tFuturo]="valoresTabs[3]" (event)="cambiarTab($event)"></pn-botonera-dias>
+      </div>
+      <div  class="graficas">
+        <div class="padreCliente_Prioridades">
+          <div>
+            <div class="tituloGrafica">
+              CLIENTES
+            </div>
+            <div id="donaCliente" style="width: 100%; height: 100%; display: flex;">
+              <pn-donut-chart *ngIf="dataCLienteReload" [idGrafica]="'cliente'" [data]="dataCLiente" [tipoGrafica]="tiposGraficas[0]" [height]="'auto'">
+              </pn-donut-chart>
+            </div>
+          </div>
+          <div>
+            <div class="tituloGrafica">
+              PRIORIDADES
+            </div>
+            <div id="donaPrioridades" style="width: 100%; height: 100%; display: flex;">
+              <pn-donut-chart *ngIf="dataPrioridadesReload" [idGrafica]="'prioridades'" [data]="dataPrioridades" [tipoGrafica]="tiposGraficas[1]" [height]="'auto'">
+              </pn-donut-chart>
+            </div>
+          </div>
+        </div>
+        <!-- fin grafica clientes y productos -->
+        <div class=" padrePrioridades">
+          <div>
+            <div class="tituloGPequenio">
+              PRIORIDAD 1
+            </div>
+            <div id="donaPrioridadUno" style="width: 100%; height: 100%; display: flex;">
+              <pn-donut-chart *ngIf="dataPrioridadUnoReload" [idGrafica]="'prioridadUno'" [data]="dataPrioridadUno" [tipoGrafica]="tiposGraficas[2]"
+                              [height]="'auto'"> </pn-donut-chart>
+            </div>
+          </div>
+          <div >
+            <div class="tituloGPequenio">
+              PRIORIDAD 2
+            </div>
+            <div id="donaPrioridadDos" style="width: 100%; height: 100%; display: flex;">
+              <pn-donut-chart *ngIf="dataPrioridadDosReload" [idGrafica]="'prioridadDos'" [data]="dataPrioridadDos" [tipoGrafica]="tiposGraficas[3]"
+                              [height]="'auto'"> </pn-donut-chart>
+            </div>
+          </div>
+          <div>
+            <div class="tituloGPequenio">
+              PRIORIDAD 3
+            </div>
+            <div id="donaPrioridadTres" style="width: 100%; height: 100%; display: flex;">
+              <pn-donut-chart *ngIf="dataPrioridadTresReload" [idGrafica]="'prioridadTres'" [data]="dataPrioridadTres" [tipoGrafica]="tiposGraficas[4]"
+                              [height]="'auto'"> </pn-donut-chart>
+            </div>
+          </div>
+          <!-- fin GRafica prioridad 1,2,3-->
+        </div>
+        <!-- fin div graficas -->
+      </div>
+      <div id="divBoton" [style.pointerEvents] = "activarBtnIngresar ? 'auto' : 'none'">
+        <a class="botonIngresar" (click)="cambiarPantalla()" [style.background]="activarBtnIngresar?'#008894':'#E6E6E6'">INGRESAR</a>
+      </div>
+    </div>
+    <div *ngIf="!vistaInicialActiva" class="trabajarRutaEnvioInfo">
+      <pn-trabajar-rutas-envio-informacion style="width: 100%; height: 100%; " [recibePiezasTot]="piezasInspeccionadas" [totalesPacking]="inspeccionDeceada" (finalizarEnvio)="recargarBotonera($event)" (regresarVistaP)="regresarVistaP($event)"></pn-trabajar-rutas-envio-informacion>
+    </div>
+  </div>
+</div>

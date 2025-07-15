@@ -1,0 +1,106 @@
+<div   *ngIf="opcion==0" class="divContenedor">
+  <!--Gráfica 1-->
+
+
+
+
+  <div class="divGraficaTituloCtn" style="position: relative;">
+    <div style="width:100%;height: 15%;display:flex; justify-content: center;align-content: center;align-items: center;">{{Titulo1}}</div>
+    <div class="Grafico flexCenter">
+      <div style="color:#424242; position:absolute; width: 40%; background: transparent;opacity: 1; min-width: 82px;  min-height: 81.5px; font-size: 12px;height: 43%;border-radius: 50px;"
+        class="flexCenter ">
+        <div class="flexCenter" style="width: 100%">
+          Total
+        </div>
+        <div class="flexCenter" style="width: 100%">
+          Monto: ${{grafica1.totales.totalmonto}}
+        </div>
+        <div class="flexCenter" style="width: 100%">
+          Compras: {{grafica1.totales.compras}}
+        </div>
+        <div class="flexCenter" style="width: 100%">
+          Partidas:{{grafica1.totales.partidas}}
+        </div>
+        <div class="flexCenter" style="width: 100%">
+          Piezas:{{grafica1.totales.totalpiezas}}
+        </div>
+      </div>
+      <canvas id="g1"></canvas>
+    </div>
+  </div>
+
+  <!--Gráfica 2-->
+  <div class="divGraficaTituloCtn">
+    <div style="width:100%;height: 15%;display: flex;justify-content: center;align-content: center;align-items: center;">{{Titulo2}}</div>
+    <div class="Grafico">
+
+      <canvas id="g2"></canvas>
+    </div>
+  </div>
+  <!--Gráfica 3-->
+  <div class="divGraficaTituloCtn">
+    <div style="width:100%;height: 15%;display: flex;justify-content: center;align-content: center;align-items: center;">{{Titulo3}}</div>
+    <div class="Grafico">
+      <canvas id="g3"></canvas>
+    </div>
+
+  </div>
+  <!--Gráfica 4-->
+  <div class="divGraficaTituloCtn">
+    <div style="width:100%;height: 15%;display: flex;justify-content: center;align-content: center;align-items: center;">{{Titulo4}}</div>
+    <div class="Grafico">
+      <canvas id="g4"></canvas>
+    </div>
+  </div>
+  <!--Gráfica 5-->
+  <div class="divGraficaTituloCtn">
+    <div style="width:100%;height: 15%;display: flex;justify-content: center;align-content: center;align-items: center;">{{Titulo5}}</div>
+    <div class="Grafico">
+      <canvas id="g5"></canvas>
+    </div>
+  </div>
+  <!--Gráfica 6-->
+  <div class="divGraficaTituloCtn">
+    <div style="width:100%;height: 15%;display: flex;justify-content: center;align-content: center;align-items: center;">{{Titulo6}}</div>
+    <div class="Grafico">
+      <canvas id="g6"></canvas>
+    </div>
+  </div>
+  <!--Gráfica 7-->
+
+  <div class="divGraficaTituloCtn">
+    <div style="width:100%;height: 15%;display: flex;justify-content: center;align-content: center;align-items: center;">{{Titulo7}}</div>
+    <div class="Grafico">
+      <canvas id="g7"></canvas>
+    </div>
+  </div>
+  <!--Gráfica 8-->
+  <div class="divGraficaTituloCtn">
+    <div style="width:100%;height: 15%;display: flex;justify-content: center;align-content: center;align-items: center;">{{Titulo8}}</div>
+    <div class="Grafico">
+      <canvas id="g8"></canvas>
+    </div>
+  </div>
+  <!--Gráfica 9-->
+  <div class="divGraficaTituloCtn">
+    <div style="width:100%;height: 15%;display: flex;justify-content: center;align-content: center;align-items: center;">{{Titulo9}}</div>
+    <div class="Grafico">
+      <canvas id="g9"></canvas>
+    </div>
+  </div>
+</div>
+
+
+<div   *ngIf="opcion==1" class="divContenedor">
+    <!--Gráfica 1-->
+  
+  
+  
+    <div class="divGraficaTituloCtn">
+        <div style="width:100%;display: flex;justify-content: center;align-content: center;align-items: center;">Gráfico de componente </div>
+        <div class="Grafico">
+          <canvas id="g21"></canvas>
+        </div>
+      </div>
+    
+    </div>

@@ -1,0 +1,51 @@
+<div class="w3-container">
+
+  <div id="id01" class="modal" #pop>
+    <div class="modal-content">
+      <header class="header">
+        <h1> ENVIAR A DESTRUCCIÓN  </h1>
+      </header>
+      <div class="contenido">
+        <div class="total">
+          <div class="material">
+            <label># MATERIALES</label>
+          </div>
+          <div class="piezas">
+            <div style="height: 95%;width: 100%;overflow: auto;">
+              <div class= "lista">
+                <div  *ngFor="let item of lista; let i = index" style="display: flex;flex-direction:column;width: 100%;position: relative;">
+                  <div [ngClass]="item.activePart? 'divActive': 'div'">
+                    <div class="dfSelect"></div>
+                    <div class="datosLst">
+                      <label>#{{i +1}} {{item.fabrica}} · {{item.codigo}}
+                      <span style="font-weight: bold"> · {{item.contacto}} ·
+                        <span style="font-weight: 400"> {{item.descripcion}}</span>
+                      </span>
+                      </label>
+                    </div>
+                  </div>
+                  <!--Termina Lista partidas-->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="uploadDoc">
+          <div>
+            <pq-file-upload class="centerFile" (enviarDocumento)="recibirDoc($event)"></pq-file-upload>
+          </div>
+        </div>
+      </div>
+      <footer class="footer2" *ngIf="activarBoton">
+        <a type="submit" class="btnOk" (click)="cerrar(false)" >
+          <label> CANCELAR </label>
+        </a>
+        <a type="submit" class="btnOk" (click)="cerrar(true)" [style.background]="activeBtn? '#008894': '#C2C3C9'">
+          <label> ACEPTAR </label>
+        </a>
+      </footer>
+    </div>
+  </div>
+
+</div>
+

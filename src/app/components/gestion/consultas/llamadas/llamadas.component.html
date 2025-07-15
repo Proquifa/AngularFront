@@ -1,0 +1,113 @@
+<div>
+  <div (click)="backMenu()">
+    <img height="22px" src="assets/Images/gestion/consultas/facturacion/recurso_190.svg" alt="">
+  </div>
+  <div *ngIf="!detalle">LLAMADAS</div>
+  <div *ngIf="detalle" (click)="regresarConsulta()" class="regresar">LLAMADAS</div>
+  <div *ngIf="detalle">|</div>
+  <div *ngIf="detalle">DETALLES</div>
+  <!-- <h4>{{ detalle }}</h4> -->
+</div>
+<div *ngIf="!detalle" class="consultaResultados">
+  <div [ngClass]="classPanel">
+    <div class="filtroHeader">
+      <div class="abrir" (click)="openPanel()">
+        <img *ngIf="hiddenClose" width="15px" src="assets/Images/hamburguesa.svg" alt="">
+        <img *ngIf="!hiddenClose" width="15px" src="assets/Images/hamburguesa_verde.svg" alt="">
+      </div>
+      <div *ngIf="hiddenClose">
+        CERRAR
+        <div class="cerrar" (click)="closePanel()">
+          <img height="20px" width="20px" src="assets/Images/gestion/consultas/facturacion/recurso_189.svg" alt="">
+        </div>
+      </div>
+    </div>
+    <!-- Vista de Filtros -->
+    <div class="filtros">
+      <!-- <div>
+        <pq-radio-button [widthTotal]="'100px'" [lstItems]="lstItems" [disble]="true" [direction]="'row'" [imgSize]="'12px'" (emitItem)="radioSistema($event)"
+          [width]="'15px'"></pq-radio-button>
+      </div> -->
+      <!-- <div>
+        <div (click)="filtroAvanzada()" [style.background]="avanzada?'#008895':'#C2C3C9'">AVANZADA</div>
+        <div (click)="filtroRapida()" [style.background]="!avanzada?'#008895':'#C2C3C9'">RÁPIDA</div>
+      </div> -->
+
+      <div *ngIf="isThereData;else loader">
+        <gestion-filter [ElementsDropList]="Elements" (valueFilter)="mostrarDatos($event)" [IsImage]="IsImage" [IsDate]="IsDate"
+          [IsLoader]="isThereData" [Clear]="Clear" style="width: 100%"></gestion-filter>
+      </div>
+
+      <ng-template #loader>
+        <gestion-filter [IsLoader]="isThereData" [Clear]="Clear"></gestion-filter>
+      </ng-template>
+    </div>
+  </div>
+  <!-- Vista de datos recolectados -->
+  <div [ngClass]="'resultados' + (!showGraphic ? ' visible' : '')" [style.width]="hiddenClose ? 'calc(100% - 321px)': 'calc(100% - 50px)'" *ngIf="!showGraphic">
+    <div>
+      <div>
+        RESULTADOS
+      </div>
+      <div>
+        <img [style.margin-right]="'15px'" height="20px" width="20px" src="assets/Images/gestion/consultas/cobros/graficaminigris.svg"
+          alt="" (click)="showGraphicPanel()">
+        <img height="20px" width="20px" src="assets/Images/exportar.svg" alt="" (click)="download()">
+      </div>
+    </div>
+    <div>
+      <div>
+        <div [style.min-width]="'50px'">#</div>
+        <div [style.min-width]="'100px'">Fecha</div>
+        <div [style.min-width]="'150px'">Empresa</div>
+        <div [style.min-width]="'150px'">Contacto</div>
+        <div [style.min-width]="'280px'">Asunto</div>
+        <div [style.min-width]="'280px'">Comentarios</div>
+        <div [style.min-width]="'110px'">Destino</div>
+        <div [style.min-width]="'110px'">Atendió</div>
+        <div [style.min-width]="'110px'">Estado</div>
+        <div [style.min-width]="'30px'"></div>
+      </div>
+      <div>
+        <div *ngFor="let item of lstLlamadas; let i = index">
+          <div [style.min-width]="'50px'">{{i + 1}}</div>
+          <div [style.min-width]="'100px'">{{item.fecha | dateFormatSlash}}</div>
+          <div [style.min-width]="'150px'">{{item.empresa}}</div>
+          <div [style.min-width]="'150px'">{{item.contacto}}</div>
+          <div [style.min-width]="'280px'">{{item.asunto}}</div>
+          <div [style.min-width]="'280px'">{{item.comentarios}}</div>
+          <div [style.min-width]="'110px'">{{item.destino}}</div>
+          <div [style.min-width]="'110px'">{{item.atendio}}</div>
+          <div [style.min-width]="'110px'">{{item.estado}}</div>
+          <div [style.min-width]="'30px'"></div>
+        </div>
+      </div>
+    </div>
+    <div class="total">
+      <p>Total:
+        <span>{{lstLlamadas.length}}</span>
+        <span>Llamada<span *ngIf="lstLlamadas.length != 1">s</span>
+        </span>
+      </p>
+    </div>
+
+  </div>
+  <div style="position: relative;" [style.width]="hiddenClose ? 'calc(100% - 321px)': 'calc(100% - 50px)'" *ngIf="showGraphic">
+    <div [ngClass]="'graphics-panel-container' + (showGraphic ? ' visible' : '')" [style.top]="topGraphics">
+      <div class="graphics-panel-option">
+        <img src="assets/Images/gestion/images/tablaminigris.svg" (click)="showTablePanel()">
+      </div>
+      <div class="graphics-container" *ngIf="refrescar">
+        <div class="donut-container" *ngFor="let item of graficas; let i = index">
+          <p class="donut-title">{{item}}</p>
+          <div id="asistencia-canvas" class="canvas-container">
+            <pn-donut-chart [idGrafica]="i+'asis'" [data]="graficasValores[i]" [tipoGrafica]="'General'"></pn-donut-chart>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+
+</div>

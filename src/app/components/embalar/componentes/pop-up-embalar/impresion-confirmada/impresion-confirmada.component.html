@@ -1,0 +1,26 @@
+<div id="popUp" class="popUp" *ngIf="openPopImpresion">
+  <div class="fondo"></div>
+  <div class="popContenido">
+    <div class="popHeader">
+      <span>PROQUIFA NET</span>
+    </div>
+    <div class="popContenido">
+      <div class="alerta">
+        <img src="assets/Images/impresora.svg" alt="" class="alert" style="box-sizing: border-box; padding-bottom: 20px"/>
+      </div>
+      <label>¿Impresión de Documentación Correcta?</label>
+    </div>
+    <div class="dvBotones" style="display: flex; justify-content:space-between">
+      <div class="dvBoton" (click)="closePopUp()" style="box-sizing: border-box; margin-left: 25px">
+        <label>
+         No
+        </label>
+      </div>
+      <div class="dvBoton" (click)="cambiarPopFinalizar()" style="box-sizing: border-box; margin-right: 25px">
+        <label>
+          Si
+        </label>
+      </div>
+    </div>
+</div>
+</div>

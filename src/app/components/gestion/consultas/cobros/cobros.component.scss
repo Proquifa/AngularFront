@@ -1,0 +1,832 @@
+@import "../../../../../mixins.scss";
+@import "../../../../../colors.scss";
+:host {
+  @include flexColumn;
+  background: $pqPanelContenido;
+  &>div:nth-of-type(1) {
+    @include flexRow;
+    background: $pqPanelTitulo;
+    height: 41px;
+    color: $pqBlanco;
+    align-items: center;
+    font-size: 12px;
+    padding: 0px 20px;
+    box-sizing: border-box;
+    &>div:nth-of-type(1) {
+      @include flexRow;
+      align-items: center;
+      margin-right: 20px;
+      cursor: pointer;
+    }
+    &>div:nth-of-type(2) {
+      margin-left: 20px;
+    }
+    &>div:nth-of-type(3) {
+      margin-left: 20px;
+    }
+    &>div:nth-of-type(4) {
+      margin-left: 20px;
+    }
+    >.regresar {
+      cursor: pointer;
+      font-weight: 200;
+    }
+  }
+  &>div:nth-of-type(2) {
+    @include flexRow;
+    justify-content: flex-start;
+    height: calc(100vh - 170px);
+    width: 100%;
+    >.panelNormal {
+      background: $pqBlanco;
+      height: 100%;
+      padding: 15px 20px;
+      box-sizing: border-box;
+      width: 321px;
+      min-width: 321px;
+      overflow-y: scroll;
+      padding-bottom: 60px;
+    }
+    >.panelOcultar {
+      background: $pqBlanco;
+      animation-name: ocultarPanel;
+      animation-duration: 1s;
+      transition: 1s ease-in-out;
+      animation-fill-mode: forwards;
+      box-sizing: border-box;
+      padding: 15px 15px;
+      .filtros {
+        display: none;
+      }
+    }
+    >.panelMostrar {
+      background: $pqBlanco;
+      animation-name: mostar;
+      animation-duration: 0.5s;
+      animation-fill-mode: forwards;
+      padding: 15px 20px;
+      box-sizing: border-box;
+      overflow-y: scroll;
+    }
+    .filtroHeader {
+      @include flexRow;
+      justify-content: space-between;
+      align-items: center;
+      color: $pqNegro;
+      font-size: 10px;
+      margin-bottom: 20px;
+      >.abrir {
+        @include flexRow;
+        align-items: center;
+        cursor: pointer;
+        min-height: 22px;
+      }
+      &>div:nth-of-type(2) {
+        @include flexRow;
+        align-items: center;
+        >.cerrar {
+          margin-left: 9px;
+          cursor: pointer;
+        }
+      }
+    }
+    .filtros {
+      @include flexColumn;
+      border-top: 1px solid #424242;
+      &>div:nth-of-type(1) {
+        @include flexColumn;
+        height: 50px;
+        border-bottom: 1px solid #ECEEF0;
+        padding-top: 15px;
+        padding-bottom: 20px;
+        box-sizing: border-box;
+      }
+      &>div:nth-of-type(2) {
+        @include flexRow;
+        justify-content: center;
+        align-items: center;
+        color: $pqBlanco;
+        font-size: 14px;
+        &>div {
+          @include flexRow;
+          justify-content: center;
+          align-items: center;
+          cursor: pointer;
+          width: 140px;
+          height: 25px;
+          margin-right: 1px;
+        }
+      }
+      >.divAvanzada {
+        @include flexColumn;
+        margin-top: 15px;
+        &>div:nth-of-type(1) {
+          @include flexRow;
+          justify-content: space-between;
+          >div {
+            @include flexColumn;
+            width: 130px;
+            font-size: 16px;
+            color: $pqNegro;
+            >div {
+              margin-top: 6px;
+            }
+          }
+        }
+        &>div:nth-of-type(2) {
+          border-bottom: 1px solid #424242;
+          padding-bottom: 18px;
+          box-sizing: border-box;
+          &>div {
+            @include flexColumn;
+            justify-content: space-between;
+            margin-top: 15px;
+          }
+        }
+        &>div:nth-of-type(3) {
+          @include flexRow;
+          justify-content: center;
+          align-items: center;
+          margin-top: 18px;
+          background: $pqNegro;
+          width: 100%;
+          height: 35px;
+          cursor: pointer;
+        }
+      }
+      >.divRapida {
+        &>div:nth-of-type(1) {
+          @include flexRow;
+          align-items: center;
+          box-sizing: border-box;
+          height: 53px;
+          padding-top: 10px;
+          border-bottom: 1px solid #ECEEF0;
+        }
+        &>div:nth-of-type(2) {
+          @include flexColumn;
+          justify-content: space-between;
+          margin-top: 15px;
+          padding-bottom: 18px;
+          border-bottom: 1px solid #424242;
+          &>input {
+            height: 25px;
+            border: 1px solid #ECEEF0;
+            box-sizing: border-box;
+            margin-top: 5px;
+          }
+        }
+        &>div:nth-of-type(3) {
+          @include flexRow;
+          justify-content: center;
+          align-items: center;
+          margin-top: 18px;
+          background: $pqNegro;
+          width: 100%;
+          height: 35px;
+          cursor: pointer;
+        }
+      }
+    }
+    &>div:nth-of-type(2) {
+      height: 100%;
+      width: 100%;
+      background: $pqPanelContenido;
+    }
+    &>.resultados {
+      @include flexColumn;
+      padding: 20px;
+      box-sizing: border-box;
+      transition: 1s ease-in-out;
+      &>div:nth-of-type(1) {
+        border-bottom: 3px solid #424242;
+        @include flexRow;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 10px;
+        box-sizing: border-box;
+        &>div:nth-of-type(1) {
+          font-size: 22px;
+        }
+        &>div:nth-of-type(2) {
+          @include flexRow;
+          flex-direction: row-revesrse;
+          align-items: center;
+          &>img {
+            cursor: pointer;
+            height: 30px;
+            width: 30px;
+          }
+        }
+      }
+      &>.total {
+        @include flexRow;
+        @include absoluteCenter;
+        min-height: 30px;
+        align-items: flex-end;
+      }
+    }
+  }
+  .fechafactura {
+    @include flexColumn;
+    width: 100%;
+    height: 100%;
+    overflow-x: scroll;
+    &>div:nth-of-type(1) {
+      @include flexRow;
+      border-bottom: 1px solid #424242;
+      justify-content: space-between;
+      min-width: 2087px;
+      min-height: 57px;
+      &>div {
+        @include flexRow;
+        min-height: 57px;
+        max-width: 160px;
+        align-items: center;
+        box-sizing: border-box;
+        text-align: center;
+        justify-content: center;
+      }
+    }
+    &>div:nth-of-type(2) {
+      @include flexColumn;
+      overflow: scroll;
+      justify-content: space-between;
+      min-width: 2087px;
+      >div {
+        @include flexRow;
+        justify-content: space-between;
+        min-height: 70px; // border-bottom: 1px solid #C2C3C9;
+        border-bottom: 1px solid #C2C3C9;
+        >div {
+          @include flexRow;
+          max-width: 160px;
+          align-items: center;
+          font-size: 12px;
+          justify-content: center;
+          text-align: center;
+        }
+      }
+    }
+  }
+  .fechacobro {
+    @include flexColumn;
+    width: 100%;
+    height: 100%;
+    overflow-x: scroll;
+    &>div:nth-of-type(1) {
+      @include flexRow;
+      border-bottom: 1px solid #424242;
+      justify-content: space-between;
+      min-width: 2785px;
+      min-height: 57px;
+      &>div {
+        @include flexRow;
+        min-height: 57px;
+        max-width: 160px;
+        align-items: center;
+        box-sizing: border-box;
+        text-align: center;
+        justify-content: center;
+      }
+    }
+    &>div:nth-of-type(2) {
+      @include flexColumn;
+      overflow: scroll;
+      justify-content: space-between;
+      min-width: 2788px;
+      >div {
+        @include flexRow;
+        justify-content: space-between;
+        min-height: 70px;
+        border-bottom: 1px solid #C2C3C9;
+        >div {
+          @include flexRow;
+          max-width: 160px;
+          align-items: center;
+          font-size: 12px;
+          justify-content: center;
+          text-align: center;
+        }
+      }
+    }
+  }
+  &>.fechacobroRapida {
+    @include flexColumn;
+    width: 100%;
+    height: 100%;
+    overflow-x: scroll;
+    &>div:nth-of-type(1) {
+      @include flexRow;
+      border-bottom: 1px solid #424242;
+      justify-content: space-between;
+      min-width: 1425px;
+      min-height: 57px;
+      &>div {
+        @include flexRow;
+        min-height: 57px;
+        max-width: 160px;
+        align-items: center;
+        box-sizing: border-box;
+        text-align: center;
+        justify-content: center;
+      }
+    }
+    &>div:nth-of-type(2) {
+      @include flexColumn;
+      overflow: scroll;
+      justify-content: space-between;
+      min-width: 1425px;
+      >div {
+        @include flexRow;
+        justify-content: space-between;
+        min-height: 70px;
+        border-bottom: 1px solid #C2C3C9;
+        >div {
+          @include flexRow;
+          max-width: 160px;
+          align-items: center;
+          font-size: 12px;
+          justify-content: center;
+          text-align: center;
+        }
+      }
+    }
+  }
+  &>.consultaDetalles {
+    @include flexRow;
+    justify-content: flex-start;
+    height: calc(100vh - 170px);
+    width: 100%;
+    >.panelNormal {
+      background: $pqBlanco;
+      height: 100%;
+      padding: 15px 20px;
+      box-sizing: border-box;
+      width: 321px;
+      min-width: 321px;
+      overflow-y: scroll;
+      padding-bottom: 70px;
+    }
+    >.panelOcultar {
+      background: $pqBlanco;
+      animation-name: ocultarPanel;
+      animation-duration: 1s;
+      transition: 1s ease-in-out;
+      animation-fill-mode: forwards;
+      box-sizing: border-box;
+      padding: 15px 15px;
+      .filtros {
+        display: none;
+      }
+    }
+    >.panelMostrar {
+      background: $pqBlanco;
+      animation-name: mostar;
+      animation-duration: 0.5s;
+      animation-fill-mode: forwards;
+      padding: 15px 20px;
+      box-sizing: border-box;
+      overflow-y: scroll;
+    }
+    .filtroHeader {
+      @include flexRow;
+      justify-content: space-between;
+      align-items: center;
+      color: $pqNegro;
+      font-size: 10px;
+      margin-bottom: 20px;
+      >.abrir {
+        @include flexRow;
+        align-items: center;
+        cursor: pointer;
+        min-height: 22px;
+      }
+      &>div:nth-of-type(2) {
+        @include flexRow;
+        align-items: center;
+        >.cerrar {
+          margin-left: 9px;
+          cursor: pointer;
+        }
+      }
+    }
+    .filtros {
+      @include flexColumn;
+      border-top: 1px solid #424242;
+      border-bottom: 1px solid #424242;
+      padding-bottom: 25px;
+      >.detalleCliente {
+        font-size: 16px;
+        color: $pqNegro;
+        font-weight: bold;
+        margin-top: 15px;
+      }
+      >.detalleTitulo {
+        font-size: 16px;
+        color: $pqNegro;
+        font-weight: 400;
+        margin-top: 20px;
+      }
+      >.detalleTexto {
+        font-size: 16px;
+        color: $pqNegro;
+        font-weight: 200;
+      }
+      >.detalleTextoVerde {
+        font-size: 16px;
+        color: $pqPanelTitulo !important;
+        font-weight: 300;
+      }
+    }
+    >.contenidoFactura {
+      @include flexRow;
+      height: calc(100vh - 170px);
+      width: 100%;
+      overflow: scroll;
+      >.detalleFactura {
+        min-width: 592px;
+        padding: 15px 20px;
+        &>div:nth-of-type(1) {
+          font-size: 22px;
+          font-weight: bold;
+        }
+        &>div:nth-of-type(2) {
+          margin-top: 20px;
+          border-top: 1px solid #424242;
+          border-bottom: 1px solid #979797;
+          >div {
+            @include flexRow;
+            border-bottom: 1px solid $pqBlanco;
+            >div:nth-of-type(1) {
+              min-width: 8px;
+              background: transparent;
+            }
+            >div:nth-of-type(2) {
+              @include flexColumn;
+              padding: 5px 10px;
+              width: 100%;
+              cursor: pointer;
+              >div {
+                @include flexRow;
+                justify-content: space-between;
+                margin: 5px 0px;
+                >div:nth-of-type(2) {
+                  justify-content: flex-end;
+                }
+              }
+            }
+          }
+          >div:hover {
+            background-color: $pqBlanco;
+          }
+          >.divActual {
+            background-color: $pqBlanco;
+            box-shadow: 0 2px 4px -3px #008895;
+            >div:nth-of-type(1) {
+              min-width: 8px;
+              background: $pqPanelTitulo;
+            }
+          }
+          >.divActive {
+            background-color: $pqBlanco;
+          }
+        }
+        &>div:nth-of-type(3) {
+          @include flexRow;
+          @include absoluteCenter;
+          width: 100%;
+          margin-top: 15px;
+          font-size: 14px;
+          color: $pqNegro;
+          font-weight: 300;
+        }
+      }
+      >.lineaTiempo {
+        min-width: 592px;
+        background: $pqBlanco;
+        padding: 15px 20px;
+        &>div:nth-of-type(1) {
+          font-size: 22px;
+          font-weight: bold;
+          color: $pqPanelTitulo;
+        }
+        &>div:nth-of-type(2) {
+          margin-top: 20px;
+          border-top: 1px solid #424242;
+          border-bottom: 1px solid #979797;
+          >div {
+            @include flexRow;
+            cursor: pointer;
+            >div:nth-of-type(1) {
+              min-width: 8px;
+              background: transparent;
+            }
+            >div:nth-of-type(2) {
+              @include flexRow;
+              >div:nth-of-type(1) {
+                @include flexColumn;
+                padding: 10px 10px;
+                width: 100%;
+                >div:nth-of-type(1) {
+                  font-size: 18px;
+                  font-weight: bold;
+                  color: $pqNegro;
+                  margin-bottom: 15px;
+                }
+                >div:nth-of-type(2) {
+                  font-size: 16px;
+                  color: #008895;
+                  margin-bottom: 2px;
+                }
+                >div:nth-of-type(3) {
+                  font-size: 16px;
+                  color: #F3B23F;
+                  margin-bottom: 2px;
+                }
+                >div:nth-of-type(4) {
+                  font-size: 16px;
+                  color: #571C7B;
+                  margin-bottom: 2px;
+                }
+                >div:nth-of-type(5) {
+                  font-size: 16px;
+                  color: #981E30;
+                  margin-bottom: 2px;
+                }
+              }
+            }
+          }
+          >div:hover {
+            background-color: rgba(0, 137, 149, 0.05);
+          }
+          >.divActive {
+            background-color: rgba(0, 137, 149, 0.05);
+            >div:nth-of-type(1) {
+              min-width: 8px;
+              background: $pqPanelTitulo;
+            }
+          }
+        }
+      }
+      >.detalleTiempo {
+        min-width: 592px;
+        padding-top: 15px;
+        &>div:nth-of-type(1) {
+          font-size: 22px;
+          font-weight: bold;
+          padding: 0px 20px;
+        }
+        &>div:nth-of-type(2) {
+          border-top: 1px solid #424242;
+          margin: 20px 20px;
+          overflow: scroll;
+          max-height: calc(100vh - 228px);
+          .monitoreo_Cobro_SC {
+            >div {
+              border-bottom: 1px solid #D8D8D8;
+              .titulo {
+                font-size: 18px;
+                color: #008895;
+                margin-top: 20px;
+                margin-bottom: 10px;
+              }
+              .subTitulo {
+                font-size: 16px;
+                font-weight: 400;
+                color: $pqNegro;
+                margin-bottom: 3px;
+              }
+              .normal {
+                font-size: 16px;
+                font-weight: 200;
+                color: $pqNegro;
+                margin-bottom: 25px;
+              }
+              .normalVerde {
+                font-size: 16px;
+                font-weight: 200;
+                margin-bottom: 25px;
+                color: #008895;
+                &>span {
+                  cursor: pointer;
+                }
+              }
+              .normalVerde:hover {
+                &>span {
+                  text-decoration: underline;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  &>.fechacobroRapida {
+    @include flexColumn;
+    width: 100%;
+    height: 100%;
+    overflow-x: scroll;
+    &>div:nth-of-type(1) {
+      @include flexRow;
+      border-bottom: 1px solid #424242;
+      justify-content: space-between;
+      min-width: 2742px;
+      min-height: 57px;
+      &>div {
+        @include flexRow;
+        min-height: 57px;
+        max-width: 160px;
+        align-items: center;
+        box-sizing: border-box;
+        text-align: center;
+        justify-content: center;
+      }
+    }
+    &>div:nth-of-type(2) {
+      @include flexColumn;
+      overflow: scroll;
+      justify-content: space-between;
+      min-width: 2742px;
+      >div {
+        @include flexRow;
+        justify-content: space-between;
+        min-height: 70px;
+        border-bottom: 1px solid #C2C3C9;
+        >div {
+          @include flexRow;
+          max-width: 160px;
+          align-items: center;
+          font-size: 12px;
+          justify-content: center;
+          text-align: center;
+        }
+      }
+    }
+  }
+  @keyframes ocultarPanel {
+    from {
+      min-width: 321px;
+    }
+    to {
+      min-width: 50px;
+    }
+  }
+  @keyframes mostar {
+    from {
+      width: 50px;
+    }
+    to {
+      width: 321px;
+    }
+  } //Sección de Gráficas
+  .w3-animate-right {
+    position: relative;
+    animation: animateright 0.4s
+  }
+  @keyframes animateright {
+    from {
+      right: -900px;
+      opacity: 0
+    }
+    to {
+      right: 0;
+      opacity: 1
+    }
+  }
+  .w3-animate-left {
+    position: relative;
+    animation: animateleft 0.8s
+  }
+  @keyframes animateleft {
+    from {
+      left: -50px;
+      opacity: 0
+    }
+    to {
+      left: 0;
+      opacity: 1
+    }
+  }
+  .GlobalContainer-graphic-Component {
+    display: flex;
+    flex-direction: row;
+    .GraphicsContainer-graphic-Component {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      background: #f7fbfb; //background: #981E30;
+    }
+    .Filter-Container-graphic-Component {
+      width: 300px;
+      height: 100%;
+      background: #424242;
+      .Tabgraphic-Component {
+        position: absolute;
+        right: 290px;
+        top: 1%;
+        background: #424242;
+        cursor: pointer;
+        width: 50px;
+        height: 35px;
+        display: flex;
+        flex-direction: row;
+        align-content: center;
+        align-items: center;
+        justify-content: center;
+      }
+      .Main-Container-filter-graphic-Component {
+        margin-left: 17px;
+        width: 100%;
+        height: 100%;
+        .totals-filter-graphic-Component {
+          width: 100%;
+          background: transparent;
+          height: 10%;
+          color: #fff;
+          border-style: solid;
+          border-bottom: 1px solid #008895;
+          display: flex;
+          flex-direction: row;
+          align-content: flex-start;
+          align-content: flex-end;
+          align-items: flex-end;
+          padding-bottom: 10px
+        }
+        .Results-filter-graphic-Component {
+          width: 100%;
+          background: transparent;
+          height: 18%;
+          color: #fff;
+          border-style: solid;
+          border-top: 1px solid #008895;
+          display: flex;
+          flex-direction: row;
+          align-content: flex-start;
+          align-content: flex-end;
+          align-items: flex-end;
+          padding-bottom: 10px;
+          display: flex;
+          justify-content: center;
+        }
+        .filters-graphic-Component {
+          width: 100%;
+          background: transparent;
+          height: 40%;
+          color: #fff;
+          border-style: solid;
+          border-bottom: 1px solid #008895;
+          display: flex;
+          flex-direction: row;
+          align-content: flex-start;
+          align-content: flex-end;
+          align-items: flex-end;
+          padding-bottom: 10px;
+        }
+      }
+    }
+  }
+  .circleGreen {
+    height: 15px;
+    width: 15px;
+    background-color: #91BE5F;
+    border-radius: 50%;
+    margin-top: 28px;
+  }
+  .circleRed {
+    height: 15px;
+    width: 15px;
+    background-color: #952936;
+    border-radius: 50%; // margin-left: 5px;
+    margin-top: 28px;
+  }
+  .circleYellow {
+    height: 15px;
+    width: 15px;
+    background-image: url('assets/Images/cobr_flag.svg');
+    border-radius: 50%; // margin-left: 14px;
+    margin-top: 28px;
+  }
+  .circlePurple {
+    height: 15px;
+    width: 15px;
+    background-color: #A9A9F5;
+    border-radius: 50%; // margin-left: 5px;
+    margin-top: 28px;
+  }
+  .circleDatePurple {
+    height: 12px;
+    width: 12px;
+    background-color: #AA65E7;
+    border-radius: 50%;
+    margin-top: 48px;
+  }
+  .circleDateGreen {
+    height: 12px;
+    width: 12px;
+    background-color: #439DC1;
+    border-radius: 50%;
+    margin-top: 21px;
+  }
+}

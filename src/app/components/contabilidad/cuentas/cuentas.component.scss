@@ -1,0 +1,460 @@
+:host{
+    user-select: none;
+    height: calc(100vh - 130px);
+    pn-header-bc{
+        display: flex;
+        width: 100%;
+        height: 41px;
+    }
+    & > .cuentas{
+        padding: 0px 20px;
+        height: calc(100vh - 170px);
+        overflow: hidden;
+        & > .cuentasListEmpresas{
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 50px;
+            border-bottom: 1px solid #ECEEF0;
+            & > .cuentasListEmpresasItem{
+                display: flex;
+                width: 100%;
+                height: 100px;
+                background: #FFFFFF;
+                transition: all 0.2s ease-in-out;
+                cursor: pointer;
+                & > img.cuentasListEmpresasItemImg{
+                    width: 100%;
+                    max-width: 170px;
+                    margin: auto;
+                    display: block;
+                    transition: all 0.2s ease-in-out;
+                    filter: grayscale(1);
+                }
+                & > img.cuentasListEmpresasItemImg:hover{
+                    filter: grayscale(0);
+                }
+            }
+            & > .cuentasListEmpresasItem:hover{
+                background: #ECEEF0;
+            }
+            & > .cuentasListEmpresasItemActive{
+                display: flex;
+                width: 100%;
+                height: 100px;
+                background: #ECEEF0;
+                transition: all 0.2s ease-in-out;
+                cursor: pointer;
+                & > img.cuentasListEmpresasItemImg{
+                    width: 100%;
+                    max-width: 150px;
+                    margin: auto;
+                    display: block;
+                }
+            }
+        }
+        & > .cuentasActions{
+            display: flex;
+            height: 58px;
+            border-bottom: 2px solid #424242;
+            justify-content: space-between;
+            align-items: center;
+            & > .cuentasActionsSelects{
+                display: flex;
+                min-width: 556px;
+                justify-content: space-between;
+                align-items: center;
+                height: 30px;
+                & > .cuentasActionsSelect{
+                    display: flex;
+                    position: relative;
+                    width: 100%;
+                    & > app-pf-selector{
+                        width: 100%;
+                    }
+                }
+            }
+            & > app-pn-search {
+                width: 430px;
+            }
+            & > .cuentasActionsBtn{
+                display: flex;
+                width: 231px;
+                height: 30px;
+                align-items: center;
+                justify-content: center;
+                background: #008894;
+                font-size: 21px;
+                color: #FFFFFF;
+                font-family: Novecento;
+                font-weight: 700;
+                cursor: pointer;
+                transition: all 0.2s ease-in-out;
+                padding-bottom: 5px;
+            }
+            & > .cuentasActionsBtn:hover{
+                opacity: 0.5;
+            }
+            & > .cuentasActionsBtn:active{
+                opacity: 0.75;
+            }
+        }
+        & > .cuentasSearch{
+            display: flex;
+            height: 85px;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            & > app-pn-search {
+                width: 430px;
+            }
+        }
+        & > .cuentasList{
+            overflow: scroll;
+            height: calc(100% - 303px);
+            & > .cuentasListHeader{
+                display: flex;
+                font-size: 15px;
+                color: #424242;
+                font-family: Roboto;
+                font-weight: 700;
+                border-bottom: 1px solid #424242;
+                justify-content: space-between;
+                & > .cuentasListHeaderCol{
+                    display: flex;
+                    width: calc(100% - 20px);
+                    margin: 0px 10px;
+                    height: 25px;
+                    align-items: center;
+                }
+            }
+            & > .cuentasListItem{
+                display: flex;
+                height: 48px;
+                font-size: 16px;
+                color: #424242;
+                font-weight: 400;
+                font-family: Roboto;
+                border-bottom: 1px solid rgba(236,238,240,0.75);
+                justify-content: space-between;
+                transition: all 0.2s ease-in-out;
+                & > .cuentasListItemCol{
+                    width: calc(100% - 20px);
+                    margin: 0px 10px;
+                    line-height: 46px;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                    vertical-align: middle;
+                    display: inline-block;
+                    & > .cuentasListItemColBtns{
+                        & > .cuentasListItemColBtnsImg{
+                            width: 16px;
+                            cursor: pointer;
+                            transition: all 0.2s ease-in-out;
+                        }
+                        & > .cuentasListItemColBtnsImg:hover{
+                            opacity: 0.5;
+                        }
+                        & > .cuentasListItemColBtnsImg:active{
+                            opacity: 0.75;
+                        }
+                        & > .imgDisabled{
+                            pointer-events: none;
+                        }
+                        & > .cuentasListItemColBtnsTooltip{
+                            display: none;
+                            background: #33333C;
+                            box-shadow: 0 1px 4px 0 rgba(0,0,0,0.35);
+                            font-size: 12px;
+                            color: #FFFFFF;
+                            font-weight: 400;
+                            width: 136;
+                            height: 38px;
+                        }
+                    }
+                }
+            }
+            & > .cuentasListItem:hover{
+                background: #ECEEF0;
+            }
+        }
+        & > .cuentasFooter{
+            display: flex;
+            height: 49px;
+            justify-content: center;
+            align-items: center;
+            border-top: 1px solid #424242;
+            & > span.cuentasFooterSpan{
+                font-size: 14px;
+                color: #424242;
+                font-family: Roboto;
+                font-weight: 400;
+            }
+        }
+    }
+}
+.modal{
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    max-height: 100%;
+    position: fixed;
+    z-index: 10;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255,255,255,0.90);
+    box-shadow: 0 0 60px 10px rgba(0, 0, 0, 0.9);
+    transition: all 1s ease-in-out;
+    & > .modalContent{
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        width: 663px;
+        height: 531px;
+        padding: 12px 30px 30px 30px;
+        background: #FFFFFF;
+        border: 1px solid #008894;
+        border-radius: 22px;
+        overflow: hidden;
+        & > .modalContentHeader{
+            background: #008894;
+            font-family: Novecento;
+            font-size: 26px;
+            color: #FFFFFF;
+            font-weight: 900;
+            margin: -12px -30px;
+            height: 55px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        & > .modalContentBody{
+            height: 428px;
+            margin-top: 42px;
+            & > .modalContentBodySelectsHoriz{
+                display: flex;
+                justify-content: space-between;
+                & > .modalContentBodySelectsHorizItem{
+                    & > .modalContentBodySelectsHorizItemInputs{
+                        & > .modalContentBodySelectsHorizItemInputsTextArea {
+                            font-size: 16px;
+                            color: #424242;
+                            padding: 0px 5px;
+                            margin: 0;
+                            outline: none;
+                            resize: none;
+                            width: 100%;
+                            background: #FFFFFF;
+                            border: 1px solid #D8D9DD;
+                            height: 38px;
+                            line-height: 38px;
+                            vertical-align: middle;
+                            transition: all 0.2s ease-in-out;
+                        }
+                    }
+                    & > .modalContentBodySelectsHorizLabel{
+                        font-size: 16px;
+                        height: 16px;
+                        color: #424242;
+                        font-weight: 400;
+                        margin-bottom: 5px;
+                    }
+                    & > .modalContentBodySelectsHoriz{
+                        position: relative;
+                        & > app-pf-selector{
+                            width: 100%;
+                        }
+                    }
+                }
+            }
+            & > .modalContentBodySelects{
+                margin-bottom: 40px;
+                & > .modalContentBodyInputs{
+                    input.modalContentBodyInput {
+                        background: #FFFFFF;
+                        border: 1px solid #D8D9DD;
+                        width: 100%;
+                        height: 28px;
+                        font-size: 16px;
+                        color: #424242;
+                        font-weight: 400;
+                    }
+                }
+                & > .modalContentBodySelectLabel{
+                    font-size: 16px;
+                    color: #424242;
+                    font-weight: 400;
+                    margin-bottom: 5px;
+                }
+                & > .modalContentBodySelect{
+                    position: relative;
+                    & > app-pf-selector{
+                        width: 100%;
+                    }
+                }
+            }
+            & > .modalContentBodyLabels{
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 35px;
+                & > .modalContentBodyLabelsItems{
+                    width: 100%;
+                    & > .modalContentBodyLabelsItemTitle{
+                        font-weight: 400;
+                        font-size: 16px;
+                        color: #424242;
+                        margin-bottom: 5px;
+                    }
+                    & > .modalContentBodyLabelsItemValue{
+                        font-weight: 700;
+                        font-size: 17px;
+                        color: #008894;
+                    }
+                }
+            }
+            & > .modalContentBodyEmpty{
+                font-weight: 700;
+                font-family: Novecento;
+                font-size: 36px;
+                color: #D8D9DD;
+                text-align: center;
+                height: 130px;
+                display: flex;
+                align-items: center;
+            }
+        }
+        & > .modalContentFooter{
+            display: flex;
+            justify-content: space-between;
+            font-family: Novecento;
+            font-size: 21px;
+            color: #FFFFFF;
+            font-weight: 700;
+            height: 30px;
+            & > .modalContentFooterBtnActive{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background: #008894;
+                width: 170px;
+                height: 30px;
+                cursor: pointer;
+                transition: all 0.2s ease-in-out;
+            }
+            & > .modalContentFooterBtnActive:hover{
+                opacity: 0.5;
+            }
+            & > .modalContentFooterBtnActive:active{
+                opacity: 0.75;
+            }
+            & > .modalContentFooterBtnDisabled{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background: #C2C3C9;
+                width: 170px;
+                height: 30px;
+                pointer-events: none;
+            }
+        }
+    }
+}
+
+.modalPrompt{
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    max-height: 100%;
+    position: fixed;
+    z-index: 10;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255,255,255,0.90);
+    box-shadow: 0 0 60px 10px rgba(0, 0, 0, 0.9);
+    transition: all 1s ease-in-out;
+    & > .modalPromptContent{
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        width: 538px;
+        height: 316px;
+        padding: 12px 40px 30px 40px;
+        background: #FFFFFF;
+        border: 1px solid #008894;
+        border-radius: 22px;
+        overflow: hidden;
+        & > .modalPromptContentHeader{
+            background: #008894;
+            font-family: Novecento;
+            font-size: 26px;
+            color: #FFFFFF;
+            font-weight: 900;
+            margin: -12px -40px;
+            height: 55px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        & > .modalPromptContentBody{
+            font-size: 29px;
+            color: #424242;
+            font-weight: 400;
+            text-align: center;
+            height: 243px;
+            margin-top: 12px;
+            & > .modalPromptContentBodyImg{
+                width: 60px;
+                height: 60px;
+                padding: 30px 0px 15px 0px;
+            }
+            & > .modalPromptContentBodyText{
+                font-size: 29px;
+                color: #424242;
+                font-weight: 400;
+                max-height: 130px;
+                overflow: scroll;
+                & > .modalPromptContentBodyTextSpan:nth-of-type(1){
+                    font-size: 29px;
+                    color: #008894;
+                    font-weight: 700;
+                }
+            }
+        }
+        & > .modalPromptContentFooter{
+            display: flex;
+            justify-content: space-between;
+            & > .modalPromptContentFooterBtn{
+                height: 30px;
+                width: 170px;
+                background: #008894;
+                font-family: Novecento;
+                font-size: 21px;
+                color: #FFFFFF;
+                font-weight: 700;
+                text-align: center;
+                vertical-align: middle;
+                line-height: 28px;
+                cursor: pointer;
+                transition: all 0.2s ease-in-out;
+            }
+            & > .modalPromptContentFooterBtn:hover{
+                opacity: 0.5;
+            }
+            & > .modalPromptContentFooterBtn:active{
+                opacity: 0.75;
+            }
+        }
+    }
+}
+.closed {
+    display: none;
+}

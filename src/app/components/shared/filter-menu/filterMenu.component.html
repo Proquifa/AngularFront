@@ -1,0 +1,13 @@
+<div class="menu">
+  <div [ngClass]="(i === filterSelected.index) ? 'filter-item selected': 'filter-item not-selected' " *ngFor="let filtro of listaFiltros; let i = index"
+      (click)="filtro.hasOptions ? ShowDrop(filtro.label,$event,filtro): sendEvent(filtro.label,2,i )"  id="{{'img'+filtro.label}}" [style.width]="(100/listaFiltros.length) + '%'">
+      <p class="total-label" >{{i === filterSelected.index ? totalObjetosLabel: ''}}</p>
+      <p class="total-value">{{i === filterSelected.index ? totalObjetos: ''}}</p>
+      <img *ngIf="i !== filterSelected.index" class="dropbtn" (click)="filtro.hasOptions ? ShowDrop(filtro.label,$event,filtro, true): sendEvent(filtro.label,2,i,true )" id="{{'img'+filtro.label}}" src="{{filtro.imgUrl}}" alt="">
+      <img *ngIf="i === filterSelected.index" class="dropbtn" (click)="filtro.hasOptions ? ShowDrop(filtro.label,$event,filtro, true): sendEvent(filtro.label,2,i,true )" id="{{'img'+filtro.label}}" [src]="filtro.imgUrlSelected ? filtro.imgUrlSelected: filtro.imgUrl" alt="">
+      <p class="filter-label">{{(i === filterSelected.index && filtro.hasOptions) ? filterSelected.value :filtro.label}}</p>
+    <div  *ngIf="filtro.hasOptions"  id="{{'myDropdown'+filtro.label}}" class="dropdown-content aniamtionTop" >
+      <a  *ngFor="let option of filtro.options" (click)="sendEvent(option.name,1,i)" class="aniamtionTopitems">{{option.name}}</a>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+<div class="padre">
+  <div style="position: relative; display: flex; background: #E6E6E6;" class="aux">
+    <aside [ngClass]="classAsideMenu">
+      <div class="articulo" *ngIf="!ocultarAcor">
+       <!-- <pn-menu-seccion (click)="regresarVista()" [pendiente]="totalPendientes" [items]="itemsMenu" [titulo]="'VENDEDOR'" [vistaInicialActiva]="vistaInicialActiva"
+          style="width: 100%" *ngIf="vistaInicialActiva"></pn-menu-seccion>-->
+        <!-- <pn-menu-seccion [pendiente]="totalPendientes" [vistaInicialActiva]="vistaInicialActiva" style="width: 100%" *ngIf="!vistaInicialActiva"></pn-menu-seccion> -->
+      </div>
+    </aside>
+    <div style="position: absolute; position: absolute; padding-top: 352px;right: 0">
+      <img class="img" src='./assets/Images/flecha_cuadro.svg' *ngIf="!ocultarAcor" (click)="mostarOcultarAcordeon()" />
+      <img class="img" src='./assets/Images/flecha_mostrar.svg' *ngIf="ocultarAcor" (click)="mostarOcultarAcordeon()" />
+    </div>
+
+  </div>
+  <div class="area" style="width:100%; height:100%;overflow: scroll;">
+    <router-outlet></router-outlet>
+  </div>
+</div>

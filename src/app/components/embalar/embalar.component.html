@@ -1,0 +1,238 @@
+<div class="seccionEmbalar">
+  <div class="aux" *ngIf="true" style="position:relative;display:flex;background: #E6E6E6;">
+    <!-- <div style="position: relative; display: flex; background: #E6E6E6;" class="aux"> -->
+    <!-- <aside [ngClass]="classAsideMenuE"> -->
+    <aside [ngClass]="classAsideMenuE">
+      <div class="articulo" *ngIf="!ocultarAcorE">
+        <!--<div class="encabezadoMenu">RESPONSABLE DE SURTIDO</div>
+        <div class="menus">Salidas Almacén</div>-->
+        <pn-menu-seccion-roles [items]="itemsMenu" [titulo]="'RESPONSABLE DE SURTIDO'"  style="width: 100%;" *ngIf="activarMenu"></pn-menu-seccion-roles>
+      </div>
+    </aside>
+    <!-- <pn-menu-seccion [pendiente]="totalPendientes" [items]="itemsMenu" [titulo]="'RESPONSABLE DE SURTIDO'" [vistaInicialActiva]="vistaInicialActiva"
+      style="width: 100%"></pn-menu-seccion> -->
+    <!-- <pn-menu-seccion></pn-menu-seccion> -->
+
+    <div style="position: absolute;  padding-top: 352px;right: 0">
+      <img class="img" src='./assets/Images/flecha_cuadro.svg' *ngIf="!ocultarAcorE" (click)="mostarOcultarAcordeon()" style="margin-right: 0px"/>
+      <img class="img" src='./assets/Images/flecha_mostrar.svg' *ngIf="ocultarAcorE" (click)="mostarOcultarAcordeon()" style="margin-right: 0px"/>
+    </div>
+  </div>
+
+  <div class="areaDeTrabajo" style="overflow: auto">
+    <!-- Encabezado de la aplicación -->
+    <div class="encabezado">
+      <img src='./assets/Images/regresar.svg' (click)="mostrarGraficaI()" *ngIf="vistaInicialI" style="height: 29px;width: 29.8px;cursor:pointer" />
+      <label>EMBALAR PRODUCTOS</label>
+    </div>
+    <!--Esta seccion es la unica que sera Scrollable  -->
+    <div class="scroll" style="min-width: 1005px; height: calc(100% - 48px);">
+      <!--style="min-width: 800px;"-->
+      <!--Objetivos de Embalaje  -->
+      <div style="height: 100%;width: 100%;border-top: 2px solid #303030;box-sizing: border-box;" [style.min-width]="vistaInicialI?'1800px':'985px'">
+      <div class="objetivosEmbalaje" style="min-width: 800px;">
+
+        <div class="embalajeHoy">
+          <div class="texto">
+            <p style="font-family: Roboto-Bold;font-size: 16px;">TU OBJETIVO</p>
+            <p style="font-family: Roboto-Bold;font-size: 16px;">DE EMBALAJE HOY</p>
+          </div>
+          <div class="imagen">
+            <div style="max-width: 85px; min-width: 30px; height:50px;padding-right: 25px">
+              <label class="estiloNumero"> {{objetivosDeEmbalaje}}</label>
+            </div>
+          </div>
+          <div class="imagen">
+            <img class="img" src='./assets/Images/objetivo.svg' style="width:22px;padding: 10px" />
+          </div>
+        </div>
+
+        <div class="piezasHoy">
+          <div class="texto">
+            <p style="font-family: Roboto-Bold;font-size: 16px;">PIEZAS HOY</p>
+            <p style="font-family: Roboto-Bold;font-size: 16px;">EMBALADAS</p>
+          </div>
+          <div class="imagen">
+            <div style="max-width:85px; height:50px;padding-right: 25px">
+              <!--<label class="estiloNumero"> {{piezasEmbaladas}}</label>-->
+              <div class="tooltip"><label class="estiloNumero"> {{piezasEmbaladas}}
+               <!-- <span class="tooltiptext">
+                  <label>ESTAS A {{embalajeDeceadoAlMomento}} PIEZAS EMBALADAS DESEADAS</label>
+                </span>-->
+              </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="embalajeDeseado">
+          <div class="texto">
+            <p style="font-family: Roboto-Bold;font-size: 16px;">EMBALAJE</p>
+            <p style="font-family: Roboto-Bold;font-size: 16px;">DESEADO</p>
+          </div>
+          <div class="imagen">
+              <div class="tooltip">
+                <div style="flex-direction: row; min-width: 45px; max-width: 100px; height:50px; position: relative; padding-right: 25px;width: 91px">
+                <label class="estiloNumero"> {{embalajeDeseado}}</label>
+                <label  style="font-size:16px; font-weight: bold; float: left;position: absolute" [style.color]="colorEmbDeseMom">{{valorSignoDesaparece}}{{embalajeDeceadoAlMomento}}</label>
+                <!--<span class="tooltiptext">
+                  <label>SUPERASTE EL MÌNIMO DE PIEZAS EMBALADAS</label>
+                </span>-->
+                  <span class="tooltiptext">
+                  <label><!--ESTAS A {{embalajeDeceadoAlMomento}} PIEZAS EMBALADAS DESEADAS--> {{mensajeDeseadoMomento}}</label>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="embalajeMinimo">
+          <div class="texto">
+            <p style="font-family: Roboto-Bold;font-size: 16px;">MINÍMO DE</p>
+            <p style="font-family: Roboto-Bold;font-size: 16px;">EMBALAJE</p>
+          </div>
+          <div class="imagen">
+            <div class="tooltip">
+            <div style="flex-direction: row; width:91px; height:50px; position: relative">
+              <label class="estiloNumero"> {{embalajeMinimo}}</label>
+              <label [style.color]="cambiarColor" style="font-size:16px; font-weight: bold; float: left;position: absolute"> {{valorSigno}}{{embalajeMinimoAlMomento}}</label>
+              <span class="tooltiptext">
+                  <label><!--ESTAS A {{embalajeMinimoAlMomento}} PIEZAS DE SUPERAR EL MÌNIMO DE EMBALAJE-->{{mensajeEmbDeseado}}</label>
+                </span>
+            </div>
+            </div>
+          </div>
+        </div>
+
+       <div class="estadisticas">
+         <pq-pop-up-estadisticas *ngIf="activarGraficasPrioEsta" [tipo]="'Embalar'" [muestraHallazgos]="false" [tipoTotales]="'Embaladas'" [totalesPorInspector]= "totales_estadisticas" [donaChart] = "dataPrioridadEstadisticas" [tipoGrafica]="graficasEstadisticas"></pq-pop-up-estadisticas>
+        <!-- <pq-pop-up-estadisticas [tipo]="'Embalar'" [muestraHallazgos]="false" [tipoTotales]="'Embaladas'" [totalesPorInspector]= "totales_estadisticas" [donita] = "listaDatosPrioEstadisticas"></pq-pop-up-estadisticas>-->
+        </div>
+
+      </div>
+
+      <div class="graficas" style="min-width: 985px;min-height: 537px;height: calc(100% - 69px);">
+        <div *ngIf="graficasI" style="height: 100%;width: 100%;">
+          <!-- <pq-vista-operacion-embalaje *ngIf="vistaInicial"></pq-vista-operacion-embalaje> -->
+          <div class="graficasEmbalaje" style="width: 100%">
+            <div class="botoneraDiasEmbalaje" style="padding-top: 1px; padding-bottom: 1px">
+              <pq-botonera-dias-embalaje class="botoneraDiasEmbalaje" (event)="recibirDia($event)" [iniciarBotonera]="iniciarBotonera"  style="display: inline-table;" ></pq-botonera-dias-embalaje>
+            </div>
+
+            <!-- Graficas y contenido  -->
+            <div class="graficasE" style="width: 100%;height: calc(100% - 200px);">
+              <!-- Pruebas de graficas  -->
+              <div [ngStyle]="{'width': '100%', 'height':'100%', 'flex-direction':'row', 'display':'flex' }">
+                <!--, 'border': '1px solid'-->
+
+                <div style="width: 100%; height: 95%; flex-direction:row; display:flex">
+
+                  <div [ngStyle]="{'width': '55%','padding-top':'19px', 'height':'100%','display':'flex','align-items':'center', 'justify-content':'center', 'position':'relative', 'flex-direction':'column'}">
+                    <div [ngStyle]="{'width':'100%', 'height': '100%','flex-direction':'column', 'display':'flex', 'align-items': 'center'}">
+                      <div style="height: 10%;">
+                        <label class="tituloGrafica">PRODUCTOS</label>
+                      </div>
+                       <div style="height: 4%"></div>
+                      <div  id="donaProducto" style="height: 90%;">
+                        <pn-donut-chart *ngIf="activarGrProd" [idGrafica]="'producto'" [data]="dataProductos" [tipoGrafica]="tipoGraficaProductos" [height]="'auto'"> </pn-donut-chart>
+                        <!--<pn-dona [doughnutChartLabels]="filtroProducctos" [doughnutChartData]="arrayProductosG" [tipoGrafica]="tipoGrafica"></pn-dona>-->
+                      </div>
+                      <!--<pn-donut-chart [idGrafica]="'producto'" [data]="data" [tipoGrafica]="'VerdevsAzul'" [height]="'auto'"> </pn-donut-chart>-->
+                    </div>
+                  </div>
+                  <!-- grafica productos y clientes-->
+                  <div [ngStyle]="{'width':'25%', 'height':'100%', 'flex-direction':'column', 'display':'flex', 'align-items': 'center','justify-content': 'center'}">
+                    <!-- <pn-donut-chart [idGrafica]="'proveedor'" [data]="data" [tipoGrafica]="tipoGraficaPro"  [height]= "'25%'"> </pn-donut-chart> -->
+                    <div [ngStyle]="{'width':'100%', 'height':'50%', 'flex-direction':'column', 'display':'flex', 'align-items': 'center'}">
+                      <div style= "height: 10%; display: flex; justify-content: center; width: 100%;">
+                        <label class="tituloGMediano">CLIENTES</label>
+                      </div>
+                      <!-- <div style="height:2%"></div> -->
+                      <div id="donaProveedores" style="height: 75%;" >
+                        <pn-donut-chart *ngIf="clienteData" [idGrafica]="'prioridades'" [data]="dataCLiente" [tipoGrafica]="tipoGraficaClienteGra" [height]= "'25%'" > </pn-donut-chart>
+                        <!-- <pn-dona [doughnutChartLabels]="filtroClientes" [doughnutChartData]="arrayClientes" [tipoGrafica]="tipoGraficaCliente"></pn-dona>-->
+
+                      </div>
+
+                    </div>
+                    <!--GRAFICA PRIORIDADES-->
+                    <div [ngStyle]="{'width':'100%', 'height':'50%', 'flex-direction':'column', 'display':'flex', 'align-items': 'center','justify-content': 'center'}">
+                      <div style= "height: 10%; display: flex; justify-content: center; width: 100%; align-items: center;">
+                        <label class="tituloGMediano">PRIORIDADES</label>
+                      </div>
+                      <!-- <div style="height:2%"></div> -->
+                      <div id="donaPrioridades" style="height: 75%;" >
+                        <pn-donut-chart *ngIf="activarGrPrio" [idGrafica]="'prioridades'" [data]="dataPrioridades" [tipoGrafica]="tipoGraficaGraPrio" [height]= "'25%'"></pn-donut-chart>
+                        <!-- <pn-dona [doughnutChartLabels]="filtroPrioridades" [doughnutChartData]="arrayPrioridades" [tipoGrafica]="tipoGraficaPrioridades"></pn-dona>-->
+                      </div>
+                    </div>
+                    <!--TERMINA PRIORIDADES-->
+                  </div>
+                  <!-- fin grafica clientes y productos -->
+                  <div [ngStyle]="{'width': '5%', 'height':'100%'}"></div>
+
+                  <div [ngStyle]="{'width':'15%', 'height':'100%', 'flex-direction':'column', 'display':'flex', 'align-items': 'center'}">
+                    <div [ngStyle]="{'width':'100%', 'height':'33%', 'flex-direction':'column', 'display':'flex', 'align-items': 'center'}">
+                      <div style= "height: 10%; display: flex; justify-content: center; width: 100%;">
+                        <label class="tituloGMediano">PRIORIDAD 1</label>
+                      </div>
+                      <div id="prioridad1" style="height: 75%;" >
+                        <!--<pn-dona [doughnutChartLabels]="filtroPrioridad1" [doughnutChartData]="arrayPrioridad1" [tipoGrafica]="tipoGraficaPrioridad1"></pn-dona>-->
+                        <pn-donut-chart *ngIf="activarGrPrio1" [idGrafica]="'prioridades'" [data]="dataPrioridadUno" [tipoGrafica]="tipoGraficaPrioridades1" [height]= "'25%'"></pn-donut-chart>
+                      </div>
+
+                    </div>
+
+
+                    <div [ngStyle]="{'width':'100%', 'height':'33%', 'flex-direction':'column', 'display':'flex', 'align-items': 'center','justify-content': 'center'}">
+                      <div style= "height: 10%; display: flex; justify-content: center; width: 100%;">
+                        <label class="tituloGMediano">PRIORIDAD 2</label>
+                      </div>
+                      <div id="prioridad2" style="height: 75%;" >
+                        <!--<pn-dona [doughnutChartLabels]="filtroPrioridad2" [doughnutChartData]="arrayPrioridad2" [tipoGrafica]="tipoGraficaPrioridad2"></pn-dona>-->
+                        <pn-donut-chart *ngIf="activarGrPrio2" [idGrafica]="'prioridades'" [data]="dataPrioridadDos" [tipoGrafica]="tipoGraficaPrioridades2" [height]= "'25%'"></pn-donut-chart>
+
+                      </div>
+
+                    </div>
+
+                    <div [ngStyle]="{'width':'100%', 'height':'33%', 'flex-direction':'column', 'display':'flex', 'align-items': 'center','justify-content': 'center'}">
+                      <div style= "height: 10%; display: flex; justify-content: center; width: 100%;">
+                        <label class="tituloGMediano">PRIORIDAD 3</label>
+                      </div>
+                      <div id="prioridad3" style="height: 75%;" >
+                        <!--<pn-dona [doughnutChartLabels]="filtroPrioridad3" [doughnutChartData]="arrayPrioridad3" [tipoGrafica]="tipoGraficaPrioridad3"></pn-dona>-->
+                        <pn-donut-chart *ngIf="activarGrPrio3" [idGrafica]="'prioridades'" [data]="dataPrioridadTres" [tipoGrafica]="tipoGraficaPrioridades3" [height]= "'25%'"></pn-donut-chart>
+                      </div>
+
+                    </div>
+
+                  </div>
+                  <!-- fin div graficas -->
+                </div>
+              </div>
+              <!-- pruebas de graficas   -->
+            </div>
+            <div class="botonesControl"> <!-- <div class="botonesControl" style="min-width: 800px;min-height: 90px">-->
+              <div class="botonIngresar" (click)="vistaIngresar()" [style.display]="boton?'-webkit-box':'none'" style="height: 43px;" [style.pointerEvents]="desactivarBtnIngresar?'none':'auto'">INGRESAR </div>
+            </div>
+          </div>
+        </div>
+        <!-- TERMINA LA PARTE DE GRAFICAS -->
+
+        <pq-vista-operacion-embalaje class="vistaInicialI" *ngIf="vistaInicialI" [partidaEmbalaje] = "partidaEmbalaje" [datosBarraProgreso]="listaBarraProgreso" [datosPrioridad] = "listaPrioridadesPiezasTotales" (EventEmiterCambioFooter)="quitarOpcionesFooter($event)" [estadoVista]="estadoVista" (vistaPrincipal)="vistaPrincipal($event)" (actualizarTotales)="actualizarTot($event)"></pq-vista-operacion-embalaje>
+        <div *ngIf="activarPopRegresar">
+          <pn-pop-up-regresar-vist-principal></pn-pop-up-regresar-vist-principal>
+        </div>
+        <!--<div *ngIf="activarIm">
+          <pn-pop-up-generar-etiqueta-estado></pn-pop-up-generar-etiqueta-estado>
+        </div>-->
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<pn-pop-up-correo *ngIf="correo"></pn-pop-up-correo>
+<pn-pop-up-facturacion *ngIf="facturacion"></pn-pop-up-facturacion>
+

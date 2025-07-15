@@ -1,0 +1,23 @@
+<div class="clientesContent"  >
+  <div class="flexbox"  >
+    <div *ngFor="let cliente of dataSplited" class="{{class}}" >
+      <div class="iconPaginatorCartera">
+        <img  class="animationZoom" [src]="cliente.imagen ? 'assets/Images/clientes/' + cliente.id+'.png' : 'assets/Images/catalogo/icono1.png'" />
+      </div>
+      <div class="infoPaginatorCartera">
+        <p class="clienteCartera CVerdeTitle">{{cliente.nombre}}</p>
+        <p class="clienteCartera">Monto facturado {{cliente.factura}} · Nivel de ingreso {{cliente.nivelIngreso}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="paginators">
+  <div *ngFor="let page of pages ">
+    <div *ngIf="current==page.page;else empty" class="fillPaginator"></div>
+    <ng-template #empty  >
+      <a (click)="change_page(page.page,$event)">
+        <div class="emptyPaginator"></div>
+      </a>
+    </ng-template>
+  </div>
+</div>

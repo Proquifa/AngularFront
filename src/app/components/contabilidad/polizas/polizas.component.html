@@ -1,0 +1,90 @@
+<div class="container">
+  <div [ngClass]="classBar">
+    <div class="containerLateralBarItems">
+      <img src="./assets/Images/gestion/consultas/facturacion/recurso_190.svg" alt="" class="containerLateralBarItemsImg">
+      <div class="containerLateralBarItemsTitle">CONSULTA</div>
+    </div>
+    <div class="containerLateralBarItems">
+        <div style="min-width:20px" ></div>
+      <div class="containerLateralBarItemsTitle">PÓLIZAS</div>
+    </div>
+    <div class="containerLateralBarDates">
+      <div class="containerLateralBarDate">
+        <div class="containerLateralBarDateLabel">Del</div>
+        <pq-date-picker [sizeInput]="'14px'" [heightInput]="'30px'" [(date)]="fechaInicio" dateFormat="YYYYMMDD" (fecha)="fnGetFechaImpl($event, 0)"></pq-date-picker>
+      </div>
+      <div style="min-width:20px" ></div>
+      <div class="containerLateralBarDate">
+        <div class="containerLateralBarDateLabel">Al</div>
+        <pq-date-picker [sizeInput]="'14px'" [heightInput]="'30px'" [(date)]="fechaFin" dateFormat="YYYYMMDD" (fecha)="fnGetFechaImpl($event, 1)"></pq-date-picker>
+      </div>
+    </div>
+    <div class="containerLateralBarSelects">
+      <div class="containerLateralBarSelectsLabel">Empresas del Grupo</div>
+      <app-pf-selector [defaultItem]="defaultItem[3]" [lstItems]="lstItems[3]" (outPutItem)="fnOutPutItem($event, 3)"></app-pf-selector>
+    </div>
+    <div class="containerLateralBarSelects">
+      <div class="containerLateralBarSelectsLabel">Tipo</div>
+      <app-pf-selector [defaultItem]="defaultItem[0]" [lstItems]="lstItems[0]" (outPutItem)="fnOutPutItem($event, 0)"></app-pf-selector>
+    </div>
+    <div class="containerLateralBarSelects">
+      <div class="containerLateralBarSelectsLabel">Empresa que Emitió</div>
+      <app-pf-selector [defaultItem]="defaultItem[1]" [lstItems]="lstItems[1]" (outPutItem)="fnOutPutItem($event, 1)"></app-pf-selector>
+    </div>
+    <div class="containerLateralBarSelects">
+      <div class="containerLateralBarSelectsLabel">Empresa que Recibió</div>
+      <app-pf-selector [defaultItem]="defaultItem[2]" [lstItems]="lstItems[2]" (outPutItem)="fnOutPutItem($event, 2)"></app-pf-selector>
+    </div>
+    <div class="containerLateralBarBtns">
+      <div class="containerLateralBarBtn" (click)="fnFiltar()" >
+        <img src="./assets/Images/actualizar.svg" alt="" class="containerLateralBarBtnImg">
+      </div>
+    </div>
+  </div>
+  <div class="containerBtn">
+    <img src="./assets/Images/flecha_cuadro.svg" alt="" [ngClass]="classBtn" (click)="fnHideBar()" >
+  </div>
+  <div class="containerBody" [ngStyle]="{'width': (classBar.indexOf('closed') !== -1) ? '100%' : 'calc(100% - 321px)' }" >
+    <div class="containerBodyHeader">
+      <div class="containerBodyHeaderTitle">RESULTADOS&nbsp;&middot;&nbsp;CARGAR INGRESOS&nbsp;&middot;&nbsp;EGRESOS</div>
+      <div class="containerBodyHeaderBtn" (click)="fnAgregarPoliza()" >NUEVA PÓLIZA</div>
+    </div>
+    <div class="containerBodyTable">
+      <div class="containerBodyTableHeader">
+        <div class="containerBodyTableHeaderCol" style="flex-basis: 5%;" >#</div>
+        <div class="containerBodyTableHeaderCol" style="flex-basis: 10%;justify-content: flex-start;" >Folio</div>
+        <div class="containerBodyTableHeaderCol" style="flex-basis: 15%;justify-content: flex-start;" >Empresa</div>
+        <div class="containerBodyTableHeaderCol" style="flex-basis: 10%;justify-content: flex-start;" >Tipo</div>
+        <div class="containerBodyTableHeaderCol" style="flex-basis: 20%;" >Fecha Referencia</div>
+        <div class="containerBodyTableHeaderCol" style="flex-basis: 10%;justify-content: flex-end;" >Subtotal</div>
+        <div class="containerBodyTableHeaderCol" style="flex-basis: 15%;justify-content: flex-end;" >IVA</div>
+        <div class="containerBodyTableHeaderCol" style="flex-basis: 10%;justify-content: flex-end;" >Total</div>
+        <div class="containerBodyTableHeaderCol" style="flex-basis: 5%;" >
+          <img src="./assets/Images/IngresosEgresosExportar.svg" alt="" class="containerBodyTableHeaderColImg">
+        </div>
+      </div>
+      <div class="containerBodyTableBody">
+        <div class="containerBodyTableBodyRow" *ngFor="let item of lstPolizas; let i = index">
+          <div class="containerBodyTableBodyRowCol" style="flex-basis: 5%;" > {{ (i + 1) }} </div>
+          <div class="containerBodyTableBodyRowCol" style="flex-basis: 10%;justify-content: flex-start;" > {{ item.folio }} </div>
+          <div class="containerBodyTableBodyRowCol" style="flex-basis: 15%;justify-content: flex-start;color: #008894;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;" > {{ item.empresa }} </div>
+          <div class="containerBodyTableBodyRowCol" style="flex-basis: 10%;justify-content: flex-start;" > {{ item.tipoTexto }} </div>
+          <div class="containerBodyTableBodyRowCol" style="flex-basis: 20%;" > {{ item.fechaView | dateFormatSlash }} </div>
+          <div class="containerBodyTableBodyRowCol" style="flex-basis: 10%;justify-content: flex-end;" > {{ item.monto | acFormatMoney }} </div>
+          <div class="containerBodyTableBodyRowCol" style="flex-basis: 15%;justify-content: flex-end;" >
+            <span class="containerBodyTableBodyRowColSpan" *ngIf="item.iva > 0">{{ item.iva | acFormatMoney }}</span>
+            <span class="containerBodyTableBodyRowColSpan" *ngIf="item.iva > 0" >&nbsp;&middot;&nbsp;16%</span>
+            <span class="containerBodyTableBodyRowColSpan" *ngIf="item.iva === 0" >0%</span>
+          </div>
+          <div class="containerBodyTableBodyRowCol" style="flex-basis: 10%;justify-content: flex-end;color: #008894;" > {{ item.total | acFormatMoney }} </div>
+          <div class="containerBodyTableBodyRowCol" style="flex-basis: 5%;" >
+            <img [src]="item.imgSrc" alt="" [ngClass]="item.imgClass" (click)="fnEditarPoliza(item.idPoliza)" >
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="containerBodyFooter">
+      {{ (lstPolizas.length === 1) ? '#1 Poliza' : '#' + lstPolizas.length + ' Polizas' }}
+    </div>
+  </div>
+</div>

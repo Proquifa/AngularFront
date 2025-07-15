@@ -1,0 +1,34 @@
+<div class="w3-container">
+
+  <div id="id01" class="modal" #pop>
+    <div class="modal-content">
+      <header class="header">
+        <h1> PROQUIFA NET  </h1>
+      </header>
+
+      <div class="contenido">
+        <div class="datos">
+          <div class="alertaTxt">
+            <span>¿Deseas desvincular del stock</span>
+            <label> el producto con # de Cat. {{itemStock.codigo}}?</label>
+          </div>
+          <div class="combos">
+            <label>Justificación</label>
+            <pn-combo-flecha-rellena class="combo" [title]="'Seleccionar'" [valImg]="'flechaRellena'" [items]="justificacion" [subtitleActive]="false" (valueDropList)="receiveJust($event)"></pn-combo-flecha-rellena>
+          </div>
+        </div>
+
+      </div>
+
+      <footer class="footer2" *ngIf="activarBoton">
+        <a type="submit" class="btnOk" (click)="cerrar(false)" >
+          <label> CANCELAR </label>
+        </a>
+        <a type="submit" class="btnOk" (click)="cerrar(true)" [style.background]="active? '#008894': '#C2C3C9'" [style.pointerEvents]="active?'auto':'none'">
+          <label> ACEPTAR </label>
+        </a>
+      </footer>
+    </div>
+  </div>
+
+</div>

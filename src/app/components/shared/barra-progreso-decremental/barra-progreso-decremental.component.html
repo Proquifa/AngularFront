@@ -1,0 +1,20 @@
+<div class="barraProgresoDecremento">
+
+  <div class="textoBarra">
+    <p>{{pzasAlMomento}} de {{pzasTotales}} {{mensajePzas}}</p>
+  </div>
+
+  <div class="graficaDecremento">
+
+    <div id="myProgress" *ngIf="normal">
+      <div id="myBar" [style.width]="restante"></div>
+      <div id="myBar2" [style.width]="progreso"></div>
+    </div>
+
+    <div id="myProgressOpaco" *ngIf="opaco">
+      <div id="myBarOpaco" [style.width]="restante"></div>
+      <div id="myBar2Opaco" [style.width]="progreso"></div>
+    </div>
+    
+  </div>
+</div>

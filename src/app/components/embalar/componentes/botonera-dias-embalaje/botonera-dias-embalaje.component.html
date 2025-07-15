@@ -1,0 +1,25 @@
+<div class="botoneraDiasEmbalaje">
+
+  <div [ngClass]="botones[0]" (click)="metodoDeDias('hoy', 0)" style="border-right: 1px solid #88868A">
+      <a id="dhoy" style="font-family: 'Novecento';font-weight: bold;font-size: 18px" >Hoy<span class="indice">{{totalHoy}}</span></a>
+  </div>
+
+  <div [ngClass]="botones[1]" (click)="metodoDeDias('manana', 1)" style="border-right: 1px solid #88868A">
+    <a  style="font-family: 'Novecento';font-weight: bold;font-size: 18px">Mañana<span class="indice">{{totalManana}}</span></a>
+  </div>
+
+  <div [ngClass]="botones[2]" (click)="metodoDeDias('pasado', 2)" style="border-right: 1px solid #88868A">
+     <a  style="flex-direction: column;font-family: 'Novecento';font-weight: bold;font-size: 18px">
+          Pasado Mañana <span class="indice">{{totalPasadoM}}</span>
+      </a>
+  </div>
+
+  <div [ngClass]="botones[3]" (click)="metodoDeDias('futuro', 3)" style="border-right: 1px solid #88868A">
+      <a style="font-family: 'Novecento';font-weight: bold;font-size: 18px">Futuro <span class="indice">{{totalFuturo}}</span></a>
+  </div>
+
+  <div [ngClass]="botones[4]" (click)="metodoDeDias('todo', 4)">
+      <a style="font-family: 'Novecento';font-weight: bold;font-size: 18px">Todo <span class="indice">{{totalTodo}}</span></a>
+  </div>
+
+</div>

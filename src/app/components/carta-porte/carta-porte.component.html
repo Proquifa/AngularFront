@@ -1,0 +1,108 @@
+<div class="principal">
+  <div  class="aux">
+    <aside [ngClass]="classAsideMenu">
+      <div class="articulo" *ngIf="!ocultarAcor">
+        <pn-menu-seccion-roles [items]="itemsMenu"  style="width: 100%" *ngIf="activeMenu"></pn-menu-seccion-roles>
+      </div>
+    </aside>
+    <div class="menuAcordeon">
+      <img class="img" src='./assets/Images/flecha_cuadro.svg' *ngIf="!ocultarAcor" (click)="mostarOcultarAcordeon()"/>
+      <img class="img" src='./assets/Images/flecha_mostrar.svg' *ngIf="ocultarAcor" (click)="mostarOcultarAcordeon()"/>
+    </div>
+  </div>
+  <div class="area">
+    <div class="contain">
+      <div class="title">
+        <label>Envíos Programados</label>
+      </div>
+      <div class="list" *ngIf="listPendientes.length > 0">
+       <div class="list-contain">
+         <div class="list-senders">
+          <div class="container-list">
+            <div class="item"  *ngFor="let pendiente of listPendientes; let i=index">
+              <div [ngClass]="selected == i?'item-container-selected':'item-container'" (click)="slopSelect(pendiente, i)">
+                <div class="sender">
+                  <div>
+                    <label class="text-bold">{{pendiente.responsable}}</label>
+                   <!-- <label>Licencia: CD123456</label>-->
+                  </div>
+                  <div>
+                    <label class="text-bold">{{pendiente.eventos}} Clientes</label>
+                    <!--<label>5 Eventos</label>-->
+                  </div>
+                </div>
+                <div class="destiny">
+                  <div class="img">
+                    <img src="./assets/Images/Indicador.svg">
+                  </div>
+                  <div class="data-destiny">
+                    <div>
+                      <label class="text-bold">Origen</label>
+                      <label>PROQUIFA</label>
+                    </div>
+                    <div>
+                      <label class="text-bold">Destino</label>
+                      <label>PROQUIFA</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+         </div>
+         <div *ngIf = "!visorPdf && !visorPdfAux" class="detail">
+           <div>
+            <div class="transport">
+             <div class="data">
+               <label>TRANSPORTE</label>
+               <div class="drop">
+                 <pn-combo-flecha-rellena class="combo" [title]="'Seleccionar'"  [items]="vehicle"[subtitleActive]="false" *ngIf="activeVehicle" (valueDropList)="selectedOption($event, 'vehicle')"></pn-combo-flecha-rellena>
+               </div>
+             </div>
+           </div>
+            <div class="transport">
+             <div class="data">
+               <label>MENSAJERO</label>
+               <div class="drop">
+                 <pn-combo-flecha-rellena class="combo" [title]="'Seleccionar'" [items]="mensajeros" [subtitleActive]="false" *ngIf="activeMensajero" (valueDropList)="selectedOption($event, 'mensajero')"></pn-combo-flecha-rellena>
+               </div>
+             </div>
+           </div>
+            <div class="transport">
+             <div class="data">
+               <label>CLIENTE</label>
+               <div class="drop">
+                 <pn-combo-flecha-rellena  class="combo" [title]="'Seleccionar'" [items]="clients" [subtitleActive]="false" *ngIf="activeClients" (valueDropList)="selectedOption($event, 'client')"></pn-combo-flecha-rellena>
+               </div>
+             </div>
+           </div>
+             <div class="transport">
+               <div class="data">
+                 <label>KILOMETROS RECORRIDOS</label>
+                 <div class="km">
+                   <input [(ngModel)]="distance" class="input-text" type="number" in="0" oninput="this.value =
+                  !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null">
+                   <label>KM</label>
+                 </div>
+               </div>
+             </div>
+           </div>
+           <div>
+             <button (click)="generateCartaPorte()" [disabled]="!selectedClient || !selectedVehicle  || !selectedMensajero" [ngClass]="selectedClient && selectedVehicle && selectedMensajero?'botonIngresar':'botonIngresar botonDisabled'">GENERAR CARTA PORTE</button>
+           </div>
+         </div>
+         <div class="pdf" *ngIf = "visorPdf || visorPdfAux">
+           <pq-visor-pdf *ngIf = "visorPdf" class="pdfViewer" [urlPdf]="path" ></pq-visor-pdf>
+           <pq-visor-pdf *ngIf = "visorPdfAux" class="pdfViewer" [urlPdf]="path" ></pq-visor-pdf>
+         </div>
+       </div>
+      </div>
+      <div class="without-data" *ngIf="listPendientes.length === 0">
+        <div>
+          <label>SIN DATOS</label>
+        </div>
+      </div>
+      </div>
+    </div>
+</div>
+<pq-alerta *ngIf="alert" [alertaTxt]="msgAlert" (confirmacion)="closeAlert()"></pq-alerta>

@@ -1,0 +1,111 @@
+<div class="vistaP">
+  <div class="areaTrabajo">
+    <div class="areaGeneral">
+      <div class="area">
+        <div class="combos">
+          <div>
+            <label>Empresa</label>
+            <pn-combo-flecha-rellena [title]="'Seleccionar'"  valImg="flechaRellena" style="display: flex;align-items: center;" [items]="empresa" *ngIf="activeCombos" [subtitleActive]="false" (valueDropList)="recibirEmpresa($event, 'empresa')"></pn-combo-flecha-rellena>
+          </div>
+          <div class="datosEmpresa">
+            <label *ngIf="datosEmpresa !== undefined" style="font-weight: bold; color: #008895;">{{datosEmpresa.rsozial}}</label>
+            <label *ngIf="datosEmpresa !== undefined">{{datosEmpresa.rfc}}</label>
+          </div>
+        </div>
+        <div class="combos">
+          <div>
+            <label>Proveedor</label>
+            <pn-drop-list-search [title]="'Seleccionar'"  valImg="flechaRellena" style="display: flex;align-items: center;" [items]="proveedores" *ngIf="activeCombos" [subtitleActive]="false" (valueDropList)="recibirEmpresa($event, 'proveedor')"></pn-drop-list-search>
+          </div>
+          <div class="datosEmpresa">
+            <label *ngIf="datosProvee !== undefined" style="font-weight: bold; color: #008895;">{{datosProvee.rsozial}}</label>
+            <label *ngIf="datosProvee !== undefined">{{datosProvee.rfc}}</label>
+          </div>
+        </div>
+      </div>
+      <div style="width: 100%;height: calc(100% - 103px)">
+        <div class="informacion">
+          <label *ngIf="activeDatos">INFORMACION</label>
+        </div>
+        <div style="height: calc(100% - 43px);width: 100%" *ngIf="activeDatos">
+          <div class="datos">
+            <div>
+              <div class="datosSaldo">
+                <label>Folio de Documento</label>
+                <input [ngModel]="folio" (ngModelChange)="recibirDatos($event, 'folio')">
+              </div>
+              <div class="datosSaldo">
+                <label [style.color]="validarInputs?'#C2C3C9':'#424242'">Serie(CFDI)</label>
+                <input [ngModel]="serie" (ngModelChange)="recibirDatos($event, 'serie')" [disabled]="validarInputs">
+              </div>
+              <div style="min-width: 69px; max-width: 720px;width: 100%;">
+                <label [style.color]="validarInputs?'#C2C3C9':'#424242'">Folio Fiscal ó UUID</label>
+                <input [ngModel]="uuid" (ngModelChange)="recibirDatos($event, 'uuid')" [disabled]="validarInputs">
+              </div>
+              <div class="datosSaldo">
+                <label>Fecha del Documento</label>
+                <pq-date-picker style="height: 21px" dateFormat="YYYYMMDD" (fecha)="getFechaImpl($event)" [(date)]="date" [color]="false"></pq-date-picker>
+              </div>
+              <div class="datosSaldo">
+                <label>Monto</label>
+                <div class="monto">
+                  <input [ngModel]="monto" (ngModelChange)="recibirDatos($event, 'monto')" type="number" [min]="0" style="width: 90%">
+                  <label *ngIf="datosProvee.moneda === 'Dolares'">USD</label>
+                  <label *ngIf="datosProvee.moneda === 'Pesos'">MXN</label>
+                  <label *ngIf="datosProvee.moneda === 'Libras'">lbs</label>
+                  <label *ngIf="datosProvee.moneda === 'Euros'">EUR</label>
+                  <label *ngIf="datosProvee.moneda === 'DlCan'">CAD</label>
+                </div>
+              </div>
+              <div class="datosSaldo">
+                <label [style.color]="validarInputs?'#C2C3C9':'#424242'">XML</label>
+                <pq-file-upload [disabled]="true" style="min-width: 260px;max-width: 260px;"
+                                [bloqueo]="validarInputs"
+                                (enviarDocumento)="recibeDocumentacion($event)"
+                                [activarOjito]="true" [activeVis]="false" [style.pointerEvents]="validarInputs?'none':'auto'" *ngIf="recargarDoc"></pq-file-upload>
+              </div>
+            </div>
+            <div class="elementos">
+              <div style="width: 100%;">
+                <label>Comentarios</label>
+                <textarea placeholder="Escribe tus comentarios" style="height: 50px" [ngModel]="coment" (ngModelChange)="recibirDatos($event, 'coment')"></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="document">
+              <div class="cargaDoc">
+                <input type="file" class="carga"  (change)="fileChange2($event)" id="cargarDocumento">
+                <label for="cargarDocumento" style="display: flex" *ngIf="primerCarga" class="cargarDocumento"><img src="./assets/Images/cargar_permiso.svg" class="imgeArchivo">
+                  <p class="textoImagen">CARGAR PDF</p></label>
+                <div *ngIf="!primerCarga" class="vistDoc">
+                  <div style="width: 100%;height: 95%; justify-content: center;display: flex">
+                    <div class="contentRefuse" id="preview" [innerHtml] = "htmlToAdd" [style.height]="'100%'"
+                         [style.overflow]="'auto'">
+                    </div>
+                  </div>
+                  <div *ngIf="!primerCarga" class="recargar">
+                    <label for="cargarDocumento" style="display: flex"><img src="./assets/Images/editar-pieza/cargar.svg"></label>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
+        <div style="height: calc(100% - 43px);width: 100%" *ngIf="!activeDatos">
+          <div class="sinDatos">
+            <label>SELECCIONA EMPRESA Y PROVEEDOR</label>
+            <label>PARA HABILITAR ESTA SECCIÓN</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="botones">
+    <div (click)="regresar()">
+      <label>CANCELAR</label>
+    </div>
+    <div (click)="generarSaldo()" [style.pointerEvents]="activeBtn?'auto':'none'" [style.background]="activeBtn?'#008894':'#ECEEF0'">
+      <label>ACEPTAR</label>
+    </div>
+  </footer>
+</div>
+<pn-pop-up-saldos *ngIf="generar" (emit)="finalizarSaldo($event)" [alertaTxt]="mensaje" [folio]="folioMensaje" [activarBoton]="false"></pn-pop-up-saldos>

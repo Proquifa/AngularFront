@@ -1,0 +1,478 @@
+.principal{
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  width: 100%;
+}
+.barraProgreso {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-content: stretch;
+  align-items: stretch;
+  height: 100%;
+  // padding: 8px 0px 8px 0px;
+  padding-left: 20px;
+  padding-right: 20px;
+  //padding-top: 20px;
+  min-height: 180px;
+  font-family: 'Roboto', sans-serif;
+}
+.textoBarraE{
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Roboto;
+ }
+.barra {
+  order: 0;
+  flex: 1 1 auto;
+  align-self: auto;
+  height: 100%;
+  width: 50%;
+  text-align: left;
+  font-family: 'Roboto', sans-serif;
+}
+
+#myProgress {
+  width: 100%;
+  background-color: #ddd;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-content: stretch;
+  align-items: center;
+  height: 70px;
+  font-weight: bold;
+  margin-top: 1%;
+  color: #9B9B9B;
+}
+
+#myBar {
+  height: 100%;
+  // background-color: #9DB83C;
+  text-align: center;
+  line-height: 30px;
+  color: #424242;
+  order: 0;
+  flex: 1 1 auto;
+  align-self: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  //tooltips
+  position: relative;
+  display: inline-block;
+  // border-bottom: 1px dotted black;
+}
+
+#myBar2 {
+  height: 100%;
+  background-color: #ddd;
+  text-align: center;
+  line-height: 30px;
+  color: white;
+  order: 0;
+  flex: 1 1 auto;
+  align-self: auto;
+  color: #9B9B9B;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  //tooltips
+  position: relative;
+  display: inline-block;
+  // border-bottom: 1px dotted black;
+}
+
+.datosBarra {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-content: space-between;
+  align-items: center;
+  margin-top: 1%;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.PzasIniciales {
+  order: 0;
+  flex: 0 1 auto;
+  align-self: auto;
+}
+
+.pzasTotales {
+  order: 0;
+  flex: 0 1 auto;
+  align-self: auto;
+}
+//tooltips
+//Muestra la cajita del tooltip
+.tooltip .tooltiptext::after {
+  content: " ";
+  position: absolute;
+  bottom: 100%;  /* At the top of the tooltip */
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent #4C4C4C transparent;
+}
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+.tooltip {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 130px;
+  background-color: #424242;
+  color: #FFFFFF ;
+  font-family: 'Roboto';
+  text-align: left;
+  // border-radius: 6px;
+  padding: 5px 10px 0px 0px;
+  font-size: 9px;
+  padding: 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  left: 2%;
+  margin-left: -60px;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+}
+  //left
+#myBar .tooltiptextleft {
+  visibility: visibility;
+  width: 119px;
+  height: 17%;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  // border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: -10%;
+  display: flex;
+  left: 50%;
+  margin-left: -60px;
+  font-size: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+#myBar .tooltiptextleft::after {
+  content: " ";
+  position: absolute;
+  color: #424242;
+  bottom: 100%;  /* At the top of the tooltip */
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent black transparent;
+}
+//Right
+#myBar2 .tooltiptextRigth {
+  visibility: visibility;
+  width: 119px;
+  height: 17%;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  // border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: -10%;
+  display: flex;
+  left: 50%;
+  margin-left: -60px;
+  font-size: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+#myBar2 .tooltiptextRigth::after {
+  content: " ";
+  position: absolute;
+  bottom: 100%;  /* At the top of the tooltip */
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent black transparent;
+}
+
+.textLeft, .textRigth {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #FFFFFF;
+}
+
+h1 {
+  font-size: 22px;
+  color: #008895;
+  font-family: 'Roboto', sans-serif;
+}
+
+.datos {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-content: center;
+    align-items: center;
+    }
+
+.mensaje {
+    order: 0;
+    flex: 0 1 auto;
+    align-self: auto;
+    }
+
+.hora {
+    order: 0;
+    flex: 0 1 auto;
+    align-self: auto;
+    font-size: 30px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    }
+/*Estilos para prioridades*/
+
+
+#myProgressPrio {
+  width: 100%;
+  // background-color: #ddd;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-content: stretch;
+  align-items: center;
+  height: 100px;
+  color: #9B9B9B;
+  font-family: 'Roboto', sans-serif;
+  margin-left: 0%;
+  padding-top: 27px;
+}
+
+#Prioridad1 {
+  height: 100%;
+  background-color: #AF3634;
+  text-align: left;
+  line-height: 19px;
+  color: white;
+  order: 0;
+  flex: 1 1 auto;
+  align-self: auto;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  //tooltips
+  position: relative;
+  display: inline-block;
+  font-size:20px;
+  border: 1px solid white;
+  padding-left: 10px;
+  padding-top: 6px;
+}
+
+#Prioridad2 {
+  height: 100%;
+  background-color: #EEB253;
+  text-align: left;
+  line-height: 19px;
+  color: white;
+  order: 0;
+  flex: 1 1 auto;
+  align-self: auto;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  //tooltips
+  position: relative;
+  display: inline-block;
+  font-size:20px;
+  border: 1px solid white;
+  padding-left: 10px;
+  padding-top: 6px;
+}
+
+#Prioridad3{
+  height: 100%;
+  background-color: #63B257;
+  text-align: left;
+  line-height: 19px;
+  color: white;
+  order: 0;
+  flex: 1 1 auto;
+  align-self: auto;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  //tooltips
+  position: relative;
+  display: inline-block;
+  font-size:20px;
+  border: 1px solid white;
+  padding-left: 10px;
+  padding-top: 6px;
+}
+
+
+p{
+  font-size:11px;
+  color : white;
+  margin-top: 1%;
+}
+
+h1{
+  font-size: 22px;
+  color: #008895;
+  font-family: 'Roboto', sans-serif;
+}
+
+h2{
+  font-size: 20px;
+  color: white;
+}
+
+.tipoInspeccion{
+  margin-top: 2%;
+  margin-bottom: 2%;
+  text-align: left;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.pedimento {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-content: stretch;
+  align-items: stretch;
+  // border: 2px solid;
+  padding: 3%;
+  box-sizing: border-box;
+}
+
+.imgPedimento {
+  order: 0;
+  flex: 0 1 auto;
+  align-self: auto;
+  // border: 2px solid red;
+  padding: 3%;
+  box-sizing: border-box;
+}
+
+.txtPedimento {
+  order: 0;
+  flex: 1 1 auto;
+  align-self: auto;
+  // border: 2px solid blue;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  align-content: stretch;
+  align-items: stretch;
+  padding: 3%;
+  box-sizing: border-box;
+}
+
+.tipoTexto {
+  order: 0;
+  flex: 0 1 auto;
+  align-self: auto;
+  font-size: 30px;
+  font-weight: 500;
+  font-family: 'Roboto', sans-serif;
+}
+
+.datoTexto {
+  order: 0;
+  flex: 0 1 auto;
+  align-self: auto;
+  font-size: 30px;
+  font-family: 'Roboto', sans-serif;
+}
+
+//Test
+.ordenDeCompra {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-content: stretch;
+  align-items: stretch;
+  // border: 2px solid;
+  // padding: 3%;
+  box-sizing: border-box;
+  min-height: 121px;
+}
+
+.txtOC {
+  order: 0;
+  flex: 1 1 auto;
+  align-self: auto;
+  // border: 2px solid blue;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-content: stretch;
+  align-items: stretch;
+  // padding: 3%;
+  box-sizing: border-box;
+}
+
+.tipoTextoOC {
+  order: 0;
+  flex: 0 1 auto;
+  align-self: auto;
+  font-size: 30px;
+  font-weight: 500;
+  font-family: 'Roboto', sans-serif;
+  padding-bottom: 3%;
+  box-sizing: border-box;
+}
+
+.datoTextoOC {
+  order: 0;
+  flex: 0 1 auto;
+  align-self: auto;
+  font-size: 30px;
+  font-family: 'Roboto', sans-serif;
+  padding-left: 7%;
+  box-sizing: border-box;
+}

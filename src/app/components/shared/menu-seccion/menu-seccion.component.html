@@ -1,0 +1,24 @@
+<div class="padre">
+    <div *ngFor="let item of items; let i = index;">
+      <a class="fondoSubmenu {{itemSelected[i]}}" (click)="redirect(i, item.url, item.disable)" [style.cursor]="vistaInicialActiva ? 'pointer' : 'default'">
+        <label class="subMenu" [style.margin-left]="(20 * hijo)+'px'" [style.cursor]="vistaInicialActiva ? 'pointer' : 'default'">
+          {{item.nombre}}
+        </label>
+        <div class="contenedor" *ngIf="item.tipo == 'valor'">
+          <div class="rectangulo"></div>
+          <div class="centrado">{{item.valor}}
+          </div>
+        </div>
+        <div class="contenedor" *ngIf="item.tipo == 'flecha'">
+          <div class="flecha">
+           <!-- <img class="flechaColor" src="./assets/Images/FlechaDerVerdee.svg">-->
+
+          </div>
+        </div>
+      </a>
+      <div *ngIf="item.subMenu != null">
+        <pn-menu-seccion (clickItem)="clickItemSon($event)"  [resetSelected]="resetSelected" [hijo]="hijo + 1" [items]="item.subMenu" ></pn-menu-seccion>
+      </div>
+    </div>
+</div>
+

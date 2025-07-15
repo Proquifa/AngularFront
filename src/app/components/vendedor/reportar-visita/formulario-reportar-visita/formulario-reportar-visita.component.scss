@@ -1,0 +1,1159 @@
+@import "../../../../../mixins";
+@import "../../../../../colors";
+
+:host {
+  .cabezera {
+    width: 100%;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    padding-left: 13px;
+    border-bottom: 2px solid black;
+
+    .etiqueta {
+      color: #5b5b5b;
+      font-size: 30px;
+      font-family: Bank Gothic;
+    }
+  }
+
+  .contenedor {
+    @include flexRow;
+
+    .libreta {
+      @include flexColumn;
+      width: 15%;
+      max-width: 295px;
+      height: calc(100vh - 194px);
+      background-color: lightgoldenrodyellow;
+      box-sizing: border-box;
+      overflow: scroll;
+
+      .tituloNotas {
+        @include flexRow;
+        align-items: center;
+        padding: 6px 15px;
+        min-height: 50px;
+        box-sizing: border-box;
+        font-family: Roboto-Bold;
+        font-size: 14px;
+      }
+
+      .notas {
+        min-height: calc(100vh - 244px);
+        box-sizing: border-box;
+        padding: 6px 10px;
+        margin: 0px 5px;
+        line-height: 28px;
+        background-image: url("assets/Images/ventas/visitas/linea.svg");
+        background-repeat: repeat;
+        background-size: 295px 28px;
+        font-family: Roboto-Regular;
+        font-size: 12px;
+      }
+    }
+
+    .contenido {
+      @include flexColumn;
+      width: 85%;
+      box-sizing: border-box;
+      padding: 0 25px;
+
+      &>.datosClientes {
+        @include flexRow;
+        justify-content: space-between;
+        border-bottom: 1px solid #c2c3c9;
+        width: 100%;
+
+        &>div {
+          @include flexColumn;
+          @include absoluteCenter;
+          align-items: flex-start;
+
+          &>div {
+            @include flexRow;
+            @include absoluteCenter;
+            justify-content: space-between;
+
+            &>img {
+              margin-right: 10px;
+            }
+          }
+        }
+      }
+
+      &>.divRequerimientos {
+        @include flexRow;
+        width: 100%;
+        border: 1px solid #c2c3c9;
+        box-sizing: border-box;
+        height: calc(100vh - 488px);
+
+        &>.listaRequerimientos {
+          width: 25%;
+          border-right: 1px solid #c2c3c9;
+          font-size: 14px;
+          height: calc(100vh - 488px);
+
+          &>.divLst {
+            height: calc(100vh - 534px);
+            overflow: scroll;
+
+            &>.divItem {
+              padding: 10px;
+
+              &>div:nth-of-type(1) {
+                @include flexRow;
+                margin-bottom: 5px;
+
+                &>img {
+                  margin-right: 5px;
+                }
+
+                &>div:nth-of-type(1) {
+                  @include multiLineTextTruncate(1, 16px, 16px);
+                  width: 100%;
+                  margin-right: 5px;
+                }
+
+                &>div:nth-of-type(2) {
+                  min-width: 78px;
+                }
+              }
+
+              &>div:nth-of-type(2) {
+                @include flexRow;
+                margin-bottom: 5px;
+
+                &>img {
+                  margin-right: 5px;
+                }
+
+                &>div:nth-of-type(1) {
+                  @include multiLineTextTruncate(2, 16px, 32px);
+                  width: 100%;
+                }
+              }
+
+              &>div:nth-of-type(3) {
+                @include multiLineTextTruncate(2, 16px, 32px);
+              }
+            }
+
+            &>.divItem:hover {
+              background-color: rgb(236, 238, 240);
+            }
+
+            &>.divItemSelected {
+              background-color: rgb(236, 238, 240);
+            }
+          }
+
+          &>.totalRequerimientos {
+            border-top: 1px solid #c2c3c9;
+            margin: 0px 10px;
+            padding: 15px 0px;
+            text-align: center;
+          }
+        }
+
+        &>.contenedorRequerimientos {
+          width: 75%;
+          max-height: calc(100vh - 488px);
+          padding: 15px;
+          overflow: scroll;
+
+          &>div:nth-of-type(1) {
+            @include flexRow;
+            justify-content: space-between;
+            align-items: flex-end;
+            border-bottom: 1px solid #c2c3c9;
+            padding-bottom: 15px;
+
+            &>div:nth-of-type(1) {
+              &>div:nth-of-type(1) {
+                color: #008895;
+                font-size: 24px;
+                margin-bottom: 5px;
+              }
+
+              &>div:nth-of-type(1) {
+                font-size: 20px;
+              }
+            }
+
+            &>div:nth-of-type(2) {
+              text-align: right;
+            }
+          }
+
+          &>div:nth-of-type(2) {
+            @include flexRow;
+            border-bottom: 1px solid #c2c3c9;
+            padding: 20px 0px;
+          }
+
+          &>div:nth-of-type(3) {
+            @include flexColumn;
+            justify-content: space-between;
+            padding: 20px 0px;
+
+            &>div:nth-of-type(1) {
+              font-family: Roboto-Regular;
+              font-size: 14px;
+              color: #008895;
+              margin-bottom: 10px;
+            }
+
+            &>form {
+              width: 100%;
+
+              &>textarea {
+                margin-bottom: 20px;
+                font-size: 14px;
+                resize: none;
+                border: 1px solid #c2c3c9;
+                width: 100%;
+                height: calc(((43) * 1px) + ((168) - (43)) * ((100vh - 770px) / (1080 - 770)));
+              }
+            }
+
+            &>div:nth-of-type(2) {
+              font-family: Roboto-Regular;
+              font-size: 14px;
+              color: #008895;
+              margin-bottom: 10px;
+            }
+          }
+        }
+      }
+
+      &>.divPendientes {
+        @include flexRow;
+        width: 100%;
+        border: 1px solid #c2c3c9;
+        box-sizing: border-box;
+        height: calc(100vh - 488px);
+
+        &>.listaPendientes {
+          width: 25%;
+          border-right: 1px solid #c2c3c9;
+          font-size: 14px;
+          height: calc(100vh - 488px);
+
+          &>.divLst {
+            height: calc(100vh - 534px);
+            overflow: scroll;
+
+            &>span:nth-of-type(1) {
+              @include flexColumn;
+              @include absoluteCenter;
+              height: calc(100vh - 534px);
+              text-align: center;
+              font-size: 28px;
+              color: #c2c3c9;
+              font-family: Roboto-Bold;
+              padding: 10px;
+              box-sizing: border-box;
+            }
+
+            &>div {
+              @include flexColumn;
+              @include absoluteCenter;
+              max-height: 55px;
+              padding: 5px 10px;
+              border-bottom: 1px solid #c2c3c9;
+
+              &>div:nth-of-type(1) {
+                @include flexRow;
+                width: 100%;
+                justify-content: flex-end;
+                font-size: 12px;
+                margin-bottom: 4px;
+              }
+
+              &>div:nth-of-type(2) {
+                @include flexRow;
+                width: 100%;
+                justify-content: flex-start;
+                @include multiLineTextTruncate(2, 14px, 28px);
+              }
+            }
+
+            &>div:hover {
+              background: #eceef0;
+            }
+
+            &>.selected {
+              background: #eceef0;
+            }
+          }
+
+          &>.totalPendientes {
+            border-top: 1px solid #c2c3c9;
+            margin: 0px 10px;
+            padding: 15px 0px;
+            text-align: center;
+          }
+        }
+
+        &>.contenedorPendientes {
+          width: 75%;
+          max-height: calc(100vh - 488px);
+          padding: 15px;
+          overflow: scroll;
+
+          &>div:nth-of-type(1) {
+            @include flexRow;
+            justify-content: flex-end;
+            border-bottom: 1px solid #c2c3c9;
+            padding-bottom: 15px;
+
+            &>div:nth-of-type(1) {
+              cursor: pointer;
+              background-color: #008895;
+              color: #ffffff;
+              padding: 10px 30px;
+              width: auto;
+              font-size: 20px;
+              font-family: Roboto-Bold;
+            }
+
+            &>.disable {
+              background-color: #eaeaea !important;
+            }
+          }
+
+          &>div:nth-of-type(2) {
+            &>div:nth-of-type(1) {
+              &>div:nth-of-type(1) {
+                color: #008895;
+                font-size: 23px;
+                font-family: Roboto-Bold !important;
+                padding: 15px 0px;
+                border-bottom: 1px solid #c2c3c9;
+              }
+            }
+
+            &>.penAgregar {
+              @include flexColumn;
+              justify-content: space-between;
+
+              &>div:nth-of-type(1) {
+                @include flexColumn;
+                justify-content: space-between;
+                padding: 20px 0px;
+                border-bottom: 1px solid #c2c3c9;
+
+                &>div:nth-of-type(1) {
+                  font-family: Roboto-Regular;
+                  font-size: 14px;
+                  color: #008895;
+                  margin-bottom: 10px;
+                }
+
+                &>form {
+                  width: 100%;
+
+                  &>textarea {
+                    font-size: 14px;
+                    resize: none;
+                    border: 1px solid #c2c3c9;
+                    width: 100%;
+                    height: calc(((43) * 1px) + ((168) - (43)) * ((100vh - 770px) / (1080 - 770)));
+                  }
+                }
+              }
+
+              &>div:nth-of-type(2) {
+                @include flexRow;
+                @include absoluteCenter;
+                justify-content: flex-start;
+                padding: 20px 0px;
+
+                &>div:nth-of-type(1) {
+                  color: #008895;
+                  font-size: 14px;
+                  margin-right: 10px;
+                }
+              }
+
+              &>div:nth-of-type(3) {
+                @include flexRow;
+                justify-content: space-between;
+                color: #FFF;
+
+                &>div:nth-of-type(1) {
+                  @include flexRow;
+                  @include absoluteCenter;
+                  cursor: pointer;
+                  background-color: #008895;
+                  width: 190px;
+                  height: 40px;
+                  font-family: Roboto-Bold;
+                  font-size: 20px;
+                }
+
+                &>div:nth-of-type(2) {
+                  @include flexRow;
+                  @include absoluteCenter;
+                  cursor: pointer;
+                  background-color: #60AF47;
+                  width: 190px;
+                  height: 40px;
+                  font-family: Roboto-Bold;
+                  font-size: 20px;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      &>.divHallazgos {
+        @include flexRow;
+        width: 100%;
+        border: 1px solid #c2c3c9;
+        box-sizing: border-box;
+        height: calc(100vh - 488px);
+
+        &>.listaHallazgos {
+          width: 25%;
+          border-right: 1px solid #c2c3c9;
+          font-size: 14px;
+          height: calc(100vh - 488px);
+
+          &>.divLst {
+            height: calc(100vh - 534px);
+            overflow: scroll;
+
+            &>span:nth-of-type(1) {
+              @include flexColumn;
+              @include absoluteCenter;
+              height: calc(100vh - 534px);
+              text-align: center;
+              font-size: 28px;
+              color: #c2c3c9;
+              font-family: Roboto-Bold;
+              padding: 10px;
+              box-sizing: border-box;
+            }
+
+            &>div {
+              @include flexColumn;
+              @include absoluteCenter;
+              max-height: 55px;
+              padding: 5px 10px;
+              border-bottom: 1px solid #c2c3c9;
+              cursor: pointer;
+              &>div:nth-of-type(1) {
+                @include flexRow;
+                width: 100%;
+                justify-content: flex-start;
+                margin-bottom: 5px;
+                &>span{
+                  color: #008895;
+                }
+              }
+              &>div:nth-of-type(2) {
+                @include flexRow;
+                width: 100%;
+                justify-content: flex-start;
+                @include multiLineTextTruncate(2, 14px, 28px);
+              }
+              
+            }
+
+            &>div:hover {
+              background: #eceef0;
+            }
+
+            &>.selected {
+              background: #eceef0;
+            }
+          }
+
+          &>.totalHallazgos {
+            border-top: 1px solid #c2c3c9;
+            margin: 0px 10px;
+            padding: 15px 0px;
+            text-align: center;
+          }
+        }
+
+        &>.contenedorHallazgos {
+          width: 75%;
+          max-height: calc(100vh - 488px);
+          padding: 15px;
+          overflow: scroll;
+
+          &>div:nth-of-type(1) {
+            @include flexRow;
+            justify-content: flex-end;
+            border-bottom: 1px solid #c2c3c9;
+            padding-bottom: 15px;
+
+            &>div:nth-of-type(1) {
+              cursor: pointer;
+              background-color: #008895;
+              color: #ffffff;
+              padding: 10px 30px;
+              width: auto;
+              font-size: 20px;
+              font-family: Roboto-Bold;
+            }
+
+            &>.disable {
+              background-color: #eaeaea !important;
+            }
+          }
+
+          &>div:nth-of-type(2) {
+            &>div:nth-of-type(1) {
+              &>div:nth-of-type(1) {
+                color: #008895;
+                font-size: 23px;
+                font-family: Roboto-Bold !important;
+                padding: 15px 0px;
+                border-bottom: 1px solid #c2c3c9;
+              }
+            }
+
+            &>.hallAgregar {
+              @include flexColumn;
+              justify-content: space-between;
+              width: 100%;
+
+              &>div:nth-of-type(1) {
+                @include flexColumn;
+                justify-content: space-between;
+                padding: 20px 0px;
+                border-bottom: 1px solid #c2c3c9;
+
+                &>div:nth-of-type(1) {
+                  @include flexRow;
+                  justify-content: space-between;
+                  &>div:nth-of-type(1) {
+                    @include flexColumn;
+                    width: 200px;
+                    &>div:nth-of-type(1) {
+                      font-family: Roboto-Regular;
+                      font-size: 14px;
+                      color: #008895;
+                      margin-bottom: 10px;
+                    }
+
+                  }
+
+                  &>.hallEmpresaImp {
+                    @include flexColumn;
+                    width: calc(100% - 250px);
+                    &>div:nth-of-type(1) {
+                      font-family: Roboto-Regular;
+                      font-size: 14px;
+                      color: #008895;
+                      margin-bottom: 10px;
+                    }
+
+                    &> input{
+                      box-sizing: border-box;
+                      height: 25px
+                    }
+
+                    &> input:focus{
+                      outline: none !important;
+                    }
+
+                  }
+
+                }
+
+                &>div:nth-of-type(2) {
+                  font-family: Roboto-Regular;
+                  font-size: 14px;
+                  color: #008895;
+                  margin-bottom: 10px;
+                }
+
+                &>form {
+                  width: 100%;
+
+                  &>textarea {
+                    font-size: 14px;
+                    resize: none;
+                    border: 1px solid #c2c3c9;
+                    width: 100%;
+                    height: calc(((43) * 1px) + ((168) - (43)) * ((100vh - 770px) / (1080 - 770)));
+                  }
+                }
+              }
+
+              &>div:nth-of-type(2) {
+                @include flexColumn;
+                padding: 20px 0px;
+
+                &>div {
+                  font-family: Roboto-Regular;
+                  font-size: 14px;
+                  color: #008895;
+                  margin-bottom: 10px;
+                }
+              }
+
+              &>div:nth-of-type(3) {
+                @include flexRow;
+                justify-content: space-between;
+                color: #FFF;
+
+                &>div:nth-of-type(1) {
+                  @include flexRow;
+                  @include absoluteCenter;
+                  cursor: pointer;
+                  background-color: #008895;
+                  width: 190px;
+                  height: 40px;
+                  font-family: Roboto-Bold;
+                  font-size: 20px;
+                }
+
+                &>div:nth-of-type(2) {
+                  @include flexRow;
+                  @include absoluteCenter;
+                  cursor: pointer;
+                  background-color: #60AF47;
+                  width: 190px;
+                  height: 40px;
+                  font-family: Roboto-Bold;
+                  font-size: 20px;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      &>.divRequisitar {
+        @include flexRow;
+        width: 100%;
+        border: 1px solid #c2c3c9;
+        box-sizing: border-box;
+        height: calc(100vh - 488px);
+
+        &>.listaRequisitar {
+          width: 25%;
+          border-right: 1px solid #c2c3c9;
+          font-size: 14px;
+          height: calc(100vh - 488px);
+
+          &>.divLst {
+            height: calc(100vh - 534px);
+            overflow: scroll;
+
+            &>span:nth-of-type(1) {
+              @include flexColumn;
+              @include absoluteCenter;
+              height: calc(100vh - 534px);
+              text-align: center;
+              font-size: 28px;
+              color: #c2c3c9;
+              font-family: Roboto-Bold;
+              padding: 10px;
+              box-sizing: border-box;
+            }
+
+            &>div {
+              @include flexColumn;
+              @include absoluteCenter;
+              max-height: 55px;
+              padding: 5px 10px;
+              border-bottom: 1px solid #c2c3c9;
+              cursor: pointer;
+              &>div:nth-of-type(1) {
+                @include flexRow;
+                width: 100%;
+                justify-content: flex-start;
+                margin-bottom: 5px;
+                &>span{
+                  color: #008895;
+                }
+              }
+              &>div:nth-of-type(2) {
+                @include flexRow;
+                width: 100%;
+                justify-content: flex-start;
+                @include multiLineTextTruncate(2, 14px, 28px);
+              }
+              
+            }
+
+            &>div:hover {
+              background: #eceef0;
+            }
+
+            &>.selected {
+              background: #eceef0;
+            }
+          }
+
+          &>.totalRequisitar {
+            border-top: 1px solid #c2c3c9;
+            margin: 0px 10px;
+            padding: 15px 0px;
+            text-align: center;
+          }
+        }
+
+        &>.contenedorRequisitar {
+          width: 75%;
+          max-height: calc(100vh - 488px);
+          padding: 15px;
+          overflow: scroll;
+
+          &>div:nth-of-type(1) {
+            @include flexRow;
+            justify-content: flex-end;
+            border-bottom: 1px solid #c2c3c9;
+            padding-bottom: 15px;
+
+            &>.disable {
+              background-color: #eaeaea !important;
+            }
+
+            &>div:nth-of-type(1) {
+              cursor: pointer;
+              background-color: #008895;
+              color: #ffffff;
+              padding: 10px 30px;
+              width: auto;
+              font-size: 20px;
+              font-family: Roboto-Bold;
+            }
+          }
+
+          &>div:nth-of-type(2) {
+            &>div {
+              &>.rqrPiezaImp {
+                @include flexRow;
+                margin: 25px 0px;
+                &>div:nth-of-type(1) {
+                  color: #008895;
+                  font-size: 14px;
+                  margin-right: 10px;
+                }
+
+                &> input{
+                  box-sizing: border-box;
+                  height: 25px
+                }
+              }
+              &>div:nth-of-type(2) {
+                color: #008895;
+                font-size: 14px;
+                margin-bottom: 10px;
+              }
+
+              &>form {
+                width: 100%;
+                &>textarea {
+                  font-size: 14px;
+                  resize: none;
+                  border: 1px solid #c2c3c9;
+                  width: 100%;
+                  height: calc(((43) * 1px) + ((168) - (43)) * ((100vh - 770px) / (1080 - 770)));
+                }
+              }
+
+              &>div:nth-of-type(3) {
+                @include flexRow;
+                justify-content: space-between;
+                color: #FFF;
+                margin-top: 20px;
+
+                &>div:nth-of-type(1) {
+                  @include flexRow;
+                  @include absoluteCenter;
+                  cursor: pointer;
+                  background-color: #008895;
+                  width: 190px;
+                  height: 40px;
+                  font-family: Roboto-Bold;
+                  font-size: 20px;
+                }
+
+                &>div:nth-of-type(2) {
+                  @include flexRow;
+                  @include absoluteCenter;
+                  cursor: pointer;
+                  background-color: #60AF47;
+                  width: 190px;
+                  height: 40px;
+                  font-family: Roboto-Bold;
+                  font-size: 20px;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      &>.divCotizar {
+        @include flexRow;
+        overflow: scroll;
+        height: calc(100vh - 488px);
+
+        &>.divBuscar {
+          min-width: 835px;
+          width: 70%;
+
+          &>div:nth-of-type(1) {
+            background: rgb(242, 247, 247);
+            padding: 10px 15px;
+
+            &>div:nth-of-type(1) {
+              color: #008895;
+              font-family: Roboto-Bold;
+              font-size: 24px;
+            }
+
+            &>.buscar {
+              @include flexRow;
+              height: 50px;
+              margin-top: 10px;
+              width: 100%;
+              border-style: solid;
+
+              div {
+                @include flexRow;
+                width: 403.1px;
+                border-radius: 102px 102px 102px 102px;
+                -moz-border-radius: 102px 102px 102px 102px;
+                -webkit-border-radius: 102px 102px 102px 102px;
+                border: 0.5px solid #bfc0c7;
+                height: 30px;
+
+                div {
+                  border: none;
+                  border-radius: 0px 0px 0px 0px;
+                  -moz-border-radius: 0px 0px 0px 0px;
+                  -webkit-border-radius: 0px 0px 0px 0px;
+                  border: 0px solid #000000;
+                  width: 40px;
+                  background: transparent;
+                  display: flex;
+                  flex-direction: row;
+                  justify-content: center;
+                  align-items: center;
+                  align-content: center;
+                }
+
+                .buscar-input {
+                  background: transparent;
+                  border-radius: 102px 102px 102px 102px;
+                  -moz-border-radius: 102px 102px 102px 102px;
+                  -webkit-border-radius: 102px 102px 102px 102px;
+                  border: 0px solid #000000;
+                  width: 380px;
+                  padding-left: 5px;
+                }
+              }
+            }
+
+            &>.filtros {
+              @include flexRow;
+              @include absoluteCenter;
+              justify-content: space-between;
+
+              &>.cmb {
+                height: 61%;
+                min-width: 158px;
+                position: relative;
+                background-color: #fff;
+              }
+
+              &>.btnAplicar {
+                @include flexRow;
+                @include absoluteCenter;
+                background-color: #008895;
+                padding: 9px 30px;
+                color: #ffffff;
+                font-family: Roboto-Bold;
+                cursor: pointer;
+              }
+            }
+          }
+
+          &>div:nth-of-type(2){
+            color: #008895;
+            margin-top: 20px;
+            font-size: 18px;
+            margin-bottom: 20px;
+          }
+
+          &>div:nth-of-type(3){
+            @include flexColumn;
+            max-height: calc(100vh - 686px);
+            overflow: scroll;
+            &>div{
+              @include flexRow;
+              justify-content: space-between;
+              padding: 15px;
+              border-top: 1px solid #C2C3C9;
+              min-height: 78px;
+              &>div:nth-of-type(1){
+                width: 5%;
+                margin-right: 55px;
+              }
+
+              &>div:nth-of-type(2){
+                width: 70%;
+                &>div:nth-of-type(1){
+                  font-family: Roboto-Bold;
+                  font-size: 14px;
+                  color: #424242;
+                  @include multiLineTextTruncate(2, 14px, 28px);
+                }
+                &>div:nth-of-type(2){
+                  font-family: Roboto-Regular;
+                  font-size: 14px;
+                  color: #989A99;
+                  line-height: 22px;
+                  margin-top: 10px;
+                }
+                &>div:nth-of-type(3){
+                  font-family: Roboto-Regular;
+                  font-size: 14px;
+                  color: #989A99;
+                  line-height: 22px;
+                }
+              }
+
+              &>div:nth-of-type(3){
+                @include flexColumn;
+                align-items: flex-end;
+                width: 15%;
+
+                &>div:nth-of-type(1){
+                  font-family: Roboto-Regular;
+                  font-size: 14px;
+                  color: #424242;
+                }
+
+                &>.btnAgregar{
+                  @include flexRow;
+                  @include absoluteCenter;
+                  background-color: #008895;
+                  padding: 8px 30px;
+                  color: #ffffff;
+                  font-family: Roboto-Bold;
+                  font-size: 14px;
+                  margin-top:23px;
+                  cursor: pointer;
+                }
+              }
+            }
+          }
+           
+        }
+
+        &>.divSeleccionados {
+          min-width: 295px;
+          width: 30%;
+          padding-left: 25px;
+
+          &>div:nth-of-type(1){
+            font-family: Roboto-Bold;
+            font-size: 22px;
+            color: #008895;
+          }
+
+          &>.buscar {
+            @include flexRow;
+            height: 50px;
+            margin-top: 10px;
+            width: 100%;
+            border-style: solid;
+
+            div {
+              @include flexRow;
+              width: calc(100vw - 1543px);
+              border-radius: 102px 102px 102px 102px;
+              -moz-border-radius: 102px 102px 102px 102px;
+              -webkit-border-radius: 102px 102px 102px 102px;
+              border: 0.5px solid #bfc0c7;
+              height: 30px;
+
+              div {
+                border: none;
+                border-radius: 0px 0px 0px 0px;
+                -moz-border-radius: 0px 0px 0px 0px;
+                -webkit-border-radius: 0px 0px 0px 0px;
+                border: 0px solid #000000;
+                width: 40px;
+                background: transparent;
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                align-content: center;
+              }
+
+              .buscar-input {
+                background: transparent;
+                border-radius: 102px 102px 102px 102px;
+                -moz-border-radius: 102px 102px 102px 102px;
+                -webkit-border-radius: 102px 102px 102px 102px;
+                border: 0px solid #000000;
+                width: 380px;
+                padding-left: 5px;
+              }
+            }
+          }
+
+          &>div:nth-of-type(3){
+            @include flexRow;
+            @include absoluteCenter;
+            font-family: Roboto-Bold;
+            font-size: 22px;
+            color: #008895;
+            &>div:nth-of-type(1){
+              margin-left: 5px;
+            }
+          }
+
+          &>div:nth-of-type(4){
+            min-height: calc(100vh  - 691px);
+            border-bottom: 1px solid #C2C3C9;
+          }
+
+          &>div:nth-of-type(5){
+            @include flexRow;
+            justify-content: space-between;
+            margin-top:15px;
+          }
+
+          &>.btnCotizar{
+            @include flexRow;
+            @include absoluteCenter;
+            background-color: #008895;
+            padding: 11px 30px;
+            color: #ffffff;
+            font-family: Roboto-Bold;
+            font-size: 16px;
+            margin-top:23px;
+            cursor: pointer;
+          }
+        }
+      }
+
+      &>.divBtn {
+        @include flexRow;
+        @include absoluteCenter;
+        justify-content: flex-end;
+        box-sizing: border-box;
+        width: 100%;
+        height: 90px;
+
+        &>div {
+          cursor: pointer;
+          background-color: #008895;
+          padding: 10px 30px;
+          font-family: Roboto-Bold;
+          font-size: 14px;
+          color: #ffffff;
+          text-align: center;
+        }
+      }
+    }
+  }
+
+  .textVerde {
+    font-family: Roboto-Bold;
+    color: #008895;
+  }
+
+  .textVerdeTitulo {
+    color: #008895;
+    font-size: 30px;
+    font-family: Bank Gothic;
+  }
+
+  .container {
+    position: fixed;
+    box-sizing: border-box;
+    width: 100%;
+    background: rgba(204, 209, 209, .6);
+    z-index: 99999;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    .modal {
+      @include flexColumn;
+      justify-content: space-between;
+      width: 460px;
+      height: 240px;
+      background: #FFF;
+      position: fixed;
+      margin: auto;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      border-radius: 25px;
+
+      &>div:nth-of-type(1) {
+        @include flexRow;
+        @include absoluteCenter;
+        width: 100%;
+        height: 30px;
+        border-radius: 25px 25px 0 0;
+        background-color: #008895;
+        color: #FFF;
+        font-family: Roboto-Bold;
+        font-size: 18px;
+      }
+
+      &>div:nth-of-type(2) {
+        @include flexColumn;
+        @include absoluteCenter;
+
+        &>div:nth-of-type(1) {
+          @include flexRow;
+          @include absoluteCenter;
+          width: 100%;
+        }
+
+        &>div:nth-of-type(2) {
+          @include flexRow;
+          @include absoluteCenter;
+          width: 100%;
+        }
+      }
+
+      &>div:nth-of-type(3) {
+        @include flexRow;
+        @include absoluteCenter;
+        margin-bottom: 20px;
+
+        &>div {
+          @include flexRow;
+          @include absoluteCenter;
+          cursor: pointer;
+          background-color: #008895;
+          width: 150px;
+          height: 35px;
+          color: #FFF;
+          margin: 3px;
+          border-radius: 7px;
+        }
+      }
+    }
+  }
+
+  .truncateTowLines{
+    @include multiLineTextTruncate(2, 14px, 28px);
+  }
+}

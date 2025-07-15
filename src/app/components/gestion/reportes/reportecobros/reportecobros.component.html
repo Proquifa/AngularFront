@@ -1,0 +1,263 @@
+<div>
+  <div (click)="backMenu()">
+    <img height="22px" src="assets/Images/gestion/consultas/facturacion/recurso_190.svg" alt="">
+  </div>
+  REPORTE |
+  <div>COBROS</div>
+</div>
+<div class="consultaResultados" [ngClass]="'resultados' + (!showGraphic ? ' visible' : '')">
+  <div [ngClass]="classPanel">
+    <div class="filtroHeader">
+      <div class="abrir" (click)="openPanel()">
+        <img *ngIf="hiddenClose" width="15px" src="assets/Images/hamburguesa.svg" alt="">
+        <img *ngIf="!hiddenClose" width="15px" src="assets/Images/hamburguesa_verde.svg" alt="">
+      </div>
+      <div *ngIf="hiddenClose">
+        CERRAR
+        <div class="cerrar" (click)="closePanel()">
+          <img height="20px" width="20px" src="assets/Images/gestion/consultas/facturacion/recurso_189.svg" alt="">
+        </div>
+      </div>
+    </div>
+    <div class="filtros">
+      <div></div>
+      <div>
+        <div (click)="filtroAvanzada()" [style.background]="avanzada?'#008895':'#C2C3C9'">AVANZADA</div>
+        <div (click)="filtroRapida()" [style.background]="!avanzada?'#008895':'#C2C3C9'">RÁPIDA</div>
+      </div>
+      <div *ngIf="avanzada" class="divAvanzada">
+        <!--  Si  ya hay datos dentro del compenente se manda el < Gestion-filter/> con los datos
+            Y la propiedad IsLoader como verdadera
+        -->
+        <div *ngIf="isThereData;else loader">
+          <gestion-filter [ElementsDropList]="Elements" (valueFilter)="mostrarDatos($event)" (diahoy)="filtroCuadros(4,1)"
+            (todas)="filtroCuadros(5,1)" (diaManana)="filtroCuadros(6,1)" (diaPasado)="filtroCuadros(7)" (diaPospasado)="filtroCuadros(8,1)"
+            (diaFuturo)="filtroCuadros(9,1)" (diaAyer)="filtroCuadros(3,1)" (diaAntier)="filtroCuadros(2,1)"
+            (diaAnteAntier)="filtroCuadros(1,1)" (diaPa)="filtroCuadros(0,1)" [IsImage]="IsImage" [IsDate]="IsDate"
+            (grafica)="showGraphicPanel()" [IsLoader]="isThereData" [Clear]="Clear" style="width: 100%" [isSeguimiento]="isSeguimiento"
+            [activarHoy]="activaGraficaHoy" [activarTodo]="activaGraficaTodo" [activarManana]="activaGraficaManana"
+            [activarPasadoMa]="activaGraficaPasadoMa" [activarPosPasado]="activaGraficaPosPasado" [activarFuturo]="activaGraficaFuturo"
+            [activarAyer]="activaGraficaAyer" [activarAntier]="activaGraficaAntier" [activarAnteAntier]="activaGraficaAnteAntier"
+            [activarPasado]="activarPasado" [tasa]="tazaRealizacion"></gestion-filter>
+
+        </div>
+        <!--  Si  no hay datos dentro del compenente se manda el < Gestion-filter/> con solo
+            una propiedad
+            IsLoader como Falsa-->
+
+        <ng-template #loader>
+          <gestion-filter [IsLoader]="isThereData" [Clear]="Clear"></gestion-filter>
+        </ng-template>
+
+      </div>
+      <div *ngIf="!avanzada" class="divRapida">
+        <gestion-filter [ElementsDropList]="Elements" (valueFilter)="mostrarDatos($event)" [IsImage]="IsImage"
+          [IsLoader]="isThereData" [Clear]="Clear" [istextboxCobros]="istextboxCobros" style="width: 100%"
+          [isSeguimiento]="isSeguimiento"></gestion-filter>
+      </div>
+    </div>
+
+  </div>
+  <!-- Fin Filtros -->
+  <!-- Seccion detalle -->
+  <div class="consultaDetalles" *ngIf="!showGraphic">
+    <div *ngIf="!detalle" class="contenidoFactura">
+      <div class="detalleFactura">
+        <div style=" display:flex">
+          <div class="rangoVerde" [style.background]="rango==1?'#008895':''" [style.color]="rango==1?'#ffff':''"
+            (click)="todo()">Todo</div>
+          <div class="rangoBlanco" [style.background]="rango==2?'#008895':''" [style.color]="rango==2?'#ffff':''"
+            (click)="cero()">$0,000-2,000</div>
+          <div class="rangoBlanco" [style.background]="rango==3?'#008895':''" [style.color]="rango==3?'#ffff':''"
+            (click)="dosmil()">$2,001-$10,000</div>
+          <div class="rangoBlanco" [style.background]="rango==4?'#008895':''" [style.color]="rango==4?'#ffff':''"
+            (click)="diezmil()">>$10,000</div>
+        </div>
+        <div *ngIf="numeroDia!=''" style="height: 60px; display: flex;align-items: center;">
+          {{titulo}}/ {{today}}  {{numeroDia}} &nbsp;
+        </div>
+        <div *ngIf="numeroDia===''" style="height: 60px; display: flex;align-items: center;">
+         {{today}} &nbsp;
+        </div>
+        <div>
+          <div style="min-height: 115px;" [ngClass]="lstclienteActivo[i]" *ngFor="let item of filtroCobros; let i = index"
+            (click)="clienteActivo(i)" (click)="segundoPanel(item.nombreCliente)">
+            <div class="dfSelect"></div>
+            <div>
+              <div>
+                <div style="display: flex;font-family: 'Roboto-Bold'"># {{i+1}} ·
+
+                  <div *ngIf="item.numCobros > 1"> {{item.numCobros}} Facturas </div>
+                  <div *ngIf="item.numCobros<=1">{{item.numCobros}} Factura </div>
+                  <div *ngIf="item.numPiezas > 1"> {{item.numPiezas}} pzas </div>
+                  <div *ngIf="item.numPiezas<=1">{{item.numPiezas}} pza </div>
+                </div>
+              </div>
+              <div>
+                <div>
+                  <div> {{item.nombreCliente}} </div>
+                </div>
+              </div>
+              <div>
+                <div style="font-family: 'Roboto-Bold'">Monto: {{item.monto | acFormatMoney}} USD</div>
+              </div>
+              <div>
+                <div style="display: flex">ESAC:&nbsp;
+                  <div style=" color: #008895;"> {{item.nombreEsac}} </div>
+                </div>
+                <div style="display: flex">EV:&nbsp;
+                  <div style=" color: #008895;">{{item.nombreEV}}</div>
+                </div>
+                <div style="display: flex">Cobrador:&nbsp;
+                  <div style=" color: #008895;"> {{item.cobrador}} </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div style="display: flex; justify-content: center; height: 50px; align-items: center">
+            {{filtroCobros.length}}&nbsp;Cliente<span>s</span>:
+            <span></span>
+            <span> &nbsp;TOTAL: {{montoTotal | acFormatMoney}} USD</span>
+
+          </div>
+          <div style="display: flex; justify-content: center; height: 50px; align-items: center">
+            <span> {{totalPiezas}} Piezas</span>
+          </div>
+          <div style="display: flex; justify-content: center; height: 30px; align-items: center">
+            TOTAL
+          </div>
+        </div>
+      </div>
+      <div class="lineaTiempo">
+        <div>
+          <div style="height: 62px;border-bottom: 1px solid #979797; align-items: center;display: flex;">{{nombreCli}}</div>
+        </div>
+        <div>
+          <div [ngClass]="lstcobroActivo[i]" *ngFor="let item of detalleCobro; let i = index" (click)="cobroActivo(i)"
+            (click)="tercerPanel(item.cpedido)">
+            <div class="ltSelect" style="height: 137px;"></div>
+            <div style="display: flex;justify-content: center;">
+              <div>
+                <div style="display: flex;font-family: 'Roboto-Bold';height: 23%;"># {{i+1}} ·
+                  <div>{{item.montoDolares | acFormatMoney}} </div> &nbsp;
+                  <div style="display: flex;width: 11%;" *ngIf="item.piezas > 1"> {{item.piezas}} pzas </div>
+                  <div style="display: flex;width: 11%;" *ngIf="item.piezas<=1">{{item.piezas}} pza </div>
+                  <div style="margin-left: 210px;">FEP: &nbsp; {{item.fechaEsperadaPago | date :'dd/MMM/yy'}} </div>
+                </div>
+                <div>
+                  <span class="link" style=" color: #008895;    margin-right: 80px;" (click)="descargarPDF('http://201.161.12.60:51725/SAP/Pedidos/'+'PI-'+item.cpedido+'.pdf')">PI-{{item.cpedido}}</span>
+                </div>
+                <div style="display: flex;justify-content: space-between;">
+                  <div>Vendió: {{item.fpor}}</div>
+                  <div> Cond. pago: {{item.cpago}} </div>
+                </div>
+                <div> Medio de pago: {{item.medioPago}} </div>
+              </div>
+              <div></div>
+            </div>
+          </div>
+        </div>
+        <div style="text-align: center;">
+          <div>
+            <span *ngIf="detalleCobro.length===1">{{detalleCobro.length}}</span> Pedido <span *ngIf="detalleCobro.length>1">s</span>
+            {{totalSegundoPanel | acFormatMoney }} &nbsp;USD
+            <div>{{totalPiezasSegundoPanel}} piezas</div>
+            <div>TOTAL</div>
+          </div>
+        </div>
+      </div>
+      <div class="detalleFactura" style="height:17% !important">
+        <div></div>
+        <div style="display: flex">
+          <div style="margin-top: 20px;">{{cpedido}}</div>
+          <div *ngIf="radarActivo==false" (click)="radar(false)" style="margin-top: 20px;margin-left: 335px;"><img
+              height="20px" width="20px" src="assets/Images/gestion/reportes/seguimiento/localizacion_1.svg" alt=""></div>
+          <div style="margin-top: 20px;margin-left: 335px;"><img height="20px" width="20px" src="assets/Images/gestion/reportes/seguimiento/localizacion_2.svg"
+              alt=""></div>
+        </div>
+        <div>
+          <div [ngClass]="lstDetalle[i]" style="min-height: 150px;" *ngFor="let item of lsttercerPanel; let i = index"
+            (click)="detalleActivo(i)">
+            <div class="dfSelect"></div>
+            <div style="display: flex; justify-content: center;">
+              <div style="display: flex;font-family: 'Roboto-Bold'"># {{i+1}} · &nbsp;
+                <div>{{item.montoDolares | acFormatMoney}} </div> &nbsp;
+                <div *ngIf="item.piezas > 1"> {{item.piezas}} pzas </div>
+                <div *ngIf="item.piezas<=1">{{item.piezas}} pza </div>
+                <div style="margin-left: 230px;">PEP: &nbsp; {{item.fechaEsperadaPago | date :'dd/MMM/yy'}} </div>
+              </div>
+              <div>
+                <span class="link" style=" color: #008895;" (click)="descargarPDF('http://201.161.12.60:51725/SAP/Facturas/Proveedora/'+'F-'+item.cpedido+'.pdf')">F-{{item.factura}}</span>
+                <div style="margin-left: 230px;">Fecha facturación: &nbsp; {{item.fechaFacturacion | date
+                  :'dd/MMM/yy'}} </div>
+              </div>
+              <div style="display: flex;justify-content: space-between;">
+                <div>Vendió: {{item.fpor}}</div>
+                <div> Cond. pago: {{item.cpago}} </div>
+              </div>
+              <div> Medio de pago: {{item.medioPago}} </div>
+            </div>
+          </div>
+        </div>
+            <div style="text-align: center;">
+              <div>
+                <span *ngIf="lsttercerPanel.length===1">{{lsttercerPanel.length}}</span> Factura <span *ngIf="lsttercerPanel.length>1">{{lsttercerPanel.length}} Facturas</span> {{montoTotalTercerPanel}} &nbsp; USD
+                <div>{{totalPiezasTercerPanel}} piezas</div>
+                <div>TOTAL</div>
+              </div>
+            </div>
+      </div>
+      
+      <div class="historial">
+        <div>
+          <div style="height:62px;align-items:center;display: flex;border-bottom: 1px solid #979797; ">Informe</div>
+        </div>
+        <div>
+          <div style="border-bottom: 1px solid black;" *ngFor="let item of lsttercerPanel; let i = index">
+            <div>
+              <div class="ltSelect"></div>
+              <div>
+                <div>
+                  <div>
+                    <div>Fecha facturación:</div>
+                    <div>{{item.fechaFacturacion | date :'dd/MMM/yy'}}</div>
+                    <div>FEP:</div>
+                    <div>{{item.fechaEsperadaPago | date :'dd/MMM/yy'}}</div>
+                    <div>Fecha revisión:</div>
+                    <div>{{item.fechaEsperadaPago | date :'dd/MMM/yy'}}</div>
+                    <div>Fecha programación:</div>
+                    <div>{{item.fechaProgramacion | date :'dd/MMM/yy'}}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div *ngIf="lsttercerPanel.length===0">
+            Sin información
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    <!-- Fin detalle -->
+    <!-- Seccion Graficas -->
+    <div style="position: relative;" [style.width]="hiddenClose ? 'calc(100% - 321px)': 'calc(100% - 50px)'" *ngIf="showGraphic">
+      <div [ngClass]="'graphics-panel-container' + (showGraphic ? ' visible' : '')" [style.top]="topGraphics" style="    height: calc(100vh - 171px);">
+        <div class="graphics-panel-option">
+          <img src="assets/Images/gestion/images/tablaminigris.svg" (click)="showTablePanel()">
+        </div>
+        <div class="graphics-container" *ngIf="refrescar">
+          <div class="donut-container" *ngFor="let item of graficas; let i = index">
+            <p class="donut-title">{{item}}</p>
+            <div id="asistencia-canvas" class="canvas-container">
+              <pn-donut-chart [idGrafica]="i+'asis'" [data]="graficasValores[i]" [tipoGrafica]="'General'"></pn-donut-chart>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+ 

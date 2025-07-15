@@ -1,0 +1,350 @@
+<pn-header-bc [opciones]="linksCarteras" [homePath]="homePath"></pn-header-bc>
+<div class="header">
+  <div class="cartera-info-basica">
+    <p class="bold">{{cartera.nombreCartera}}</p>
+    <p>{{cartera.folio}}</p>
+    <p>{{cartera.categoria}} · {{cartera.nivelIngreso}}</p>
+  </div>
+  <div class="vertical-line"></div>
+  <div class="periodo-facturacion">
+    <div class="datos-cont">
+      <div class="superior">
+        <p class="bold title">FPAc</p>
+        <p class="subtitle">Part</p>
+      </div>
+      <div class="inferior">
+        <p class="bold">${{cartera.facturacionActual | acFormatNumber2decimal }}</p>
+        <p>{{porcentajeComparacionfacturaGlobal(cartera.facturacionActual) | acFormatNumber2decimal }}%</p>
+      </div>
+    </div>
+    <div class="datos-cont flecha-cont">
+      <div>
+        <p></p>
+        <p></p>
+      </div>
+      <div>
+        <img class="flecha-periodos" src="assets/Images/catalogo/flecharoja.png" />
+        <p class="flecha-texto">{{calcularPorcentaje(cartera.facturacionActual, cartera.facturacionAnterior) | acFormatNumber2decimal }}%</p>
+      </div>
+    </div>
+    <div class="datos-cont">
+      <div class="superior">
+        <p class="bold title">FACTURACIÓN</p>
+        <p class="subtitle">Periodo anterior</p>
+      </div>
+      <div class="inferior">
+        <div>
+          <p class="bold title">${{cartera.facturacionAnterior | acFormatNumber2decimal }}</p>
+        </div>
+        <div>
+          <p class="subtitle">{{porcentajeComparacionfacturaGlobal(cartera.facturacionAnterior) | acFormatNumber2decimal }}%</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="datos-cartera">
+    <div class="objetivo-promedio">
+      <div class="datos-cont">
+        <div class="superior">
+          <p class="bold title">OF</p>
+          <img class="objetivo" src="assets/Images/catalogo/objetivo.svg" />
+        </div>
+        <div class="inferior">
+          <p class="bold title">${{cartera.objetivoFundamental | acFormatNumber2decimal }}</p>
+          <div class="objetivo-valor">
+            <img class="objetivo min" src="assets/Images/catalogo/objetivo.svg" />
+            <p class="subtitle">{{calcularCambioEnProcentaje(cartera.facturacionAnterior, cartera.objetivoFundamental) | acFormatNumber2decimal }}%</p>
+          </div>
+        </div>
+      </div>
+      <div class="datos-cont">
+        <div class="superior">
+          <p class="bold title">OD</p>
+          <img class="objetivo" src="assets/Images/catalogo/objetivo.svg" />
+        </div>
+        <div class="inferior">
+          <p class="bold title">${{cartera.objetivoDeseado | acFormatNumber2decimal }}</p>
+          <div class="objetivo-valor">
+            <img class="objetivo min" src="assets/Images/catalogo/objetivo.svg" />
+            <p class="subtitle">{{calcularCambioEnProcentaje(cartera.facturacionAnterior, cartera.objetivoDeseado) | acFormatNumber2decimal }}%</p>
+          </div>
+        </div>
+      </div>
+      <div class="datos-cont">
+        <div class="superior">
+          <p class="bold title">PROMEDIO</p>
+          <p class="subtitle">Facturado</p>
+        </div>
+        <div class="inferior">
+          <p class="bold title">${{cartera.promedioFacturacion | acFormatNumber2decimal }}</p>
+          <div class="objetivo-valor">
+            <p>&nbsp;</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="proyeccion-venta">
+      <div class="pv-label top">
+        <p class="bold">PV</p>
+        <img class="pv-grafica" src="assets/Images/catalogo/Recurso_209.svg" />
+      </div>
+      <div class="pv-cont bot">
+        <p class="pv-cant bold space">${{cartera.proyeccionVenta | acFormatNumber2decimal}}</p>
+        <div class="pv-arrows-cont">
+          <div class="pv-arrow">
+            <p class="fant-value">{{calcularCambioEnProcentaje(cartera.facturacionAnterior, cartera.proyeccionVenta) | acFormatNumber2decimal }}%</p>
+            <img class="arrow fant-img" [src]="'assets/Images/catalogo/' + (cartera.facturacionAnterior <= cartera.proyeccionVenta ? 'arriba1.png': 'abajo1.png')" />
+          </div>
+          <div class="pv-arrow">
+            <p class="of-value">{{calcularCambioEnProcentaje(cartera.objetivoFundamental, cartera.proyeccionVenta) | acFormatNumber2decimal }}%</p>
+            <img class="arrow of-img" [src]="'assets/Images/catalogo/' + (cartera.objetivoFundamental <= cartera.proyeccionVenta ? 'arriba2.png': 'abajo2.png')" />
+          </div>
+          <div class="pv-arrow">
+            <p class="od-value">{{calcularCambioEnProcentaje(cartera.objetivoDeseado, cartera.proyeccionVenta) | acFormatNumber2decimal }}%</p>
+            <img class="arrow od-img" [src]="'assets/Images/catalogo/' + (cartera.objetivoDeseado <= cartera.proyeccionVenta ? 'arriba3.png': 'abajo3.png')" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="deudas-cont">
+      <div class="datos-cont">
+        <p class="bold superior">DEBE</p>
+        <p class="bold inferior">${{cartera.debe | acFormatNumber2decimal }}</p>
+      </div>
+      <div class="datos-cont">
+        <p class="bold superior">DEBEMOS</p>
+        <p class="bold inferior">${{cartera.debemos | acFormatNumber2decimal }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="vertical-line"></div>
+  <div class="cartera-info-detalle">
+    <div class="detalle-column">
+      <div class="detalle">
+        <img src="assets/Images/catalogo/creadorB.svg" />
+        <p class="subtitle">{{cartera.elaboro || 'ND'}}</p>
+      </div>
+      <div class="detalle">
+        <img src="assets/Images/catalogo/Recurso 201.svg" />
+        <p class="subtitle">{{cartera.industria || 'ND'}}</p>
+      </div>
+    </div>
+    <div class="detalle-column">
+      <div class="detalle">
+        <img src="assets/Images/catalogo/Recurso 213.svg" />
+        <p class="subtitle">{{cartera.esac || 'ND'}}</p>
+      </div>
+      <div class="detalle">
+        <img src="assets/Images/catalogo/importancia.svg" />
+        <p class="subtitle">{{cartera.estrella || 'ND'}}</p>
+      </div>
+    </div>
+    <div class="detalle-column">
+      <div class="detalle">
+        <img src="assets/Images/catalogo/EV.svg" />
+        <p class="subtitle">{{cartera.ev || 'ND'}}</p>
+      </div>
+      <div class="detalle">
+        <img src="assets/Images/catalogo/dificultad.png" />
+        <p class="subtitle">{{cartera.triangulo || 'ND'}}</p>
+      </div>
+    </div>
+    <div class="detalle-column">
+      <div class="detalle">
+        <img src="assets/Images/catalogo/cobradorB.svg" />
+        <p class="subtitle">{{cartera.cobrador || 'ND'}}</p>
+      </div>
+      <div class="detalle">
+        <img src="assets/Images/catalogo/todos.svg" />
+        <p class="subtitle">{{cartera.numeroClientes || 'ND'}}</p>
+      </div>
+    </div>
+    <div class="detalle-column">
+      <div class="detalle">
+        <img src="assets/Images/catalogo/Recurso 213.svg" />
+        <p class="subtitle">{{cartera.evt || 'ND'}}</p>
+      </div>
+      <div class="detalle">
+        <img src="assets/Images/catalogo/msjero.svg" />
+        <p class="subtitle">{{cartera.mensajero || 'ND'}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="clients-content">
+  <div class="client-wrapper" *ngFor="let cliente of cartera.clientes">
+    <flip-card [cliente]="cliente">
+
+    </flip-card>
+  </div>
+</div>
+<div class="nomenclatura-cont">
+  <div class="nomen-bloque">
+    <div class="nomen-row">
+      <p class="bold title">FPACT</p>
+    </div>
+    <div class="nomen-row">
+      <p class="subtitle">Facturación Periódo Act.</p>
+    </div>
+  </div>
+  <div class="nomen-bloque">
+    <div class="nomen-row">
+      <p class="bold title">PART</p>
+    </div>
+    <div class="nomen-row">
+      <p class="subtitle">Participación</p>
+    </div>
+  </div>
+  <div class="nomen-bloque">
+    <div class="nomen-row">
+      <p class="bold title">OF</p>
+    </div>
+    <div class="nomen-row">
+      <p class="subtitle">Obj. Fundamental</p>
+    </div>
+  </div>
+  <div class="nomen-bloque">
+    <div class="nomen-row">
+      <p class="bold title">OD</p>
+    </div>
+    <div class="nomen-row">
+      <p class="subtitle">Obj. Deseado</p>
+    </div>
+  </div>
+  <div class="nomen-bloque">
+    <div class="nomen-row">
+      <p class="bold title">PV</p>
+    </div>
+    <div class="nomen-row">
+      <p class="subtitle">Proyección Venta</p>
+    </div>
+  </div>
+  <div class="nomen-bloque">
+    <div class="nomen-row">
+      <img class="objetivo" src="assets/Images/catalogo/objetivo.svg" />
+    </div>
+    <div class="nomen-row">
+      <p class="subtitle">Objetivo</p>
+    </div>
+  </div>
+  <div class="nomen-bloque">
+    <div class="nomen-row">
+      <img class="objetivo" src="assets/Images/catalogo/Recurso_209.svg" />
+    </div>
+    <div class="nomen-row">
+      <p class="subtitle">Creador</p>
+    </div>
+  </div>
+  <div class="nomen-bloque">
+    <div class="nomen-row">
+      <img class="objetivo" src="assets/Images/catalogo/esac.svg" />
+    </div>
+    <div class="nomen-row">
+      <p class="subtitle">ESAC</p>
+    </div>
+  </div>
+  <div class="nomen-bloque">
+    <div class="nomen-row">
+      <img class="objetivo" src="assets/Images/catalogo/esac.svg" />
+    </div>
+    <div class="nomen-row">
+      <p class="subtitle">EVT</p>
+    </div>
+  </div>
+  <div class="nomen-bloque">
+    <div class="nomen-row">
+      <img class="objetivo" src="assets/Images/catalogo/EV.svg" />
+    </div>
+    <div class="nomen-row">
+      <p class="subtitle">EV</p>
+    </div>
+  </div>
+  <div class="nomen-bloque">
+    <div class="nomen-row">
+      <img class="objetivo" src="assets/Images/catalogo/cobradorB.svg" />
+    </div>
+    <div class="nomen-row">
+      <p class="subtitle">Cobrador</p>
+    </div>
+  </div>
+  <div class="nomen-bloque">
+    <div class="nomen-row">
+      <img class="objetivo" src="assets/Images/catalogo/Recurso 201.svg" />
+    </div>
+    <div class="nomen-row">
+      <p class="subtitle">Farmaceútica</p>
+    </div>
+  </div>
+  <div class="nomen-bloque">
+    <div class="nomen-row">
+      <img class="objetivo" src="assets/Images/catalogo/importancia.svg" />
+    </div>
+    <div class="nomen-row">
+      <p class="subtitle">Importancia</p>
+    </div>
+  </div>
+  <div class="nomen-bloque">
+    <div class="nomen-row">
+      <img class="objetivo" src="assets/Images/catalogo/dificultad.png" />
+    </div>
+    <div class="nomen-row">
+      <p class="subtitle">Dificultad</p>
+    </div>
+  </div>
+  <div class="nomen-bloque">
+    <div class="nomen-row">
+      <img class="objetivo" src="assets/Images/catalogo/msjero.svg" />
+    </div>
+    <div class="nomen-row">
+      <p class="subtitle">Mensajero</p>
+    </div>
+  </div>
+  <div class="nomen-bloque">
+    <div class="nomen-row">
+      <img class="objetivo" src="assets/Images/catalogo/todos.svg" />
+    </div>
+    <div class="nomen-row">
+      <p class="subtitle">Clientes</p>
+    </div>
+  </div>
+</div>
+<div class="footer">
+  <div class="footer-column">
+    <div (click)="clicked()" class="green-button extra-large" >EXPORTAR</div>
+  </div>
+  <div class="footer-column">
+    <div (click)="modal = true" class="green-button extra-large" >ELIMINAR</div>
+    <div (click)="redirectEdit()" class="green-button extra-large" >EDITAR</div>
+  </div>
+</div>
+<div *ngIf="modal" class="modal">
+  <div (click)="modal = false" class="modal-bg"></div>
+  <div class="modal-content">
+    <div class="header">
+      <p>ProquifaNet</p>
+      <div (click)="modal = false" class="close-modal" >X</div>
+    </div>
+    <div class="body">
+      <div class="message">
+        <p>¿Estás seguro de eliminar la cartera {{cartera.nombreCartera}}?</p>
+      </div>
+      <div class="options">
+        <div (click)="modal = false" class="green-button extra-large" >Cancelar</div>
+        <div (click)="deleteWallet()" class="red-button extra-large" >Eliminar</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="modalDelete" class="modal">
+  <div class="modal-bg"></div>
+  <div class="modal-content">
+    <div class="header">
+      <p>ProquifaNet</p>
+    </div>
+    <div class="body">
+      <div class="message">
+        <p>La cartera fue eliminada correctamente.</p>
+      </div>
+    </div>
+  </div>
+</div>

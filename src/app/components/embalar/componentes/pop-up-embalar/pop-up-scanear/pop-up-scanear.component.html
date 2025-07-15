@@ -1,0 +1,46 @@
+<div id="popUp" class="popUp" *ngIf="popUpScanear">
+  <div class="fondo"></div>
+  <div class="popContenido">
+    <textarea #textarea type="text" name="firstname" (keydown.enter)="enter()" class="texArea" [(ngModel)]="textoPedimento" style="position: absolute"> </textarea>
+    <div class="popHeader">
+      <span>PROQUIFA NET</span>
+    </div>
+    <div class="popContenido">
+      <div class="alerta">
+        <img src="assets/Images/escanea.svg" alt="" class="alert" />
+      </div>
+      <label>
+        {{mensaje}}
+      </label>
+    </div>
+  </div>
+</div>
+
+<!--Pop-up informativo de lo que recupero al scanear con el pop anterior-->
+
+<div id="popUp" class="popUp" *ngIf="popUpComprobante">
+  <div class="fondo"></div>
+  <div class="popContenido">
+    <div class="popHeader">
+      <span>PROQUIFA NET</span>
+    </div>
+    <div class="popContenido">
+     <title>Bolsa de Tránsito</title>
+      <!--<div class="alerta" *ngIf="!valScaner">-->
+      <!--<img src="assets/Images/packinglist.svg" alt="" class="alert" />-->
+      <!--</div>-->
+      <label>
+        Folio: {{textoPedimento}}
+      </label>
+      <label>
+        Manejo: Ambiente
+      </label>
+    </div>
+    <div class="dvBotones">
+      <div class="dvBoton" (click)="cerrar()">
+        <label>Aceptar</label>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,277 @@
+.padreG {
+  //width: 100%;
+  // height: 100%;
+  // background: #ECEEF0;
+  flex-direction: row;
+  display: flex;
+  position: relative;
+  overflow: scroll;
+}
+
+.tituloGrafica {
+  position: absolute;
+  top: -45px;
+  right: 133px;
+  left: 0px;
+  margin: auto;
+  width: 100px;
+  font-size: 36px;
+  font-weight: bold;
+}
+
+.tituloGraficaMediana {
+  position: absolute;
+  top: 7px;
+  right: 71px;
+  left: 0px;
+  margin: auto;
+  width: 100px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.tituloGraficaChica {
+  position: absolute; // top: -27px;
+  text-align: center; //right: -7px;
+  //left: 25px;
+  margin: auto;
+  width: 200px; //height: 15px;
+  font-size: 10px; //font-weight: bold;
+  font-family: "Roboto"; // margin-top: -15px;
+  color: #424242; // margin-top: 13px;
+}
+
+.grafica {
+  width: 100%;
+  height: 85%;
+}
+
+.flexCenter {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.borderRadious {
+  border: 2px solid red;
+  padding: 10px;
+  border-radius: 25px;
+}
+
+.datosGrafica1 {
+  font-size: 12px;
+  position: absolute;
+  z-index: 1;
+  left: 15%;
+  top: 15%;
+}
+
+.datosGrafica2 {
+  position: absolute;
+  z-index: 1;
+  left: 40%;
+  top: 15%;
+  font-size: 12px;
+}
+
+.datosGrafica3 {
+  position: absolute;
+  z-index: 1;
+  font-size: 12px;
+  left: 65%;
+  top: 15%;
+}
+
+.datosGrafica4 {
+  position: absolute;
+  z-index: 1;
+  font-size: 12px;
+  left: 15%;
+  top: 48%;
+}
+
+.datosGrafica5 {
+  position: absolute;
+  z-index: 1;
+  font-size: 12px;
+  left: 40%;
+  top: 48%;
+}
+
+.datosGrafica6 {
+  position: absolute;
+  z-index: 1;
+  font-size: 12px;
+  left: 65%;
+  top: 48%;
+}
+
+.datosGrafica7 {
+  position: absolute;
+  z-index: 1;
+  font-size: 12px;
+  left: 15%;
+  top: 81%;
+}
+
+.datosGrafica8 {
+  position: absolute;
+  z-index: 1;
+  font-size: 12px;
+  left: 40%;
+  top: 81%
+}
+
+.datosGrafica9 {
+  position: absolute;
+  z-index: 1;
+  font-size: 12px;
+  left: 65%;
+  top: 81%;
+}
+
+@media only screen and (max-width: 2221px) {
+  .datosGrafica1 {
+    font-size: 12px;
+    position: absolute;
+    z-index: 1;
+    left: 13%;
+    top: 15%;
+  }
+  .datosGrafica2 {
+    position: absolute;
+    z-index: 1;
+    left: 37%;
+    top: 15%;
+    font-size: 12px;
+  }
+  .datosGrafica3 {}
+  .datosGrafica4 {}
+  .datosGrafica5 {}
+  .datosGrafica6 {}
+  .datosGrafica7 {}
+  .datosGrafica8 {}
+  .datosGrafica9 {}
+}
+
+@media only screen and (max-width: 1957px) {
+  .datosGrafica1 {
+    font-size: 12px;
+    position: absolute;
+    z-index: 1;
+    left: 12%;
+    top: 15%;
+  }
+  .datosGrafica2 {
+    position: absolute;
+    z-index: 1;
+    left: 35%;
+    top: 15%;
+    font-size: 12px;
+  }
+  .datosGrafica3 {}
+  .datosGrafica4 {}
+  .datosGrafica5 {}
+  .datosGrafica6 {}
+  .datosGrafica7 {}
+  .datosGrafica8 {}
+  .datosGrafica9 {}
+}
+
+@media only screen and (max-width: 1777px) {
+  .datosGrafica1 {
+    font-size: 10px;
+    position: absolute;
+    z-index: 1;
+    left: 11%;
+    top: 16%;
+  }
+  .datosGrafica2 {
+    position: absolute;
+    z-index: 1;
+    left: 33%;
+    top: 16%;
+    font-size: 10px;
+  }
+  .datosGrafica3 {}
+  .datosGrafica4 {}
+  .datosGrafica5 {}
+  .datosGrafica6 {}
+  .datosGrafica7 {}
+  .datosGrafica8 {}
+  .datosGrafica9 {}
+}
+
+@media only screen and (max-width: 1368px) {
+  .datosGrafica1 {
+    font-size: 8px;
+    position: absolute;
+    z-index: 1;
+    left: 8%;
+    top: 17%;
+  }
+  .datosGrafica2 {
+    position: absolute;
+    z-index: 1;
+    left: 26%;
+    top: 17%;
+    font-size: 8px;
+  }
+  .datosGrafica3 {}
+  .datosGrafica4 {}
+  .datosGrafica5 {}
+  .datosGrafica6 {}
+  .datosGrafica7 {}
+  .datosGrafica8 {}
+  .datosGrafica9 {}
+}
+
+@media only screen and (max-width: 1505px) {
+  .datosGrafica1 {
+    font-size: 10px;
+    position: absolute;
+    z-index: 1;
+    left: 9%;
+    top: 16%;
+  }
+  .datosGrafica2 {
+    position: absolute;
+    z-index: 1;
+    left: 29%;
+    top: 16%;
+    font-size: 10px;
+  }
+  .datosGrafica3 {}
+  .datosGrafica4 {}
+  .datosGrafica5 {}
+  .datosGrafica6 {}
+  .datosGrafica7 {}
+  .datosGrafica8 {}
+  .datosGrafica9 {}
+}
+
+#doughnut1Div {
+  position: relative;
+}
+
+#doughnut1Div2 {
+  position: relative;
+}
+
+#doughnut1Div3 {
+  position: relative;
+}
+
+#doughnut1Div4 {
+  position: relative;
+}
+
+#doughnut1Div5 {
+  position: relative;
+}
+
+#doughnut1Div6 {
+  position: relative;
+}

@@ -1,0 +1,139 @@
+.barraProgresoDecremento {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-content: stretch;
+    align-items: stretch;
+    height: 100%;
+    width: 100%;
+    // border: 2px solid ;
+    }
+
+.textoBarra{
+    order: 0;
+    flex: 1 1 auto;
+    align-self: auto;
+    height: 100%;
+    width: 100%;
+    // border: 2px solid ;
+    display: flex;
+    align-items: flex-end;
+    font-size: 25px;
+    color: #404040;
+    }
+
+.graficaDecremento {
+    order: 0;
+    flex: 1 1 auto;
+    align-self: auto;
+    height: 100%;
+    width: 100%;
+    // border: 2px solid ;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    }
+
+
+    #myProgress {
+      width: 100%;
+      background-color: #ddd;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+      align-content: stretch;
+      align-items: center;
+      height: 14px;
+      font-weight: bold;
+      margin-top: 1%;
+      color: #9B9B9B;
+      border-radius: 8px;
+
+      & > #myBar {
+        height: 100%;
+        background-color: #008895;
+        text-align: center;
+        line-height: 30px;
+        color: #424242;
+        order: 0;
+        flex: 1 1 auto;
+        align-self: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        //tooltips
+        position: relative;
+        display: inline-block;
+            border-radius: 8px;
+        // border-bottom: 1px dotted black;
+      }
+      & > #myBar2 {
+      height: 100%;
+      background-color: #ddd;
+      text-align: center;
+      line-height: 30px;
+      color: white;
+      order: 0;
+      flex: 1 1 auto;
+      align-self: auto;
+      color: #9B9B9B;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      //tooltips
+      position: relative;
+      display: inline-block;
+          border-radius: 8px;
+      // border-bottom: 1px dotted black;
+    }
+  }
+
+  #myProgressOpaco {
+    width: 100%;
+    background-color: #ddd;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-content: stretch;
+    align-items: center;
+    height: 14px;
+    font-weight: bold;
+    margin-top: 1%;
+    color: #9B9B9B;
+    border-radius: 8px;
+
+    & > #myBarOpaco {
+      height: 100%;
+      opacity: 0.5;
+      background: #008895;
+      line-height: 30px;
+      color: #424242;
+      order: 0;
+      flex: 1 1 auto;
+      align-self: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      border-radius: 8px;
+    }
+    & > #myBar2Opaco {
+    height: 100%;
+    background-color: #ddd;
+    text-align: center;
+    line-height: 30px;
+    color: white;
+    order: 0;
+    flex: 1 1 auto;
+    align-self: auto;
+    color: #9B9B9B;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+  }
+}

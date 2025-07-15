@@ -1,0 +1,344 @@
+.inspeccion {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-content: stretch;
+    align-items: stretch;
+    height: 93.3%;
+    width: 100%;
+    min-height: 570px;
+    // border: 2px solid red;
+    }
+
+.pasosInspeccion {
+    order: 0;
+    flex: 1 1 auto;
+    align-self: auto;
+    width:50%;
+    display: flex;
+    height: 100%;
+    min-width: 804px;
+    min-height: 545px;
+    // border: 2px solid green;
+    }
+
+.video {
+  order: 0;
+  flex: 1 1 auto;
+  align-self: auto;
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding-left: 20px;
+  align-items: center;
+  align-self: center;
+  //align-items: center;
+  box-sizing: border-box;
+  // min-width: 804px;
+      border-left: 1px solid #ECEEF0;
+//   & > div{
+//     justify-content:space-between;
+//     display:flex;
+//     flex-direction:row;
+//     width:100%;
+//     // padding-bottom: 2%;
+//    &> p {
+//     font-family: 'Novecento';
+//     font-weight: bold;
+//     font-size: 21px;
+//     color: #008895;
+//     text-align: left;
+//
+//   }
+//
+//    & > div > img{
+//     width:30px;
+//     height:30px;
+//     cursor: pointer;
+//   }
+//   }
+//
+//   & > .enfoqueInferior, .enfoqueSuperior
+//   {
+//    & > img{
+//      width: 47px;
+//      height: 47px;
+//    }
+//   }
+//       & >  a {
+//       font-family: 'Roboto';
+//       font-style: italic;
+//       font-weight: lighter;
+//       font-size: 15px;
+//       color: #000000;
+//       text-align: left;
+//       line-height: 24px;
+//       display: flex;
+//       margin-top: 1%;
+//       align-self: baseline;
+//     }
+}
+
+.teclaEspacio{
+    font-family: 'Roboto';
+    font-style: italic;
+    font-weight: 200;
+    font-size: 18px;
+    color: #000000;
+    text-align: left;
+    line-height: 24px;
+    }
+
+
+ .espacioActividades{
+    height: 100%;
+    width: 100%;
+}
+
+.areaTrabajoActividades{
+    flex-direction: row;
+    display: flex;
+}
+
+.imgen1{
+    transform: rotateZ(-90deg);
+    position: absolute;
+}
+
+
+.botones {
+    width: 190px;
+    height: 30px;
+    background: #008895;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    cursor: pointer;
+  //  z-index: 3;
+    & > label{
+      font-family: 'Novecento';
+      font-size: 21px;
+      font-weight: bold;
+      cursor: pointer;
+      color: white;
+      height: 100%;
+      padding-top: 2.7%;
+    }
+  }
+
+  .simulaBoton {
+    width: 190px;
+    height: 30px;
+
+  }
+
+  .direccionRow{
+    display: flex;
+    flex-direction: row;
+    // border: 2px solid blue;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    justify-content: space-between;
+}
+
+@media all and (width:1368px) and (height:770px){
+  // .enfoqueSuperior{margin-top: 4%;}
+  .scroll{overflow: scroll;}
+  .inspeccion{height: 120.3%;}
+}
+
+@media all and (max-width:2560px) and (min-height:1365px) and (max-height:1400px){
+  .scroll{overflow: hidden;}
+  .enfoqueInferior{padding-bottom: 2%;}
+}
+
+
+@media all and (min-height:1426px) and (max-height:1439px){
+.inspeccion{height: 92.7%;}//Test
+}
+
+@media all and (min-height:1413px) and (max-height:1425px){
+.inspeccion{height: 93.2%;}//Test
+}
+
+@media all and (min-height:1393px) and (max-height:1412px){
+.inspeccion{height: 91.6%;}//Test
+}
+
+@media all and (min-height:1369px) and (max-height:1392px){
+.inspeccion{height: 91.7%}//Test
+}
+
+@media all and (min-height:1345px) and (max-height:1368px){
+.inspeccion{height: 89.7%}//Test
+}
+
+
+@media all and (min-height:1320px) and (max-height:1344px){
+.inspeccion{height: 89%;}//Test
+}
+
+@media all and (min-height:1302px) and (max-height:1319px){
+.inspeccion{height:86.9%;}//Test
+}
+
+
+@media all and (width:2560px) and (height:1440px){
+  .inspeccion{height: 94.3%;}
+}
+//
+// @media all and (min-width:2401px) and (max-height:2559px){
+//   // .inspeccion{height: 93.3%;}
+// }
+//
+// @media all and (min-height:2200px) and (max-height:2400px){
+//   // .inspeccion{height: 90%;}
+// }
+//
+// @media all and (width:1920px) and (height:1080px){
+//
+//   // .direccionRow{margin: 108px -6px 20px 0px;}
+// }
+
+
+.videoInspeccion{
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  order: 0;
+  flex: 1 1 auto;
+  align-self: auto;
+  padding: 10px 10px 10px 16px;
+  box-sizing: border-box;
+}
+
+.enfoqueSuperior {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-content: space-between;
+    align-items: flex-start;
+    order: 0;
+    flex: 0 1 auto;
+    align-self: auto;
+    }
+
+.imgEnfoque {
+    order: 0;
+    flex: 0 1 auto;
+    align-self: auto;
+    }
+
+.enfoqueInferior {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-content: space-between;
+    align-items: flex-end;
+    order: 0;
+    flex: 0 1 auto;
+    align-self: auto;
+    }
+
+.videoInterior{
+  height:100%;
+  width: 100%;
+  // border: 2px solid red;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-content: stretch;
+  align-items: stretch;
+}
+
+.textoSuperior{
+  height:7%;
+  width: 100%;
+  // border: 2px solid blue;
+  order: 0;
+  flex: 0 1 auto;
+  align-self: auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-content: stretch;
+  align-items: center;
+  padding-bottom: 10px;
+  box-sizing: border-box;
+}
+
+.textoSuperiorP, .textoSuperiorImg {
+    order: 0;
+    flex: 0 1 auto;
+    align-self: auto;
+    font-family: 'Novecento';
+    font-weight: bold;
+    font-size: 21px;
+    color: #008895;
+    text-align: left;
+    }
+
+.video123{
+  height:85%;
+  width: 100%;
+  // border: 2px solid green;
+  order: 0;
+  flex: 1 1 auto;
+  align-self: auto;
+  // padding: 20px 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-content: stretch;
+  align-items: stretch;
+}
+
+.textoInferior {
+  height:7%;
+  width: 100%;
+  // border: 2px solid pink;
+  order: 0;
+  flex: 0 1 auto;
+  align-self: auto;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-content: stretch;
+  align-items: baseline;
+  & > a{
+    font-family: 'Roboto';
+    font-style: italic;
+    font-weight: lighter;
+    font-size: 15px;
+    color: #000000;
+    text-align: left;
+    line-height: 24px;
+    display: flex;
+    margin-top: 1%;
+    align-self: baseline;
+
+    }
+}
+
+.textoInferiorA{
+  order: 0;
+  flex: 0 1 auto;
+  align-self: auto;
+}
+
+.textoSuperiorImg{
+  cursor: pointer;
+}

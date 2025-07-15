@@ -1,0 +1,401 @@
+<pn-header-bc [opciones]="opcion" [homePath]="homePath"></pn-header-bc>
+
+<div class="container">
+    <div class="containerTitle">Datos Generales</div>
+    <div class="containerForms">
+        <div class="containerFormsInputs">
+            <label for="" class="containerFormsInputsLabel">ID</label>
+            <input class="containerFormsInputsInput" style="width:80px;" placeholder="000" type="text">
+        </div>
+        <div class="containerFormsInputs">
+            <label for="" class="containerFormsInputsLabel">Nombre</label>
+            <input class="containerFormsInputsInput" style="width:340px;" placeholder="Escribe Aquí" type="text">
+        </div>
+        <div class="containerFormsInputs">
+            <label for="" class="containerFormsInputsLabel">Apellido Paterno</label>
+            <input class="containerFormsInputsInput" style="width:245px;" placeholder="Escribe Aquí" type="text">
+        </div>
+        <div class="containerFormsInputs">
+            <label for="" class="containerFormsInputsLabel">Apellido Materno</label>
+            <input class="containerFormsInputsInput" style="width:245px;" placeholder="Escribe Aquí" type="text">
+        </div>
+        <div class="containerFormsInputs">
+            <span class="containerFormsInputsSpan">{{ selectsLabels[0] }}</span>
+            <pq-drop-list style="width:265px;margin-right: 20px;margin-top: 5px;" [items]="itemsParent[0]" [isSearch]="isSearchParent[0]" [isCategory]="isCategoryParent[0]" [size]="sizeParent[0]" [align]="alignParent[0]" [itemSelect]="itemSelectParent[0]" [widthContent]="widthContentParent[0]" [marginLeftContent]="marginLeftContentParent[0]" [tooltip]="tooltipParent[0]" [tipoDrop]="tipoDropParent[0]" [campoLabel]="campoLabelParent[0]" [heightDrop]="heightDropParent[0]" [colorBorderDrop]="colorBorderDropParent[0]" (valueDropList)="fnGetValueDropList($event, 0)"></pq-drop-list>
+        </div>
+        <div class="containerFormsInputs">
+            <span class="containerFormsInputsSpan">{{ selectsLabels[1] }}</span>
+            <pq-drop-list style="width:155px;margin-right: 20px;margin-top: 5px;" [items]="itemsParent[1]" [isSearch]="isSearchParent[1]" [isCategory]="isCategoryParent[1]" [size]="sizeParent[1]" [align]="alignParent[1]" [itemSelect]="itemSelectParent[1]" [widthContent]="widthContentParent[1]" [marginLeftContent]="marginLeftContentParent[1]" [tooltip]="tooltipParent[1]" [tipoDrop]="tipoDropParent[1]" [campoLabel]="campoLabelParent[1]" [heightDrop]="heightDropParent[1]" [colorBorderDrop]="colorBorderDropParent[1]" (valueDropList)="fnGetValueDropList($event, 1)"></pq-drop-list>
+        </div>
+        <div class="containerFormsInputs">
+            <span class="containerFormsInputsSpan">{{ selectsLabels[2] }}</span>
+            <pq-drop-list style="width:200px;margin-right: 20px;margin-top: 5px;" [items]="itemsParent[2]" [isSearch]="isSearchParent[2]" [isCategory]="isCategoryParent[2]" [size]="sizeParent[2]" [align]="alignParent[2]" [itemSelect]="itemSelectParent[2]" [widthContent]="widthContentParent[2]" [marginLeftContent]="marginLeftContentParent[2]" [tooltip]="tooltipParent[2]" [tipoDrop]="tipoDropParent[2]" [campoLabel]="campoLabelParent[2]" [heightDrop]="heightDropParent[2]" [colorBorderDrop]="colorBorderDropParent[2]" (valueDropList)="fnGetValueDropList($event, 2)"></pq-drop-list>
+        </div>
+        <div class="containerFormsInputs">
+            <span class="containerFormsInputsSpan">{{ selectsLabels[3] }}</span>
+            <pq-drop-list style="width:209px;margin-right: 20px;margin-top: 5px;" [items]="itemsParent[3]" [isSearch]="isSearchParent[3]" [isCategory]="isCategoryParent[3]" [size]="sizeParent[3]" [align]="alignParent[3]" [itemSelect]="itemSelectParent[3]" [widthContent]="widthContentParent[3]" [marginLeftContent]="marginLeftContentParent[3]" [tooltip]="tooltipParent[3]" [tipoDrop]="tipoDropParent[3]" [campoLabel]="campoLabelParent[3]" [heightDrop]="heightDropParent[3]" [colorBorderDrop]="colorBorderDropParent[3]" (valueDropList)="fnGetValueDropList($event, 3)"></pq-drop-list>
+        </div>
+        <div class="containerFormsInputs">
+            <label for="" class="containerFormsInputsLabel">Calle</label>
+            <input class="containerFormsInputsInput" style="width:334px;" placeholder="Escribe Aquí" type="text">
+        </div>
+    </div>
+    <div class="containerForms">
+        <div class="containerFormsInputs">
+            <label for="" class="containerFormsInputsLabel">Número</label>
+            <input class="containerFormsInputsInput" style="width:136px;" placeholder="Escribe Aquí" type="text">
+        </div>
+        <div class="containerFormsInputs">
+            <label for="" class="containerFormsInputsLabel">Colonia</label>
+            <input class="containerFormsInputsInput" style="width:549px;" placeholder="Escribe Aquí" type="text">
+        </div>
+        <div class="containerFormsInputs">
+            <label for="" class="containerFormsInputsLabel">Código Postal</label>
+            <input class="containerFormsInputsInput" style="width:136px;" placeholder="Escribe Aquí" type="text">
+        </div>
+        <div class="containerFormsInputs">
+            <label for="" class="containerFormsInputsLabel">Estado</label>
+            <input class="containerFormsInputsInput" style="width:198px;" placeholder="Escribe Aquí" type="text">
+        </div>
+        <div class="containerFormsInputs">
+            <label for="" class="containerFormsInputsLabel">Municipio/Delegación</label>
+            <input class="containerFormsInputsInput" style="width:332px;" placeholder="Escribe Aquí" type="text">
+        </div>
+        <div class="containerFormsInputs">
+            <label for="" class="containerFormsInputsLabel">País</label>
+            <input class="containerFormsInputsInput" style="width:200px;" placeholder="Escribe Aquí" type="text">
+        </div>
+        <div class="containerFormsInputs">
+            <label for="" class="containerFormsInputsLabel">Nacionalidad</label>
+            <input class="containerFormsInputsInput" style="width:209px;" placeholder="Escribe Aquí" type="text">
+        </div>
+        <div class="containerFormsInputs">
+            <label for="" class="containerFormsInputsLabel">Teléfono</label>
+            <input class="containerFormsInputsInput" style="width:334px;" placeholder="Escribe Aquí" type="text">
+        </div>
+    </div>
+    <div class="containerForms">
+        <div class="containerFormsInputs">
+            <span class="containerFormsInputsSpan">{{ selectsLabels[4] }}</span>
+            <pq-drop-list style="width:241px;margin-right: 20px;margin-top: 5px;" [items]="itemsParent[4]" [isSearch]="isSearchParent[4]" [isCategory]="isCategoryParent[4]" [size]="sizeParent[4]" [align]="alignParent[4]" [itemSelect]="itemSelectParent[4]" [widthContent]="widthContentParent[4]" [marginLeftContent]="marginLeftContentParent[4]" [tooltip]="tooltipParent[4]" [tipoDrop]="tipoDropParent[4]" [campoLabel]="campoLabelParent[4]" [heightDrop]="heightDropParent[4]" [colorBorderDrop]="colorBorderDropParent[4]" (valueDropList)="fnGetValueDropList($event, 4)"></pq-drop-list>
+        </div>
+        <div class="containerFormsInputs">
+            <label for="" class="containerFormsInputsLabel">Número de Cuenta</label>
+            <input class="containerFormsInputsInput" style="width:198px;" placeholder="Escribe Aquí" type="text">
+        </div>
+        <div class="containerFormsInputs">
+            <label for="" class="containerFormsInputsLabel">Clave Interbancaria</label>
+            <input class="containerFormsInputsInput" style="width:330px;" placeholder="Escribe Aquí" type="text">
+        </div>
+    </div>
+    <div class="containerTitle">Contratación</div>
+    <div class="containerForms">
+        <div class="containerFormsInputs">
+            <label for="" class="containerFormsInputsLabel">Fecha de ingreso</label>
+            <pq-date-picker [style.margin-top]="'5px'" [style.width]="'190px'" [style.padding-right]="'20px'" [borderInputColor]="'1px solid #D8D9DD'" [fontColor]="'#424242'" [backGroundColor]="white" [disabled]="'false'" [sizeInput]="'16px'" [heightInput]="'35px'" [(date)]="date[0]" dateFormat="YYYYMMDD" (fecha)="getFechaImpl($event, 0)"></pq-date-picker>
+        </div>
+        <div class="containerFormsInputs">
+            <span class="containerFormsInputsSpan">{{ selectsLabels[5] }}</span>
+            <pq-drop-list style="width:327px;margin-right: 20px;margin-top: 5px;" [items]="itemsParent[5]" [isSearch]="isSearchParent[5]" [isCategory]="isCategoryParent[5]" [size]="sizeParent[5]" [align]="alignParent[5]" [itemSelect]="itemSelectParent[5]" [widthContent]="widthContentParent[5]" [marginLeftContent]="marginLeftContentParent[5]" [tooltip]="tooltipParent[5]" [tipoDrop]="tipoDropParent[5]" [campoLabel]="campoLabelParent[5]" [heightDrop]="heightDropParent[5]" [colorBorderDrop]="colorBorderDropParent[5]" (valueDropList)="fnGetValueDropList($event, 5)"></pq-drop-list>
+        </div>
+        <div class="containerFormsInputs">
+            <label for="" class="containerFormsInputsLabel">Fecha de Inicio</label>
+            <pq-date-picker [style.margin-top]="'5px'" [style.width]="'190px'" [style.padding-right]="'20px'" [borderInputColor]="'1px solid #D8D9DD'" [fontColor]="'#424242'" [backGroundColor]="white" [disabled]="'false'" [sizeInput]="'16px'" [heightInput]="'35px'" [(date)]="date[1]" dateFormat="YYYYMMDD" (fecha)="getFechaImpl($event, 1)"></pq-date-picker>
+        </div>
+        <div class="containerFormsInputs">
+            <label for="" class="containerFormsInputsLabel">Fecha de Termino</label>
+            <pq-date-picker [style.margin-top]="'5px'" [style.width]="'190px'" [style.padding-right]="'20px'" [borderInputColor]="'1px solid #D8D9DD'" [fontColor]="'#424242'" [backGroundColor]="white" [disabled]="'false'" [sizeInput]="'16px'" [heightInput]="'35px'" [(date)]="date[2]" dateFormat="YYYYMMDD" (fecha)="getFechaImpl($event, 2)"></pq-date-picker>
+        </div>
+        <div class="containerFormsInputs">
+            <label for="" class="containerFormsInputsLabel">Salario Mensual Inicial</label>
+            <input class="containerFormsInputsInput" style="width:240px;" placeholder="Escribe Aquí" type="text">
+        </div>
+        <div class="containerFormsInputs">
+            <label for="" class="containerFormsInputsLabel">Número de Seguridad Social</label>
+            <input class="containerFormsInputsInput" style="width:400px;" placeholder="Escribe Aquí" type="text">
+        </div>
+        <div class="containerFormsInputs">
+            <span class="containerFormsInputsSpan">{{ selectsLabels[6] }}</span>
+            <pq-drop-list style="width:175px;margin-right: 20px;margin-top: 5px;" [items]="itemsParent[6]" [isSearch]="isSearchParent[6]" [isCategory]="isCategoryParent[6]" [size]="sizeParent[6]" [align]="alignParent[6]" [itemSelect]="itemSelectParent[6]" [widthContent]="widthContentParent[6]" [marginLeftContent]="marginLeftContentParent[6]" [tooltip]="tooltipParent[6]" [tipoDrop]="tipoDropParent[6]" [campoLabel]="campoLabelParent[6]" [heightDrop]="heightDropParent[6]" [colorBorderDrop]="colorBorderDropParent[6]" (valueDropList)="fnGetValueDropList($event, 6)"></pq-drop-list>
+        </div>
+        <div class="containerFormsInputs">
+            <span class="containerFormsInputsSpan">{{ selectsLabels[7] }}</span>
+            <pq-drop-list style="width:175px;margin-right: 20px;margin-top: 5px;" [items]="itemsParent[7]" [isSearch]="isSearchParent[7]" [isCategory]="isCategoryParent[7]" [size]="sizeParent[7]" [align]="alignParent[7]" [itemSelect]="itemSelectParent[7]" [widthContent]="widthContentParent[7]" [marginLeftContent]="marginLeftContentParent[7]" [tooltip]="tooltipParent[7]" [tipoDrop]="tipoDropParent[7]" [campoLabel]="campoLabelParent[7]" [heightDrop]="heightDropParent[7]" [colorBorderDrop]="colorBorderDropParent[7]" (valueDropList)="fnGetValueDropList($event, 7)"></pq-drop-list>
+        </div>
+        <div class="containerFormsInputs">
+            <span class="containerFormsInputsSpan">{{ selectsLabels[8] }}</span>
+            <pq-drop-list style="width:175px;margin-right: 20px;margin-top: 5px;" [items]="itemsParent[8]" [isSearch]="isSearchParent[8]" [isCategory]="isCategoryParent[8]" [size]="sizeParent[8]" [align]="alignParent[8]" [itemSelect]="itemSelectParent[8]" [widthContent]="widthContentParent[8]" [marginLeftContent]="marginLeftContentParent[8]" [tooltip]="tooltipParent[8]" [tipoDrop]="tipoDropParent[8]" [campoLabel]="campoLabelParent[8]" [heightDrop]="heightDropParent[8]" [colorBorderDrop]="colorBorderDropParent[8]" (valueDropList)="fnGetValueDropList($event, 8)"></pq-drop-list>
+        </div>
+    </div>
+    <div class="containerForms">
+        <div class="containerFormsInputs">
+            <div class="containerFormsInputsChecks">
+                <div class="containerFormsInputsChecksLabel">&nbsp;</div>
+                <div class="containerFormsInputsChecksHoriz" (click)="fnCheck(0)">
+                    <div [ngClass]="checkBtn[0]"></div>
+                    <span class="containerFormsInputsChecksSpan" [style.font-weight]="'700'">Infonavit</span>
+                </div>
+            </div>
+        </div>
+        <div [ngClass]="formsInputs[0]">
+            <label for="" class="containerFormsInputsLabel">Número de Infonavit</label>
+            <input class="containerFormsInputsInput" style="width:240px;" placeholder="Escribe Aquí" type="text">
+        </div>
+        <div [ngClass]="formsInputs[0]">
+            <label for="" class="containerFormsInputsLabel">Cuota Mensual Infonavit</label>
+            <input class="containerFormsInputsInput" style="width:240px;" placeholder="Escribe Aquí" type="text">
+        </div>
+        <div [ngClass]="formsInputs[0]">
+            <label for="" class="containerFormsInputsLabel">Inicio Infonavit</label>
+            <pq-date-picker [style.margin-top]="'5px'" [style.width]="'190px'" [style.padding-right]="'20px'" [borderInputColor]="'1px solid #D8D9DD'" [fontColor]="'#424242'" [backGroundColor]="white" [disabled]="'false'" [sizeInput]="'16px'" [heightInput]="'35px'" [(date)]="date[3]" dateFormat="YYYYMMDD" (fecha)="getFechaImpl($event, 3)"></pq-date-picker>
+        </div>
+        <div [ngClass]="formsInputs[0]">
+            <label for="" class="containerFormsInputsLabel">Termino Infonavit</label>
+            <pq-date-picker [style.margin-top]="'5px'" [style.width]="'190px'" [style.padding-right]="'20px'" [borderInputColor]="'1px solid #D8D9DD'" [fontColor]="'#424242'" [backGroundColor]="white" [disabled]="'false'" [sizeInput]="'16px'" [heightInput]="'35px'" [(date)]="date[4]" dateFormat="YYYYMMDD" (fecha)="getFechaImpl($event, 4)"></pq-date-picker>
+        </div>
+    </div>
+    <div class="containerTitle">Pagos</div>
+    <div class="containerForms">
+        <div class="containerFormsInputs">
+            <label for="" class="containerFormsInputsLabel">RFC</label>
+            <input class="containerFormsInputsInput" style="width:165px;" placeholder="Escribe Aquí" type="text">
+        </div>
+        <div class="containerFormsInputs">
+            <label for="" class="containerFormsInputsLabel">CURP</label>
+            <input class="containerFormsInputsInput" style="width:165px;" placeholder="Escribe Aquí" type="text">
+        </div>
+        <div class="containerFormsInputs">
+            <span class="containerFormsInputsSpan">{{ selectsLabels[9] }}</span>
+            <pq-drop-list style="width:170px;margin-right: 20px;margin-top: 5px;" [items]="itemsParent[9]" [isSearch]="isSearchParent[9]" [isCategory]="isCategoryParent[9]" [size]="sizeParent[9]" [align]="alignParent[9]" [itemSelect]="itemSelectParent[9]" [widthContent]="widthContentParent[9]" [marginLeftContent]="marginLeftContentParent[9]" [tooltip]="tooltipParent[9]" [tipoDrop]="tipoDropParent[9]" [campoLabel]="campoLabelParent[9]" [heightDrop]="heightDropParent[9]" [colorBorderDrop]="colorBorderDropParent[9]" (valueDropList)="fnGetValueDropList($event, 9)"></pq-drop-list>
+        </div>
+        <div class="containerFormsInputs">
+            <span class="containerFormsInputsSpan">{{ selectsLabels[10] }}</span>
+            <pq-drop-list style="width:175px;margin-right: 20px;margin-top: 5px;" [items]="itemsParent[10]" [isSearch]="isSearchParent[10]" [isCategory]="isCategoryParent[10]" [size]="sizeParent[10]" [align]="alignParent[10]" [itemSelect]="itemSelectParent[10]" [widthContent]="widthContentParent[10]" [marginLeftContent]="marginLeftContentParent[10]" [tooltip]="tooltipParent[10]" [tipoDrop]="tipoDropParent[10]" [campoLabel]="campoLabelParent[10]" [heightDrop]="heightDropParent[10]" [colorBorderDrop]="colorBorderDropParent[10]" (valueDropList)="fnGetValueDropList($event, 10)"></pq-drop-list>
+        </div>
+        <div class="containerFormsInputs">
+            <div class="containerFormsInputsChecks">
+                <div class="containerFormsInputsChecksLabel" [style.font-weight]="'700'">Métodos de Pago:</div>
+                <div class="containerFormsInputsChecksHoriz" (click)="fnCheck(1)">
+                    <div [ngClass]="checkBtn[1]"></div>
+                    <span class="containerFormsInputsChecksSpan">Sueldos y Salarios Régimen Tipo 2</span>
+                </div>
+            </div>
+        </div>
+        <div [ngClass]="formsInputs[1]">
+            <label for="" class="containerFormsInputsLabel">Salario Diario Base</label>
+            <input [(ngModel)]="trabajadorValor[1]" class="containerFormsInputsInput" style="width:137px;" placeholder="Escribe Aquí" type="number">
+        </div>
+        <div [ngClass]="formsInputs[1]">
+            <span class="containerFormsInputsSpan">{{ selectsLabels[11] }}</span>
+            <pq-drop-list style="width:250px;margin-right: 20px;margin-top: 5px;" [items]="itemsParent[11]" [isSearch]="isSearchParent[11]" [isCategory]="isCategoryParent[11]" [size]="sizeParent[11]" [align]="alignParent[11]" [itemSelect]="itemSelectParent[11]" [widthContent]="widthContentParent[11]" [marginLeftContent]="marginLeftContentParent[11]" [tooltip]="tooltipParent[11]" [tipoDrop]="tipoDropParent[11]" [campoLabel]="campoLabelParent[11]" [heightDrop]="heightDropParent[11]" [colorBorderDrop]="colorBorderDropParent[11]" (valueDropList)="fnGetValueDropList($event, 11)"></pq-drop-list>
+        </div>
+        <div class="containerFormsInputs">
+            <div class="containerFormsInputsChecks">
+                <div class="containerFormsInputsChecksLabel">&nbsp;</div>
+                <div class="containerFormsInputsChecksHoriz" (click)="fnCheck(2)">
+                    <div [ngClass]="checkBtn[2]"></div>
+                    <span class="containerFormsInputsChecksSpan">Asimilados a Salarios Régimen Tipo 8</span>
+                </div>
+            </div>
+        </div>
+        <div [ngClass]="formsInputs[2]">
+            <label for="" class="containerFormsInputsLabel">Salario Diario Base</label>
+            <input [(ngModel)]="trabajadorValor[2]" class="containerFormsInputsInput" style="width:137px;" placeholder="Escribe Aquí" type="number">
+        </div>
+        <div [ngClass]="formsInputs[2]">
+            <span class="containerFormsInputsSpan">{{ selectsLabels[12] }}</span>
+            <pq-drop-list style="width:250px;margin-right: 20px;margin-top: 5px;" [items]="itemsParent[12]" [isSearch]="isSearchParent[12]" [isCategory]="isCategoryParent[12]" [size]="sizeParent[12]" [align]="alignParent[12]" [itemSelect]="itemSelectParent[12]" [widthContent]="widthContentParent[12]" [marginLeftContent]="marginLeftContentParent[12]" [tooltip]="tooltipParent[12]" [tipoDrop]="tipoDropParent[12]" [campoLabel]="campoLabelParent[12]" [heightDrop]="heightDropParent[12]" [colorBorderDrop]="colorBorderDropParent[12]" (valueDropList)="fnGetValueDropList($event, 12)"></pq-drop-list>
+        </div>
+    </div>
+    <div class="containerTotals">
+        <div class="containerTotalsLabels">
+            <span class="containerTotalsLabelsSpan">Salario Diario Integrado:</span>
+            <span class="containerTotalsLabelsSpan">Sueldos y Salarios Régimen Tipo 2:</span>
+            <span class="containerTotalsLabelsSpan">Asimilados a Salarios Régimen Tipo 8:</span>
+        </div>
+        <div class="containerTotalsCants">
+            <span class="containerTotalsCantsSpan">$&nbsp;{{ (trabajadorValor[1] + trabajadorValor[2]) | number:'2.2-2' }}</span>
+            <span class="containerTotalsCantsSpan">$&nbsp;{{ trabajadorValor[1] }}</span>
+            <span class="containerTotalsCantsSpan">$&nbsp;{{ trabajadorValor[2] }}</span>
+        </div>
+        <div class="containerTotalsTotal">
+            <span class="containerTotalsTotalSpan">Salario Mensual Total</span>
+            <span class="containerTotalsTotalSpan">$&nbsp;{{ ((trabajadorValor[1] + trabajadorValor[2]) * 30) | number:'2.2-2' }}</span>
+        </div>
+    </div>
+    <div class="containerTitle">Carga de Documentación</div>
+    <div class="containerForms">
+        <div class="containerFormsInputs">
+            <label for="" class="containerFormsInputsLabel">{{ fileEmpLabel[0] }}</label>
+            <input (change)="fnGetFile($event, 0)" id="fileEmp0" class="containerFormsInputsFile" type="file" accept="application/pdf">
+            <div class="containerFormsInputsFileBox">
+                <div (click)="fnClickFile(0)" class="containerFormsInputsFileBoxInput"> {{ fileEmpName[0] }} </div>
+                <div (click)="fnClickFile(0)" class="containerFormsInputsFileBoxUpload" *ngIf="!fileEmpIsUp[0]">
+                    <img src="./assets/Images/cargar_archivo.svg" alt="Archivo" class="containerFormsInputsFileBoxUploadImg">
+                </div>
+                <div (click)="fnClickFile(0)" class="containerFormsInputsFileBoxReload" *ngIf="fileEmpIsUp[0]">
+                    <img src="./assets/Images/recargar_archivo.svg" alt="Archivo" class="containerFormsInputsFileBoxReloadImg">
+                </div>
+                <div class="containerFormsInputsFileBoxView" *ngIf="fileEmpIsUp[0]">
+                    <img src="./assets/Images/visualizar_archivo.svg" alt="Archivo" class="containerFormsInputsFileBoxViewImg">
+                </div>
+            </div>
+        </div>
+        <div class="containerFormsInputs">
+            <label for="" class="containerFormsInputsLabel">{{ fileEmpLabel[1] }}</label>
+            <input (change)="fnGetFile($event, 1)" id="fileEmp1" class="containerFormsInputsFile" type="file" accept="application/pdf">
+            <div class="containerFormsInputsFileBox">
+                <div (click)="fnClickFile(1)" class="containerFormsInputsFileBoxInput"> {{ fileEmpName[1] }} </div>
+                <div (click)="fnClickFile(1)" class="containerFormsInputsFileBoxUpload" *ngIf="!fileEmpIsUp[1]">
+                    <img src="./assets/Images/cargar_archivo.svg" alt="Archivo" class="containerFormsInputsFileBoxUploadImg">
+                </div>
+                <div (click)="fnClickFile(1)" class="containerFormsInputsFileBoxReload" *ngIf="fileEmpIsUp[1]">
+                    <img src="./assets/Images/recargar_archivo.svg" alt="Archivo" class="containerFormsInputsFileBoxReloadImg">
+                </div>
+                <div class="containerFormsInputsFileBoxView" *ngIf="fileEmpIsUp[1]">
+                    <img src="./assets/Images/visualizar_archivo.svg" alt="Archivo" class="containerFormsInputsFileBoxViewImg">
+                </div>
+            </div>
+        </div>
+        <div class="containerFormsInputs">
+            <label for="" class="containerFormsInputsLabel">{{ fileEmpLabel[2] }}</label>
+            <input (change)="fnGetFile($event, 2)" id="fileEmp2" class="containerFormsInputsFile" type="file" accept="application/pdf">
+            <div class="containerFormsInputsFileBox">
+                <div (click)="fnClickFile(2)" class="containerFormsInputsFileBoxInput"> {{ fileEmpName[2] }} </div>
+                <div (click)="fnClickFile(2)" class="containerFormsInputsFileBoxUpload" *ngIf="!fileEmpIsUp[2]">
+                    <img src="./assets/Images/cargar_archivo.svg" alt="Archivo" class="containerFormsInputsFileBoxUploadImg">
+                </div>
+                <div (click)="fnClickFile(2)" class="containerFormsInputsFileBoxReload" *ngIf="fileEmpIsUp[2]">
+                    <img src="./assets/Images/recargar_archivo.svg" alt="Archivo" class="containerFormsInputsFileBoxReloadImg">
+                </div>
+                <div class="containerFormsInputsFileBoxView" *ngIf="fileEmpIsUp[2]">
+                    <img src="./assets/Images/visualizar_archivo.svg" alt="Archivo" class="containerFormsInputsFileBoxViewImg">
+                </div>
+            </div>
+        </div>
+        <div class="containerFormsInputs">
+            <label for="" class="containerFormsInputsLabel">{{ fileEmpLabel[3] }}</label>
+            <input (change)="fnGetFile($event, 3)" id="fileEmp3" class="containerFormsInputsFile" type="file" accept="application/pdf">
+            <div class="containerFormsInputsFileBox">
+                <div (click)="fnClickFile(3)" class="containerFormsInputsFileBoxInput"> {{ fileEmpName[3] }} </div>
+                <div (click)="fnClickFile(3)" class="containerFormsInputsFileBoxUpload" *ngIf="!fileEmpIsUp[3]">
+                    <img src="./assets/Images/cargar_archivo.svg" alt="Archivo" class="containerFormsInputsFileBoxUploadImg">
+                </div>
+                <div (click)="fnClickFile(3)" class="containerFormsInputsFileBoxReload" *ngIf="fileEmpIsUp[3]">
+                    <img src="./assets/Images/recargar_archivo.svg" alt="Archivo" class="containerFormsInputsFileBoxReloadImg">
+                </div>
+                <div class="containerFormsInputsFileBoxView" *ngIf="fileEmpIsUp[3]">
+                    <img src="./assets/Images/visualizar_archivo.svg" alt="Archivo" class="containerFormsInputsFileBoxViewImg">
+                </div>
+            </div>
+        </div>
+        <div class="containerFormsInputs">
+            <label for="" class="containerFormsInputsLabel">{{ fileEmpLabel[4] }}</label>
+            <input (change)="fnGetFile($event, 4)" id="fileEmp4" class="containerFormsInputsFile" type="file" accept="application/pdf">
+            <div class="containerFormsInputsFileBox">
+                <div (click)="fnClickFile(4)" class="containerFormsInputsFileBoxInput"> {{ fileEmpName[4] }} </div>
+                <div (click)="fnClickFile(4)" class="containerFormsInputsFileBoxUpload" *ngIf="!fileEmpIsUp[4]">
+                    <img src="./assets/Images/cargar_archivo.svg" alt="Archivo" class="containerFormsInputsFileBoxUploadImg">
+                </div>
+                <div (click)="fnClickFile(4)" class="containerFormsInputsFileBoxReload" *ngIf="fileEmpIsUp[4]">
+                    <img src="./assets/Images/recargar_archivo.svg" alt="Archivo" class="containerFormsInputsFileBoxReloadImg">
+                </div>
+                <div class="containerFormsInputsFileBoxView" *ngIf="fileEmpIsUp[4]">
+                    <img src="./assets/Images/visualizar_archivo.svg" alt="Archivo" class="containerFormsInputsFileBoxViewImg">
+                </div>
+            </div>
+        </div>
+        <div class="containerFormsInputs">
+            <label for="" class="containerFormsInputsLabel">{{ fileEmpLabel[5] }}</label>
+            <input (change)="fnGetFile($event, 5)" id="fileEmp5" class="containerFormsInputsFile" type="file" accept="application/pdf">
+            <div class="containerFormsInputsFileBox">
+                <div (click)="fnClickFile(5)" class="containerFormsInputsFileBoxInput"> {{ fileEmpName[5] }} </div>
+                <div (click)="fnClickFile(5)" class="containerFormsInputsFileBoxUpload" *ngIf="!fileEmpIsUp[5]">
+                    <img src="./assets/Images/cargar_archivo.svg" alt="Archivo" class="containerFormsInputsFileBoxUploadImg">
+                </div>
+                <div (click)="fnClickFile(5)" class="containerFormsInputsFileBoxReload" *ngIf="fileEmpIsUp[5]">
+                    <img src="./assets/Images/recargar_archivo.svg" alt="Archivo" class="containerFormsInputsFileBoxReloadImg">
+                </div>
+                <div class="containerFormsInputsFileBoxView" *ngIf="fileEmpIsUp[5]">
+                    <img src="./assets/Images/visualizar_archivo.svg" alt="Archivo" class="containerFormsInputsFileBoxViewImg">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="containerForms">
+        <div class="containerFormsInputs">
+            <label for="" class="containerFormsInputsLabel">{{ fileEmpLabel[6] }}</label>
+            <input (change)="fnGetFile($event, 6)" id="fileEmp6" class="containerFormsInputsFile" type="file" accept="application/pdf">
+            <div class="containerFormsInputsFileBox">
+                <div (click)="fnClickFile(6)" class="containerFormsInputsFileBoxInput"> {{ fileEmpName[6] }} </div>
+                <div (click)="fnClickFile(6)" class="containerFormsInputsFileBoxUpload" *ngIf="!fileEmpIsUp[6]">
+                    <img src="./assets/Images/cargar_archivo.svg" alt="Archivo" class="containerFormsInputsFileBoxUploadImg">
+                </div>
+                <div (click)="fnClickFile(6)" class="containerFormsInputsFileBoxReload" *ngIf="fileEmpIsUp[6]">
+                    <img src="./assets/Images/recargar_archivo.svg" alt="Archivo" class="containerFormsInputsFileBoxReloadImg">
+                </div>
+                <div class="containerFormsInputsFileBoxView" *ngIf="fileEmpIsUp[6]">
+                    <img src="./assets/Images/visualizar_archivo.svg" alt="Archivo" class="containerFormsInputsFileBoxViewImg">
+                </div>
+            </div>
+        </div>
+        <div class="containerFormsInputs">
+            <label for="" class="containerFormsInputsLabel">{{ fileEmpLabel[7] }}</label>
+            <input (change)="fnGetFile($event, 7)" id="fileEmp7" class="containerFormsInputsFile" type="file" accept="application/pdf">
+            <div class="containerFormsInputsFileBox">
+                <div (click)="fnClickFile(7)" class="containerFormsInputsFileBoxInput"> {{ fileEmpName[7] }} </div>
+                <div (click)="fnClickFile(7)" class="containerFormsInputsFileBoxUpload" *ngIf="!fileEmpIsUp[7]">
+                    <img src="./assets/Images/cargar_archivo.svg" alt="Archivo" class="containerFormsInputsFileBoxUploadImg">
+                </div>
+                <div (click)="fnClickFile(7)" class="containerFormsInputsFileBoxReload" *ngIf="fileEmpIsUp[7]">
+                    <img src="./assets/Images/recargar_archivo.svg" alt="Archivo" class="containerFormsInputsFileBoxReloadImg">
+                </div>
+                <div class="containerFormsInputsFileBoxView" *ngIf="fileEmpIsUp[7]">
+                    <img src="./assets/Images/visualizar_archivo.svg" alt="Archivo" class="containerFormsInputsFileBoxViewImg">
+                </div>
+            </div>
+        </div>
+        <div class="containerFormsInputs">
+            <label for="" class="containerFormsInputsLabel">{{ fileEmpLabel[8] }}</label>
+            <input (change)="fnGetFile($event, 8)" id="fileEmp8" class="containerFormsInputsFile" type="file" accept="application/pdf">
+            <div class="containerFormsInputsFileBox">
+                <div (click)="fnClickFile(8)" class="containerFormsInputsFileBoxInput"> {{ fileEmpName[8] }} </div>
+                <div (click)="fnClickFile(8)" class="containerFormsInputsFileBoxUpload" *ngIf="!fileEmpIsUp[8]">
+                    <img src="./assets/Images/cargar_archivo.svg" alt="Archivo" class="containerFormsInputsFileBoxUploadImg">
+                </div>
+                <div (click)="fnClickFile(8)" class="containerFormsInputsFileBoxReload" *ngIf="fileEmpIsUp[8]">
+                    <img src="./assets/Images/recargar_archivo.svg" alt="Archivo" class="containerFormsInputsFileBoxReloadImg">
+                </div>
+                <div class="containerFormsInputsFileBoxView" *ngIf="fileEmpIsUp[8]">
+                    <img src="./assets/Images/visualizar_archivo.svg" alt="Archivo" class="containerFormsInputsFileBoxViewImg">
+                </div>
+            </div>
+        </div>
+        <div class="containerFormsInputs">
+            <label for="" class="containerFormsInputsLabel">{{ fileEmpLabel[9] }}</label>
+            <input (change)="fnGetFile($event, 9)" id="fileEmp9" class="containerFormsInputsFile" type="file" accept="application/pdf">
+            <div class="containerFormsInputsFileBox">
+                <div (click)="fnClickFile(9)" class="containerFormsInputsFileBoxInput"> {{ fileEmpName[9] }} </div>
+                <div (click)="fnClickFile(9)" class="containerFormsInputsFileBoxUpload" *ngIf="!fileEmpIsUp[9]">
+                    <img src="./assets/Images/cargar_archivo.svg" alt="Archivo" class="containerFormsInputsFileBoxUploadImg">
+                </div>
+                <div (click)="fnClickFile(9)" class="containerFormsInputsFileBoxReload" *ngIf="fileEmpIsUp[9]">
+                    <img src="./assets/Images/recargar_archivo.svg" alt="Archivo" class="containerFormsInputsFileBoxReloadImg">
+                </div>
+                <div class="containerFormsInputsFileBoxView" *ngIf="fileEmpIsUp[9]">
+                    <img src="./assets/Images/visualizar_archivo.svg" alt="Archivo" class="containerFormsInputsFileBoxViewImg">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="containerForms" [style.height]="'50px'"></div>
+    <div class="containerBtns">
+        <div class="containerBtnsBtn">
+            <div class="containerBtnsBtnCancel" (click)="fnReturnView()">CANCELAR</div>
+        </div>
+        <div class="containerBtnsBtn">
+            <div class="containerBtnsBtnCancel" [style.margin-right]="'20px'" (click)="fnReturnView()">FINIQUITAR</div>
+            <div [ngClass]="classBtnAccept" (click)="fnReturnView()">ACEPTAR</div>
+        </div>
+    </div>
+</div>

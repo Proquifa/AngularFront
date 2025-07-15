@@ -1,0 +1,9 @@
+<div class="cont">
+  <p (click)="toggleSwitch(false)" [ngClass]="leftOptionSelected ? 'selected': ''">{{leftOptionText}}</p>
+  <div class="switch">
+    <input id="check" class="check" type="checkbox" (change)="toggleSwitch(leftOptionSelected)" />
+    <label for="check" [ngClass]="'button' + (leftOptionSelected ? ' left': ' right')"></label>
+    <div class="line" (click)="toggleSwitch(leftOptionSelected)"></div>
+  </div>
+  <p (click)="toggleSwitch(true)" [ngClass]="!leftOptionSelected ? 'selected': ''">{{rightOptionText}}</p>
+</div>

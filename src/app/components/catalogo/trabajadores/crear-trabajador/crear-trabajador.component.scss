@@ -1,0 +1,396 @@
+pn-header-bc{
+    user-select: none;
+    display: flex;
+    width: 100%;
+    height: 41px;
+}
+.container{
+    user-select: none;
+    display: flex;
+    flex-direction: column;
+    padding: 25px;
+    & > .containerTitle{
+        display: flex;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #424242;
+        font-size: 17px;
+        color: #424242;
+        font-weight: 700;
+        margin: 17px 0px;
+        font-family: Novecento;
+        text-transform: uppercase;
+        justify-content: space-between;
+        align-items: baseline;
+        & > .containerTitleItem1{
+            display: flex;
+        }
+        & > .containerTitleItem2{
+            display: flex;
+            & > img.containerTitleItem2Img{
+                display: flex;
+                width: 30px;
+                cursor: pointer;
+                transition: all 0.2s ease-in-out;
+            }
+            & > img.containerTitleItem2Img:hover{
+                opacity: 0.5;
+            }
+            & > img.containerTitleItem2Img:active{
+                opacity: 0.75;
+            }
+        }
+    }
+    & > .containerTotals{
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        height: 95px;
+        background:rgba(0,136,148,0.05);
+        margin: 15px 0px;
+        padding: 10px 120px 10px 10px;
+        & > .containerTotalsLabels{
+            display: flex;
+            flex-direction: column;
+            width: 225px;
+            margin: 0px 20px;
+            align-items: flex-end;
+            height: 80px;
+            justify-content: space-evenly;
+            & > .containerTotalsLabelsSpan{
+                display: flex;
+                font-size: 13px;
+                color: #424242;
+                font-weight: 400;
+            }
+        }
+        & > .containerTotalsCants{
+            display: flex;
+            flex-direction: column;
+            width: 100px;
+            padding: 0px 20px;
+            align-items: flex-end;
+            border-right: 1px solid #424242;
+            height: 80px;
+            justify-content: space-evenly;
+            & > .containerTotalsCantsSpan{
+                display: flex;
+                font-size: 13px;
+                color: #008894;
+                font-weight: 400;
+            }
+        }
+        & > .containerTotalsTotal{
+            display: flex;
+            flex-direction: column;
+            width: 150px;
+            margin: 0px 20px;
+            align-items: flex-end;
+            height: 80px;
+            justify-content: center;
+            & > .containerTotalsTotalSpan:nth-of-type(1){
+                display: flex;
+                font-size: 14px;
+                color: #424242;
+                font-weight: 700;
+                padding: 3px 0px;
+            }
+            & > .containerTotalsTotalSpan:nth-of-type(2){
+                display: flex;
+                font-size: 20px;
+                color: #4BA92B;
+                font-weight: 700;
+                padding: 3px 0px;
+            }
+        }
+    }
+    & > .containerForms{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        justify-content: flex-start;
+        margin: 17px 0px;
+        & > .containerFormsInputs{
+            display: flex;
+            flex-direction: column;
+            align-self: baseline;
+            transition: all 0.2s ease-in-out;
+            & > .containerFormsInputsChecks{
+                display: flex;
+                flex-direction: column;
+                margin-right: 20px;
+                & > .containerFormsInputsChecksLabel{
+                    display: flex;
+                    font-size: 16px;
+                    color: #424242;
+                    font-weight: 400;
+                }
+                & > .containerFormsInputsChecksHoriz{
+                    display: flex;
+                    align-items: center;
+                    height: 30px;
+                    margin-top: 5px;
+                    cursor: pointer;
+                    transition: all 0.2s ease-in-out;
+                    & > .containerFormsInputsChecksUncheck{
+                        display: flex;
+                        width: 18px;
+                        height: 18px;
+                        margin-right: 10px;
+                        border: 1px solid #424242;
+                        transition: all 0.2s ease-in-out;
+                    }
+                    & > .checked{
+                        content: url('/assets/Images/checked20px.svg');
+                    }
+                    & > span.containerFormsInputsChecksSpan{
+                        display: flex;
+                        font-size: 16px;
+                        color: #424242;
+                        font-weight: 400;
+                    }
+                }
+                & > .containerFormsInputsChecksHoriz:hover{
+                    opacity: 0.5;
+                }
+                & > .containerFormsInputsChecksHoriz:active{
+                    opacity: 0.75;
+                }
+            }
+            & > .containerFormsInputsFile{
+                display: none;
+            }
+            & > .containerFormsInputsFileBox{
+                display:flex;
+                margin-right: 85px;
+                align-items: center;
+                & > .containerFormsInputsFileBoxInput{
+                    display: flex;
+                    width: 250px;
+                    height: 28px;
+                    display: flex;
+                    border: 1px solid #D8D8D8;
+                    font-size: 16px;
+                    color: #424242;
+                    font-weight: 400;
+                    align-items: center;
+                    cursor: pointer;
+                    transition: all 0.2s ease-in-out;
+                }
+                & > .containerFormsInputsFileBoxInput:hover{
+                    opacity: 0.5;
+                }
+                & > .containerFormsInputsFileBoxInput:active{
+                    opacity: 0.75;
+                }
+                & > .containerFormsInputsFileBoxUpload{
+                    display:flex;
+                    cursor: pointer;
+                    transition: all 0.2s ease-in-out;
+                    & > .containerFormsInputsFileBoxUploadImg{
+                        display:flex;
+                    }
+                }
+                & > .containerFormsInputsFileBoxUpload:hover{
+                    opacity: 0.5;
+                }
+                & > .containerFormsInputsFileBoxUpload:active{
+                    opacity: 0.75;
+                }
+                & > .containerFormsInputsFileBoxReload{
+                    display:flex;
+                    cursor: pointer;
+                    margin-right: 10px;
+                    transition: all 0.2s ease-in-out;
+                    & > .containerFormsInputsFileBoxReloadImg{
+                        display:flex;
+                    }
+                }
+                & > .containerFormsInputsFileBoxReload:hover{
+                    opacity: 0.5;
+                }
+                & > .containerFormsInputsFileBoxReload:active{
+                    opacity: 0.75;
+                }
+                & > .containerFormsInputsFileBoxView{
+                    display:flex;
+                    cursor: pointer;
+                    transition: all 0.2s ease-in-out;
+                    & > .containerFormsInputsFileBoxViewImg{
+                        display:flex;
+                    }
+                }
+                & > .containerFormsInputsFileBoxView:hover{
+                    opacity: 0.5;
+                }
+                & > .containerFormsInputsFileBoxView:active{
+                    opacity: 0.75;
+                }
+            }
+            & > .containerFormsInputsSpan{
+                display: flex;
+                font-size: 16px;
+                color: #424242;
+                font-weight: 400;
+            }
+            & > pq-drop-list{
+                display: flex;
+            }
+            & > label.containerFormsInputsLabel{
+                display: flex;
+                font-size: 16px;
+                color: #424242;
+                font-weight: 400;
+            }
+            & > input.containerFormsInputsInput{
+                display: flex;
+                width: 100%;
+                height: 30px;
+                margin-right: 20px;
+                margin-top: 5px;
+                border: 1px solid #D8D8D8;
+                font-size: 16px;
+                color: #424242;
+                font-weight: 400;
+            }
+        }
+        & > .inputsDisabled{
+            pointer-events: none;
+            opacity: 0.5;
+        }
+        & > .containerFormsInputLabel{
+            display: flex;
+            align-items: center;
+            height: 55px;
+            & > .containerFormsInputLabelCheck{
+                display: flex;
+            }
+        }
+    }
+    & > .lstTrabajadores{
+        display:flex;
+        & > .lstTrabajadoresHeader{
+            display:flex;
+            & > .lstTrabajadoresHeaderCol{
+                display:flex;
+            }
+        }
+        & > .lstTrabajadoresItem{
+            display:flex;
+            & > .lstTrabajadoresItemCol{
+                display:flex;
+            }
+        }
+    }
+    & > .lstTrabajadoresVacia{
+        display:flex;
+        width: 100%;
+        height: 100%;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: 120px;
+        margin-bottom: 104px;
+        & > .lstTrabajadoresVaciaLabel{
+            display:flex;
+            font-size: 36px;
+            color: #D8D9DD;
+            font-family: Novecento;
+            font-weight: 700;
+            padding: 25px 0px;
+        }
+        & > .lstTrabajadoresVaciaBtn{
+            display:flex;
+            background: #008894;
+            width: 293px;
+            height: 30px;
+            font-size: 21px;
+            color: #FFFFFF;
+            font-family: Novecento;
+            font-weight: 700;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+        }
+        & > .lstTrabajadoresVaciaBtn:hover{
+            opacity: 0.5;
+        }
+        & > .lstTrabajadoresVaciaBtn:active{
+            opacity: 0.75;
+        }
+        
+        & > .lstTrabajadoresVaciaBtnDisabled{
+            display:flex;
+            background: #C2C3C9;
+            width: 293px;
+            height: 30px;
+            font-size: 21px;
+            color: #FFFFFF;
+            font-family: Novecento;
+            font-weight: 700;
+            justify-content: center;
+            align-items: center;
+            pointer-events: none;
+        }
+    }
+    & > .containerBtns{
+        display: flex;
+        border-top: 2px solid #424242;
+        padding-top: 20px;
+        height: 48px;
+        justify-content: space-between;
+        font-size: 21px;
+        color: #FFFFFF;
+        font-weight: 700;
+        & > .containerBtnsBtn{
+            display: flex;
+            justify-content: space-between;
+            & > .containerBtnsBtnCancel{
+                display: flex;
+                font-family: Novecento;
+                background: #008894;
+                cursor: pointer;
+                transition: all 0.2s ease-in-out;
+                width: 170px;
+                height: 30px;
+                justify-content: center;
+                align-items: center;
+            }
+            & > .containerBtnsBtnCancel:hover{
+                opacity: 0.5;
+            }
+            & > .containerBtnsBtnCancel:active{
+                opacity: 0.75;
+            }
+            & > .containerBtnsBtnDisabled{
+                display: flex;
+                font-family: Novecento;
+                background: #C2C3C9;
+                pointer-events: none;
+                transition: all 0.2s ease-in-out;
+                width: 170px;
+                height: 30px;
+                justify-content: center;
+                align-items: center;
+            }
+            & > .containerBtnsBtnActive{
+                display: flex;
+                font-family: Novecento;
+                background: #4DA72C;
+                cursor: pointer;
+                transition: all 0.2s ease-in-out;
+                width: 170px;
+                height: 30px;
+                justify-content: center;
+                align-items: center;
+            }
+            & > .containerBtnsBtnActive:hover{
+                opacity: 0.5;
+            }
+            & > .containerBtnsBtnActive:active{
+                opacity: 0.75;
+            }
+        }
+    }
+}

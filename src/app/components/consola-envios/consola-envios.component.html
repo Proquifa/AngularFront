@@ -1,0 +1,189 @@
+<div class="padre">
+  <!--Seccion de menu-->
+  <div style="position: relative; display: flex; background: #E6E6E6;" class="aux">
+    <aside [ngClass]="classAsideMenu">
+      <div class="articulo" *ngIf="!ocultarAcor">
+        <pn-menu-seccion-roles [items]="itemsMenu" [titulo]="'Direccion Operaciones'"  style="width: 100%;" *ngIf="activeMenu"></pn-menu-seccion-roles>
+      </div>
+    </aside>
+    <div style="position: absolute; position: absolute; padding-top: 352px;right: 0">
+      <img class="img" src='./assets/Images/flecha_cuadro.svg' *ngIf="!ocultarAcor" (click)="mostarOcultarAcordeon()" />
+      <img class="img" src='./assets/Images/flecha_mostrar.svg' *ngIf="ocultarAcor" (click)="mostarOcultarAcordeon()" />
+    </div>
+  </div>
+  <!--Empieza el area de trabajo-->
+  <div class="area">
+    <!--Empieza la cabezera-->
+    <div class="cabezera">
+      <div>
+        <label class="etiqueta">CONSOLA DE ENVÍOS</label>
+      </div>
+    </div>
+    <!--Empiezan los componentes-->
+    <div [ngStyle]="{'overflow':'scroll', 'width':'100%', 'height':'calc(100% - 122px)'}">
+      <div class="areaPrincipal" *ngIf="partHabilidatas">
+        <div class="informacionLista">
+          <div class="filtros">
+            <div>
+              <div class="menu" id="menuOrden" (click)="abreCombo()">
+                <div id="menuOrden1">
+                </div>
+                <div id="menuOrden2">
+                </div>
+                <div id="menuOrden3">
+                </div>
+                <section id="section">
+                  <ul class="listaHamburguesa">
+                    <li (click)="ordenamiento('En Pausa')">En Pausa</li>
+                    <li (click)="ordenamiento('Por Sistema')">Por Enviar</li>
+                  </ul>
+                </section>
+              </div>
+              <label id="menuOrdenLabel">{{tipoOrden}}</label>
+            </div>
+            <div class="barraBusqueda">
+              <div class="buscar">
+                <div>
+                  <div class="lupa">
+                    <img src="assets/Images/lupa.svg" width="22px" height="22px" alt="buscar">
+                  </div>
+                  <input type="text" [ngModel]="searchTerm" (ngModelChange)="buscar($event)" class="buscar-input" placeholder="Cliente, Contacto, Packing List" />
+                  <div class="lupa" (click)="buscar('')" style="cursor: pointer;">
+                    <img src="assets/Images/cerrar.svg"  height="12px" alt="buscar">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="vistaLista">
+            <header>
+              <div  class="imagenesDiv" style="max-width: 27px">
+                <label>#</label>
+              </div>
+              <div class="imagenesDiv" style="min-width: 60px"></div>
+              <div style="width: 5%">
+                <label>#Prioridad</label>
+              </div>
+              <div>
+                <label>Cliente</label>
+              </div>
+              <div style="width: 20%">
+                <label>Zona</label>
+              </div>
+              <div style="width: 15%">
+                <label>Contacto</label>
+              </div>
+              <div style="width: 13%">
+                <label>FEE</label>
+              </div>
+              <div>
+                <label>Días Restantes</label>
+              </div>
+              <div></div>
+              <div></div>
+              <div class="imagenesDiv"></div>
+            </header>
+            <div style="height: 95%;width: 100%;overflow: auto;">
+              <div class= "lista" style="display: unset;flex-direction: column">
+                <div  *ngFor="let item of lista; let i = index" style="display: flex;flex-direction:column;width: 100%;position: relative;">
+                  <div [ngClass]="item.activePart? 'divActive': 'div'">
+                    <div class="dfSelect"></div>
+                    <div class="datosLst">
+                      <div class="imagenesDiv" style="max-width: 27px">
+                        <label>{{i + 1}}</label>
+                      </div>
+                      <div class="imagenesDiv" style="min-width: 60px">
+                        <div class="tooltip" *ngIf="item.urgencia === 0">
+                          <img src="./assets/Images/pausar.svg" *ngIf="item.urgencia === 0" (click)="cambiarStatus(item, 1)" height="15px">
+                          <span class="tooltiptext" *ngIf="item.urgencia === 0"> Pausar Envío</span>
+                        </div>
+                        <div class="tooltip"  *ngIf="item.urgencia !== 0">
+                          <img src="./assets/Images/reanudar.svg" *ngIf="item.urgencia !== 0" (click)="cambiarStatus(item, 0)" height="15px">
+                          <span class="tooltiptext" *ngIf="item.urgencia"> Reanudar Envío</span>
+                        </div>
+                      </div>
+                      <div style="width: 5%">
+                        <label>{{item.indicePrioridad}}</label>
+                      </div>
+                      <div>
+                        <label>{{item.cliente}}</label>
+                      </div>
+                      <div style="width: 20%">
+                        <span>{{item.zona}}</span>
+                        <label class="textLimite">{{item.calle}} C.P {{item.cp}}</label>
+                      </div>
+                      <div style="width: 15%">
+                        <span>{{item.contacto}}</span>
+                        <label class="textLimite">{{item.puesto}}</label>
+                      </div>
+                      <div style="width: 13%">
+                        <label style=" text-transform: capitalize;">{{item.fee}}</label>
+                      </div>
+                      <div>
+                        <label>{{item.dias}}</label>
+                      </div>
+                      <div>
+                        <span>{{item.totalPartidas}} PL</span>
+                        <label class="textLimite"><span *ngIf="item.totalInspeccion > 0">{{item.totalInspeccion}} Inspeccion</span><span *ngIf="item.totalInspeccion > 0 && item.totalEmbalar > 0"> · </span> <span *ngIf="item.totalEmbalar > 0">{{item.totalEmbalar}} Embalaje</span></label>
+                      </div>
+                      <div style="width: 8%">
+                        <label *ngIf="item.urgencia !== 0" [style.color]="'#D0021B'">En Pausa</label>
+                        <label *ngIf="item.urgencia === 0" [style.color]="'#242424'">Por Enviar</label>
+                      </div>
+                      <div class="imagenesDiv">
+                        <img src="./assets/Images/flecha_abajo.svg" *ngIf="item.activePart" (click)="item.activePart = !item.activePart">
+                        <img src="./assets/Images/flecha_arriba.svg" *ngIf="!item.activePart" (click)="item.activePart = !item.activePart">
+                      </div>
+                    </div>
+                  </div>
+                  <!--Empieza Lista partidas-->
+                  <div *ngIf="item.activePart" class="partidas">
+                    <header class="headerPart">
+                      <div>
+                        <label><span style="padding-left: 5px; font-weight: bold">Packing List</span></label>
+                      </div>
+                    </header>
+                    <div class="listaPart" *ngIf="item.partidas.length > 0">
+                      <div class="listaPartidas" *ngFor="let part of item.partidas; let i = index">
+                        <div class="datosLst">
+                          <div>
+                            <span>
+                            <label class="labelData">{{i +1}} ·</label>
+                            <span class="spanData">{{part.codigo}} </span>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!--Termina Lista partidas-->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="sinDatos" *ngIf="!partHabilidatas">
+        <label>SIN PARTIDAS DISPONIBLES</label>
+      </div>
+    </div>
+    <!--Terminan los componentes-->
+    <footer class="footer">
+      <div class="datosFooter">
+        <div class="Prioridad1">
+            <img style="height: 20px;" class="img" src='./assets/Images/reanudar.svg' /> Reanudar Envío
+        </div>
+        <div class="Prioridad1">
+          <img style="height: 20px;" class="img" src='./assets/Images/pausar.svg' /> Pausar Envío
+        </div>
+        <div class="Prioridad1">
+          <label class="p1">FEE: </label> Fecha Estimada de Entrega
+        </div>
+        <div class="Prioridad1">
+          <label class="p1">PL: </label> Packing List
+        </div>
+      </div>
+    </footer>
+  </div>
+</div>
+

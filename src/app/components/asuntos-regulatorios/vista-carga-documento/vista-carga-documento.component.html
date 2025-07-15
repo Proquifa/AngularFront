@@ -1,0 +1,72 @@
+<div class="areaPrincipal">
+  <div class="titulo">
+    <label> PRODUCTO </label>
+  </div>
+  <div class="datos">
+   <div class="infoProd">
+     <div class="nombre">
+       <label>{{nombreFabricante}} · <span>{{nombreProd}}</span></label>
+     </div>
+     <div class="nombre">
+       <span style="font-size: 18px; font-weight: 400"><label class="labelPeq">{{cpedido}} · </label> {{piezas}} {{conceptoPiezas}}  · <label class="labelPeq">Presentación {{presentacion}}</label> · Fecha Trámite {{fechaTramite}} </span>
+     </div>
+   </div>
+    <div class="fechas">
+      <div style="width: 12%">
+        <label>FEE</label>
+        <h1>{{fechaEntrega}}</h1>
+      </div>
+      <div style="width: 22%">
+        <label>Tipo de Permiso:</label>
+        <div>
+          <pn-combo-flecha-verde [title]="'Seleccionar'" [items]="tiposPermiso" (valueDropList)="recibirTipo($event)"></pn-combo-flecha-verde>
+        </div>
+      </div>
+      <div style="width: 19%">
+        <label> No. Permiso de Adquisición</label>
+      <input #textAdquisicion (blur)="cambioAquisicion(textAdquisicion.value)" value="{{permAdq}}"  id="textAdquision" type="text"
+             style="width: 100%;height: 24px;max-width: 206px;">
+      </div>
+      <div style="width: 16%">
+        <label> Fecha de Permiso</label>
+        <pq-date-picker style="height: 21px" dateFormat="YYYYMMDD" (fecha)="getFechaImpl($event)" [(date)]="date" [color]="false"></pq-date-picker>
+      </div>
+      <div style="width: 15%">
+        <label> Fecha Vencimiento</label>
+        <h1>{{fechaVencimiento}}</h1>
+      </div>
+      <div style="width: 18%">
+        <label> # de Acta de Liberación</label>
+        <h1>NA</h1>
+      </div>
+    </div>
+  </div>
+  <div  class="documento">
+    <div style="width: 100%; height: 5%;min-height: 30px;">
+      <label class="titulo2">PERMISO DE ADQUISICIÓN</label>
+    </div>
+    <div class="cargaDoc">
+      <input type="file" class="carga"  (change)="fileChange2($event)" id="cargarDocumento">
+      <label for="cargarDocumento" style="display: flex" *ngIf="primerCarga" class="cargarDocumento"><img src="./assets/Images/cargar_permiso.svg" class="imgeArchivo">
+        <p class="textoImagen">CARGAR PERMISO DE ADQUISICIÓN EN PLAZA</p></label>
+      <div *ngIf="!primerCarga" class="vistDoc">
+      <div style="width: 100%;height: 95%; justify-content: center;display: flex">
+        <div class="contentRefuse" id="preview" [innerHtml] = "htmlToAdd" [style.height]="'100%'"
+             [style.overflow]="'auto'">
+        </div>
+      </div>
+      <div *ngIf="!primerCarga" class="recargar">
+        <label for="cargarDocumento" style="display: flex"><img src="./assets/Images/editar-pieza/cargar.svg"></label>
+      </div>
+      </div>
+   </div>
+  </div>
+  <div class="btnDireccionPL">
+    <div>
+      <a class="btnImprimir" (click)="cambiarVista()">CANCELAR</a>
+    </div>
+    <div>
+      <a class="btnImprimir" (click)="finalizar()" [style.pointer-events]="colorBoton?'auto':'none'" [style.background]="colorBoton?'#4BA92B':'#D8D9DD'">ACEPTAR</a>
+    </div>
+  </div>
+</div>

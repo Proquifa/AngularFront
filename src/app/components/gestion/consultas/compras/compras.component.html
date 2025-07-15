@@ -1,0 +1,875 @@
+<!--060418-2501-->
+<div>
+  <div (click)="backMenu()">
+    <img height="22px" src="assets/Images/gestion/consultas/facturacion/recurso_190.svg" alt="">
+  </div>
+  |
+  <div *ngIf="!detalle">CONSULTA DE COMPRAS </div>
+  <div *ngIf="detalle" (click)="regresarConsulta()" class="regresar" style="  margin-right: 20px;">CONSULTA DE COMPRAS </div>
+  <div *ngIf="detalle" style="  margin-right: 20px;">|</div>
+  <div *ngIf="detalle">DETALLES</div>
+</div>
+<div *ngIf="!detalle">
+  <div [ngClass]="classPanel">
+    <div class="filtroHeader">
+      <div class="abrir" (click)="openPanel()">
+        <img *ngIf="hiddenClose" width="15px" src="assets/Images/gestion/consultas/facturacion/recurso_193.svg" alt="">
+        <img *ngIf="!hiddenClose" width="15px" src="assets/Images/gestion/consultas/facturacion/recurso_188.svg" alt="">
+      </div>
+      <div *ngIf="hiddenClose">
+        CERRAR
+        <div class="cerrar" (click)="closePanel()">
+          <img height="20px" width="20px" src="assets/Images/gestion/consultas/facturacion/recurso_189.svg" alt="">
+        </div>
+      </div>
+    </div>
+
+    <div class="filtros">
+      <div style="display: none;">
+        <!--  <pq-radio-button [widthTotal]="'100px'" [lstItems]="lstItems" [disble]="true" [direction]="'row'" [imgSize]="'12px'" (emitItem)="emitItem($event)"></pq-radio-button>
+      -->
+      </div>
+      <div>
+        <div (click)="filtroAvanzada()" [style.background]="avanzada?'#008895':'#C2C3C9'">AVANZADA</div>
+        <div (click)="filtroRapida()" [style.background]="!avanzada?'#008895':'#C2C3C9'">RÁPIDA</div>
+      </div>
+
+      <div *ngIf="avanzada" class="divAvanzada">
+        <!--  Si  ya hay datos dentro del compenente se manda el < Gestion-filter/> con los datos
+            Y la propiedad IsLoader como verdadera
+          -->
+        <div *ngIf="isThereData;else loader">
+          <gestion-filter [ElementsDropList]="Elements" (valueFilter)="mostrarDatos($event)" [IsImage]="IsImage" [IsDate]="IsDate"
+            [IsLoader]="isThereData" [Clear]="Clear" style="width: 100%"></gestion-filter>
+        </div>
+
+        <!--  Si  no hay datos dentro del compenente se manda el < Gestion-filter/> con solo
+            una propiedad
+            IsLoader como Falsa-->
+        <ng-template #loader>
+          <gestion-filter [IsLoader]="isThereData" [Clear]="Clear"></gestion-filter>
+        </ng-template>
+      </div>
+
+      <div *ngIf="!avanzada" class="divRapida">
+        <div style="display: none">
+
+        </div>
+
+        <div>
+          <span>Orden de compra</span>
+          <input [(ngModel)]="txtFactura" type="text">
+        </div>
+
+        <div (click)="ConsultaEspecifica(txtFactura)">
+          <img height="20px" (click)="ConsultaEspecifica(txtFactura)" src="assets/Images/visualizar.svg" alt="">
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="resultados w3-animate-left " *ngIf="isTableShow;else ShowGraphic" [style.width]="hiddenClose ? 'calc(100% - 321px)': 'calc(100% - 50px)'">
+    <div>
+      <div>
+        RESULTADOS
+      </div>
+      <div>
+        <img height="20px" width="20px" (click)="download()" src="assets/Images/exportar.svg" alt="">
+        <img [style.margin-right]="'15px'" (click)="showGraphic()" height="20px" width="20px" src="assets/Images/gestion/images/graficaminigris.svg"
+          alt="">
+      </div>
+    </div>
+
+
+
+    <div *ngIf="lstCompras" class="sistema ">
+      <div>
+        <div [style.min-width]="'50px'">#</div>
+        <div [style.min-width]="'160px'">OC</div>
+        <div [style.min-width]="'160px'">Proveedor</div>
+        <div [style.min-width]="'160px'">Compró</div>
+        <div [style.min-width]="'160px'">Colocó</div>
+        <div [style.min-width]="'160px'">Comprador</div>
+        <div [style.min-width]="'160px'">Estado</div>
+        <div [style.min-width]="'30px'"></div>
+      </div>
+      <div>
+        <div *ngFor="let item of lstCompras; let i = index">
+          <div [style.min-width]="'50px'">{{i + 1}}</div>
+          <div [style.min-width]="'160px'">{{item.clave}}</div>
+          <div [style.min-width]="'160px'">{{item.nombreProveedor}}</div>
+          <div [style.min-width]="'160px'">{{item.empresa}}</div>
+          <div [style.min-width]="'160px'">{{item.colocarDesde}}</div>
+          <div [style.min-width]="'160px'">{{item.comprador}}</div>
+          <div [style.min-width]="'160px'">{{item.abierto_cerrado}}</div>
+          <div [style.min-width]="'30px'" (click)="verDetalle(item)">
+            <img class="detalle" width="14px" src="assets/Images/ir_detalle.svg" alt="">
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+    <div class="total">
+      <p>Total:
+        <span>{{lstCompras.length}}</span>
+        <span>Compra
+          <span *ngIf="lstCompras.length != 1">s</span>
+        </span>
+      </p>
+    </div>
+
+  </div>
+
+  <!--Elemento Que muestra la vista Grafica-->
+  <ng-template #ShowGraphic>
+    <div class="w3-animate-right GlobalContainer-graphic-Component" style="overflow:hidden;">
+
+      <!--Elemento Que muestra los gráficos-->
+      <div class="GraphicsContainer-graphic-Component" style="overflow-y: scroll">
+
+        <div class="OnceGraphic-graphic-Component" style="overflow: auto">
+          <pq-graficas-dona [id]="id1" [Refresh]="refresh" [grafica1]="Grafico1" [opcion]="0"></pq-graficas-dona>
+        </div>
+      </div>
+      <div class="Filter-Container-graphic-Component">
+        <div class="Tabgraphic-Component" (click)="showTable()">
+          <img height="16.2px" width="20.4px" src="assets/Images/gestion/images/tablaminibca.svg" alt=“”>
+        </div>
+        <!--contenedor principal para los filtros de los graficos-->
+        <div class="Main-Container-filter-graphic-Component">
+          <!--Encabezado Totales-->
+          <div class="totals-filter-graphic-Component">
+            TOTALES
+
+
+
+
+
+            <br>
+          </div>
+          <!--Resultados de los filtros-->
+          <div class="Results-filter-graphic-Component">
+
+
+            <div class="Contenedor-Paneles">
+              <div class="Panel-Izq">
+                <img width="21.4px" src="assets/Images/gestion/images/verdeflecha.png" alt="">
+              </div>
+
+              <div class="Panel-Derecho">
+                Monto USD:
+                <br>
+                <p class="total"> $470,194.28</p>
+                <p class="azul">$470,194.28</p>
+                <p class="morado">$470,194.28</p>
+              </div>
+            </div>
+
+            <div class="Contenedor-Paneles">
+              <div class="Panel-Izq">
+                <img width="21.4px" src="assets/Images/gestion/images/rojoflecha.png" alt="">
+              </div>
+
+              <div class="Panel-Derecho">
+                No. Compra:
+                <br>
+                <p class="total"> $470,194.28</p>
+                <p class="azul">$470,194.28</p>
+                <p class="morado">$470,194.28</p>
+              </div>
+            </div>
+            <div class="Contenedor-Paneles">
+              <div class="Panel-Izq">
+                <img width="21.4px" src="assets/Images/gestion/images/verdeflecha.png" alt="">
+              </div>
+
+              <div class="Panel-Derecho">
+                Total Piezas:
+                <br>
+                <p class="total"> $470,194.28</p>
+                <p class="azul">$470,194.28</p>
+                <p class="morado">$470,194.28</p>
+              </div>
+            </div>
+
+
+            <br>
+          </div>
+          <!--Dobles filtros-->
+          <div class="filters-graphic-Component">
+
+
+            <div class="content2dates" style=" width:100%;height: 25%; display: flex; flex-wrap: wrap">
+
+
+              <div style="width: 10%;height: 100%; display: flex;  justify-content: center;  align-items: center; align-content: center;">
+                <div class="dotAzul"></div>
+              </div>
+              <div style="display: flex;flex-wrap: wrap; width: 80%; justify-content: space-between;;; height: 100%; align-content: center; align-items: center;">
+                <div>
+                  Del
+                  <div>
+                    <pq-date-picker [style.width]="'125px'" [(date)]="date3" dateFormat="YYYYMMDD"></pq-date-picker>
+
+                  </div>
+                </div>
+
+                <div>
+                  Al
+                  <div>
+                    <pq-date-picker [style.width]="'125px'" [(date)]="date4" dateFormat="YYYYMMDD"></pq-date-picker>
+
+                  </div>
+                </div>
+
+              </div>
+              <br>
+            </div>
+
+
+
+            <div class="content2dates" style=" width:100%;height: 25%; display: flex; flex-wrap: wrap">
+
+
+              <div style="width: 10%;height: 100%; display: flex; justify-content: center; align-items: center; align-content: center;">
+                <div class="dotMorado"></div>
+              </div>
+              <div style="display: flex;flex-wrap: wrap; width: 80%; justify-content: space-between;;; height: 100%; align-content: center; align-items: center;">
+                <div>
+                  Del
+                  <div>
+                    <pq-date-picker [style.width]="'125px'" [(date)]="date3" dateFormat="YYYYMMDD"></pq-date-picker>
+
+                  </div>
+                </div>
+
+                <div>
+                  Al
+                  <div>
+                    <pq-date-picker [style.width]="'125px'" [(date)]="date4" dateFormat="YYYYMMDD"></pq-date-picker>
+
+                  </div>
+                </div>
+
+              </div>
+              <br>
+            </div>
+
+            <div style="width:90%;display: flex; justify-content:center;">
+              <div style="width: 235px;; height: 35px;background: white; display: flex; justify-content: center; align-content: center; align-items: center;cursor: pointer;">
+
+
+                <img class="img-filter2" height="24px" src="assets/Images/gestion/images/reloadAzul.svg" alt="">
+              </div>
+
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</div>
+
+<!--Sección de detalles-->
+<div *ngIf="detalle" class="consultaDetalles">
+  <div [ngClass]="classPanel">
+    <div class="filtroHeader">
+      <div class="abrir" (click)="openPanel()">
+        <img *ngIf="hiddenClose" width="15px" src="assets/Images/hamburguesa.svg" alt="">
+        <img *ngIf="!hiddenClose" width="15px" src="assets/Images/hamburguesa_verde.svg" alt="">
+      </div>
+      <div *ngIf="hiddenClose">
+        CERRAR
+        <div class="cerrar" (click)="closePanel()">
+          <img height="20px" width="20px" src="assets/Images/gestion/consultas/facturacion/recurso_189.svg" alt="">
+        </div>
+      </div>
+    </div>
+    <div class="filtros">
+      <div class="detalleCliente"> {{CompraDetalle.nombreProveedor}} </div>
+      <div style="height: 0.1px; margin: 0.1px;"></div>
+      <div class="detalleTitulo">OC:</div>
+      <div class="detalleTexto" style="color:#008895; cursor:pointer" (click)="descargarPDF('http://201.161.12.60:51725/SAP/Ordenes de compra/'+CompraDetalle.clave+'-P.pdf')">
+      {{CompraDetalle.clave}} </div>
+      <div class="detalleTitulo">Colocó:</div>
+      <div class="detalleTexto">{{CompraDetalle.colocarDesde}}</div>
+      <div class="detalleTitulo">Comprò:</div>
+      <div class="detalleTexto">{{CompraDetalle.empresa}}</div>
+      <div class="detalleTitulo">Fecha de Comfirmación</div>
+      <div class="detalleTexto">{{CompraDetalle.fechaConfirmacion | dateFormatSlashHour}}</div>
+      <div class="detalleTitulo">Fecha de colocación:</div>
+      <div class="detalleTexto">{{CompraDetalle.fecha | dateFormatSlashHour}}</div>
+      <div class="detalleTitulo">Comprobador:</div>
+      <div class="detalleTexto">{{CompraDetalle.comprador}}</div>
+      <div class="detalleTitulo">Monto total de compra:</div>
+      <div class="detalleTexto">{{CompraDetalle.montoTotalDolares | acFormatMoney}} USD</div>
+      <div class="detalleTitulo">Total de piezas:</div>
+      <div class="detalleTexto">{{CompraDetalle.totalPiezas}}</div>
+
+    </div>
+
+    <div *ngIf="hiddenClose" style="width: 100%; opacity: 1;margin-top: 40px;background: transparent;color:#008895;;display:flex;flex-direction: column; justify-content: center;align-content: center; align-items: center">
+
+      Recibido ET vs FT
+      <div style="width: 70%;height:60%; opacity: 1;;background: transparent;margin-top: 20px;;display:flex; justify-content: center;align-content: center; align-items: center; position: relative">
+        <div style="width:60%;height:10vh;background:transparent;position:absolute;text-align:center; margin-top:10%;font-size:12px;
+          border-radius: 100%;">Totales
+          <p style="font-size: 10px;margin-top: 20px;color: #424242 ">
+            Monto total: {{montototalGraficaDetalle | acFormatMoney}} USD
+          </p>
+
+          <p style="font-size: 10px;color: #424242 ">
+            Partidas: {{nPartidas}}
+          </p>
+
+
+          <p style="font-size: 10px;color: #424242 ">
+            Piezas:{{TotalPiezasPartidasDetalle}}
+          </p>
+
+        </div>
+        <div>
+
+          <div style="min-width: 300px;min-height: 200px;">
+            <canvas id="graficoIndividual"></canvas>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+  <div class="contenidoFactura">
+    <div class="detalleFactura" style="justify-content: center; background: transparent;overflow-y: auto">
+      <div style="background: transparent; justify-content: center">OC {{CompraDetalle.clave}} </div>
+      <div>
+        <!--  lista de Compras-->
+        <div [ngClass]="i==0?'divActual':''" *ngFor="let item of lstPartidas; let i = index" (click)="resumenFactura(i)">
+          <div class="dfSelect"></div>
+          <div>
+            <div>
+              <div *ngIf="item.totalPiezas==1" [style.color]="'#008895'">#{{(i+1)+" - "+item.totalPiezas +"Pza - "}}{{item.montoTotal | acFormatMoney}} USD </div>
+
+              <div *ngIf="item.totalPiezas!=1" [style.color]="'#008895'">#{{(i+1)+" - "+item.totalPiezas +"Pzas - "}}{{item.montoTotal | acFormatMoney}} USD </div>
+              <div></div>
+            </div>
+            <div>
+              <div style="width: 65%">{{item.descripcionProducto}}</div>
+
+              <div style="width: 5%"></div>
+              <div style="width:30%">FEE: {{item.fechaEstimadaEntrega| dateFormatSlash}}
+              </div>
+
+            </div>
+            <div>
+              <div style="opacity: 0.5;">PU {{item.costo| acFormatMoney}} USD </div>
+              <div></div>
+            </div>
+
+            <div>
+              <div style="width:70%"> {{item.destino}} </div>
+              <div *ngIf="item.abierto;else cerrado" style="width:19%; color:red; text-align: center"> Abierto</div>
+              <ng-template #cerrado>
+                <div style="width:19%; color:#91BE5F; text-align: center"> Cerrado</div>
+              </ng-template>
+            </div>
+
+            <div>
+
+              <!--Aqui se muestra otra ventana
+              http://201.161.12.60:51725/SAP/Pedidos/062218-5141.pdf
+              -->
+              <div style="color:#008895; width:70%" (click)="descargarPDF('http://201.161.12.60:51725/SAP/Pedidos/'+item.pedido+'.pdf')">
+              {{item.pedido}} </div>
+
+
+              <div *ngIf="item.estado=='Recibido'" style="color:#008895; width:30%"> {{item.estado+" "}}
+                <span style="color:#91BE5F "> ET</span>
+              </div>
+
+              <div *ngIf="item.estado=='BackOrder'" style="color:#008895; width:30%"> {{item.estado+" "}}
+                <span style="color:#D0021B  "> FT</span>
+              </div>
+
+              <div *ngIf="item.estado!='BackOrder'&&item.estado!='Recibido'" style="color:#008895; width:30%"> {{item.estado+" "}}</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="width: 100%; height: 100px;display: flex;flex-wrap: wrap; justify-content: center;align-content: center;align-items: center; background: transparent">
+          <div style="background: transparent">
+            {{lstPartidas.length==1?lstPartidas.length+" Partida" :lstPartidas.length+" Partidas" }}
+          </div>
+
+
+        </div>
+
+
+      </div>
+      <div>
+
+      </div>
+    </div>
+    <div class="lineaTiempo">
+
+
+      <div *ngIf="lstPartidas[PartidaSeleccionada].totalPiezas==1">
+        # {{(PartidaSeleccionada+1)}}-{{lstPartidas[PartidaSeleccionada].totalPiezas +"Pieza" }}</div>
+      <div *ngIf="lstPartidas[PartidaSeleccionada].totalPiezas!=1">
+        # {{(PartidaSeleccionada+1)}}-{{lstPartidas?lstPartidas[PartidaSeleccionada].totalPiezas:"" }}-Piezas</div>
+
+      <div [ngClass]="i==lineaSeleccionada?'cont-timeLine cont-timeLineSelected':'cont-timeLine'" *ngFor="let item of lstTiempoProceso; let i = index"
+        (click)="SeleccionarLinea(i)" style="border-bottom: none; cursor: pointer;display: flex;flex-direction: row; min-width: 564px">
+        <br>
+
+
+        <div *ngIf="lineaSeleccionada==i" class="cuadroActivo" style="min-width: 8px;
+background: #008895;
+min-height:150px; display: flex; flex-direction: column">
+
+        </div>
+
+        <div *ngIf="lineaSeleccionada!=i" class="cuadroActivo" style="min-width: 8px;
+background: transparent;
+min-height:150px; display: flex; flex-direction: column">
+
+        </div>
+
+        <div style="display: flex;
+                          flex-direction: column;  padding-left: 1rem">
+
+          <div style="font-size: 18px;width: 100%;
+                  font-weight: bold;
+                  color: #424242;
+                  margin-bottom: 15px;display: flex; justify-content: space-between">
+            <div style="width: 90%; min-width: 520px;">
+              {{item.etapa}}
+            </div>
+
+            <div *ngIf="item.fechaFin !=null" class="circuloverde"></div>
+
+            <div *ngIf="item.fechaFin ==null" class="circulorojo"></div>
+          </div>
+
+          <div style="    font-size: 16px;
+                  color: #008895;
+                  margin-bottom: 5px;margin-bottom: 2px">{{item.responsable}}</div>
+          <div style="    font-size: 16px;
+                  color: #F3B23F;
+                  margin-bottom: 5px;">FI {{item.fechaInicio | dateFormatSlash}}</div>
+          <div style="    font-size: 16px;
+                  color: #571C7B;
+                  margin-bottom: 5px;">FF {{item.fechaFin | dateFormatSlash}}</div>
+          <div style="    font-size: 16px;
+                  color: #981E30;
+                  margin-bottom: 5px;">TT {{item.totalProceso}} día
+            <span *ngIf="item.totalProceso != 1">s</span>
+          </div>
+        </div>
+
+      </div>
+
+
+
+      <hr>
+
+    </div>
+
+
+    <div class="detalleTiempo">
+      <div style="display: flex;">
+        <div style="width: 90%">
+          {{lstTiempoProceso[lineaSeleccionada].etapa}}
+        </div>
+        <div *ngIf="lstTiempoProceso[lineaSeleccionada].fechaFin !=null" class="circuloverde"></div>
+
+        <div *ngIf="lstTiempoProceso[lineaSeleccionada].fechaFin ==null" class="circulorojo"></div>
+
+
+      </div>
+      <!--Seccion de Tramitacion -->
+      <div *ngIf="lstTiempoProceso[lineaSeleccionada].etapa=='TRAMITACIÓN'">
+        <div class="encabezadoGestion">
+          Generales
+        </div>
+
+        <div class="subencabezadoGestion">
+          Fecha de Tramitación
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{lstTiempoProceso[lineaSeleccionada].fechaTramitacion | dateFormatSlashHour}}
+        </div>
+
+
+        <div class="subencabezadoGestion">
+          OC
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{ lstTiempoProceso[lineaSeleccionada].referencia?lstTiempoProceso[lineaSeleccionada].referencia: "ND"}}
+
+        </div>
+
+        <div class="subencabezadoGestion">
+          Proveedor
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{ lstTiempoProceso[lineaSeleccionada].proveedor?lstTiempoProceso[lineaSeleccionada].proveedor: "ND"}}
+
+        </div>
+
+
+        <div class="subencabezadoGestion">
+          Compró
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{ lstTiempoProceso[lineaSeleccionada].fpor?lstTiempoProceso[lineaSeleccionada].fpor: "ND"}}
+
+        </div>
+
+
+        <div class="subencabezadoGestion">
+          Contacto
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{ lstTiempoProceso[lineaSeleccionada].contacto?lstTiempoProceso[lineaSeleccionada].contacto: "ND"}}
+
+        </div>
+
+        <div class="subencabezadoGestion">
+          Comprador
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{ lstTiempoProceso[lineaSeleccionada].responsable?lstTiempoProceso[lineaSeleccionada].responsable: "ND"}}
+
+        </div>
+
+        <div class="subencabezadoGestion">
+          Tráfico
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{ lstTiempoProceso[lineaSeleccionada].trafico?lstTiempoProceso[lineaSeleccionada].trafico: "ND"}}
+
+        </div>
+
+      </div>
+      <!--Seccion de confirmacion-->
+
+      <div *ngIf="lstTiempoProceso[lineaSeleccionada].etapa=='CONFIRMACIÓN'">
+        <div class="encabezadoGestion">
+          Generales
+        </div>
+
+        <div class="subencabezadoGestion">
+          Fecha de colocación
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{lstTiempoProceso[lineaSeleccionada].fechaInicio | dateFormatSlashHour}}
+        </div>
+
+
+        <div class="subencabezadoGestion">
+          Fecha de confirmación
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{lstTiempoProceso[lineaSeleccionada].fechaFin | dateFormatSlashHour}}
+        </div>
+
+        <div class="subencabezadoGestion">
+          Colocó
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{ lstTiempoProceso[lineaSeleccionada].responsable?lstTiempoProceso[lineaSeleccionada].responsable: "ND"}}
+
+        </div>
+
+
+        <div class="subencabezadoGestion">
+          Comentarios de la confirmación
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{ lstTiempoProceso[lineaSeleccionada].comentariios?lstTiempoProceso[lineaSeleccionada].comentariios: "ND"}}
+        </div>
+      </div>
+
+
+
+      <!--Seccion de importacioón-->
+
+      <div *ngIf="lstTiempoProceso[lineaSeleccionada].etapa=='IMPORTACIÓN'">
+        <div class="encabezadoGestion">
+          Generales
+        </div>
+
+        <div class="subencabezadoGestion">
+          Fecha de Arribo Tránsito
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{lstTiempoProceso[lineaSeleccionada].fechaInicio | dateFormatSlashHour}}
+        </div>
+
+
+        <div class="subencabezadoGestion">
+          Fecha de Arribo Matriz
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{lstTiempoProceso[lineaSeleccionada].fechaFin | dateFormatSlashHour}}
+        </div>
+
+        <div class="subencabezadoGestion">
+          No. Pedimento
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{lstTiempoProceso[lineaSeleccionada].pedimento ?lstTiempoProceso[lineaSeleccionada].pedimento :"ND" }}
+
+        </div>
+
+
+        <div class="subencabezadoGestion">
+          Orden de despacho
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{lstTiempoProceso[lineaSeleccionada].ordenDespacho ?lstTiempoProceso[lineaSeleccionada].ordenDespacho :"ND" }}
+
+        </div>
+
+
+        <div class="subencabezadoGestion">
+          Aduana
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{lstTiempoProceso[lineaSeleccionada].aduna?lstTiempoProceso[lineaSeleccionada].aduna:"ND" }}
+        </div>
+
+        <div class="subencabezadoGestion">
+          Agente aduanal
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{lstTiempoProceso[lineaSeleccionada].agenteAduanal?lstTiempoProceso[lineaSeleccionada].agenteAduanal:"ND" }}
+
+        </div>
+
+        <div class="subencabezadoGestion">
+          Fletera
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{lstTiempoProceso[lineaSeleccionada].feltera?lstTiempoProceso[lineaSeleccionada].fletera:"ND" }}
+        </div>
+
+        <hr style="opacity: .5">
+
+        <div class="encabezadoGestion">
+          DECLARAR ARRIBO TRÁNSITO
+        </div>
+
+        <div class="subencabezadoGestion">
+          Fecha de Arribo Tránsito
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{lstTiempoProceso[lineaSeleccionada].fechaInicio | dateFormatSlashHour}}
+        </div>
+
+        <div class="subencabezadoGestion">
+          Lista de Arribo</div>
+
+        <!--Aqui se abre una nueva ventana con url
+          http://201.161.12.60:51725/SAP/ListaArribo/LA-062018-3560.pdf
+          -->
+        <div *ngIf="lstTiempoProceso[lineaSeleccionada].folio!=null" class="contenidoencabezadoGestion " (click)="descargarPDF('http://201.161.12.60:51725/SAP/ListaArribo/'+lstTiempoProceso[lineaSeleccionada].folio+'.pdf')"
+          style="color: #008895;cursor:pointer;">
+          {{lstTiempoProceso[lineaSeleccionada].folio }}
+
+        </div>
+
+        <div *ngIf="lstTiempoProceso[lineaSeleccionada].folio==null" class="contenidoencabezadoGestion ">
+          ND
+
+        </div>
+
+        <hr style="opacity: .5">
+        <div class="encabezadoGestion">
+          DESPACHO
+        </div>
+
+        <div class="subencabezadoGestion">
+          Fecha de Planificación
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{lstTiempoProceso[lineaSeleccionada].fechaPlanificacion | dateFormatSlashHour}}
+
+        </div>
+
+        <div class="subencabezadoGestion">
+          Fecha de registro de despacho</div>
+        <div class="contenidoencabezadoGestion">
+          Pendiente
+        </div>
+        <!--
+            Aqui se abre una nueva ventana por url 
+            http://201.161.12.60:51725/SAP/OrdenDespacho/OD-061918-0906/1618%208000523.pdf
+          -->
+        <div class="subencabezadoGestion">
+          No. pedimento</div>
+        <div *ngIf="lstTiempoProceso[lineaSeleccionada].pedimento!=null" class="contenidoencabezadoGestion " (click)="descargarPDF('http://201.161.12.60:51725/SAP/OrdenDespacho/'+lstTiempoProceso[lineaSeleccionada].ordenDespacho+'/'+lstTiempoProceso[lineaSeleccionada].pedimento+'.pdf')"
+          style="color: #008895;cursor:pointer;">
+
+          {{lstTiempoProceso[lineaSeleccionada].pedimento ?lstTiempoProceso[lineaSeleccionada].pedimento :"ND" }}
+        </div>
+        <div *ngIf="lstTiempoProceso[lineaSeleccionada].pedimento==null" class="contenidoencabezadoGestion">
+          ND
+        </div>
+
+        <div class="subencabezadoGestion">
+          Fecha de Pedimento</div>
+        <div class="contenidoencabezadoGestion">
+
+          {{lstTiempoProceso[lineaSeleccionada].fechaPedimento | dateFormatSlash}}
+        </div>
+
+        <div class="subencabezadoGestion">
+          Referencia</div>
+        <div class="contenidoencabezadoGestion">
+          {{lstTiempoProceso[lineaSeleccionada].referencia ?lstTiempoProceso[lineaSeleccionada].referencia :"ND" }}
+        </div>
+
+        <div class="subencabezadoGestion">
+          Guia de Embarque</div>
+        <div class="contenidoencabezadoGestion">
+
+          {{lstTiempoProceso[lineaSeleccionada].guiaEmbarque ?lstTiempoProceso[lineaSeleccionada].guiaEmbarque :"ND" }}
+        </div>
+
+        <div class="subencabezadoGestion">
+          Fecha de Salida de Aduana</div>
+        <div class="contenidoencabezadoGestion">
+
+          {{lstTiempoProceso[lineaSeleccionada].fechaSalidaAduana | dateFormatSlashHour}}
+        </div>
+
+        <div class="subencabezadoGestion">
+          Fecha Estimada de Arribo</div>
+        <div class="contenidoencabezadoGestion">
+          {{lstTiempoProceso[lineaSeleccionada].fechaEstimadaArribo | dateFormatSlashHour}}
+        </div>
+
+
+        <div class="subencabezadoGestion">
+          Comprador que recibe</div>
+        <div class="contenidoencabezadoGestion">
+          {{lstTiempoProceso[lineaSeleccionada].responsable ?lstTiempoProceso[lineaSeleccionada].responsable :"ND" }}
+        </div>
+
+        <hr style="opacity: .5">
+
+        <div class="encabezadoGestion">
+          REGISTRO ARRIBO
+        </div>
+
+        <div class="subencabezadoGestion">
+          Fecha de Registro
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{lstTiempoProceso[lineaSeleccionada].fechaFin | dateFormatSlashHour}}
+        </div>
+
+
+        <div class="subencabezadoGestion">
+          Recibió
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{lstTiempoProceso[lineaSeleccionada].responsable ?lstTiempoProceso[lineaSeleccionada].responsable :"ND" }}
+        </div>
+
+      </div>
+
+
+      <!--Seccion de  TRÁNSITO PHS-->
+
+      <div *ngIf="lstTiempoProceso[lineaSeleccionada].etapa=='TRÁNSITO PHS'">
+        <div class="encabezadoGestion">
+          TRÁNSITO PHS
+        </div>
+
+        <div class="subencabezadoGestion">
+          FI {{lstTiempoProceso[lineaSeleccionada].fechaInicio | dateFormatSlashHour}} : FF {{lstTiempoProceso[lineaSeleccionada].fechaFin
+          | dateFormatSlashHour}} : TT {{lstTiempoProceso[lineaSeleccionada].id==1?lstTiempoProceso[lineaSeleccionada].id
+          +" dia":lstTiempoProceso[lineaSeleccionada].id +" dias"}}
+        </div>
+        <div class="contenidoencabezadoGestion">
+
+        </div>
+
+
+        <div class="subencabezadoGestion">
+
+          FEA PHS
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{lstTiempoProceso[lineaSeleccionada].fechaEsperadaArribo | dateFormatSlash}}
+        </div>
+
+        <div class="subencabezadoGestion">
+          FRA PHS
+        </div>
+        <div class="contenidoencabezadoGestion">
+          Pendiente
+        </div>
+      </div>
+
+
+
+
+      <!--Seccion de RECIBIDO-->
+
+      <div *ngIf="lstTiempoProceso[lineaSeleccionada].etapa=='RECIBIDO'">
+        <div class="encabezadoGestion">
+          GENERALES
+        </div>
+
+        <div class="subencabezadoGestion">
+          Fecha de Tramitación
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{lstTiempoProceso[lineaSeleccionada].fechaInicio | dateFormatSlashHour}}
+        </div>
+
+
+        <div class="subencabezadoGestion">
+          FRA PHS
+        </div>
+        <div class="contenidoencabezadoGestion">
+          {{lstTiempoProceso[lineaSeleccionada].fechaFin | dateFormatSlashHour}}
+        </div>
+
+        <div class="subencabezadoGestion">
+          FEE
+        </div>
+        <div clasS="contenidoencabezadoGestion">
+          {{lstTiempoProceso[lineaSeleccionada].fechaEsperadaArribo | dateFormatSlashHour}}
+        </div>
+        <div class="subencabezadoGestion">
+          Inspección Matriz
+        </div>
+        <div class="contenidoencabezadoGestion" *ngIf="lstPartidas[PartidaSeleccionada].totalPiezas==1">
+
+          {{lstPartidas[PartidaSeleccionada].totalPiezas +" Pieza Despachable" }}
+        </div>
+
+        <div class="contenidoencabezadoGestion" *ngIf="lstPartidas[PartidaSeleccionada].totalPiezas!=1">
+          {{lstPartidas?lstPartidas[PartidaSeleccionada].totalPiezas+ " Piezas Despachable" :"" }}
+        </div>
+
+
+        <div class="subencabezadoGestion">
+          # de Monitoreos
+        </div>
+        <div clasS="contenidoencabezadoGestion">
+          {{lstTiempoProceso[lineaSeleccionada].pedimento ?lstTiempoProceso[lineaSeleccionada].pedimento :"ND" }}
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

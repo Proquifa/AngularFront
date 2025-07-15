@@ -1,0 +1,245 @@
+<div class="areaSeccion">
+  <div>
+    <div class="datosPersonales" *ngIf="contacto !== 'Seleccionar'">
+      <div>
+        <div>
+          <img src="./assets/Images/contacto.svg" class="icono">
+          <pn-combo-flecha-verde [validar]="true"  [items]="itemContacto" [itemSelect]="selected" [heightLi]="'35px'" [widthBorder] = 'false' (valueDropList)="recibirItem($event)" style="width: 250px;" *ngIf="activarCombo"></pn-combo-flecha-verde>
+        </div>
+        <div>
+          <img src="./assets/Images/mail.svg" class="icono">
+          <label>{{itemContactoS.email}}</label>
+        </div>
+        <div>
+          <img src="./assets/Images/telefono.svg" class="icono">
+          <label>{{itemContactoS.tel}}</label>
+        </div>
+      </div>
+      <div>
+        <label>{{itemContactoS.titulo}}</label>
+        <span>Título de Contacto</span>
+      </div>
+      <div>
+        <label>{{itemContactoS.puesto}}</label>
+        <span>Puesto</span>
+      </div>
+      <div>
+        <label>{{itemContactoS.departament}}</label>
+        <span>Departamento</span>
+      </div>
+    </div>
+    <div class="datosPersonales" *ngIf="contacto == 'Seleccionar'">
+      <div style="width: 100%">
+        <div class="noSeleccionado">
+          <img src="./assets/Images/contacto.svg" class="icono">
+          <pn-combo-flecha-verde  [items]="itemContacto" [itemSelect]="selected" [heightLi]="'35px'" [widthBorder] = 'false' (valueDropList)="recibirItem($event)" style="width: 250px;display: flex;align-items: center" *ngIf="activarCombo"></pn-combo-flecha-verde>
+        </div>
+        <div style="height: 50%;width: 100%">
+          <h1>SELECCIONA UN CONTACTO PARA VISUALIZAR ESTA SECCIÓN</h1>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div style="padding-right: 20px;" class="seccionListas">
+        <div class="titulos" style="border-bottom: initial">
+          <label>ORDENES DE COMPRA</label>
+        </div>
+        <div>
+            <div class="titulosLista">
+              <div class="organizarLista" style="padding-bottom: 10px; padding-top: initial">
+                <div style="height: 100%;    display: flex;align-items: center;">
+                  <div class="menu" (click)="abreCombo()">
+                    <div>
+                    </div>
+                    <div>
+                    </div>
+                    <div>
+                    </div>
+                    <section id="section">
+                      <ul class="listaHamburguesa">
+                        <li (click)="ordenamientoFechaTramNue()">Más Recientes</li>
+                        <li (click)="ordenamientoFechaTramAnt()">Más Antiguos</li>
+                      </ul>
+                    </section>
+                  </div>
+                </div>
+                <div style="height: 100%;    display: flex;align-items: center;">
+                  <h3 class="subtitulo">{{tipoOrden}}</h3>
+                </div>
+                <div class="barraBusqueda" style="height: 100%">
+                  <div class="buscar">
+                    <div>
+                      <div class="lupa">
+                        <img src="assets/Images/lupa.svg" width="22px" height="22px" alt="buscar">
+                      </div>
+                      <input type="text" [ngModel]="searchTerm" (ngModelChange)="buscar($event)" class="buscar-input" placeholder="OC" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--Lista total-->
+            <div class="listaSeccionUno">
+              <div>
+                <div class= "lista" style="display: unset;flex-direction: column" >
+                  <div [ngClass]="item.oc === folio? 'divActive': ''"  *ngFor="let item of lista; let i = index"
+                       style="display: flex;flex-direction:row;width: 100%;position: relative; border-bottom: 1px solid #ECEEF0" (click)="seleccionarItem(i, item)">
+                    <div class="dfSelect"></div>
+                    <div class="datosLst">
+                      <div class="informacionList">
+                        <label>#{{i +1}} · {{item.oc}} </label>
+                        <p>{{item.piezas}} Piezas · Inspector {{item.inspector}}</p>
+                        <h3 class="textoPiezas">Fecha de Inspección: <span style="text-transform: capitalize;">{{item.fechaInspeccion}}</span></h3>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="totales">
+                <label>#{{lista.length}}</label>
+                <label>{{totalProductos}} Piezas</label>
+              </div>
+            </div>
+        </div>
+      </div>
+      <!--linea degradada-->
+      <div class="borderLine"></div>
+      <!---->
+      <div style="width: 32%;padding-right: 20px;padding-left: 20px" class="seccionListas">
+        <div class="titulos">
+          <label *ngIf="selectedOc">#{{indice}} · OC<span>-{{this.folio}}</span></label>
+        </div>
+        <div>
+          <div class="titulosLista">
+            <div class="organizarLista">
+              <div class="barraBusqueda" style="height: 100%">
+                <div class="buscar">
+                  <div style="width: 100%">
+                    <div class="lupa">
+                      <img src="assets/Images/lupa.svg" width="22px" height="22px" alt="buscar">
+                    </div>
+                    <input type="text" [ngModel]="searchTermOc" (ngModelChange)="buscarOc($event)" class="buscar-input" placeholder="codigo, tipo, descripción" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--Lista total-->
+          <div class="listaSeccionUno" style="padding-top: 15px;">
+            <div style="border-top: initial">
+              <div class= "lista" style="display: unset;flex-direction: column;padding: initial" >
+                <div [ngClass]="item.identificador === folioOc? 'divActive': ''"  *ngFor="let item of listaOc; let i = index"
+                     style="display: flex;flex-direction:row;width: 100%;position: relative; border-bottom: 1px solid #ECEEF0" (click)="seleccionarItemPieza(i, item)">
+                  <div class="dfSelect"></div>
+                  <div class="datosLst">
+                    <div class="informacionList" style="line-height: 1.3;">
+                      <label>#{{i +1}} · <span style="color: #008894">{{item.codigo}}</span> {{item.concepto}}</label>
+                      <label style="font-weight: 400">Fecha de Inpección: <span style="text-transform: capitalize">{{item.fechaInspeccionFormato}}</span> · Inspector: {{item.inspector}}</label>
+                      <h3>Lugar: {{item.destino}} FEE: {{item.feeFormato}} DRE: {{item.dre}} Tipo: {{item.tipo}}</h3>
+                      <label class="pedidoInter">Pedido Interno {{item.cpedido}}</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="totales">
+              <label>{{listaOcUniverso.length}} Piezas</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--linea degradada-->
+      <div class="borderLine"></div>
+      <!---->
+      <div style="width: 48%;padding-left: 20px" class="seccionListas">
+        <div class="titulos">
+          <label *ngIf="activarOc" class="corteTexto">#{{indiceOc}} · <span>{{itemOc.codigo}}</span> {{itemOc.concepto}}</label>
+        </div>
+        <div>
+          <div style="height: 15%; width: 100%; display: flex;flex-direction: column">
+            <div style="height: 60%; width: 100%;display: flex;flex-direction: row;justify-content: space-between">
+              <div class="infoProveedor">
+                <span>Producto</span>
+                <div>
+                  <div style="padding-right: 5px;">
+                    <label style="font-weight: 400">Costo:</label>
+                    <label>{{itemOc.costo}}</label>
+                  </div>
+                  <div>
+                    <label style="font-weight: 400">Manejo:</label>
+                    <label>{{itemOc.manejo}}</label>
+                  </div>
+                </div>
+              </div>
+              <div class="infoProveedor">
+                <span>Datos Económicos · Proveedor</span>
+                <div>
+                  <div>
+                    <label style="font-weight: 400">Origen:</label>
+                    <label>{{itemOc.origen}}</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="segundaS">
+              <div class="causaProducto">
+                <label>Marca:</label>
+                <label style="font-weight: bold">{{itemOc.proveedor}}</label>
+              </div>
+              <div class="causaProducto">
+                <span>Causa</span>
+                <label>{{itemOc.causa.trim().slice(this.itemOc.causa.lenght, -1)}}</label>
+              </div>
+            </div>
+          </div>
+          <div class="seccionContenido">
+            <div class="texto">
+              <div style="height: calc(100% - 84px)">
+                <label>Reporte de Rechazo</label>
+              </div>
+              <div class="rechazo">
+                <label style="font-weight: 400">{{itemOc.rechazo}}</label>
+              </div>
+            </div>
+            <div class="imagenes">
+              <div class="imagenRechazo">
+                <div class="image">
+                  <label (click)="visualizarImg('frente')" [style.font-weight]="fotoF? 'bold': ''">Foto Frente</label>
+                  <label (click)="visualizarImg('arriba')" [style.font-weight]="fotoAr? 'bold': ''">Foto Arriba</label>
+                  <label (click)="visualizarImg('abajo')" [style.font-weight]="fotoAb? 'bold': ''">Foto Abajo</label>
+                </div>
+                <div class="estilosImagen">
+                  <img [src]="pathImg">
+                </div>
+              </div>
+            </div>
+            <div class="motivos">
+              <div style="flex-direction: row; justify-content: flex-start;align-items: center">
+                <div class="espacios">
+                  <img src="./assets/Images/radio_unselected.svg" *ngIf="!entregarSelect" (click)="activarSelect('entregar')">
+                  <img src="./assets/Images/radio_selected.svg" *ngIf="entregarSelect" (click)="activarSelect('entregar')">
+                  <label>Entregar Producto a Cliente</label>
+                </div>
+                <div>
+                  <img src="./assets/Images/radio_unselected.svg" *ngIf="!reclamarSelect" (click)="activarSelect('reclamar')">
+                  <img src="./assets/Images/radio_selected.svg" *ngIf="reclamarSelect" (click)="activarSelect('reclamar')">
+                  <label>Reclamar reposición de producto</label>
+                </div>
+              </div>
+              <div  style="flex-direction: column;height: 70%">
+                 <label>Instrucciones</label>
+                <textarea [ngModel]="instruccion" (ngModelChange)="recibirInstruccion($event)"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="btn">
+    <div [style.background-color]="activarBtn? '#4BA92B': '#C2C3C9'" [style.pointer-events]="activarBtn? 'auto':'none'" (click)="finalizar()">
+      <label>ACEPTAR</label>
+    </div>
+  </div>
+</div>
+<pn-pop-up-finalizar-exitoso *ngIf="activarPop" (desactivarPop)="cerrarPop($event)" [label]="itemOc.concepto" [imagen]="true"></pn-pop-up-finalizar-exitoso>

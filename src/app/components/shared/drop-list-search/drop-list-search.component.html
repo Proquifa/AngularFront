@@ -1,0 +1,28 @@
+<div [ngClass]="dropListClass" style="min-width: 210px;">
+  <div class="container-drop">
+    <div class="Title" (click)="openDropList($event)">
+      <!--<p [ngClass]="align" [style.color]="colorPrincipal" style="font-weight: 400">{{title}} <label [style.color]="colorSecundario">{{subtitle}}</label></p>-->
+      <img src="./assets/Images/lupa.svg" width="11" height="6" alt="" *ngIf="showDropList" class="buscar">
+      <input [ngClass]="align" [placeholder]="title"  [ngModel]="search" (ngModelChange)="changeSearchTerm($event)">
+      <img [src]="srcImagen" width="11" height="6" alt="" *ngIf="!showDropList">
+    </div>
+
+    <div [hidden]="!showDropList" class="content" [style.width]="widthContent" [style.margin-left]="marginLeftContent">
+
+      <div>
+        <div slimScroll height="100%" size="5px" color="#3369b1" railVisible="true" railColor="#ecf0f3" opacity=".7">
+          <ul class="lista"  *ngIf="(arrayAux != undefined)">
+            <div *ngFor="let item of arrayAux" (click)="selectItem(item)">
+              <li style="font-family: 'Roboto';font-weight: lighter;    display: flex;flex-direction: column;" [style.min-height]="heightLi" [style.align-items]="'left'" class="list">
+                <label [style.color]="colorPrincipal">{{item.nombre}}</label>
+                <label *ngIf="subtitleActive" [style.color]="colorSecundario">{{item.nombre}} <label [style.color]="colorSecundario"> · {{item.puesto}}</label></label>
+              </li>
+            </div>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

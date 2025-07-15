@@ -1,0 +1,122 @@
+<div class="areaSeccion">
+  <div>
+    <div>
+      <div style="width: 40%;flex-direction: column;padding-right: 20px">
+        <div class="titulosLista">
+          <div  class="tituloCliente">
+            <label class="tituloLista">PRODUCTOS</label>
+          </div>
+          <div class="filtro">
+            <div style="padding-right: 10px">
+              <pn-combo-flecha-verde [items]="listaLineas" [itemSelect]="selectedLinea" [heightLi]="'35px'" (valueDropList)="recibirFiltro($event, 'linea')"></pn-combo-flecha-verde>
+            </div>
+            <div style="padding-left: 10px">
+              <pn-combo-flecha-verde [items]="listaTipos" [itemSelect]="selectedTipo" [heightLi]="'35px'" (valueDropList)="recibirFiltro($event, 'tipo')"></pn-combo-flecha-verde>
+            </div>
+          </div>
+          <div class="organizarLista">
+            <div style="width: 10%; height: 100%;    display: flex;align-items: center;">
+              <div class="menu" (click)="abreCombo()">
+                <div>
+                </div>
+                <div>
+                </div>
+                <div>
+                </div>
+                <section id="section">
+                  <ul class="listaHamburguesa">
+                    <li (click)="ordenamientoFechaTramNue()">Más Recientes</li>
+                    <li (click)="ordenamientoFechaTramAnt()">Más Antiguos</li>
+                  </ul>
+                </section>
+              </div>
+            </div>
+            <div style="width: 38%; height: 100%;    display: flex;align-items: center;">
+              <h3 class="subtitulo">{{tipoOrden}}</h3>
+            </div>
+            <div class="barraBusqueda" style="height: 100%">
+              <div class="buscar">
+                <div>
+                  <div class="lupa">
+                    <img src="assets/Images/lupa.svg" width="22px" height="22px" alt="buscar">
+                  </div>
+                  <input type="text" [ngModel]="searchTerm" (ngModelChange)="tipoBuscar($event)" class="buscar-input" placeholder="Cliente" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--Lista total-->
+        <div class="segundaSeccionList">
+          <div style="width: 99%;display: flex;overflow: auto;position: relative;height: 100%;">
+            <div class= "lista" style="display: unset;flex-direction: column">
+              <div [ngClass]="item.codigo === codigo? 'divActive': ''" *ngFor="let item of lista; let i = index;"   style="display: flex;flex-direction:row;width: 100%;position: relative; border-bottom: 1px solid #ECEEF0">
+                <div class="dfSelect"></div>
+                <div class="datosLst" style="padding-top: 5px;padding-left: 15px;display: flex; width: 100%;box-sizing: border-box;padding-bottom: 10px;" (click)="seleccionarItem(item, i)">
+                  <div class="informacionList">
+                    <label> #{{i +1}} · <span>{{item.proveedor}}</span> · {{item.codigo}}  <span [style.color]="item.control === 'Controlados' ? '#DE0209': '#4BA92B'">· {{item.control}}</span></label>
+                    <label style="font-size: 19px; font-weight: 400">{{item.descripcion}}</label>
+                    <h1>{{item.referencia}} · {{item.presentacion}}</h1>
+                    <h3> Fecha de Inicio: {{item.fechaInicio}}</h3>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="totales">
+          <label>{{listaUniverso.length}} Productos</label>
+        </div>
+      </div>
+      <!--linea degradada-->
+      <div class="borderLine"></div>
+      <!---->
+      <div style="padding-left: 20px;flex-direction: column" class="razon">
+        <div *ngIf="seleccionado" style="height: calc(100% - 50px); width: 100%">
+          <div class="tituloProducto">
+            <label class="tituloLista">PRODUCTO NO DISPONIBLE</label>
+          </div>
+          <div class="infoProducto">
+            <div class="imgProveedor">
+              <img [src]="pathImg" class="producto" [style.padding-right]="tipoImagen? '10px' : 'initial'">
+            </div>
+            <div *ngIf="seleccionado" class="selectedData">
+              <div>
+                <label> #{{indice}} · {{itemSelect.codigo}} · {{itemSelect.presentacion}}</label>
+                <h3 style="font-weight: lighter; font-size: 25px">{{itemSelect.descripcion}}</h3>
+                <span>{{itemSelect.referencia}} · <span [style.color]="itemSelect.control === 'Controlados' ? '#DE0209': '#4BA92B'">{{itemSelect.control}}</span></span>
+                <h1>Marca: <span class="marca">{{itemSelect.proveedor}}</span></h1>
+              </div>
+              <div style="width: 30%;align-items: center">
+                <span>{{itemSelect.fechaInicio}}</span>
+                <h1>Fecha de Inicio BO</h1>
+              </div>
+            </div>
+          </div>
+          <div class="infoPrincipal">
+            <div>
+              <label>Razón del Producto en BackOrder</label>
+              <pn-combo-flecha-verde [items]="listaRazones" [itemSelect]="selectedRazon" [heightLi]="'35px'"  style="max-width: 737px" (valueDropList)="recibirRazon($event)"></pn-combo-flecha-verde>
+            </div>
+            <div *ngIf="activarFecha">
+              <label>Fecha Estimada de Disponibilidad</label>
+              <pq-date-picker style="max-width: 250px;display: flex;align-items: center;" dateFormat="YYYYMMDD" (fecha)="getFechaImpl($event)" [(date)]="date" [color]="false"></pq-date-picker>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="!seleccionado" class="bloqueoCarga">
+          <label>SELECCIONA UN PRODUCTO PARA VISUALIZAR ESTA SECCIÓN</label>
+        </div>
+        <div class="btn">
+            <div (click)="cancelar()" style="background: #008894">
+              <label>CANCELAR</label>
+            </div>
+            <div [style.background-color]="activarBtn? '#008894': '#C2C3C9'" [style.pointer-events]="activarBtn? 'auto':'none'" (click)="finalizar()">
+              <label>ACEPTAR</label>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<pq-alerta [activarBoton]="false" [alertaTxt]="'Operación Exitosa'" (confirmacion)="cerrarPop($event)" *ngIf="activarAlert"></pq-alerta>

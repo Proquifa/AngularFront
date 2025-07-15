@@ -1,0 +1,91 @@
+<div style="height: 100%; width: 100%;">
+
+<div style="width:100%;">
+  <Pq-barra-actividades (eventCambio)="recibeIndex($event)"   [reiniciaBarra]="reiniciaBarra"
+                        (verificarSiAvanza)="verificarAvance($event)"
+                        [maxItemList]="maxItemList"
+                        [clickArrows]="clickArrows" [clickArrows2]="clickArrows2"
+                        [pieza]= "permiteRegresar"
+                        [actividades]="actividades">
+                      </Pq-barra-actividades>
+</div>
+ <!--  <pn-vista-inspccionar-partida></pn-vista-inspccionar-partida> -->
+  <div class="inspeccion">
+    <div class="pasosInspeccion" *ngIf= "indexBarraActividades !=2" >
+
+      <div style="width: 100%; height: 100%;" *ngIf= "indexBarraActividades == 0">
+          <pn-vista-inspccionar-partida (actualizarPartida)="actualizarPartida($event)" (enviarDocumento)="cargarDocumentos($event)" (iniciaVideo)="recibeIniciarVideo($event)"
+          [archCertificado]="documentoCertificado" [archSeguridad]="documentoHoja"  (enviarConDocumentacion)="recibeConDocumentacion($event)" [conDocumentacion] = "conDocumentacion"
+          [partidaPrioridad]="partidaPrioridad" #vistaInspeccionPartida id="vistaInspeccionPartida"  ></pn-vista-inspccionar-partida>
+      </div>
+
+      <div style="width: 100%; height: 100%; padding-bottom: 10%;" *ngIf= "indexBarraActividades == 1">
+          <pq-inspeccion-nivel-pieza [partidaPrioridad]="partidaPrioridad" #vistaInspeccionPiezas id="vistaInspeccionPiezas"
+                                     [archCertificado]="documentoCertificado" [archSeguridad]="documentoHoja" [conDocumentacion] = "conDocumentacion"
+                                     (eventCambioIndex)="cambioIndex($event)"  (enviaPiezas)="actualizarPartida($event)" (eventlistaPiezas)="recibeListaPiezas($event)"
+                                     (enviarUbiNoDes)="recibirUbicacionNoD($event)"></pq-inspeccion-nivel-pieza>
+      </div>
+    </div>
+
+    <div style="width: 100%; height: 100%;" *ngIf= "indexBarraActividades == 2">
+        <pn-vista-almacenar-productos [partidaPrioridad]="partidaPrioridad" [obtenerDatos]="finalizarActivo"   (finalizarPartida)="finalizar($event)"
+                                      (ubicacionImprimir)="asignarUbicacion($event)" [ubicacionNoDes]="ubicacionNoDes"></pn-vista-almacenar-productos>
+   </div>
+    <div class="video" *ngIf= "indexBarraActividades !=2" >
+      <div class="videoInterior">
+    <div class="textoSuperior" *ngIf= "indexBarraActividades == 1" >
+        <p class="textoSuperiorP"> Inspeccionando {{recibePzas}}/{{recibeTotalPzas}} piezas</p>
+
+          <div class="textoSuperiorImg">
+            <img style="width:30px;height: 30px;" src="./assets/Images/editar-pieza/caja_vacia.svg" alt="" (click)="abrirPop()" [style.display] = "cajaVerde ? 'block' : 'none' ">
+            <img style="width:30px;height: 30px;" src="./assets/Images/editar-pieza/caja_vaciagris.svg" alt="" [style.display] = "cajaVerde ? 'none' : 'block'" [style.cursor]= "cajaVerde ? 'pointer' : 'auto'">
+            <!-- <pq-pop-confirmacion *ngIf="abrirPopConfirmacion"  [pzasE]='recibeTotalPzas' [pzasI]= 'recibePzas' (confirmacion)="popConfirmacion($event)" > </pq-pop-confirmacion> -->
+          </div>
+    </div>
+
+    <div class="video123">
+      <div class="enfoqueSuperior" style="width:100%; flex-direction:row; justify-content:space-between">
+        <img src="./assets/Images/Images/Sup_Izq.svg" alt="" class="imgEnfoque">
+        <img src="./assets/Images/Images/Sup_Der.svg" alt="" class="imgEnfoque">
+
+      </div>
+      <!-- <pq-grabacion-video  class="videoInspeccion" [style.z-index]="ocultaVideo?'-1':'0'" [iniciaVideo]= "iniciaVideo" ></pq-grabacion-video> -->
+      <!-- <video  #video class="videoInspeccion" [style.z-index]="ocultaVideo?'-1':'0'"  autoplay ></video> -->
+      <video id ="video" #video class="videoInspeccion" [style.z-index]="ocultaVideo?'-1':'0'"  autoplay ></video>
+
+
+      <div class="enfoqueInferior" style="width:100%;flex-direction:row; justify-content:space-between; align-items: flex-end;">
+        <img src="./assets/Images/Images/Inf_Izq.svg" alt="" class="imgEnfoque">
+        <img src="./assets/Images/Images/Inf_Der.svg" alt="" class="imgEnfoque">
+      </div>
+    </div>
+
+    <div class="textoInferior">
+          <a clas="textoInferiorA" *ngIf= "indexBarraActividades == 1" > <span style=" color:#39B54A; ">* Despachables: </span>Teclea barra espaciadora solo una vez, para pasar a la siguiente  </a>
+          <a clas="textoInferiorA" *ngIf= "indexBarraActividades == 1"> <span style=" color:#DF0101; ">** Incidencia: </span>Teclea barra espaciadora dos veces, para registrar la incidencia. </a>
+    </div>
+    </div>
+  </div>
+
+  <pq-pop-confirmacion *ngIf="abrirPopConfirmacion" [pzasE]='recibeTotalPzas' [pzasI]= 'recibePzas' (confirmacion)="popConfirmacion($event)" > </pq-pop-confirmacion>
+  <!-- <pq-pop-informativo *ngIf="abrirPopInformativo" (cambioIndex)="cambioIndex($event)" > </pq-pop-informativo> -->
+  <pn-pop-finalizar *ngIf="mostrarPopFinalizar" (imprimir)="imprimir($event)" (finalizar)="finalizarInspeccion($event)" [pzasE]= "contDespachable" [mensajeEtiqueta]="mensajeEtiqueta" [tipoColor]="true"></pn-pop-finalizar>
+    <pn-pop-finalizar *ngIf="mostrarPopFinalizarNoDesp" (imprimir)="imprimir($event)" (finalizar)="finalizarInspeccion($event)" [pzasE]= "contIncidencia" [mensajeEtiqueta]="mensajeEtiqueta" [tipoColor]="false"></pn-pop-finalizar>
+    <pq-alerta *ngIf="mostrarAlerta" [alertaTxt]="textoAlerta" (confirmacion)="cerrarAlerta($event)" ></pq-alerta>
+
+
+</div>
+
+<footer class="direccionRow">
+       <div class="simulaBoton" *ngIf= "indexBarraActividades == 0"> </div>
+       <div type="submit" class="botones" (click)="regresar()" *ngIf= "indexBarraActividades == 1 || indexBarraActividades == 2 "
+             [style.background]= "btnVolver ? '#008895': '#D5DBDB'"
+             [style.pointerEvents] = "btnVolver ? 'auto' : 'none'">
+             <label [style.pointerEvents] = "btnVolver ? 'auto' : 'none'" >VOLVER</label></div>
+       <div type="submit" class="botones" (click)="avanzar()" *ngIf= "indexBarraActividades == 0 "><label >SIGUIENTE</label></div>
+       <div type="submit" class="botones" (click)="avanzar()" *ngIf= "indexBarraActividades == 1 " [style.background]= "cajaVerde ? '#008895' : '#D5DBDB'" [style.cursor]= "cajaVerde ? 'pointer' : 'auto'" ><label [style.cursor]= "cajaVerde ? 'pointer' : 'default'">SIGUIENTE</label></div>
+       <div type="submit" style="background: #39B54A" class="botones" (click)="etiquetar()" *ngIf= "indexBarraActividades == 2 && contDespachable > 0 && partidaPrioridad.pasosImprimirEtiqueta " #finalizar ><label>ETIQUETAR</label></div>
+       <div type="submit" style="background: #39B54A" class="botones" (click)="etiquetar()" *ngIf= "indexBarraActividades == 2 && contDespachable > 0 && !partidaPrioridad.pasosImprimirEtiqueta  " #finalizar ><label>SIGUIENTE</label></div>
+       <div type="submit" style="background: #39B54A" class="botones" (click)="etiquetar()" *ngIf= "indexBarraActividades == 2 && contDespachable <= 0 " #finalizar ><label>FINALIZAR</label></div>
+
+</footer>

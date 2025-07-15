@@ -1,0 +1,122 @@
+<div style="border-right: 1px solid #ECEEF0; height: 100%;">
+  <form>
+    <p class="subtitulo">INSPECCIÓN A NIVEL PÁRTIDA</p>
+
+    <div class="direccionRow">
+
+      <div style="width: 50%; min-width: 402px; display: flex; box-sizing: border-box; flex-direction: column;" *ngIf="!esPublicacion">
+        <label class="letraMediana">Descripción</label>
+
+        <div [ngStyle]="{'display':'flex', 'flex-direction':'column', 'width':'90%'}">
+          <label class="etiquetas"> Presentación</label>
+          <div>
+            <pn-combo-flecha-verde [title]="'Seleccionar'" [itemSelect]="selectedPresentacion" id="cmbPresentacion" (valueDropList)="recibeValosCombo($event,'presentacion')" [items]="presentacion" [heightLi]="'35px'" ></pn-combo-flecha-verde>
+          </div>
+        </div>
+
+        <div [ngStyle]="{'display':'flex', 'flex-direction':'column', 'width':'90%', 'padding-top':'46px'}">
+          <label class="etiquetas"> Lote</label>
+          <div>
+            <pn-combo-flecha-verde [title]="'Seleccionar'" (valueDropList)="recibeValosCombo($event,'lote')"  id="cmbLote" *ngIf= "esUsp" ></pn-combo-flecha-verde>
+            <input #textLote (blur)="cambioLote(textLote.value)" value="{{loteTex}}" class="cuadroTex" id="textLote"  *ngIf= "!esUsp" type="text">
+          </div>
+        </div>
+
+        <div [ngStyle]="{'display':'flex', 'flex-direction':'column', 'width':'90%', 'padding-top':'43px'}">
+          <label class="etiquetas"> Caducidad</label>
+          <div [ngStyle]="{'display':'flex', 'flex-direction':'row'}">
+              <div style="width: 50%">
+                  <pn-combo-flecha-verde [title]="'Seleccionar'"  [itemSelect]="selectedMes" id="cmbMeses"  (valueDropList)="recibeValosCombo($event,'mes')"[items]="meses" [heightLi]="'35px'" ></pn-combo-flecha-verde>
+                </div>
+                 <div style="width: 5%"></div>
+                <div style="width: 45%">
+                    <pn-combo-flecha-verde [title]="'Seleccionar'" [itemSelect]="selectedAnio" id="cmbAnios" (valueDropList)="recibeValosCombo($event,'anio')" [items]="anios" [heightLi]="'35px'" ></pn-combo-flecha-verde>
+                </div>
+
+          </div>
+
+        </div>
+      </div>
+
+      <div style="width: 50%; min-width: 402px; display: flex; box-sizing: border-box; flex-direction: column" *ngIf="!esPublicacion">
+        <label class="letraMediana">Manejos</label>
+
+        <div [ngStyle]="{'display':'flex', 'flex-direction':'column', 'width':'90%'}">
+          <label class="etiquetas">Almacenaje </label>
+          <div>
+            <pn-combo-flecha-verde [title]="'Seleccionar'" [itemSelect]="selectedAlmacen" (valueDropList)="recibeValosCombo($event,'almacenaje')"  id="cmbAlmacen" [items]="almacenaje" [heightLi]="'35px'"></pn-combo-flecha-verde>
+          </div>
+        </div>
+
+        <div [ngStyle]="{'display':'flex', 'flex-direction':'column', 'width':'90%', 'padding-top':'46px'}">
+          <label class="etiquetas">Transportación </label>
+          <div>
+            <pn-combo-flecha-verde [title]="'Seleccionar'"  [itemSelect]="selectedTransporte" (valueDropList)="recibeValosCombo($event,'transportacion')"  id="cmbTransportacion" [items]="almacenaje" [heightLi]="'35px'" ></pn-combo-flecha-verde>
+          </div>
+        </div>
+        <!--NUEVO PARA CANTIDAD Y UNIDAD -->
+        <div [ngStyle]="{'display':'flex', 'flex-direction':'row', 'width':'90%', 'padding-top':'42px'}">
+          <div style="width: 45%;">
+             <label class="etiquetas" style="display: flex"> Cantidad</label>
+             <input #textCantidad (blur)="cambioCantidad(textCantidad.value)" value="{{cantidadText}}" class="cuadroTex" id="textCantidad"  *ngIf= "!esUsp" type="text">
+          </div>
+          <div style="width: 10%"></div>
+          <div style="width: 45%;display: flex; flex-direction: column;">
+              <label class="etiquetas">Unidad </label>
+              <div>
+                <pn-combo-flecha-verde *ngIf="activarCombo" [title]="'Seleccionar'"  [itemSelect]="selectedUnidad" (valueDropList)="recibeValosCombo($event,'unidad')"  id="cmbUnidad" [items]="listaUnidadAux" [heightLi]="'35px'" ></pn-combo-flecha-verde>
+              </div>
+            <!--<label class="etiquetas" style="display: flex"> Unidad</label>
+            <input #textUnidad (blur)="cambioUnidad(textUnidad.value)" value="{{unidadText}}" class="cuadroTex" id="textUnidad"  *ngIf= "!esUsp" type="text">-->
+          </div>
+        </div>
+      </div>
+      <div style="width: 100%; min-width: 804px; display: flex; box-sizing: border-box; flex-direction: row" *ngIf="esPublicacion">
+        <div style="width: 50%;">
+          <div [ngStyle]="{'display':'flex', 'flex-direction':'column', 'width':'90%'}">
+            <label class="etiquetas" style="display: flex"> Edición</label>
+            <input #textEdicion (blur)="cambioEdicion(textEdicion.value)" value="{{EdicionText}}" class="cuadroTex" id="textEdicion"  *ngIf= "!esUsp" type="text">
+          </div>
+        </div>
+        <div style="width: 50%;">
+          <div [ngStyle]="{'display':'flex', 'flex-direction':'column', 'width':'90%'}">
+            <label class="etiquetas">Idioma </label>
+            <div>
+              <pn-combo-flecha-verde [title]="'Seleccionar'" [itemSelect]="selectedIdioma" (valueDropList)="recibeValosCombo($event,'idioma')"  id="cmbIdioma" [items]="idioma" [heightLi]="'35px'"></pn-combo-flecha-verde>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div style="width: 95%; min-width: 780px; padding-top: 50px; display: flex;flex-direction:row; border-bottom: 1px solid #424242; " *ngIf="!esPublicacion">
+      <pq-check-gris-palomita-verde [check]="conDocumentacion"   (event)="cambioDocumentacion($event)" style="padding-right: 12px"></pq-check-gris-palomita-verde>
+      <p class="letraMedianaal100SinBorde">Aplica documentación</p>
+    </div>
+
+
+    <div class="direccionRow" style="width: 100%; min-width: 824px;  opacity: 0.5;" #grDocumento *ngIf="!esPublicacion">
+      <div style="width: 50%; display: flex; box-sizing: border-box; flex-direction: column;">
+        <div [ngStyle]="{'display':'flex', 'flex-direction':'column', 'width':'90%', 'padding-top':'24px'}">
+          <label class="etiquetasGris"> *Certificado:</label>
+          <div style="padding-left: 1px;">
+              <pq-file-upload [disabled]="conDocumentacion" [formato]="'.pdf'"  [docR]="pathCertificado"  (enviarDocumento)="enviarDocumentacion($event,'Certificado')" [partidaPrioridad]="partidaPrioridad" ></pq-file-upload>
+          </div>
+          <label class="fontSize14Roja">Carga obligatoria</label>
+        </div>
+      </div>
+
+      <div style="width: 50%; display: flex; box-sizing: border-box; flex-direction: column;">
+        <div [ngStyle]="{'display':'flex', 'flex-direction':'column', 'width':'90%', 'padding-top':'24px'}">
+          <label class="etiquetasGris"> Hoja de Seguridad:</label>
+          <div style="padding-left: 1px;">
+            <pq-file-upload  [disabled]="conDocumentacion" [docR]="pathHojaSeg"  (enviarDocumento)="enviarDocumentacion($event,'HojaSeguridad')" [partidaPrioridad]="partidaPrioridad" ></pq-file-upload>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </form>
+</div>

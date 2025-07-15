@@ -1,0 +1,87 @@
+<div class="principal">
+  <div class="barraProgreso" style="width:70%; border-right: 1px solid #ECEEF0; ">
+    <div class="barra">
+      <h1>PROGRESO DE {{evento| uppercase}}</h1>
+      <div class="datos">
+        <div class="mensaje">
+          <label style="font-style: italic; padding-top: 5px;">{{mensaje}}</label>
+        </div>
+        <div class="hora">
+          <img src='./assets/Images/reloj.svg' style="width: 37px;height: 37px;margin-right: 10px;"/>
+          <label>{{hora}}</label>
+        </div>
+      </div>
+
+
+      <div class="padreBarraProgreso" style="position: relative">
+        <div id="myProgress">
+          <div id="myBar" [style.width]="promedio" [style.background]="colorBarra" class="tooltip">
+            <span class="tooltiptextleft" *ngIf="tooltiptextLeft">{{formatoPzasInspeccionadas}}</span>
+            <label class="textLeft" *ngIf="textLeft">{{formatoPzasInspeccionadas}}</label>
+            <!--<label class="textoBarraE"style="font-size: 25px">{{piezasEmbaladasHoy}} piezas embaladas</label>-->
+          </div>
+
+          <div id="myBar2" [style.width]="restante">
+            <span class="tooltiptextRigth" *ngIf="toolTipRigth">{{formatoPzasRestantes}}</span>
+            <label class="textRigth" *ngIf="textRigth" style="color:#9B9B9B">{{formatoPzasRestantes}}</label>
+            <!--<label class="textoBarraE"style="font-size: 25px">{{piezasRestantesHoy}} piezas (restantes)</label>-->
+          </div>
+        </div>
+        <div class="datosBarra">
+          <div class="PzasIniciales">
+            0 piezas
+          </div>
+          <div class="pzasTotales">
+            {{totalPiezasHoy}} piezas
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <!--Empieza la parte de prioridad de embalaje-->
+  <div class="inspeccionPorPrioridad" style="width: 30%; heigth: 100%;">
+    <div  style="padding-left: 20px;height: 100%;">
+    <h1>PRIORIDAD</h1>
+    <h1>DE EMBALAJE</h1>
+    <div id="myProgressPrio">
+      <div id="Prioridad1" [style.width]="porcentajeP1" *ngIf="mostrarP1">
+        <h2>Prioridad 1</h2>
+        <p style="font-family: Roboto-Regular;display: unset;"><label>Por Embalar: </label>{{formatoPzaP1 | acFormatNumber}} <label>  piezas</label></p>
+        <p style="font-family: Roboto-Regular"><label *ngIf="!existo">Tiempo Estimado de Embalaje: </label>{{TEIPrioridad1}}</p>
+      </div>
+      <div id="Prioridad2" [style.width]="porcentajeP2" *ngIf="mostrarP2">
+
+        <div class="descripcionLargaP2" *ngIf="descripcionLargaP2">
+          <h2>Prioridad 2</h2>
+          <p style="font-family: Roboto-Regular"><label>Por Embalar: </label>{{formatoPzaP2 | acFormatNumber }}<label>piezas</label></p>
+          <p> style="font-family: Roboto-Regular"<label >Tiempo Estimado de Embalaje: </label>{{TEIPrioridad2}}</p>
+        </div>
+
+        <div class="descripcionCortaP2" *ngIf="descripcionCortaP2">
+          <h2>P2</h2>
+          <p style="font-family: Roboto-Regular;display: unset;"><label>PE: </label>{{formatoPzaP2 | acFormatNumber }} </p>
+          <p><label >TEE: </label>{{TEIPrioridad2}}</p>
+        </div>
+
+      </div>
+
+      <div id="Prioridad3" [style.width]="porcentajeP3" *ngIf="mostrarP3">
+
+        <div class="descripcionLargaP3" *ngIf="descripcionLargaP3">
+          <h2>Prioridad 3</h2>
+          <p style="font-family: Roboto-Regular;display: unset;"><label>Por Embalar: </label>{{formatoPzaP3}}</p>
+          <p style="font-family: Roboto-Regular"><label >Tiempo Estimado de Embalaje: </label>{{TEIPrioridad3}}<label>piezas</label></p>
+        </div>
+
+        <div class="descripcionCortaP3" *ngIf="descripcionCortaP3">
+          <h2>P3</h2>
+          <p style="font-family: Roboto-Regular;display: unset;"><label>PE: </label>{{formatoPzaP3}} </p>
+          <p style="font-family: Roboto-Regular"><label >TEE: </label>{{TEIPrioridad3}}</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  </div>
+</div>

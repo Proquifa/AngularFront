@@ -1,0 +1,54 @@
+.vistaGenerarPackingList{
+  height: 99%;
+}
+
+.btnDireccionPL{
+  order: 0;
+  flex: 0 1 auto;
+  align-self: auto;
+  height: 100%;
+  width: 100%;
+  min-height: 70px;
+  max-height: 70px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 20px;
+  box-sizing: border-box;
+  min-width: 1800px;
+  // border-top: 1px solid #D8D8D8;
+  }
+
+  .btnDireccionPLSnBorde {
+    order: 0;
+    flex: 0 1 auto;
+    align-self: auto;
+    height: 100%;
+    width: 100%;
+    min-height: 70px;
+    max-height: 70px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 20px;
+    box-sizing: border-box;
+    min-width: 1800px;
+    // border-top: 1px solid #D8D8D8;
+    }
+
+  .btnImprimir {
+    width: 190px;
+    height: 30px;
+    background-color: #008894;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 21px;
+    cursor: pointer;
+    border: none;
+    color: #FFFFFF;
+    font-weight: bold;
+    order: 0;
+    flex: 0 1 auto;
+    align-self: auto;
+  }

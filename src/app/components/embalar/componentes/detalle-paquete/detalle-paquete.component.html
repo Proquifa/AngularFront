@@ -1,0 +1,98 @@
+<div class="detallePaquete" *ngIf = "!mostrarDatosPL">
+  <div class="datosPaquete" *ngIf="datosPaquete">
+    <div class="encabezadoPaquete" style="display: flex;">
+      <div class="titulo">{{valorTitulo}}</div>
+      <div class="barraBusqueda">
+        <div class="buscar" style="padding-left: 236px;">
+          <div>
+            <div class="lupa">
+              <img src="assets/Images/lupa.svg" width="22px" height="22px" alt="buscar">
+            </div>
+            <input type="text" [ngModel]="searchTerm" (ngModelChange)="buscar($event)" class="buscar-input" placeholder="Folios" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contenidoPaquete" style="overflow: scroll; scrollbar-face-color: #FFFFFF;" *ngIf="validarLista">
+      <!--<iframe  class="pdfViewer"  src="http://192.168.2.113:8080/Correos/attached/164b31226c9cd3e1_0.pdf" #visor></iframe>-->
+      <div class="listado">
+        <div class="lista" [ngClass]="listaFolios[i]" *ngFor="let item of folios; let i = index"  (click)="seleccionarItemLista(i)">
+          <pq-check-gris-palomita-verde style="width:25px;height:25px;" [check]="item.check" (event) = "recibeCheck($event)"></pq-check-gris-palomita-verde>
+          <label style="padding-left:13px;"> {{item.folio}} </label>
+        </div>
+      </div>
+    </div>
+    <div class="contenidoPaquete" style="overflow: scroll; scrollbar-face-color: #FFFFFF;" *ngIf="!validarLista">
+      <div class="listado">
+        <div  class="lista" [ngClass]="listaFolios[i]" *ngFor="let item of FoliosSearched; let i = index"  (click)="seleccionarItemLista(i)">
+          <pq-check-gris-palomita-verde style="width:25px;height:25px;" [check]="item.check"></pq-check-gris-palomita-verde>
+          <label style="padding-left:13px;"> {{item.folio}} </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="totalesPaquete">
+      <!-- <div class="btnSeleccion" (click)="seleccionarTodaLaLista()">
+        <pq-check-gris-palomita-verde style="width:25px;height:25px;"  [check]="mostrarTodosChecks"></pq-check-gris-palomita-verde>
+        <label>Seleccionar todo</label>
+      </div> -->
+      <div class="totalNum">
+        Total: #{{folios.length}}
+      </div>
+      <div class="totalCopias">
+        {{totales}}
+      </div>
+    </div>
+  </div>
+
+<!-- <div class="datosPaquete" style = "display: flex; flex-direction: column;" *ngIf="mostrarDatosPL && !datosPaquete" > -->
+  <!-- <div class="txtPackingList" >
+    <p class="p1">Packing List</p>
+    <p class="p2">{{foliosAux[0]}}</p>
+  </div> -->
+<!-- </div>  -->
+
+  <div class="pdfPaquete" *ngIf="true">
+  <!-- <webview src="http://201.161.12.60:51725/SAP/Facturas/Ryndem/62.pdf" plugins></webview> //Esta funcion no la reconoce electron -->
+   <!-- <iframe *ngIf = "visorPdf" class="pdfViewer"  src="http://192.168.2.113:8080/Correos/attached/164b31226c9cd3e1_0.pdf" #visor></iframe> -->
+   <!-- //Version que funciona en electron.  -->
+   <!-- <iframe src="http://187.189.39.50:51725/SAP/Doctos/1955240939.pdf" class="pdfViewer"  #iframe></iframe>-->
+   <pq-visor-pdf  *ngIf = "visorPdf2" class="pdfViewer" [urlPdf]="path"  ></pq-visor-pdf>
+   <pq-visor-pdf  *ngIf = "visorPdf" class="pdfViewer" [urlPdf]="path"  ></pq-visor-pdf>
+   <p *ngIf="!colorBoton"> Selecciona un folio para visualizar la documentación </p>
+  </div>
+</div>
+
+
+<div class="detallePaquete" *ngIf = "mostrarDatosPL" style= " display: flex; flex-direction: column;">
+  <div class="txtPackingList" >
+    <p class="p1">Packing List</p>
+    <p class="p2">{{foliosAux[0]}}</p>
+  </div>
+<!-- </div>  -->
+
+  <div class="pdfPaquete" *ngIf="true">
+  <!-- <webview src="http://201.161.12.60:51725/SAP/Facturas/Ryndem/62.pdf" plugins></webview> //Esta funcion no la reconoce electron -->
+   <!-- <iframe *ngIf = "visorPdf" class="pdfViewer"  #visor></iframe> -->
+   <!-- //Version que funciona en electron.  -->
+   <!-- <iframe src="http://201.161.12.60:51725/SAP/Facturas/Ryndem/62.pdf" class="pdfViewer"  #iframe></iframe>-->
+     <pq-visor-pdf  *ngIf = "visorPdf2" class="pdfViewer" [urlPdf]="path"  ></pq-visor-pdf>
+     <pq-visor-pdf  *ngIf = "visorPdf" class="pdfViewer" [urlPdf]="path"  ></pq-visor-pdf>
+  </div>
+</div>
+
+
+
+<!---------------------------------------------Botones-------------------------------------->
+<footer *ngIf="mostrarFooter" class="btnDireccionPL" style="justify-content: space-between">
+  <div style="padding-left: 11px">
+    <a class="btnImprimir" (click)="cambiarVista()">REGRESAR</a>
+  </div>
+  <div>
+    <a class="btnImprimir" (click)="validarImpresion()" [style.pointer-events]="colorBoton?'auto':'none'" [style.background]="colorBoton?'#008895':'#D8D9DD'">IMPRIMIR</a>
+  </div>
+  <!-- <div *ngIf="footerSBorde">
+    <a class="btnImprimir">IMPRIMIR</a>
+  </div> -->
+</footer>

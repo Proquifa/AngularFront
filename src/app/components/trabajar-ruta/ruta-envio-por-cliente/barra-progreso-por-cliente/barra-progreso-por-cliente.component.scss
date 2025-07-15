@@ -1,0 +1,371 @@
+.barraProgreso {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-content: stretch;
+  align-items: stretch;
+  height: 20%;
+  // padding: 8px 0px 8px 0px;
+  padding-left: 20px;
+  padding-right: 20px;
+  font-family: 'Roboto', sans-serif;
+}
+
+.barra {
+  order: 0;
+  flex: 1 1 auto;
+  align-self: auto;
+  height: 100%;
+  width: 50%;
+  text-align: left;
+  font-family: 'Roboto', sans-serif;
+}
+
+#myProgress {
+  width: 100%;
+  background-color: #ddd;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-content: stretch;
+  align-items: center;
+  height: 70px;
+  font-weight: bold;
+  margin-top: 1%;
+  color: #9B9B9B;
+}
+
+#myBar {
+  height: 100%;
+  background-color: #9DB83C;
+  text-align: center;
+  line-height: 30px;
+  color: #424242;
+  order: 0;
+  flex: 1 1 auto;
+  align-self: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  //tooltips
+  position: relative;
+  display: inline-block;
+  // border-bottom: 1px dotted black;
+}
+
+
+.datosBarra {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-content: space-between;
+  align-items: center;
+  margin-top: 1%;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.PzasIniciales {
+  order: 0;
+  flex: 0 1 auto;
+  align-self: auto;
+}
+
+.pzasTotales {
+  order: 0;
+  flex: 0 1 auto;
+  align-self: auto;
+}
+
+//tooltips
+//left
+// #myBar .tooltiptextleft {
+//     visibility: visibility;
+//     width: 119px;
+//     height: 17%;
+//     background-color: black;
+//     color: #fff;
+//     text-align: center;
+//     border-radius: 6px;
+//     padding: 5px 0;
+//     position: absolute;
+//     z-index: 1;
+//     bottom: -10%;
+//     display: flex;
+//     left: 50%;
+//     margin-left: -60px;
+//     font-size: 10px;
+//     justify-content: center;
+//     align-items: center;
+// }
+// #myBar .tooltiptextleft::after {
+//     content: " ";
+//     position: absolute;
+//     color: #424242;
+//     bottom: 100%;
+//     /* At the top of the tooltip */
+//     left: 50%;
+//     margin-left: -5px;
+//     border-width: 5px;
+//     border-style: solid;
+//     border-color: transparent transparent black transparent;
+// }
+// //Right
+// #myBar2 .tooltiptextRigth {
+//     visibility: visibility;
+//     width: 119px;
+//     height: 17%;
+//     background-color: black;
+//     color: #fff;
+//     text-align: center;
+//     border-radius: 6px;
+//     padding: 5px 0;
+//     position: absolute;
+//     z-index: 1;
+//     bottom: -10%;
+//     display: flex;
+//     left: 50%;
+//     margin-left: -60px;
+//     font-size: 10px;
+//     justify-content: center;
+//     align-items: center;
+// }
+// #myBar2 .tooltiptextRigth::after {
+//     content: " ";
+//     position: absolute;
+//     bottom: 100%;
+//     /* At the top of the tooltip */
+//     left: 50%;
+//     margin-left: -5px;
+//     border-width: 5px;
+//     border-style: solid;
+//     border-color: transparent transparent black transparent;
+// }
+.textLeft,
+.textRigth {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+h1 {
+  font-size: 20px;
+  color: #008894;
+}
+
+.datos {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-content: center;
+  align-items: center;
+}
+
+.mensaje {
+  order: 0;
+  flex: 0 1 auto;
+  align-self: auto;
+}
+
+.hora {
+  order: 0;
+  flex: 0 1 auto;
+  align-self: auto;
+  font-size: 30px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+
+/////
+.tooltip .tooltiptext::after {
+  content: " ";
+  position: absolute;
+  bottom: 100%;
+  /* At the top of the tooltip */
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent #4C4C4C transparent;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 130px;
+  background-color: #4C4C4C;
+  color: #FFFFFF;
+  font-family: 'Roboto';
+  text-align: left;
+  border-radius: 6px;
+  padding: 5px 10px 0px 0px;
+  font-size: 9px;
+  padding: 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  left: 2%;
+  margin-left: -60px;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+}
+.mensajeBarra{
+  font-style: italic;
+  padding-top: 5px;
+}
+.imagenReloj{
+  width: 37px;
+  height: 37px;
+}
+
+.textLeft, .textRigth {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Roboto';
+
+}
+//Right
+#myBar2 .tooltiptextRigth {
+  visibility: visibility;
+  width: 119px;
+  height: 17%;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: -10%;
+  display: flex;
+  left: 50%;
+  margin-left: -60px;
+  font-size: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+#myBar2 .tooltiptextRigth::after {
+  content: " ";
+  position: absolute;
+  bottom: 100%;  /* At the top of the tooltip */
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent black transparent;
+}
+////////
+#myBar {
+  height: 100%;
+  //background-color: #9DB83C;
+  text-align: center;
+  line-height: 30px;
+  color: #FFFFFF;
+  order: 0;
+  flex: 1 1 auto;
+  align-self: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  //tooltips
+  position: relative;
+  display: inline-block;
+  font-size: 25px;
+  // border-bottom: 1px dotted black;
+}
+
+#myBar2 {
+  height: 100%;
+  background-color: #ddd;
+  text-align: center;
+  line-height: 30px;
+  color: white;
+  order: 0;
+  flex: 1 1 auto;
+  align-self: auto;
+  color: #9B9B9B;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  //tooltips
+  position: relative;
+  display: inline-block;
+  font-weight: bold;
+  font-size: 25px;
+
+  // border-bottom: 1px dotted black;
+}
+//tooltips
+//left
+#myBar .tooltiptextleft {
+  visibility: visibility;
+  width: 119px;
+  height: 17%;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: -10%;
+  display: flex;
+  left: 50%;
+  margin-left: -60px;
+  font-size: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+#myBar .tooltiptextleft::after {
+  content: " ";
+  position: absolute;
+  color: #424242;
+  bottom: 100%;  /* At the top of the tooltip */
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent black transparent;
+}
+/******************MEDIA PARA EL TAMAÑO PEQUEÑO *************/
+@media all and (min-height:770px) and (max-height: 880px) and (min-width: 1300px) and (max-width: 2571px) {
+  #myBar2 {font-size: 16px};
+  #myBar {font-size: 16px};
+  h1{font-size: 13px};
+  .padreBarraProgreso{width: 356px};
+  #myProgress{width: 356px; height: 47px};
+  .mensajeBarra{font-size: 11px};
+  .hora{font-size: 12px};
+  .imagenReloj{width: 20px}
+}

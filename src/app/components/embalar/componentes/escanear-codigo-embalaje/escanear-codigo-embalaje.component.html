@@ -1,0 +1,35 @@
+<div class="escanearCodigo">
+
+  <div class="encabezado" >
+    <div class="txtEncabezado">
+    <p style="font-weight: bold;">ESCANEA EL CÓDIGO</p>
+    <p style="font-weight: normal;">{{valorTituloLista}} · {{valorRecibidoEmbalaje}}</p>
+  </div>
+  <div class="imgEncabezado">
+    <img class="img" src='./assets/Images/escanea_2.svg' style="height:42px;width:42px;" />
+
+  </div>
+  </div>
+
+  <div class="contenido">
+    <div class= "lista" style="display: unset;flex-direction: column" *ngIf="cambioDeEtiqueta">
+      <div [ngClass]="listaFD[i]" *ngFor="let item of etiquetaPorRefrigeracion; let i = index"  (click)="seleccionarItemFD(i)" style="display: flex;flex-direction:row;width: 100%; height: 80px;">
+        <div class="dfSelect"></div>
+        <div class="datosLst" style="padding-top: 15px;padding-left: 15px">
+          <label class="index" style="font-family: Roboto-Bold">#{{i +1}} ·  </label>
+          <label>{{item.fd}}<p style="font-family: Roboto-Regular;text-align: center;">{{item.piezas}} Piezas</p></label>
+        </div>
+      </div>
+    </div>
+
+    <div class="lista" style="display: unset;flex-direction: column" *ngIf="!cambioDeEtiqueta">
+      <div [ngClass]="listaFD[i]" *ngFor="let item of etiquetaPorQr; let i = index"  (click)="seleccionarItemFD(i)" style="display: flex;flex-direction:row;width: 100%; height: 80px;">
+        <div class="dfSelect"></div>
+        <div class="datosLst" style="padding-top: 15px;padding-left: 15px">
+          <label class="index" style="font-family: Roboto-Bold">#{{i +1}} ·  </label>
+          <label >{{item.qr}} <p style="font-family: Roboto-Regular;text-align: center;">{{item.piezas}} Piezas</p></label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

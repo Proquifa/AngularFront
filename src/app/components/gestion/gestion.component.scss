@@ -1,0 +1,35 @@
+@import "../../../mixins.scss";
+@import "../../../colors.scss";
+
+:host{
+  @include flexColumn;
+  justify-content: space-between;
+  height: calc(100vh - 231px);
+  margin: 20px;
+
+  .title{
+    margin: 0;
+    margin-bottom: 5px;
+    font-size: 34px;
+  }
+
+  .divTableros{
+    @include flexRow;
+    width: calc(100%);
+    overflow: scroll;
+    color: #404040;
+  }
+
+  .divConsultas{
+    @include flexRow;
+    width: calc(100%);
+    overflow: scroll;
+  }
+
+  .divReportes{
+    @include flexRow;
+    margin-bottom: 150px;
+    width: calc(100%);
+    overflow: scroll;
+  }
+}
